@@ -18,12 +18,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { isInWishlist, toggleWishlist } = useWishlist();
 
   const isSaved = isInWishlist(product.id);
+  const originalPrice = product.originalPrice || (product.price > 0 ? Math.round(product.price * 1.25) : 0);
   const discount =
     product.discountPct ||
-    Math.round(
-      ((product.originalPrice - product.price) / product.originalPrice) * 100
-    );
-  const colorCount = product.colors?.length || 2;
+    (originalPrice > product.price
+      ? Math.round(((originalPrice - product.price) / originalPrice) * 100)
+      : 0);
+  const colorCount = product.colors?.length || (product.variants?.length ? product.variants.length : 1);
+  const displayImg = product.img || product.images?.[0] || "/images/placeholder.jpg";
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -56,9 +58,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             />
           </button>
 
-          <span className="px-2.5 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase shadow-xs">
-            SAVE {discount}%
-          </span>
+          {discount > 0 && (
+            <span className="px-2.5 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase shadow-xs">
+              SAVE {discount}%
+            </span>
+          )}
         </div>
 
         {/* Eyewear Image Container */}
@@ -67,7 +71,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="w-full h-24 flex items-center justify-center p-1 my-1 cursor-pointer"
         >
           <img
-            src={product.img}
+            src={displayImg}
             alt={product.name}
             loading="lazy"
             className="h-24 max-h-24 max-w-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
@@ -95,14 +99,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <span className="text-xs font-bold text-[#16803E]">
             {formatCurrency(product.price)}
           </span>
-          <span className="text-xs sm:text-sm text-[#DD2E2E] line-through">
-            {formatCurrency(product.originalPrice)}
-          </span>
+          {originalPrice > product.price && (
+            <span className="text-xs sm:text-sm text-[#DD2E2E] line-through">
+              {formatCurrency(originalPrice)}
+            </span>
+          )}
         </div>
 
         {/* Colors Subtitle */}
         <div className="text-[11px] text-[#6B7280] mt-0.5 mb-1 text-center">
-          Available in {colorCount} Colors
+          Available in {colorCount} {colorCount === 1 ? "Color" : "Colors"}
         </div>
       </div>
 

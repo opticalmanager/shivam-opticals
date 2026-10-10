@@ -66,6 +66,7 @@ function mapRowToProduct(row: any): Product {
     isLimitedEdition: Boolean(row.is_limited_edition ?? localMatch?.isLimitedEdition),
     rating: Number(row.rating) || localMatch?.rating || 5.0,
     reviewCount: Number(row.review_count) || localMatch?.reviewCount || 0,
+    img: resolvedImages[0] || "/images/placeholder.jpg",
     images: resolvedImages,
     description: row.description || localMatch?.description || "",
     specs: row.specs || localMatch?.specs || {
