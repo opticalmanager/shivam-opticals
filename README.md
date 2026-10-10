@@ -1,53 +1,80 @@
-# Shivam Optical (Haute Lunetterie)
+# Shivam Optics — Luxury Eyewear Atelier & Clinical Web App
 
-A luxury eyewear boutique and optical eye clinic web application for **Shivam Optical**, located in Samachar Market, Mayur Vihar Phase 1 Extension, Delhi.
+A premier luxury optical atelier and clinical eyewear e-commerce platform built for **Shivam Optics**, located at Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Phase 1 Extension, New Delhi - 110091.
 
-## ✨ Features
+---
 
-- **Luxury Brand Experience**: Warm, bespoke aesthetic tailored for high-end designer eyewear (Cartier, GAST, Montblanc, Vision Express, and in-house collections).
-- **Interactive Eyewear Catalog**: Comprehensive filtering by frame shape (Aviator, Rectangle, Round, Cat-Eye, Geometric, Clubmaster, Square), material, brand, and gender.
-- **Dynamic 3-View Product Showcase**:
-  - Angled 3/4 hero view
-  - Straight-on front view
-  - Macro detail view showing titanium hinges, beveled optical edges, and screw mounts
-- **Prescription Lens Customizer**: In-browser selection of single vision, digital screen protection (blue-cut), bifocal, and progressive lenses.
-- **In-Store Eye Test Booking**: Integrated reservation system for computer eye testing and consultations.
-- **Dynamic Cart & Wishlist**: Real-time sliding drawer cart with free insured delivery progress tracker and saved favorites wishlist.
-- **CSV Catalog Import**: Built-in support for importing frame inventory and live photo URLs via spreadsheet/CSV.
-- **Responsive Architecture**: Mobile-first design optimized for mobile, tablet, and desktop viewports.
+## ✨ Features & Architecture
 
-## 📁 Project Structure
+### 1. Luxury Customer Storefront
+* **Brand Aesthetic**: Bespoke Haute Lunetterie aesthetic with Atelier Gold (`#C5A059`), Atelier Charcoal (`#1A1816`), and Heritage Green (`#0A251C`) design tokens.
+* **Filterable Optical & Sun Catalog**: Real-time filtering by silhouette shape (Aviator, Rectangle, Round, Cat-Eye, Geometric, Wayfarer, etc.), material, brand, and gender with responsive drawer filters.
+* **3-View Showcase & 3D Virtual Try-On**: Real-time WebAssembly + WebGL 3D face landmark tracking (MediaPipe + Three.js).
+* **Clinical Lens Customizer**: Comprehensive prescription customization (OD/OS Sphere, Cylinder, Axis, Add, Pupillary Distance) with Single Vision, Digital HD Progressive, and Zero Power Screen Guard packages.
+* **Cart & Wishlist Engine**: Sliding drawer cart with live subtotal calculations, free insured delivery meter, and persistent wishlist.
+* **Online Booking**: Clinical eye exam consultation booking for the Mayur Vihar boutique clinic.
 
-```
-shivam-optics/
-├── index.html                    # Home landing page with hero banners & collections
-├── products.html                 # Complete filterable eyewear catalog
-├── product.html                  # Individual product view with 3-angle gallery
-├── checkout.html                 # Checkout workspace
-├── about.html                    # About Us & store information
-├── app.js                        # Home page animations, cart, wishlist, and modal logic
-├── products.js                   # Product catalog data, filtering, and search engine
-├── styles.css                    # Tailwind CSS custom luxury utility classes
-├── sample_eyewear_catalogue.csv  # Sample import inventory
-└── images/                       # High-resolution eyewear photography and shapes
-```
+### 2. Dual Data Layer & Backend
+* **Supabase & PostgreSQL**: Live relational database with ACID transactions, Row-Level Security (RLS) policies, and connection pooler support.
+* **Razorpay Payment Gateway**: Seamless checkout with UPI, Card, and Netbanking support.
+* **Admin OS & Lab Assembly Queue**: High-density command center with a 5-stage optical laboratory assembly queue (`Confirmed` → `In Lab Assembly` → `Quality Check` → `Dispatched` → `Delivered`), printable GST tax invoices (HSN 9003 / 9001), and inventory management.
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework**: Next.js 16 (App Router, Turbopack)
+* **UI & Components**: React 19, Tailwind CSS, Lucide Icons, Framer Motion
+* **Database & Auth**: PostgreSQL 17, Supabase JS Client
+* **Payments**: Razorpay
+* **Type Safety**: TypeScript 5
+
+---
 
 ## 🚀 Getting Started
 
-To run locally with any static web server:
+### 1. Prerequisites
+* Node.js 18+ or 20+
+* npm or pnpm
 
+### 2. Installation
 ```bash
-# Python
-python -m http.server 8080
-
-# Or with Node.js
-npx serve .
+git clone https://github.com/opticalmanager/shivam-opticals.git
+cd shivam-opticals
+npm install
 ```
 
-Open `http://localhost:8080` in your web browser.
+### 3. Environment Setup
+Copy `.env.example` to `.env.local` and populate your credentials:
+```bash
+cp .env.example .env.local
+```
+
+### 4. Database Migrations & Seeding
+```bash
+# Run PostgreSQL / Supabase migrations
+npm run db:migrate
+
+# Seed categories, brands, lens packages & catalog
+npm run db:seed
+```
+
+### 5. Development Server
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 6. Production Build
+```bash
+npm run build
+npm start
+```
+
+---
 
 ## 📍 Store Information
-
-- **Location**: Shop No-1, Kanishka Complex, SAMACHAR Market, Mayur Vihar Phase I Extension, Delhi - 110091
-- **Hours**: Open 7 Days • 10:30 AM to 9:00 PM
-- **Contact**: 097799 90207
+* **Boutique Atelier**: Shop No-1, Kanishka Complex, SAMACHAR Market, Mayur Vihar Phase I Extension, New Delhi - 110091
+* **Contact Phone**: 097799 90207
+* **Hours**: Monday – Sunday • 10:30 AM – 9:00 PM

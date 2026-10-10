@@ -1,0 +1,1796 @@
+[
+  {
+    "id": "do-7775903416566",
+    "brand": "Ray-Ban",
+    "name": "RAY BAN 3957",
+    "category": "Sunglasses",
+    "type": "sunglasses",
+    "shape": "Rectangle",
+    "gender": "unisex",
+    "size": "S",
+    "rating": 4.9,
+    "price": 11511,
+    "originalPrice": 12790,
+    "discountPct": 10,
+    "tag": "ON SALE",
+    "tagType": "sale",
+    "img": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3957-julie-919631-gold-8056597846936-800x800w_615f0d98-f385-41da-938e-f32cf3fcbc89.webp?v=1712556844",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3957-julie-919631-gold-8056597846936-800x800w_615f0d98-f385-41da-938e-f32cf3fcbc89.webp?v=1712556844",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3957-julie-919631-gold-8056597846936-1-800x800w_7db17946-4abe-42c8-bce9-92197a7e4625.webp?v=1712556844",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_90_800x_97e80712-195f-44da-bd38-c6d2cd7c209e.webp?v=1712556844",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_30_800x_a0ec88c8-87fe-44c9-8bdc-ad619c6d560d.webp?v=1768375580",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_0_800x_1b11799e-eb5d-4463-9e12-58ee1afee142.webp?v=1768375580",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_90_800x_fc243a90-5fac-477d-adf7-3dcac8e7bb69.webp?v=1768375580"
+    ],
+    "colors": [
+      "#C5A059"
+    ],
+    "description": "Model No 3957 Material Metal Gender Unisex Shape Rectangle Type Full Rim",
+    "material": "Metal",
+    "measurements": {
+      "lensWidth": 49,
+      "bridgeWidth": 19,
+      "templeLength": 145
+    },
+    "colorVariants": [
+      {
+        "id": "var-do-7775903416566-0",
+        "variantId": 45687531241718,
+        "sku": "SKU-RAYBAN-RAY-BAN--1",
+        "colorName": "GOLD & GREEN   919631",
+        "colorHex": "#C5A059",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3957-julie-919631-gold-8056597846936-800x800w_615f0d98-f385-41da-938e-f32cf3fcbc89.webp?v=1712556844",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3957-julie-919631-gold-8056597846936-800x800w_615f0d98-f385-41da-938e-f32cf3fcbc89.webp?v=1712556844"
+        ]
+      },
+      {
+        "id": "var-do-7775903416566-1",
+        "variantId": 46305666728182,
+        "sku": "SKU-RAYBAN-RAY-BAN--2",
+        "colorName": "GOLD & GREEN   919631",
+        "colorHex": "#C5A059",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3957-julie-919631-gold-8056597846936-800x800w_615f0d98-f385-41da-938e-f32cf3fcbc89.webp?v=1712556844",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3957-julie-919631-gold-8056597846936-800x800w_615f0d98-f385-41da-938e-f32cf3fcbc89.webp?v=1712556844"
+        ]
+      },
+      {
+        "id": "var-do-7775903416566-2",
+        "variantId": 46305667580150,
+        "sku": "SKU-RAYBAN-RAY-BAN--3",
+        "colorName": "ROSE GOLD & BLUE   9202R5",
+        "colorHex": "#C5A059",
+        "price": 10611,
+        "compareAtPrice": 11790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_30_800x_a0ec88c8-87fe-44c9-8bdc-ad619c6d560d.webp?v=1768375580",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_30_800x_a0ec88c8-87fe-44c9-8bdc-ad619c6d560d.webp?v=1768375580"
+        ]
+      },
+      {
+        "id": "var-do-7775903416566-3",
+        "variantId": 46305667776758,
+        "sku": "SKU-RAYBAN-RAY-BAN--4",
+        "colorName": "ROSE GOLD & BLUE   9202R5",
+        "colorHex": "#C5A059",
+        "price": 10611,
+        "compareAtPrice": 11790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_30_800x_a0ec88c8-87fe-44c9-8bdc-ad619c6d560d.webp?v=1768375580",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3957_9202R5_52_30_800x_a0ec88c8-87fe-44c9-8bdc-ad619c6d560d.webp?v=1768375580"
+        ]
+      }
+    ],
+    "sourceUrl": "https://dayalopticalsindia.com/products/ray-ban-357",
+    "packageDimensions": {
+      "lengthCm": 18,
+      "breadthCm": 9,
+      "heightCm": 7,
+      "weightKg": 0.25
+    }
+  },
+  {
+    "id": "do-7768808521974",
+    "brand": "Ray-Ban",
+    "name": "RAY BAN   0RB 3547",
+    "category": "Sunglasses",
+    "type": "sunglasses",
+    "shape": "Round",
+    "gender": "unisex",
+    "size": "M",
+    "rating": 4.9,
+    "price": 10701,
+    "originalPrice": 11890,
+    "discountPct": 10,
+    "tag": "ON SALE",
+    "tagType": "sale",
+    "img": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597033787_2.jpg?v=1658916233",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597033787_2.jpg?v=1658916233",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597033787_1.jpg?v=1658916233",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597033787_3.jpg?v=1658915426",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139434_2.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139434_1.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139434_3.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139342_2.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139342_1.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139342_3.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139465_2.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139465_1.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139465_3.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139403_1.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139403_3.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139403_2.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139373_1.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139373_3.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139373_2.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_1.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_3.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_1.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_3.jpg?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-9202s2-rose-gold-8056597982375.webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-9202s2-rose-gold-8056597982375-1.webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-9202s2-rose-gold-8056597982375-2.webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3547_00131_54_30_800x_25d0446c-d057-46bd-969d-591956d44440.webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3547_00131_54_0_800x_9acf7d87-b294-4e62-92d1-d0112479c86f.webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3547_00131_54_90_800x_463da5d2-09a2-4e34-bdc0-06dd66d3a0d5.webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-002b1-black-8056597663106.webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_1A......webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_1A........webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_1A...........webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_53......webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_53..........webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_53.............webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_56......webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_56..........webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_56.............webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_4E........webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_4E..........webp?v=1768387570",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_4E.............webp?v=1768387570"
+    ],
+    "colors": [
+      "#C5A059",
+      "#C0C0C0",
+      "#1E3A8A",
+      "#1A1816"
+    ],
+    "description": "Model No 3547 Material Metal Gender Unisex Shape Round Type Full Rim",
+    "material": "Metal",
+    "measurements": {
+      "lensWidth": 51,
+      "bridgeWidth": 19,
+      "templeLength": 145
+    },
+    "colorVariants": [
+      {
+        "id": "var-do-7768808521974-0",
+        "variantId": 45026700460278,
+        "sku": "SKU-RAYBAN-RAY-BAN--1",
+        "colorName": "GOLDEN   BLUE    001/3M",
+        "colorHex": "#C5A059",
+        "price": 10701,
+        "compareAtPrice": 11890,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597033787_2.jpg?v=1658916233",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597033787_2.jpg?v=1658916233"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-1",
+        "variantId": 44166760005878,
+        "sku": "SKU-RAYBAN-RAY-BAN--2",
+        "colorName": "SILVER    003/T1",
+        "colorHex": "#C0C0C0",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139434_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139434_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-2",
+        "variantId": 44166760038646,
+        "sku": "SKU-RAYBAN-RAY-BAN--3",
+        "colorName": "SILVER   003/T2",
+        "colorHex": "#C0C0C0",
+        "price": 10431,
+        "compareAtPrice": 11590,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139342_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139342_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-3",
+        "variantId": 44166760071414,
+        "sku": "SKU-RAYBAN-RAY-BAN--4",
+        "colorName": "LIGHT BLUE    003/T3",
+        "colorHex": "#1E3A8A",
+        "price": 10431,
+        "compareAtPrice": 11590,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139465_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139465_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-4",
+        "variantId": 45167612657910,
+        "sku": "SKU-RAYBAN-RAY-BAN--5",
+        "colorName": "LIGHT YELLOW   003/T4",
+        "colorHex": "#1A1816",
+        "price": 10431,
+        "compareAtPrice": 11590,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139403_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139403_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-5",
+        "variantId": 45167621865718,
+        "sku": "SKU-RAYBAN-RAY-BAN--6",
+        "colorName": "LIGHT  PINK    003/T5",
+        "colorHex": "#1A1816",
+        "price": 10431,
+        "compareAtPrice": 11590,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139373_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597139373_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-6",
+        "variantId": 45167624421622,
+        "sku": "SKU-RAYBAN-RAY-BAN--7",
+        "colorName": "GOLD GREEN   919631",
+        "colorHex": "#C5A059",
+        "price": 9351,
+        "compareAtPrice": 10390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-7",
+        "variantId": 44166760169718,
+        "sku": "SKU-RAYBAN-RAY-BAN--8",
+        "colorName": "GOLD GREEN   919631",
+        "colorHex": "#C5A059",
+        "price": 9351,
+        "compareAtPrice": 10390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-8",
+        "variantId": 45167623209206,
+        "sku": "SKU-RAYBAN-RAY-BAN--9",
+        "colorName": "GOLD GREEN   919631",
+        "colorHex": "#C5A059",
+        "price": 9351,
+        "compareAtPrice": 10390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-9",
+        "variantId": 45167623864566,
+        "sku": "SKU-RAYBAN-RAY-BAN--10",
+        "colorName": "GOLD GREEN   919631",
+        "colorHex": "#C5A059",
+        "price": 9351,
+        "compareAtPrice": 10390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197403_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-10",
+        "variantId": 45167636611318,
+        "sku": "SKU-RAYBAN-RAY-BAN--11",
+        "colorName": "SILVER GREEN   91984E",
+        "colorHex": "#C0C0C0",
+        "price": 10071,
+        "compareAtPrice": 11190,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-11",
+        "variantId": 45167634579702,
+        "sku": "SKU-RAYBAN-RAY-BAN--12",
+        "colorName": "SILVER GREEN   91984E",
+        "colorHex": "#C0C0C0",
+        "price": 10071,
+        "compareAtPrice": 11190,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-12",
+        "variantId": 44166760202486,
+        "sku": "SKU-RAYBAN-RAY-BAN--13",
+        "colorName": "SILVER GREEN   91984E",
+        "colorHex": "#C0C0C0",
+        "price": 10071,
+        "compareAtPrice": 11190,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-13",
+        "variantId": 45167636381942,
+        "sku": "SKU-RAYBAN-RAY-BAN--14",
+        "colorName": "SILVER GREEN   91984E",
+        "colorHex": "#C0C0C0",
+        "price": 10071,
+        "compareAtPrice": 11190,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/8056597197434_2.jpg?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-14",
+        "variantId": 45871743238390,
+        "sku": "SKU-RAYBAN-RAY-BAN--15",
+        "colorName": "ROSE GOLD   9202S2",
+        "colorHex": "#C5A059",
+        "price": 12591,
+        "compareAtPrice": 13990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-9202s2-rose-gold-8056597982375.webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-9202s2-rose-gold-8056597982375.webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-15",
+        "variantId": 45441918533878,
+        "sku": "SKU-RAYBAN-RAY-BAN--16",
+        "colorName": "ROSE GOLD   9202S2",
+        "colorHex": "#C5A059",
+        "price": 12591,
+        "compareAtPrice": 13990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-9202s2-rose-gold-8056597982375.webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-9202s2-rose-gold-8056597982375.webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-16",
+        "variantId": 45672759427318,
+        "sku": "SKU-RAYBAN-RAY-BAN--17",
+        "colorName": "GOLD & GREEN   001/31",
+        "colorHex": "#C5A059",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3547_00131_54_30_800x_25d0446c-d057-46bd-969d-591956d44440.webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3547_00131_54_30_800x_25d0446c-d057-46bd-969d-591956d44440.webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-17",
+        "variantId": 45672751071478,
+        "sku": "SKU-RAYBAN-RAY-BAN--18",
+        "colorName": "GOLD & GREEN   001/31",
+        "colorHex": "#C5A059",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3547_00131_54_30_800x_25d0446c-d057-46bd-969d-591956d44440.webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_3547_00131_54_30_800x_25d0446c-d057-46bd-969d-591956d44440.webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-18",
+        "variantId": 47102456791286,
+        "sku": "SKU-RAYBAN-RAY-BAN--19",
+        "colorName": "BLACK  002/B1",
+        "colorHex": "#1A1816",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-002b1-black-8056597663106.webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-002b1-black-8056597663106.webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-19",
+        "variantId": 47059735216374,
+        "sku": "SKU-RAYBAN-RAY-BAN--20",
+        "colorName": "BLACK  002/B1",
+        "colorHex": "#1A1816",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-002b1-black-8056597663106.webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/ray-ban-rb-3547-oval-002b1-black-8056597663106.webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-20",
+        "variantId": 48680134541558,
+        "sku": "SKU-RAYBAN-RAY-BAN--21",
+        "colorName": "GOLD & LIGHT VIOLET 001/1A",
+        "colorHex": "#C5A059",
+        "price": 10611,
+        "compareAtPrice": 11790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_1A......webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_1A......webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-21",
+        "variantId": 48680159707382,
+        "sku": "SKU-RAYBAN-RAY-BAN--22",
+        "colorName": "ARISTA GOLD BROWN  001/53",
+        "colorHex": "#C5A059",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_53......webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_53......webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-22",
+        "variantId": 48680185364726,
+        "sku": "SKU-RAYBAN-RAY-BAN--23",
+        "colorName": "ARISTA GOLD BLUE 001/56",
+        "colorHex": "#C5A059",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_56......webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_56......webp?v=1768387570"
+        ]
+      },
+      {
+        "id": "var-do-7768808521974-23",
+        "variantId": 48680241594614,
+        "sku": "SKU-RAYBAN-RAY-BAN--24",
+        "colorName": "GOLD GREEN 001/4E",
+        "colorHex": "#C5A059",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_4E........webp?v=1768387570",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3547_001_4E........webp?v=1768387570"
+        ]
+      }
+    ],
+    "sourceUrl": "https://dayalopticalsindia.com/products/ray-ban-237",
+    "packageDimensions": {
+      "lengthCm": 18,
+      "breadthCm": 9,
+      "heightCm": 7,
+      "weightKg": 0.25
+    }
+  },
+  {
+    "id": "do-7768807932150",
+    "brand": "Ray-Ban",
+    "name": "RAY BAN  0RB 3447I",
+    "category": "Sunglasses",
+    "type": "sunglasses",
+    "shape": "Round",
+    "gender": "men",
+    "size": "M",
+    "rating": 4.9,
+    "price": 7821,
+    "originalPrice": 8690,
+    "discountPct": 10,
+    "tag": "ON SALE",
+    "tagType": "sale",
+    "img": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__001_030A_1024x1024_b858589b-0ec1-40a8-96d4-86ff126e2524.webp?v=1701856120",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__001_030A_1024x1024_b858589b-0ec1-40a8-96d4-86ff126e2524.webp?v=1701856120",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__001_000A_1024x1024_09c9cb27-a95a-4ad8-b527-2c7063d0cc5c.webp?v=1701856120",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__001_090A_1024x1024_2d2393b5-517b-4ce5-aad2-217fa9b2ccfe.webp?v=1701856104",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__91233M_030A_1024x1024_685d09f2-4936-4a81-a2c8-3fc1d218c23a.webp?v=1768390357",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__91233M_000A_1024x1024_842ed083-f492-4f6c-a238-d1643c52d291.webp?v=1768390357",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__91233M_090A_1024x1024_3e8e4858-ec36-4f09-be6f-0d8f2547aac7.webp?v=1768390357",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3447I_004-71.........W......webp?v=1768390357",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3447I_004-71.........ww...webp?v=1768390357",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3447I_004-71.........W...webp?v=1768390357"
+    ],
+    "colors": [
+      "#14532D",
+      "#C5A059",
+      "#4A5568"
+    ],
+    "description": "Model No 3447I Material Metal Gender Men Shape Round Type Full Rim",
+    "material": "Metal",
+    "measurements": {
+      "lensWidth": 50,
+      "bridgeWidth": 19,
+      "templeLength": 145
+    },
+    "colorVariants": [
+      {
+        "id": "var-do-7768807932150-0",
+        "variantId": 45710132609270,
+        "sku": "SKU-RAYBAN-RAY-BAN--1",
+        "colorName": "GREEN   001",
+        "colorHex": "#14532D",
+        "price": 7821,
+        "compareAtPrice": 8690,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__001_030A_1024x1024_b858589b-0ec1-40a8-96d4-86ff126e2524.webp?v=1701856120",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__001_030A_1024x1024_b858589b-0ec1-40a8-96d4-86ff126e2524.webp?v=1701856120"
+        ]
+      },
+      {
+        "id": "var-do-7768807932150-1",
+        "variantId": 46187899715830,
+        "sku": "SKU-RAYBAN-RAY-BAN--2",
+        "colorName": "GOLD & BLUE  91233M",
+        "colorHex": "#C5A059",
+        "price": 7281,
+        "compareAtPrice": 8090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__91233M_030A_1024x1024_685d09f2-4936-4a81-a2c8-3fc1d218c23a.webp?v=1768390357",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/0RB3447I__91233M_030A_1024x1024_685d09f2-4936-4a81-a2c8-3fc1d218c23a.webp?v=1768390357"
+        ]
+      },
+      {
+        "id": "var-do-7768807932150-2",
+        "variantId": 49283487727862,
+        "sku": "SKU-RAYBAN-RAY-BAN--3",
+        "colorName": "GUNMETAL  004/71",
+        "colorHex": "#4A5568",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3447I_004-71.........W......webp?v=1768390357",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_3447I_004-71.........W......webp?v=1768390357"
+        ]
+      }
+    ],
+    "sourceUrl": "https://dayalopticalsindia.com/products/ray-ban-224",
+    "packageDimensions": {
+      "lengthCm": 18,
+      "breadthCm": 9,
+      "heightCm": 7,
+      "weightKg": 0.25
+    }
+  },
+  {
+    "id": "do-7787248189686",
+    "brand": "Ray-Ban",
+    "name": "RAY BAN 0RB 2140",
+    "category": "Sunglasses",
+    "type": "sunglasses",
+    "shape": "Wayfarer",
+    "gender": "unisex",
+    "size": "M",
+    "rating": 4.9,
+    "price": 7990,
+    "originalPrice": 7990,
+    "discountPct": 0,
+    "tag": "LUXURY ATELIER",
+    "tagType": "new",
+    "img": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_II.jpg?v=1660031805",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_II.jpg?v=1660031805",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_10013F.jpg?v=1660031805",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_11594E.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/ray-ban-rb-2140-117617.png?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/ray-ban-rb-2140-127771.png?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/ray-ban-rb-2140-127771-6.png?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_135931.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_1361R5.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_606140.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6587C5.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_661313.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_661456.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6615B1.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6615G4.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_901.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_901-58.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_90158.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902_2323.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-51.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-51_II.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-57.jpg?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_954_II.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/rayban_0rb2140_1382r5_havana.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901SIDE_1.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901FRONT_1.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/23704_side_2_1599492359126.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/23704_1599492359126.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/23704_side_3_1599492359127.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_2140_90132_50_0_800x_0f2288d9-a1ea-4026-b29d-b40025f3ecb0.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_2140_90132_50_30_800x_a14495d7-4b1a-4385-bff1-dcdef99be71c.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_2140_90132_50_90_800x_cb74f09a-9e2f-4abd-9e17-0044dfc300c2.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/601800_1663135172543.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/601800_side_2_1681884129054.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/601800_side_3_1681884129055.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/674931_1712042251562.webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_129431.........webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_129431............webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_129431...............webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1446R5.......webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1446R5..........webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1446R5.............webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1447B1........webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1447B1...........webp?v=1768375229",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban___2140_14134E_1..webp?v=1769752676",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban__2140-_14134E-.1......_55b97a0f-7687-431e-b78d-229bc41c8812.webp?v=1769752676",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban__2140-_14134E-.1._26d22978-63ff-4847-bc93-96546990bb7d.webp?v=1769752676",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban__2140-_68694E_...webp?v=1769753831",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban__2140-_68694E_.....webp?v=1769753831",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban__2140-_68694E.webp?v=1769753831"
+    ],
+    "colors": [
+      "#1A1816",
+      "#5A381E",
+      "#6B7280",
+      "#1E3A8A",
+      "#991B1B",
+      "#14532D",
+      "#6B3E11",
+      "#78350F"
+    ],
+    "description": "Model No 2140 Material Acetate Gender Unisex Shape Wayfarer Type Full Rim",
+    "material": "Acetate",
+    "measurements": {
+      "lensWidth": 50,
+      "bridgeWidth": 19,
+      "templeLength": 145
+    },
+    "colorVariants": [
+      {
+        "id": "var-do-7787248189686-0",
+        "variantId": 44248791908598,
+        "sku": "SKU-RAYBAN-RAY-BAN--1",
+        "colorName": "BLACK &  LIGHT BLUE  10013F",
+        "colorHex": "#1A1816",
+        "price": 7990,
+        "compareAtPrice": 7990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_II.jpg?v=1660031805",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_II.jpg?v=1660031805"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-1",
+        "variantId": 44248791941366,
+        "sku": "SKU-RAYBAN-RAY-BAN--2",
+        "colorName": "GREEN & HAVANA   11594E",
+        "colorHex": "#5A381E",
+        "price": 7641,
+        "compareAtPrice": 8490,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_11594E.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RAY_BAN_2140_11594E.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-2",
+        "variantId": 44248791974134,
+        "sku": "SKU-RAYBAN-RAY-BAN--3",
+        "colorName": "GREY MIRROR BLUE    117617",
+        "colorHex": "#6B7280",
+        "price": 7641,
+        "compareAtPrice": 8690,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/ray-ban-rb-2140-117617.png?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/ray-ban-rb-2140-117617.png?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-3",
+        "variantId": 45020311519478,
+        "sku": "SKU-RAYBAN-RAY-BAN--4",
+        "colorName": "TOP GREY ON HAVANA     127771",
+        "colorHex": "#6B7280",
+        "price": 10701,
+        "compareAtPrice": 11890,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/ray-ban-rb-2140-127771.png?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/ray-ban-rb-2140-127771.png?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-4",
+        "variantId": 44248792039670,
+        "sku": "SKU-RAYBAN-RAY-BAN--5",
+        "colorName": "HAVANA  135931",
+        "colorHex": "#5A381E",
+        "price": 11331,
+        "compareAtPrice": 12590,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_135931.jpg?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_135931.jpg?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-5",
+        "variantId": 44248792072438,
+        "sku": "SKU-RAYBAN-RAY-BAN--6",
+        "colorName": "STRIPED BLUE    1361R5",
+        "colorHex": "#1E3A8A",
+        "price": 12951,
+        "compareAtPrice": 14390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_1361R5.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_1361R5.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-6",
+        "variantId": 44248792105206,
+        "sku": "SKU-RAYBAN-RAY-BAN--7",
+        "colorName": "BLUE    606140",
+        "colorHex": "#1E3A8A",
+        "price": 7191,
+        "compareAtPrice": 7990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_606140.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_606140.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-7",
+        "variantId": 44248792137974,
+        "sku": "SKU-RAYBAN-RAY-BAN--8",
+        "colorName": "TRANSPARENT BLUE &  RED    6587C5",
+        "colorHex": "#1E3A8A",
+        "price": 9981,
+        "compareAtPrice": 11090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6587C5.jpg?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6587C5.jpg?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-8",
+        "variantId": 44248792170742,
+        "sku": "SKU-RAYBAN-RAY-BAN--9",
+        "colorName": "TRANSPARENT PURPLE     661313",
+        "colorHex": "#1A1816",
+        "price": 9981,
+        "compareAtPrice": 11090,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_661313.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_661313.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-9",
+        "variantId": 44248792203510,
+        "sku": "SKU-RAYBAN-RAY-BAN--10",
+        "colorName": "TRANSPARENT RED   661456",
+        "colorHex": "#991B1B",
+        "price": 9981,
+        "compareAtPrice": 11090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_661456.jpg?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_661456.jpg?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-10",
+        "variantId": 44248792236278,
+        "sku": "SKU-RAYBAN-RAY-BAN--11",
+        "colorName": "TRANSPARENT GREEN     6615B1",
+        "colorHex": "#14532D",
+        "price": 9981,
+        "compareAtPrice": 11090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6615B1.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6615B1.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-11",
+        "variantId": 44248792269046,
+        "sku": "SKU-RAYBAN-RAY-BAN--12",
+        "colorName": "DARK GREEN MIRROR POLAR    6615G4",
+        "colorHex": "#14532D",
+        "price": 15111,
+        "compareAtPrice": 16790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6615G4.jpg?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_6615G4.jpg?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-12",
+        "variantId": 45020311847158,
+        "sku": "SKU-RAYBAN-RAY-BAN--13",
+        "colorName": "BLACK    901/58",
+        "colorHex": "#1A1816",
+        "price": 13491,
+        "compareAtPrice": 14990,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_901.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_901.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-13",
+        "variantId": 44248792400118,
+        "sku": "SKU-RAYBAN-RAY-BAN--14",
+        "colorName": "TORTOISESHELL     902/51",
+        "colorHex": "#6B3E11",
+        "price": 12231,
+        "compareAtPrice": 13590,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-51_II.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-51_II.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-14",
+        "variantId": 45022593482998,
+        "sku": "SKU-RAYBAN-RAY-BAN--15",
+        "colorName": "TORTOISESHELL     902/51",
+        "colorHex": "#6B3E11",
+        "price": 12231,
+        "compareAtPrice": 13590,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-51_II.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-51_II.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-15",
+        "variantId": 44248792432886,
+        "sku": "SKU-RAYBAN-RAY-BAN--16",
+        "colorName": "TORTOISE       902/57",
+        "colorHex": "#6B3E11",
+        "price": 13491,
+        "compareAtPrice": 14990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-57.jpg?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_902-57.jpg?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-16",
+        "variantId": 44248792465654,
+        "sku": "SKU-RAYBAN-RAY-BAN--17",
+        "colorName": "HAVANA      954",
+        "colorHex": "#5A381E",
+        "price": 7461,
+        "compareAtPrice": 8290,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_954_II.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/2140_954_II.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-17",
+        "variantId": 44984122212598,
+        "sku": "SKU-RAYBAN-RAY-BAN--18",
+        "colorName": "GREY & HAVANA   1382R5",
+        "colorHex": "#6B7280",
+        "price": 10611,
+        "compareAtPrice": 11790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/rayban_0rb2140_1382r5_havana.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/rayban_0rb2140_1382r5_havana.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-18",
+        "variantId": 45214055071990,
+        "sku": "SKU-RAYBAN-RAY-BAN--19",
+        "colorName": "BLACK   901",
+        "colorHex": "#1A1816",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901SIDE_1.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901SIDE_1.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-19",
+        "variantId": 45237251178742,
+        "sku": "SKU-RAYBAN-RAY-BAN--20",
+        "colorName": "BLACK   901",
+        "colorHex": "#1A1816",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901SIDE_1.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901SIDE_1.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-20",
+        "variantId": 45214055399670,
+        "sku": "SKU-RAYBAN-RAY-BAN--21",
+        "colorName": "BLACK   901",
+        "colorHex": "#1A1816",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901SIDE_1.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/RB2140-901SIDE_1.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-21",
+        "variantId": 45384047100150,
+        "sku": "SKU-RAYBAN-RAY-BAN--22",
+        "colorName": "HAVANA    902",
+        "colorHex": "#5A381E",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/23704_side_2_1599492359126.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/23704_side_2_1599492359126.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-22",
+        "variantId": 45684600013046,
+        "sku": "SKU-RAYBAN-RAY-BAN--23",
+        "colorName": "BLACK    901/32",
+        "colorHex": "#1A1816",
+        "price": 12231,
+        "compareAtPrice": 13590,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_2140_90132_50_30_800x_a14495d7-4b1a-4385-bff1-dcdef99be71c.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_2140_90132_50_30_800x_a14495d7-4b1a-4385-bff1-dcdef99be71c.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-23",
+        "variantId": 45689407635702,
+        "sku": "SKU-RAYBAN-RAY-BAN--24",
+        "colorName": "BLACK   135831",
+        "colorHex": "#1A1816",
+        "price": 11331,
+        "compareAtPrice": 12590,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/601800_side_2_1681884129054.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/601800_side_2_1681884129054.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-24",
+        "variantId": 47531055350006,
+        "sku": "SKU-RAYBAN-RAY-BAN--25",
+        "colorName": "BLACK & CLEAR   129433",
+        "colorHex": "#1A1816",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/674931_1712042251562.webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/674931_1712042251562.webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-25",
+        "variantId": 49292819333366,
+        "sku": "SKU-RAYBAN-RAY-BAN--26",
+        "colorName": "BLACK & TRANSPARENT  129431",
+        "colorHex": "#1A1816",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_129431.........webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_129431.........webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-26",
+        "variantId": 49292819431670,
+        "sku": "SKU-RAYBAN-RAY-BAN--27",
+        "colorName": "BROWN & TRANSPARENT BLUE 1446R5",
+        "colorHex": "#78350F",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1446R5.......webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1446R5.......webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-27",
+        "variantId": 49292819529974,
+        "sku": "SKU-RAYBAN-RAY-BAN--28",
+        "colorName": "PURPLE GREY 1447B1",
+        "colorHex": "#6B7280",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1447B1........webp?v=1768375229",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban_2140_1447B1........webp?v=1768375229"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-28",
+        "variantId": 49900622217462,
+        "sku": "SKU-RAYBAN-RAY-BAN--29",
+        "colorName": "DARK HAVANA 14134E",
+        "colorHex": "#5A381E",
+        "price": 11511,
+        "compareAtPrice": 12790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban___2140_14134E_1..webp?v=1769752676",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban___2140_14134E_1..webp?v=1769752676"
+        ]
+      },
+      {
+        "id": "var-do-7787248189686-29",
+        "variantId": 49900661473526,
+        "sku": "SKU-RAYBAN-RAY-BAN--30",
+        "colorName": "TRANSPARENT GREEN 68694E",
+        "colorHex": "#14532D",
+        "price": 15021,
+        "compareAtPrice": 16690,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban__2140-_68694E_...webp?v=1769753831",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Ray_Ban__2140-_68694E_...webp?v=1769753831"
+        ]
+      }
+    ],
+    "sourceUrl": "https://dayalopticalsindia.com/products/ray-ban-383",
+    "packageDimensions": {
+      "lengthCm": 18,
+      "breadthCm": 9,
+      "heightCm": 7,
+      "weightKg": 0.25
+    }
+  },
+  {
+    "id": "do-7774372888822",
+    "brand": "Ray-Ban",
+    "name": "RAY BAN  0RB 3025I",
+    "category": "Sunglasses",
+    "type": "sunglasses",
+    "shape": "Aviator",
+    "gender": "men",
+    "size": "L",
+    "rating": 4.9,
+    "price": 7641,
+    "originalPrice": 8490,
+    "discountPct": 10,
+    "tag": "ON SALE",
+    "tagType": "sale",
+    "img": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3E_030A.jpg?v=1678447339",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3E_030A.jpg?v=1678447339",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3E_000A.jpg?v=1678447339",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3E_060A.jpg?v=1678447339",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_51_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_51_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_51_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_57_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_57_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_57_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_58_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_58_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_58_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_32_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_32_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_32_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_37_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_37_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_37_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_51_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_51_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_51_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_58_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_58_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_58_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0015_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0015_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0015_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__00253F_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__00253F_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__00253F_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_32_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_32_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_32_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3E_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3E_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3E_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3F_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3F_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3F_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_51_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_51_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_51_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_58_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_58_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_58_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_78_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_78_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_78_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0045_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0045_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0045_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__014_51_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__014_51_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__014_51_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3277_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3277_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3277_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3276_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3276_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3276_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L9797_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L9797_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L9797_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L1744_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L1744_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L1744_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__088_3F_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__088_3F_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__088_3F_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L0205_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L0205_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L0205_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__112_85_030A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__112_85_000A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__112_85_060A.jpg?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_AVIATOR_3025I_00258_62_30_800x_0dd95925-6dbb-4f59-83cb-1f40a164088e.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_AVIATOR_3025I_00258_62_0_800x_19506ba9-39e8-41e7-bdf8-56ea461418f6.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_AVIATOR_3025I_00258_62_90_800x_067382ca-5417-4bfa-996d-d7a32a4247f5.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/19153_1680591570427.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/19153_side_1_1681896817773.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/19153_side_2_1681896817773.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/52178_side_1_1681977873130.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/52178_1679652642845.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/52178_side_2_1681977873130.webp?v=1768386548",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAY_BAN_3025I_003-32_...webp?v=1782725594",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAY_BAN_3025I_003-32_..webp?v=1782725594"
+    ],
+    "colors": [
+      "#C5A059",
+      "#1A1816",
+      "#C0C0C0",
+      "#4A5568",
+      "#14532D",
+      "#78350F",
+      "#6B7280"
+    ],
+    "description": "Model No 3025I Material Metal Gender Men Shape Aviator Type Full Rim",
+    "material": "Metal",
+    "measurements": {
+      "lensWidth": 58,
+      "bridgeWidth": 19,
+      "templeLength": 145
+    },
+    "colorVariants": [
+      {
+        "id": "var-do-7774372888822-0",
+        "variantId": 45024256786678,
+        "sku": "SKU-RAYBAN-RAY-BAN--1",
+        "colorName": "GOLD & BROWN   001/3E",
+        "colorHex": "#C5A059",
+        "price": 7641,
+        "compareAtPrice": 8490,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3E_030A.jpg?v=1678447339",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3E_030A.jpg?v=1678447339"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-1",
+        "variantId": 47226966933750,
+        "sku": "SKU-RAYBAN-RAY-BAN--2",
+        "colorName": "GOLD & BLUE  001/3F",
+        "colorHex": "#C5A059",
+        "price": 7911,
+        "compareAtPrice": 8790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-2",
+        "variantId": 46871228874998,
+        "sku": "SKU-RAYBAN-RAY-BAN--3",
+        "colorName": "GOLD & BLUE  001/3F",
+        "colorHex": "#C5A059",
+        "price": 7911,
+        "compareAtPrice": 8790,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-3",
+        "variantId": 45024258818294,
+        "sku": "SKU-RAYBAN-RAY-BAN--4",
+        "colorName": "GOLD & BLUE  001/3F",
+        "colorHex": "#C5A059",
+        "price": 7911,
+        "compareAtPrice": 8790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-4",
+        "variantId": 45024282640630,
+        "sku": "SKU-RAYBAN-RAY-BAN--5",
+        "colorName": "GOLD & BROWN   001/57",
+        "colorHex": "#C5A059",
+        "price": 8451,
+        "compareAtPrice": 9390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_57_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_57_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-5",
+        "variantId": 45201725030646,
+        "sku": "SKU-RAYBAN-RAY-BAN--6",
+        "colorName": "GOLD DARK & GREEN   001/58",
+        "colorHex": "#C5A059",
+        "price": 9891,
+        "compareAtPrice": 10990,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_58_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_58_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-6",
+        "variantId": 45042780012790,
+        "sku": "SKU-RAYBAN-RAY-BAN--7",
+        "colorName": "GOLD DARK & GREEN   001/58",
+        "colorHex": "#C5A059",
+        "price": 9891,
+        "compareAtPrice": 10990,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_58_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__001_58_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-7",
+        "variantId": 46958753579254,
+        "sku": "SKU-RAYBAN-RAY-BAN--8",
+        "colorName": "BLACK   002/3F",
+        "colorHex": "#1A1816",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-8",
+        "variantId": 48946865733878,
+        "sku": "SKU-RAYBAN-RAY-BAN--9",
+        "colorName": "BLACK   002/3F",
+        "colorHex": "#1A1816",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-9",
+        "variantId": 48946867175670,
+        "sku": "SKU-RAYBAN-RAY-BAN--10",
+        "colorName": "BLACK   002/3F",
+        "colorHex": "#1A1816",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-10",
+        "variantId": 45024327368950,
+        "sku": "SKU-RAYBAN-RAY-BAN--11",
+        "colorName": "BLACK & GREY   002/32",
+        "colorHex": "#1A1816",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_32_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_32_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-11",
+        "variantId": 50088968093942,
+        "sku": "SKU-RAYBAN-RAY-BAN--12",
+        "colorName": "BLACK & GREY   002/32",
+        "colorHex": "#1A1816",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_32_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_32_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-12",
+        "variantId": 46958753612022,
+        "sku": "SKU-RAYBAN-RAY-BAN--13",
+        "colorName": "BLACK   002/51",
+        "colorHex": "#1A1816",
+        "price": 9891,
+        "compareAtPrice": 10990,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_37_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__002_37_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-13",
+        "variantId": 45024338837750,
+        "sku": "SKU-RAYBAN-RAY-BAN--14",
+        "colorName": "SILVER   003/3E",
+        "colorHex": "#C0C0C0",
+        "price": 6291,
+        "compareAtPrice": 6990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3E_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3E_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-14",
+        "variantId": 45024344015094,
+        "sku": "SKU-RAYBAN-RAY-BAN--15",
+        "colorName": "SILVER & BLUE   003/3F",
+        "colorHex": "#C0C0C0",
+        "price": 7641,
+        "compareAtPrice": 8490,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-15",
+        "variantId": 47582487281910,
+        "sku": "SKU-RAYBAN-RAY-BAN--16",
+        "colorName": "SILVER & BLUE   003/3F",
+        "colorHex": "#C0C0C0",
+        "price": 7641,
+        "compareAtPrice": 8490,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__003_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-16",
+        "variantId": 46958753677558,
+        "sku": "SKU-RAYBAN-RAY-BAN--17",
+        "colorName": "BLACK    004/51",
+        "colorHex": "#1A1816",
+        "price": 8541,
+        "compareAtPrice": 9490,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__00253F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__00253F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-17",
+        "variantId": 47582530732278,
+        "sku": "SKU-RAYBAN-RAY-BAN--18",
+        "colorName": "BLACK    004/51",
+        "colorHex": "#1A1816",
+        "price": 8541,
+        "compareAtPrice": 9490,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__00253F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__00253F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-18",
+        "variantId": 45024351912182,
+        "sku": "SKU-RAYBAN-RAY-BAN--19",
+        "colorName": "GUNMETAL   004/58",
+        "colorHex": "#4A5568",
+        "price": 9171,
+        "compareAtPrice": 10190,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_58_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_58_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-19",
+        "variantId": 45024360497398,
+        "sku": "SKU-RAYBAN-RAY-BAN--20",
+        "colorName": "GUNMETAL & BLUE  004/78",
+        "colorHex": "#4A5568",
+        "price": 9711,
+        "compareAtPrice": 10790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_78_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_78_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-20",
+        "variantId": 45024367444214,
+        "sku": "SKU-RAYBAN-RAY-BAN--21",
+        "colorName": "GUNMETAL & BLUE  004/78",
+        "colorHex": "#4A5568",
+        "price": 9711,
+        "compareAtPrice": 10790,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_78_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__004_78_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-21",
+        "variantId": 45024379371766,
+        "sku": "SKU-RAYBAN-RAY-BAN--22",
+        "colorName": "GREEN   0045",
+        "colorHex": "#14532D",
+        "price": 6201,
+        "compareAtPrice": 6890,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0045_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__0045_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-22",
+        "variantId": 45024383500534,
+        "sku": "SKU-RAYBAN-RAY-BAN--23",
+        "colorName": "BROWN   014/51",
+        "colorHex": "#78350F",
+        "price": 5841,
+        "compareAtPrice": 6490,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__014_51_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__014_51_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-23",
+        "variantId": 45024384254198,
+        "sku": "SKU-RAYBAN-RAY-BAN--24",
+        "colorName": "SILVER   W3277",
+        "colorHex": "#C0C0C0",
+        "price": 8451,
+        "compareAtPrice": 9390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3277_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3277_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-24",
+        "variantId": 45024385204470,
+        "sku": "SKU-RAYBAN-RAY-BAN--25",
+        "colorName": "SILVER   W3277",
+        "colorHex": "#C0C0C0",
+        "price": 8451,
+        "compareAtPrice": 9390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3277_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3277_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-25",
+        "variantId": 45024386515190,
+        "sku": "SKU-RAYBAN-RAY-BAN--26",
+        "colorName": "GOLD & GREY   W3276",
+        "colorHex": "#C5A059",
+        "price": 6291,
+        "compareAtPrice": 6990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3276_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__W3276_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-26",
+        "variantId": 45024389300470,
+        "sku": "SKU-RAYBAN-RAY-BAN--27",
+        "colorName": "GOLD & BROWN  L9797",
+        "colorHex": "#C5A059",
+        "price": 6651,
+        "compareAtPrice": 7390,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L9797_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L9797_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-27",
+        "variantId": 45024390873334,
+        "sku": "SKU-RAYBAN-RAY-BAN--28",
+        "colorName": "GOLDEN GERY  L1744",
+        "colorHex": "#C5A059",
+        "price": 7281,
+        "compareAtPrice": 8090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L1744_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L1744_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-28",
+        "variantId": 45024393167094,
+        "sku": "SKU-RAYBAN-RAY-BAN--29",
+        "colorName": "BLACK & BLUE   088/3F",
+        "colorHex": "#1A1816",
+        "price": 7281,
+        "compareAtPrice": 8090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__088_3F_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__088_3F_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-29",
+        "variantId": 45024393822454,
+        "sku": "SKU-RAYBAN-RAY-BAN--30",
+        "colorName": "GOLDEN   L0205",
+        "colorHex": "#C5A059",
+        "price": 7821,
+        "compareAtPrice": 8690,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L0205_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L0205_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-30",
+        "variantId": 45024394117366,
+        "sku": "SKU-RAYBAN-RAY-BAN--31",
+        "colorName": "GOLDEN   L0205",
+        "colorHex": "#C5A059",
+        "price": 7821,
+        "compareAtPrice": 8690,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L0205_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__L0205_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-31",
+        "variantId": 45024394281206,
+        "sku": "SKU-RAYBAN-RAY-BAN--32",
+        "colorName": "GOLDEN   112/85",
+        "colorHex": "#C5A059",
+        "price": 6291,
+        "compareAtPrice": 6990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__112_85_030A.jpg?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/products/0RB3025I__112_85_030A.jpg?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-32",
+        "variantId": 45680875307254,
+        "sku": "SKU-RAYBAN-RAY-BAN--33",
+        "colorName": "BLACK   002/58",
+        "colorHex": "#1A1816",
+        "price": 9891,
+        "compareAtPrice": 10990,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_AVIATOR_3025I_00258_62_30_800x_0dd95925-6dbb-4f59-83cb-1f40a164088e.webp?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_AVIATOR_3025I_00258_62_30_800x_0dd95925-6dbb-4f59-83cb-1f40a164088e.webp?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-33",
+        "variantId": 45680878485750,
+        "sku": "SKU-RAYBAN-RAY-BAN--34",
+        "colorName": "BLACK   002/58",
+        "colorHex": "#1A1816",
+        "price": 9891,
+        "compareAtPrice": 10990,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_AVIATOR_3025I_00258_62_30_800x_0dd95925-6dbb-4f59-83cb-1f40a164088e.webp?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAYBAN_AVIATOR_3025I_00258_62_30_800x_0dd95925-6dbb-4f59-83cb-1f40a164088e.webp?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-34",
+        "variantId": 45788506259702,
+        "sku": "SKU-RAYBAN-RAY-BAN--35",
+        "colorName": "GREY GREEN   L2823",
+        "colorHex": "#6B7280",
+        "price": 7821,
+        "compareAtPrice": 8690,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/19153_side_1_1681896817773.webp?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/19153_side_1_1681896817773.webp?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-35",
+        "variantId": 45880722653430,
+        "sku": "SKU-RAYBAN-RAY-BAN--36",
+        "colorName": "GRADIENT BROWN   001/51",
+        "colorHex": "#78350F",
+        "price": 8541,
+        "compareAtPrice": 9490,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/52178_side_1_1681977873130.webp?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/52178_side_1_1681977873130.webp?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-36",
+        "variantId": 47643123581174,
+        "sku": "SKU-RAYBAN-RAY-BAN--37",
+        "colorName": "GRADIENT BROWN   001/51",
+        "colorHex": "#78350F",
+        "price": 8541,
+        "compareAtPrice": 9490,
+        "available": true,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/52178_side_1_1681977873130.webp?v=1768386548",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/52178_side_1_1681977873130.webp?v=1768386548"
+        ]
+      },
+      {
+        "id": "var-do-7774372888822-37",
+        "variantId": 51066503037174,
+        "sku": "SKU-RAYBAN-RAY-BAN--38",
+        "colorName": "SILVER & GREY 003/32",
+        "colorHex": "#C0C0C0",
+        "price": 9081,
+        "compareAtPrice": 10090,
+        "available": false,
+        "featuredImage": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAY_BAN_3025I_003-32_...webp?v=1782725594",
+        "gallery": [
+          "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/RAY_BAN_3025I_003-32_...webp?v=1782725594"
+        ]
+      }
+    ],
+    "sourceUrl": "https://dayalopticalsindia.com/products/ray-ban-254",
+    "packageDimensions": {
+      "lengthCm": 18,
+      "breadthCm": 9,
+      "heightCm": 7,
+      "weightKg": 0.25
+    }
+  }
+]
