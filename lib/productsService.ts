@@ -132,24 +132,43 @@ export async function getCatalogProducts(forceRefresh = false): Promise<Product[
   }
 
   try {
-    const { data, error } = await supabase
-      .from("products")
-      .select(`
-        *,
-        brand:brands(name, slug),
-        category:categories(name, slug),
-        product_variants(*),
-        product_images(*)
-      `)
-      .eq("is_active", true)
-      .order("created_at", { ascending: false });
+    let allRows: any[] = [];
+    let from = 0;
+    const pageSize = 1000;
+    let hasMore = true;
 
-    if (error || !data || data.length === 0) {
+    while (hasMore) {
+      const { data, error } = await supabase
+        .from("products")
+        .select(`
+          *,
+          brand:brands(name, slug),
+          category:categories(name, slug),
+          product_variants(*),
+          product_images(*)
+        `)
+        .eq("is_active", true)
+        .order("created_at", { ascending: false })
+        .range(from, from + pageSize - 1);
+
+      if (error || !data || data.length === 0) {
+        break;
+      }
+
+      allRows = allRows.concat(data);
+      if (data.length < pageSize) {
+        hasMore = false;
+      } else {
+        from += pageSize;
+      }
+    }
+
+    if (allRows.length === 0) {
       cachedProducts = ALL_FALLBACK_PRODUCTS;
       return ALL_FALLBACK_PRODUCTS;
     }
 
-    const mapped: Product[] = data.map(mapRowToProduct);
+    const mapped: Product[] = allRows.map(mapRowToProduct);
     cachedProducts = mapped;
     return mapped;
   } catch (err) {
