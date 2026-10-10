@@ -209,12 +209,14 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   );
 }
 
+export const getProductById = getProductBySlug;
+
 /**
  * Filter and sort catalog in-memory with maximum performance and zero latency.
  */
 export function filterAndSortProducts(
   products: Product[],
-  filterState: FilterState
+  filterState: Partial<FilterState>
 ): Product[] {
   let result = [...products];
 

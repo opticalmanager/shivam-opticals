@@ -25,8 +25,8 @@ export async function GET(request: NextRequest) {
     }
 
     const filtered = filterAndSortProducts(allProducts, {
-      type,
-      gender,
+      category: type || "all",
+      gender: gender ? [gender as any] : undefined,
       shapes: shape ? [shape] : undefined,
       brands: brand ? [brand] : undefined,
       searchQuery: q,

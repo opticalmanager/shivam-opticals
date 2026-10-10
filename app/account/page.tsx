@@ -34,7 +34,7 @@ type AccountTab = "orders" | "prescriptions" | "consultations" | "addresses" | "
 function AccountDashboard() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { user, isLoggedIn, login, logout, openAppointmentModal } = useAuth();
+  const { user, isLoggedIn, login, logout, openAppointmentModal, openAuthModal } = useAuth();
 
   const tabParam = (searchParams.get("tab") as AccountTab) || "orders";
   const [activeTab, setActiveTab] = useState<AccountTab>(tabParam);
@@ -152,6 +152,15 @@ function AccountDashboard() {
             >
               <Sparkles className="w-4 h-4" />
               <span>CONTINUE TO DASHBOARD</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => openAuthModal()}
+              className="w-full py-3 border border-[#C5A059] bg-[#FAF3EB] hover:bg-[#F4EFEA] text-[#0A251C] text-xs font-bold uppercase tracking-wider rounded-xl transition cursor-pointer flex items-center justify-center gap-2"
+            >
+              <ShieldCheck className="w-4 h-4 text-[#C5A059]" />
+              <span>VERIFY WITH SECURE PHONE OTP</span>
             </button>
           </form>
 

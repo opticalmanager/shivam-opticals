@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { PRODUCTS } from "@/data/products";
 import { getProductById } from "@/lib/productsService";
 import { ProductDetailView } from "./ProductDetailView";
@@ -20,5 +20,15 @@ export default async function ProductPage({
     PRODUCTS.find((p) => p.id === resolvedParams.id) ||
     PRODUCTS[0];
 
-  return <ProductDetailView product={product} />;
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#FCFAF7] flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-[#C5A059] border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <ProductDetailView product={product} />
+    </Suspense>
+  );
 }

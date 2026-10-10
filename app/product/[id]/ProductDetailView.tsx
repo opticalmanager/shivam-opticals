@@ -27,13 +27,19 @@ import {
   Navigation,
   Calendar,
   CheckCircle2,
+  Camera,
+  Star,
 } from "lucide-react";
-import { Product } from "@/types";
+import { Product, SelectedLensConfig } from "@/types";
+import { PRODUCTS } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useAuth } from "@/context/AuthContext";
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner";
+import { LensCustomizerModal } from "@/components/optical/LensCustomizerModal";
+import { VirtualTryOnModal } from "@/components/optical/VirtualTryOnModal";
+import { PincodeEstimator } from "@/components/product/PincodeEstimator";
 
 interface ProductDetailViewProps {
   product: Product;
@@ -42,7 +48,7 @@ interface ProductDetailViewProps {
 export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   product,
 }) => {
-  const { addItem, openCart } = useCart();
+  const { addItem, addCustomLensToCart, openCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { openAppointmentModal } = useAuth();
 
@@ -50,6 +56,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const [selectedImgIndex, setSelectedImgIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [copiedCode, setCopiedCode] = useState(false);
+  const [isTryOnOpen, setIsTryOnOpen] = useState(false);
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
 
   // Accordion state
   const [openAccordions, setOpenAccordions] = useState<{
@@ -143,6 +151,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 alt={product.name}
                 className="w-full h-full object-contain filter drop-shadow-sm transition-transform duration-500 group-hover:scale-105 select-none"
               />
+
+              {/* 3D Virtual Try-On Badge */}
+              <button
+                type="button"
+                onClick={() => setIsTryOnOpen(true)}
+                className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#0A251C]/90 hover:bg-[#0A251C] text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-md shadow-md transition-all cursor-pointer hover:scale-105"
+              >
+                <Camera className="w-3.5 h-3.5 text-[#C5A059]" />
+                <span>3D TRY-ON</span>
+              </button>
             </div>
 
             {/* Interactive Angle Switching Pills & Carousel Navigation */}
@@ -321,8 +339,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
             {/* Rating & Reviews Bar */}
             <div className="flex items-center gap-2 text-xs text-[#0A251C] -mt-1 pb-1">
-              <div className="flex text-amber-500 text-sm leading-none">
-                ★★★★★
+              <div className="flex items-center gap-0.5 text-amber-500">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                ))}
               </div>
               <span className="font-bold text-xs">5.0</span>
               <span className="text-neutral-300">•</span>
@@ -351,15 +371,15 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </div>
 
             {/* Quantity Stepper & ADD TO CART Action Stack */}
-            <div className="pt-1 flex items-center gap-3">
-              <div className="flex items-center justify-between border border-[#E8DEC8] rounded-lg bg-white w-28 px-3 py-3 shadow-2xs shrink-0">
+            <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <div className="flex items-center justify-between border border-[#E8DEC8] rounded-lg bg-white w-full sm:w-28 px-3 py-3 shadow-2xs shrink-0">
                 <button
                   onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
                   className="text-[#0A251C] hover:text-[#C5A059] font-bold text-base px-1 leading-none select-none cursor-pointer"
                 >
                   −
                 </button>
-                <span className="font-bold text-xs text-[#0A251C]">
+                <span className="font-bold text-xs text-[#0A251C] font-mono">
                   {quantity}
                 </span>
                 <button
@@ -370,29 +390,38 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
               </div>
 
+              {/* Primary Action 1: Customize Lenses & Buy */}
               <button
+                type="button"
+                onClick={() => setIsCustomizerOpen(true)}
+                className="flex-1 py-3.5 px-5 bg-[#C5A059] hover:bg-[#B08B45] text-[#0A251C] text-xs font-bold uppercase tracking-[0.16em] rounded-lg transition duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] group"
+              >
+                <Glasses className="w-4 h-4 text-[#0A251C] group-hover:scale-110 transition-transform" />
+                <span>CUSTOMIZE LENSES & BUY</span>
+              </button>
+
+              {/* Primary Action 2: Add Frame Only */}
+              <button
+                type="button"
                 onClick={handleAddToCart}
-                className="flex-1 py-3.5 px-6 bg-[#0A251C] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.16em] rounded-lg transition duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] group"
+                className="py-3.5 px-5 bg-[#0A251C] hover:bg-black text-white text-xs font-bold uppercase tracking-[0.16em] rounded-lg transition duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] group shrink-0"
               >
                 <ShoppingBag className="w-4 h-4 text-[#C5A059] group-hover:scale-110 transition-transform" />
-                <span>ADD TO CART</span>
+                <span>FRAME ONLY</span>
               </button>
             </div>
 
-            {/* Secondary Banner: ADD PRESCRIPTION LENSES */}
-            <a
-              href={`https://wa.me/919779990207?text=${encodeURIComponent(
-                `Hi Shivam Optical, I would like to add Prescription Lenses for ${product.name}.`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* 3D Virtual Try-On Banner */}
+            <button
+              type="button"
+              onClick={() => setIsTryOnOpen(true)}
               className="w-full py-3 px-4 bg-[#FAF3EB] hover:bg-[#F3EDE5] border border-[#C5A059]/60 rounded-lg text-center text-xs font-semibold tracking-wider uppercase text-[#0A251C] transition flex items-center justify-center gap-2 group cursor-pointer shadow-2xs"
             >
-              <Glasses className="w-4 h-4 text-[#C5A059]" />
+              <Camera className="w-4 h-4 text-[#C5A059]" />
               <span className="text-[11px] font-bold text-[#0A251C] group-hover:text-[#A38241] transition-colors">
-                ADD PRESCRIPTION LENSES (NIKON • ZEISS • ESSILOR) &rarr;
+                REAL-TIME 3D VIRTUAL TRY-ON (WEBGL &amp; MEDIAPIPE) &rarr;
               </span>
-            </a>
+            </button>
 
             {/* Luxury Ticket Promo Box */}
             <div className="p-3.5 rounded-xl bg-[#FAF3EB]/70 border-dashed border border-[#C5A059]/70 flex items-center justify-between text-xs">
@@ -448,6 +477,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
               </div>
             </div>
+
+            {/* Pincode Delivery Estimator */}
+            <PincodeEstimator isRx={false} />
 
             {/* WhatsApp Concierge Consultation Bar */}
             <a
@@ -715,6 +747,36 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Clinical Lens Customizer Modal */}
+      {isCustomizerOpen && (
+        <LensCustomizerModal
+          product={product}
+          onClose={() => setIsCustomizerOpen(false)}
+          onConfirmLensConfig={(cfg: SelectedLensConfig) => {
+            addCustomLensToCart(product, cfg);
+            setIsCustomizerOpen(false);
+            openCart();
+          }}
+        />
+      )}
+
+      {/* 3D Virtual Try-On Modal */}
+      {isTryOnOpen && (
+        <VirtualTryOnModal
+          product={product}
+          allProducts={PRODUCTS}
+          onClose={() => setIsTryOnOpen(false)}
+          onAddToCart={(p) => {
+            addItem(p, p.colors?.[0] || "#1A1816");
+            openCart();
+          }}
+          onOpenLensCustomizer={() => {
+            setIsTryOnOpen(false);
+            setIsCustomizerOpen(true);
+          }}
+        />
+      )}
     </div>
   );
 };
