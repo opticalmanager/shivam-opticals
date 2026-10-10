@@ -74,6 +74,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={displayImg}
             alt={product.name}
             loading="lazy"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+            }}
             className="h-24 max-h-24 max-w-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
           />
         </Link>

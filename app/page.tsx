@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import {
   Star,
@@ -226,18 +226,32 @@ export default function HomePage() {
   }, []);
 
   // Filter products for collection section
-  const filteredProducts = productsList.filter((p) => {
-    if (selectedShape !== "all" && p.shape.toLowerCase() !== selectedShape.toLowerCase()) {
-      return false;
-    }
-    if (collectionTab === "bestsellers") {
-      return p.rating >= 4.9;
-    }
-    return true;
-  }).slice(0, 10);
+  const filteredProducts = useMemo(() => {
+    return productsList
+      .filter((p) => {
+        if (
+          selectedShape !== "all" &&
+          (p.shape || "").toLowerCase() !== selectedShape.toLowerCase()
+        ) {
+          return false;
+        }
+        if (collectionTab === "bestsellers") {
+          return p.isBestSeller || (p.rating && p.rating >= 4.8);
+        }
+        return true;
+      })
+      .slice(0, 10);
+  }, [productsList, selectedShape, collectionTab]);
 
-  // Recommended products
-  const recommendedProducts = productsList.slice(0, 5);
+  // Recommended products dynamically filtered by patron demographic
+  const recommendedProducts = useMemo(() => {
+    const list = productsList.filter((p) => {
+      if (recCategory === "kids") return p.gender === "kids";
+      if (recCategory === "women") return p.gender === "women" || p.gender === "unisex";
+      return p.gender === "men" || p.gender === "unisex";
+    });
+    return list.length > 0 ? list.slice(0, 8) : productsList.slice(0, 8);
+  }, [productsList, recCategory]);
 
   return (
     <div className="w-full">

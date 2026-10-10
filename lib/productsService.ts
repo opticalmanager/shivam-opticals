@@ -198,7 +198,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
   // 2. Direct single row lookup in Supabase
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from("products")
       .select(`
         *,
@@ -207,9 +207,16 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
         product_variants(*),
         product_images(*)
       `)
-      .eq("is_active", true)
-      .eq("slug", slug)
-      .maybeSingle();
+      .eq("is_active", true);
+
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug);
+    if (isUuid) {
+      query = query.or(`slug.eq.${slug},id.eq.${slug}`);
+    } else {
+      query = query.eq("slug", slug);
+    }
+
+    const { data, error } = await query.maybeSingle();
 
     if (data && !error) {
       return mapRowToProduct(data);

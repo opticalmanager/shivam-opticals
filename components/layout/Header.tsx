@@ -61,16 +61,25 @@ export const Header: React.FC = () => {
             </button>
 
             {/* LOGIN / ACCOUNT ICON */}
-            <Link
-              href="/account"
-              className="relative inline-flex items-center justify-center p-1 group hover:scale-105 transition-transform cursor-pointer"
-              title={isLoggedIn ? `Account (${user?.name})` : "Sign In / Patron Account"}
-            >
-              <User className="w-[20px] h-[20px] text-[#2B2825] group-hover:text-black transition" />
-              {isLoggedIn && (
+            {isLoggedIn ? (
+              <Link
+                href="/account"
+                className="relative inline-flex items-center justify-center p-1 group hover:scale-105 transition-transform cursor-pointer"
+                title={`Account (${user?.name})`}
+              >
+                <User className="w-[20px] h-[20px] text-[#2B2825] group-hover:text-black transition" />
                 <span className="absolute top-0.5 right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-[#FAF3EB]" />
-              )}
-            </Link>
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={openLoginModal}
+                className="relative inline-flex items-center justify-center p-1 group hover:scale-105 transition-transform cursor-pointer"
+                title="Sign In / Patron Account"
+              >
+                <User className="w-[20px] h-[20px] text-[#2B2825] group-hover:text-black transition" />
+              </button>
+            )}
 
             {/* WISHLIST ICON */}
             <button

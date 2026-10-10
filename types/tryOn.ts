@@ -21,10 +21,10 @@ export interface FrameCalibration {
 }
 
 export interface TryOnConfiguration extends FrameCalibration {
-  enabled: boolean;
-  modelUrl: string;
-  modelVersion: number | string;
-  calibrationVersion: number | string;
+  enabled?: boolean;
+  modelUrl?: string;
+  modelVersion?: number | string;
+  calibrationVersion?: number | string;
   /** Physical frame measurements in millimeters */
   frameWidth?: number;
   lensWidth?: number;

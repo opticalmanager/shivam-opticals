@@ -82,6 +82,8 @@ export interface ProductSpecs {
   templeColor?: string;
   lensColor?: string;
   styleTip?: string;
+  packageDimensions?: ShippingPackageDimensions;
+  contactLensSpecs?: ContactLensSpecs;
 }
 
 export interface Product {
@@ -127,7 +129,7 @@ export interface Product {
   contactLensSpecs?: ContactLensSpecs;
   tryOnEnabled?: boolean;
   tryOnModelUrl?: string;
-  tryOnConfig?: import('./tryOn').TryOnConfiguration;
+  tryOnConfig?: Partial<import('./tryOn').TryOnConfiguration>;
 }
 
 export * from './tryOn';
@@ -155,10 +157,12 @@ export interface LensPackage {
   id: string;
   name: string;
   type?: string;
-  description: string;
+  lensType?: string;
+  description?: string;
   price: number;
   badge?: string;
   features?: string[];
+  recommended?: boolean;
 }
 
 export interface EyePrescription {
