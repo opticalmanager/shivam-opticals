@@ -344,14 +344,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               )}
 
               {/* 3D Virtual Try-On Badge */}
-              <button
-                type="button"
-                onClick={() => setIsTryOnOpen(true)}
-                className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#0A251C]/90 hover:bg-[#0A251C] text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-md shadow-md transition-all cursor-pointer hover:scale-105"
-              >
-                <Camera className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>3D TRY-ON</span>
-              </button>
+              {hasTryOnModel(product) && (
+                <button
+                  type="button"
+                  onClick={() => setIsTryOnOpen(true)}
+                  className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#0A251C]/90 hover:bg-[#0A251C] text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-md shadow-md transition-all cursor-pointer hover:scale-105"
+                >
+                  <Camera className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>3D TRY-ON</span>
+                </button>
+              )}
             </div>
 
             {/* Horizontal Thumbnail Gallery */}

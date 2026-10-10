@@ -3,11 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag, Camera } from "lucide-react";
 import { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { formatCurrency } from "@/lib/utils";
+import { hasTryOnModel } from "@/lib/try-on/products/TryOnProductConfig";
 
 interface ProductCardProps {
   product: Product;
@@ -46,17 +47,28 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="p-3 pt-2.5 pb-2 flex flex-col items-center">
         {/* Top Row: Wishlist Heart & Burgundy 'SAVE XX%' Pill */}
         <div className="w-full flex items-center justify-between mb-1">
-          <button
-            onClick={handleToggleWishlist}
-            className="w-6 h-6 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-neutral-400 hover:text-red-500 transition shadow-xs z-10 cursor-pointer"
-            title={isSaved ? "Remove from Wishlist" : "Save to Wishlist"}
-          >
-            <Heart
-              className={`w-3 h-3 ${
-                isSaved ? "fill-red-500 text-red-500" : "text-neutral-400"
-              }`}
-            />
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={handleToggleWishlist}
+              className="w-6 h-6 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-neutral-400 hover:text-red-500 transition shadow-xs z-10 cursor-pointer"
+              title={isSaved ? "Remove from Wishlist" : "Save to Wishlist"}
+            >
+              <Heart
+                className={`w-3 h-3 ${
+                  isSaved ? "fill-red-500 text-red-500" : "text-neutral-400"
+                }`}
+              />
+            </button>
+            {hasTryOnModel(product) && (
+              <span
+                className="px-1.5 py-0.5 rounded-full bg-[#0A251C] text-[#C5A059] text-[9px] font-bold tracking-wider uppercase shadow-2xs flex items-center gap-1 z-10"
+                title="3D Virtual Try-On Available"
+              >
+                <Camera className="w-2.5 h-2.5 text-[#C5A059]" />
+                <span>3D</span>
+              </span>
+            )}
+          </div>
 
           {discount > 0 && (
             <span className="px-2.5 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase shadow-xs">

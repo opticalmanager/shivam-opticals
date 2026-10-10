@@ -13,26 +13,212 @@ import {
   Send,
   Loader2,
   Save,
+  User,
+  MapPin,
+  CreditCard,
   Glasses,
+  Copy,
+  Check,
+  PackageCheck,
+  Package,
+  AlertCircle,
+  FileDown,
+  Edit3,
+  Building2,
+  Tag,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/admin/common/StatusBadge";
+import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner";
-import { StoredOrder } from "@/lib/adminDb";
 
 export default function AdminOrderDetailPage() {
   const params = useParams();
   const router = useRouter();
   const id = params?.id as string;
 
-  const [order, setOrder] = useState<StoredOrder | null>(null);
+  const [order, setOrder] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
+  const [copiedTxId, setCopiedTxId] = useState(false);
 
   // Editable fields
   const [newStatus, setNewStatus] = useState("");
   const [courierPartner, setCourierPartner] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
+
+  // Shiprocket states
+  const [courierOptions, setCourierOptions] = useState<any[]>([]);
+  const [selectedCourierId, setSelectedCourierId] = useState<number | undefined>(undefined);
+  const [bookingShiprocket, setBookingShiprocket] = useState(false);
+  const [loadingCouriers, setLoadingCouriers] = useState(false);
+
+  // Product-Level Packaging Dimensions
+  const [packageDimensions, setPackageDimensions] = useState<{
+    length: number | string;
+    breadth: number | string;
+    height: number | string;
+    weight: number | string;
+  }>({
+    length: "",
+    breadth: "",
+    height: "",
+    weight: "",
+  });
+  const [dimensionsAutofetched, setDimensionsAutofetched] = useState(false);
+  const [productNameForDims, setProductNameForDims] = useState<string>("");
+
+  // Consignment Origin / Pickup Point details
+  const [pickupDetails, setPickupDetails] = useState({
+    location: "work",
+    address: "Pocket 1, Mayur Vihar Phase 1",
+    city: "New Delhi",
+    state: "Delhi",
+    pincode: "110091",
+  });
+  const [isEditingPickup, setIsEditingPickup] = useState(false);
+  const [editLocationName, setEditLocationName] = useState("work");
+  const [editAddress, setEditAddress] = useState("Pocket 1, Mayur Vihar Phase 1");
+  const [editCity, setEditCity] = useState("New Delhi");
+  const [editState, setEditState] = useState("Delhi");
+  const [editPincode, setEditPincode] = useState("110091");
+  const [saveAsDefaultPickup, setSaveAsDefaultPickup] = useState(false);
+
+  const fetchCourierRates = async (deliveryPincode: string, customPickupPin?: string, customWeight?: number) => {
+    if (!deliveryPincode || deliveryPincode.length !== 6) return;
+    setLoadingCouriers(true);
+    try {
+      const pin = customPickupPin || pickupDetails.pincode || "110091";
+      const res = await fetch("/api/admin/shipping/shiprocket", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "calculate_rates",
+          deliveryPincode,
+          pickupPincode: pin,
+          weight: customWeight,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        if (Array.isArray(data.couriers) && data.couriers.length > 0) {
+          setCourierOptions(data.couriers);
+          const rec = data.couriers.find((c: any) => c.isRecommended) || data.couriers[0];
+          setSelectedCourierId(rec.courierId);
+        }
+        if (data.pickupLocation) {
+          const loaded = {
+            location: data.pickupLocation,
+            address: data.pickupAddress || "Pocket 1, Mayur Vihar Phase 1",
+            city: data.pickupCity || "New Delhi",
+            state: data.pickupState || "Delhi",
+            pincode: data.pickupPincode || "110091",
+          };
+          setPickupDetails(loaded);
+          setEditLocationName(loaded.location);
+          setEditAddress(loaded.address);
+          setEditCity(loaded.city);
+          setEditState(loaded.state);
+          setEditPincode(loaded.pincode);
+        }
+      }
+    } catch (e) {
+      console.warn("Failed to fetch Shiprocket rates:", e);
+    } finally {
+      setLoadingCouriers(false);
+    }
+  };
+
+  const handleUpdatePickupPoint = async () => {
+    const updated = {
+      location: editLocationName.trim() || "work",
+      address: editAddress.trim(),
+      city: editCity.trim() || "New Delhi",
+      state: editState.trim() || "Delhi",
+      pincode: editPincode.trim() || "110091",
+    };
+    setPickupDetails(updated);
+    setIsEditingPickup(false);
+
+    if (saveAsDefaultPickup) {
+      try {
+        await fetch("/api/admin/shipping/shiprocket", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "update_pickup_location",
+            pickupLocation: updated.location,
+            pickupAddress: updated.address,
+            pickupCity: updated.city,
+            pickupState: updated.state,
+            pickupPincode: updated.pincode,
+          }),
+        });
+        toast.success("Primary pickup location saved to settings");
+      } catch (err) {
+        console.warn("Failed to persist default pickup location:", err);
+      }
+    }
+
+    if (order?.shipping_address?.pincode) {
+      fetchCourierRates(order.shipping_address.pincode, updated.pincode);
+    }
+  };
+
+  const handleBookShiprocket = async () => {
+    if (
+      !packageDimensions.weight ||
+      !packageDimensions.length ||
+      !packageDimensions.breadth ||
+      !packageDimensions.height
+    ) {
+      toast.error("Packaging Dimensions Required", {
+        description:
+          "Please enter Dead Weight, Length, Breadth, and Height in the Packaging Specification box before booking courier.",
+      });
+      return;
+    }
+
+    setBookingShiprocket(true);
+    const selectedCourier =
+      courierOptions.find((c) => c.courierId === selectedCourierId) || courierOptions[0];
+
+    try {
+      const res = await fetch("/api/admin/shipping/shiprocket", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "book_shipment",
+          orderId: id,
+          courierId: selectedCourierId,
+          pickupLocation: pickupDetails.location,
+          deliveryCost: selectedCourier?.rate,
+          dimensions: {
+            length: Number(packageDimensions.length),
+            breadth: Number(packageDimensions.breadth),
+            height: Number(packageDimensions.height),
+          },
+          weight: Number(packageDimensions.weight),
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.booking) {
+        toast.success("Shipment Booked Successfully", {
+          description: `${data.booking.courierName} • AWB: ${data.booking.awbCode}`,
+        });
+        setTrackingNumber(data.booking.awbCode);
+        setCourierPartner(data.booking.courierName);
+        setNewStatus("dispatched");
+        fetchOrderDetail();
+      } else {
+        toast.error("Failed to book shipment", { description: data.message });
+      }
+    } catch (err: any) {
+      toast.error("Booking error", { description: err.message });
+    } finally {
+      setBookingShiprocket(false);
+    }
+  };
 
   const fetchOrderDetail = async () => {
     setLoading(true);
@@ -44,6 +230,64 @@ export default function AdminOrderDetailPage() {
         setNewStatus(data.order.status);
         setCourierPartner(data.order.courier_partner || "Delhivery Air");
         setTrackingNumber(data.order.tracking_number || "");
+
+        // Autofetch packaging dimensions from order items
+        let detectedDims: { length?: number; breadth?: number; height?: number; weight?: number } | null = null;
+        let sourceProdName = "";
+
+        const itemsList = Array.isArray(data.order.items) ? data.order.items : [];
+        for (const item of itemsList) {
+          const snap = item.product_snapshot || {};
+          const pDims = snap.packageDimensions || snap.package_dimensions || snap.specs?.packageDimensions;
+          const pWeight = snap.packageDimensions?.weightKg || snap.package_dimensions?.weightKg || snap.specs?.weight;
+
+          let parsedWeight: number | undefined = undefined;
+          if (typeof pWeight === "number") {
+            parsedWeight = pWeight;
+          } else if (typeof pWeight === "string") {
+            const m = pWeight.match(/([\d.]+)/);
+            if (m) {
+              parsedWeight = pWeight.includes("g") && !pWeight.includes("kg") ? Number(m[1]) / 1000 : Number(m[1]);
+            }
+          }
+
+          if (pDims && (pDims.lengthCm || pDims.length)) {
+            detectedDims = {
+              length: Number(pDims.lengthCm || pDims.length),
+              breadth: Number(pDims.breadthCm || pDims.breadth),
+              height: Number(pDims.heightCm || pDims.height),
+              weight: parsedWeight || (pDims.weightKg ? Number(pDims.weightKg) : 0.25),
+            };
+            sourceProdName = snap.name || item.name || "Eyewear";
+            break;
+          }
+        }
+
+        if (detectedDims) {
+          setPackageDimensions({
+            length: detectedDims.length ?? "",
+            breadth: detectedDims.breadth ?? "",
+            height: detectedDims.height ?? "",
+            weight: detectedDims.weight ?? "",
+          });
+          setDimensionsAutofetched(true);
+          setProductNameForDims(sourceProdName);
+          if (data.order.shipping_address?.pincode) {
+            fetchCourierRates(data.order.shipping_address.pincode, undefined, detectedDims.weight);
+          }
+        } else {
+          setPackageDimensions({
+            length: "",
+            breadth: "",
+            height: "",
+            weight: "",
+          });
+          setDimensionsAutofetched(false);
+          setProductNameForDims("");
+          if (data.order.shipping_address?.pincode) {
+            fetchCourierRates(data.order.shipping_address.pincode);
+          }
+        }
       }
     } catch (err) {
       console.warn("Failed to fetch order:", err);
@@ -71,7 +315,7 @@ export default function AdminOrderDetailPage() {
       const data = await res.json();
       if (data.success) {
         toast.success("Order status updated successfully", {
-          description: `Order is now marked as ${newStatus.replace(/_/g, " ")}.`,
+          description: `Order is now in ${newStatus.replace(/_/g, " ")}.`,
         });
         fetchOrderDetail();
       } else {
@@ -111,8 +355,12 @@ export default function AdminOrderDetailPage() {
     );
   }
 
-  const shipping = order.shipping_address || ({} as any);
-  const items = order.items || [];
+  const shipping = typeof order.shipping_address === "string" 
+    ? JSON.parse(order.shipping_address) 
+    : order.shipping_address || {};
+  const items = Array.isArray(order.items) ? order.items : [];
+  const selectedCourier =
+    courierOptions.find((c) => c.courierId === selectedCourierId) || courierOptions[0];
 
   return (
     <>
@@ -137,7 +385,7 @@ export default function AdminOrderDetailPage() {
               </div>
               <p className="text-xs text-stone-500">
                 Placed on {new Date(order.created_at).toLocaleString("en-IN")} • Tracking:{" "}
-                <span className="font-mono text-stone-700">{order.tracking_number}</span>
+                <span className="font-mono text-stone-700">{order.tracking_number || "Awaiting dispatch"}</span>
               </p>
             </div>
           </div>
@@ -148,10 +396,10 @@ export default function AdminOrderDetailPage() {
               variant="outline"
               size="sm"
               onClick={() => window.print()}
-              className="text-xs bg-white border-stone-300"
+              className="text-xs bg-white border-[#E8DCCF] text-[#0A251C] hover:bg-[#FAF7F2] cursor-pointer"
             >
-              <Printer className="w-3.5 h-3.5 mr-1" />
-              <span>Print GST Invoice</span>
+              <Printer className="w-3.5 h-3.5 mr-1 text-[#C5A059]" />
+              <span>Print Tax Invoice</span>
             </Button>
 
             <Button
@@ -159,7 +407,7 @@ export default function AdminOrderDetailPage() {
               size="sm"
               onClick={handleUpdateOrder}
               disabled={updating}
-              className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white shadow-xs"
+              className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white shadow-xs cursor-pointer"
             >
               {updating ? (
                 <Loader2 className="w-3.5 h-3.5 mr-1 animate-spin" />
@@ -216,76 +464,525 @@ export default function AdminOrderDetailPage() {
           </div>
         </div>
 
-        {/* Main Grid: Left Items, Right Customer & Payment */}
+        {/* Main Grid: Left Items + Rx, Right Customer & Payment */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          {/* Left Column (2 Cols): Ordered Items */}
+          {/* Left Column (2 Cols): Ordered Items & Optical Prescriptions */}
           <div className="lg:col-span-2 space-y-4">
+            {/* Ordered Products */}
             <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-[#0A251C] font-serif flex items-center gap-2">
+              <h3 className="text-sm font-bold text-[#0A251C] flex items-center gap-2">
                 <Glasses className="w-4 h-4 text-[#C5A059]" />
                 <span>Eyewear & Lens Specifications</span>
               </h3>
 
               <div className="divide-y divide-stone-100">
-                {items.map((it: any, idx: number) => (
-                  <div key={idx} className="py-3.5 first:pt-0 last:pb-0 space-y-2">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="font-bold text-sm text-[#0A251C]">
-                          {it.product_name}
-                        </div>
-                        <div className="text-xs text-stone-500">
-                          Colorway: <span className="font-medium text-stone-800">{it.color}</span>
-                          {it.lens_package && (
-                            <span> • Lens: <span className="text-purple-700 font-semibold">{it.lens_package}</span></span>
-                          )}
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-bold text-sm text-[#0A251C]">
-                          ₹{Number(it.total_price).toLocaleString("en-IN")}
-                        </div>
-                        <div className="text-[10px] text-stone-400">Qty: {it.quantity}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                {items.map((it: any, idx: number) => {
+                  const snap = it.product_snapshot || {};
+                  const rx = snap.prescription;
 
-              {/* Order Cost Breakdown */}
-              <div className="border-t border-stone-100 pt-3 space-y-1.5 text-xs">
-                <div className="flex justify-between text-stone-600">
-                  <span>Subtotal:</span>
-                  <span className="font-medium text-stone-900">₹{(order.subtotal || 0).toLocaleString("en-IN")}</span>
-                </div>
-                {order.discount_amount > 0 && (
-                  <div className="flex justify-between text-emerald-700">
-                    <span>Privilege Discount ({order.coupon_code || "Special"}):</span>
-                    <span>-₹{Number(order.discount_amount).toLocaleString("en-IN")}</span>
-                  </div>
-                )}
-                <div className="flex justify-between text-stone-600">
-                  <span>Insured Shipping / Lab Delivery:</span>
-                  <span>{order.shipping_fee === 0 ? "Complimentary" : `₹${order.shipping_fee}`}</span>
-                </div>
-                <div className="flex justify-between font-bold text-sm text-[#0A251C] border-t border-stone-200 pt-2">
-                  <span>Total Amount:</span>
-                  <span>₹{Number(order.total_amount).toLocaleString("en-IN")}</span>
-                </div>
+                  return (
+                    <div key={idx} className="py-3.5 first:pt-0 last:pb-0 space-y-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="font-bold text-sm text-[#0A251C]">
+                            {snap.name || it.product_name || "Shivam Optics Designer Frame"}
+                          </div>
+                          <div className="text-xs text-stone-500">
+                            Finish: <span className="font-medium text-stone-800">{snap.color || it.color || "Standard"}</span> • Lens Option:{" "}
+                            <span className="font-medium text-stone-800">
+                              {snap.lensPackage || snap.lensType || it.lens_package || "Demo Plastic"}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <div className="font-bold text-sm text-[#0A251C]">
+                            {formatCurrency(Number(it.total_price))}
+                          </div>
+                          <div className="text-[10px] text-stone-400">
+                            Qty: {it.quantity} • Frame: {formatCurrency(Number(it.unit_price))} + Lens:{" "}
+                            {formatCurrency(Number(it.lens_price || 0))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Prescription Table if available */}
+                      {rx && (
+                        <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg p-3 text-xs">
+                          <div className="font-bold text-[#0A251C] mb-2 flex items-center justify-between">
+                            <span className="uppercase tracking-wider text-[10px] text-stone-600">
+                              Verified Clinical Eye Power (Rx)
+                            </span>
+                            <span className="text-[11px] font-mono text-[#C5A059]">
+                              PD: {rx.pd} mm
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-white p-2.5 rounded border border-stone-200">
+                              <span className="font-bold text-stone-700 block mb-1 text-[11px]">
+                                Right Eye (OD)
+                              </span>
+                              <div className="grid grid-cols-4 gap-1 text-[11px] font-mono text-center">
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">SPH</span>
+                                  {rx.rightEye?.sph || "0.00"}
+                                </div>
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">CYL</span>
+                                  {rx.rightEye?.cyl || "0.00"}
+                                </div>
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">AXIS</span>
+                                  {rx.rightEye?.axis || "0"}°
+                                </div>
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">ADD</span>
+                                  {rx.rightEye?.add || "—"}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="bg-white p-2.5 rounded border border-stone-200">
+                              <span className="font-bold text-stone-700 block mb-1 text-[11px]">
+                                Left Eye (OS)
+                              </span>
+                              <div className="grid grid-cols-4 gap-1 text-[11px] font-mono text-center">
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">SPH</span>
+                                  {rx.leftEye?.sph || "0.00"}
+                                </div>
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">CYL</span>
+                                  {rx.leftEye?.cyl || "0.00"}
+                                </div>
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">AXIS</span>
+                                  {rx.leftEye?.axis || "0"}°
+                                </div>
+                                <div>
+                                  <span className="text-[9px] text-stone-400 block">ADD</span>
+                                  {rx.leftEye?.add || "—"}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Logistics & Dispatch Card */}
-            <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-3">
-              <h3 className="text-sm font-bold text-[#0A251C] font-serif flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#C5A059]" />
-                <span>Logistics & Fulfillment</span>
-              </h3>
+            {/* Shiprocket Logistics & Courier Allocation Center */}
+            <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
+                <h3 className="text-sm font-bold text-[#0A251C] flex items-center gap-2">
+                  <Truck className="w-4 h-4 text-[#C5A059]" />
+                  <span>Shiprocket Logistics Command</span>
+                </h3>
+                {order.status === "dispatched" || order.status === "delivered" ? (
+                  <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+                    <Check className="w-3 h-3" />
+                    <span>AWB Assigned ({order.tracking_number || "Dispatched"})</span>
+                  </span>
+                ) : (
+                  <span className="text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    Ready for AWB Booking
+                  </span>
+                )}
+              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              {/* 1. Eyewear Packaging Specification (Product-Specific Autofetch) */}
+              <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-xl p-4 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-stone-200/80 pb-2">
+                  <div className="flex items-center gap-2">
+                    <Package className="w-4 h-4 text-[#C5A059]" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-stone-700">
+                      Eyewear Packaging Specification (For Courier Volumetric Weight)
+                    </span>
+                  </div>
+                  {dimensionsAutofetched ? (
+                    <span className="text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <Check className="w-3 h-3 text-emerald-600" />
+                      <span>Autofetched from Product: {productNameForDims}</span>
+                    </span>
+                  ) : (
+                    <span className="text-[10px] bg-amber-50 text-amber-800 border border-amber-200 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3 text-amber-600" />
+                      <span>Dimensions Missing on Product — Please enter below</span>
+                    </span>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                  <div>
+                    <label className="block text-stone-600 font-semibold mb-1">
+                      Dead Weight (kg) <span className="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      placeholder="e.g. 0.35"
+                      value={packageDimensions.weight}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setPackageDimensions((prev) => ({ ...prev, weight: val }));
+                      }}
+                      className={`w-full px-2.5 py-1.5 rounded-md border text-xs text-[#0A251C] font-mono ${
+                        !packageDimensions.weight ? "border-amber-300 bg-amber-50/60" : "border-[#E8DCCF] bg-white"
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-stone-600 font-semibold mb-1">
+                      Length (cm) <span className="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      placeholder="e.g. 18"
+                      value={packageDimensions.length}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setPackageDimensions((prev) => ({ ...prev, length: val }));
+                      }}
+                      className={`w-full px-2.5 py-1.5 rounded-md border text-xs text-[#0A251C] font-mono ${
+                        !packageDimensions.length ? "border-amber-300 bg-amber-50/60" : "border-[#E8DCCF] bg-white"
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-stone-600 font-semibold mb-1">
+                      Breadth (cm) <span className="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      placeholder="e.g. 12"
+                      value={packageDimensions.breadth}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setPackageDimensions((prev) => ({ ...prev, breadth: val }));
+                      }}
+                      className={`w-full px-2.5 py-1.5 rounded-md border text-xs text-[#0A251C] font-mono ${
+                        !packageDimensions.breadth ? "border-amber-300 bg-amber-50/60" : "border-[#E8DCCF] bg-white"
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-stone-600 font-semibold mb-1">
+                      Height (cm) <span className="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      placeholder="e.g. 8"
+                      value={packageDimensions.height}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setPackageDimensions((prev) => ({ ...prev, height: val }));
+                      }}
+                      className={`w-full px-2.5 py-1.5 rounded-md border text-xs text-[#0A251C] font-mono ${
+                        !packageDimensions.height ? "border-amber-300 bg-amber-50/60" : "border-[#E8DCCF] bg-white"
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pt-1 text-[11px] text-stone-500">
+                  <span>
+                    Volumetric Weight: <strong>{packageDimensions.length && packageDimensions.breadth && packageDimensions.height ? ((Number(packageDimensions.length) * Number(packageDimensions.breadth) * Number(packageDimensions.height)) / 5000).toFixed(2) : "0.00"} kg</strong> (Air Divisor: 5000)
+                  </span>
+                  {shipping?.pincode && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (packageDimensions.weight) {
+                          fetchCourierRates(shipping.pincode, pickupDetails.pincode, Number(packageDimensions.weight));
+                          toast.success("Recalculated courier freight with updated package weight");
+                        }
+                      }}
+                      className="text-[#C5A059] font-semibold hover:underline cursor-pointer"
+                    >
+                      Recalculate courier freight for this weight
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Consignment Origin & Delivery Cost Confirmation Section */}
+              <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-xl p-4 space-y-3">
+                <div className="flex items-center justify-between border-b border-stone-200/80 pb-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-stone-600">
+                    Consignment Origin &amp; Freight Breakdown
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setIsEditingPickup(!isEditingPickup)}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C5A059] hover:text-[#0A251C] transition-colors cursor-pointer"
+                  >
+                    <Edit3 className="w-3.5 h-3.5" />
+                    <span>{isEditingPickup ? "Close Editor" : "Edit / Change Pickup Point"}</span>
+                  </button>
+                </div>
+
+                {/* Inline Pickup Location Editor */}
+                {isEditingPickup && (
+                  <div className="bg-white border border-[#E8DCCF] rounded-xl p-3.5 space-y-3 animate-in fade-in duration-150">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#0A251C] flex items-center gap-1.5">
+                        <Building2 className="w-4 h-4 text-[#C5A059]" />
+                        <span>Edit Dispatch Pickup Point</span>
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEditLocationName("work");
+                          setEditAddress("Pocket 1, Mayur Vihar Phase 1");
+                          setEditCity("New Delhi");
+                          setEditState("Delhi");
+                          setEditPincode("110091");
+                        }}
+                        className="text-[10px] font-bold text-[#C5A059] hover:underline cursor-pointer"
+                      >
+                        Reset to Mayur Vihar Lab Primary
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs">
+                      <div>
+                        <label className="block text-stone-600 font-semibold mb-1">
+                          Location Nickname (Shiprocket ID)
+                        </label>
+                        <input
+                          type="text"
+                          value={editLocationName}
+                          onChange={(e) => setEditLocationName(e.target.value)}
+                          placeholder="work"
+                          className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                        />
+                      </div>
+
+                      <div className="lg:col-span-2">
+                        <label className="block text-stone-600 font-semibold mb-1">
+                          Street Address / Lab Unit
+                        </label>
+                        <input
+                          type="text"
+                          value={editAddress}
+                          onChange={(e) => setEditAddress(e.target.value)}
+                          placeholder="Pocket 1, Mayur Vihar Phase 1"
+                          className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-stone-600 font-semibold mb-1">
+                          City
+                        </label>
+                        <input
+                          type="text"
+                          value={editCity}
+                          onChange={(e) => setEditCity(e.target.value)}
+                          placeholder="New Delhi"
+                          className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-stone-600 font-semibold mb-1">
+                          State
+                        </label>
+                        <input
+                          type="text"
+                          value={editState}
+                          onChange={(e) => setEditState(e.target.value)}
+                          placeholder="Delhi"
+                          className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-stone-600 font-semibold mb-1">
+                          Postal PIN Code
+                        </label>
+                        <input
+                          type="text"
+                          maxLength={6}
+                          value={editPincode}
+                          onChange={(e) => setEditPincode(e.target.value.replace(/\D/g, ""))}
+                          placeholder="110091"
+                          className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs font-mono text-[#0A251C]"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-stone-100">
+                      <label className="flex items-center gap-2 text-xs font-medium text-stone-600 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={saveAsDefaultPickup}
+                          onChange={(e) => setSaveAsDefaultPickup(e.target.checked)}
+                          className="rounded text-[#C5A059] w-4 h-4 cursor-pointer accent-[#C5A059]"
+                        />
+                        <span>Save as default primary atelier in store settings</span>
+                      </label>
+
+                      <div className="flex items-center gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setIsEditingPickup(false)}
+                          className="text-xs h-7.5 bg-white border-stone-300 cursor-pointer"
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          type="button"
+                          size="sm"
+                          onClick={handleUpdatePickupPoint}
+                          className="text-xs h-7.5 bg-[#C5A059] hover:bg-[#b59049] text-white cursor-pointer"
+                        >
+                          Apply &amp; Recalculate Rates
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Origin vs Delivery Cost Summary Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                  {/* Pickup Origin Point */}
+                  <div className="bg-white p-3 rounded-lg border border-[#E8DCCF] space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-stone-700 flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
+                        <span>Dispatch Pickup Point</span>
+                      </span>
+                      <span className="text-[10px] font-mono bg-stone-100 text-stone-700 px-1.5 py-0.2 rounded font-bold">
+                        PIN: {pickupDetails.pincode}
+                      </span>
+                    </div>
+                    <div className="font-bold text-[#0A251C] text-xs">
+                      {pickupDetails.location}
+                    </div>
+                    <p className="text-[11px] text-stone-600 leading-relaxed">
+                      {pickupDetails.address}, {pickupDetails.city}, {pickupDetails.state}
+                    </p>
+                  </div>
+
+                  {/* Delivery Cost & Courier Choice */}
+                  <div className="bg-white p-3 rounded-lg border border-[#E8DCCF] space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-stone-700 flex items-center gap-1.5">
+                        <Tag className="w-3.5 h-3.5 text-emerald-700" />
+                        <span>Owner Delivery Freight</span>
+                      </span>
+                      <span className="text-xs font-bold font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                        ₹{selectedCourier?.rate ?? 95}
+                      </span>
+                    </div>
+                    <div className="font-bold text-[#0A251C] text-xs flex items-center justify-between">
+                      <span>{selectedCourier?.courierName || "Delhivery Air / BlueDart"}</span>
+                      <span className="text-[11px] text-stone-500 font-normal">
+                        ETA: {selectedCourier?.estimatedDays || 2} days
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-stone-500">
+                      Direct freight billed to Shiprocket balance upon AWB booking
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Courier Comparison Cards */}
+              {courierOptions.length > 0 && (
+                <div className="space-y-2">
+                  <div className="text-[11px] font-semibold text-stone-600 flex items-center justify-between">
+                    <span>Available Air Couriers to {shipping.pincode || "Destination"}:</span>
+                    <span className="text-stone-400 font-normal">Live rates via Shiprocket</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    {courierOptions.map((opt) => (
+                      <div
+                        key={opt.courierId}
+                        onClick={() => setSelectedCourierId(opt.courierId)}
+                        className={`p-3 rounded-lg border text-xs cursor-pointer transition-all ${
+                          selectedCourierId === opt.courierId
+                            ? "border-[#C5A059] bg-[#FAF3EB] ring-1 ring-[#C5A059]"
+                            : "border-stone-200 bg-[#FAF7F2] hover:border-stone-300"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-bold text-[#0A251C] truncate">{opt.courierName}</span>
+                          {opt.isRecommended && (
+                            <span className="text-[9px] bg-[#C5A059] text-white px-1.5 py-0.2 rounded font-bold uppercase">
+                              Fastest
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-baseline justify-between text-[11px] text-stone-600 pt-1 border-t border-stone-200/60">
+                          <span>Owner Cost: <strong className="text-[#0A251C]">₹{opt.rate}</strong></span>
+                          <span className="text-emerald-700 font-medium">{opt.estimatedDays} {opt.estimatedDays === 1 ? "day" : "days"}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 1-Click Dispatch Action Bar with Pre-Booking Confirmation */}
+              <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="text-xs space-y-0.5">
+                  <div className="font-bold text-[#0A251C] flex items-center gap-1.5">
+                    <PackageCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <span>Clinical Lab Dispatch Confirmation</span>
+                  </div>
+                  <p className="text-[11px] text-stone-600">
+                    Ready to dispatch from <strong className="text-stone-800">{pickupDetails.location} ({pickupDetails.pincode})</strong> &rarr; <strong className="text-stone-800">{shipping.city} ({shipping.pincode})</strong> via <strong className="text-stone-800">{selectedCourier?.courierName || "Delhivery Air"}</strong> for <strong className="text-emerald-700 font-mono">₹{selectedCourier?.rate ?? 95}</strong> freight.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  {order.payment_details?.shiprocket?.labelUrl ? (
+                    <a
+                      href={order.payment_details.shiprocket.labelUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E8DCCF] hover:bg-stone-50 text-[#0A251C] rounded-md text-xs font-semibold shadow-2xs"
+                    >
+                      <FileDown className="w-3.5 h-3.5 text-[#C5A059]" />
+                      <span>Print Label PDF</span>
+                    </a>
+                  ) : null}
+
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={handleBookShiprocket}
+                    disabled={bookingShiprocket}
+                    className="text-xs bg-[#0A251C] hover:bg-[#C5A059] text-white shadow-xs cursor-pointer"
+                  >
+                    {bookingShiprocket ? (
+                      <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                    ) : (
+                      <Send className="w-3.5 h-3.5 mr-1.5 text-white" />
+                    )}
+                    <span>{order.tracking_number ? "Re-book Courier" : "Confirm Booking & Generate AWB"}</span>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Manual Edit Overrides */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs pt-2 border-t border-stone-100">
                 <div>
                   <label className="block text-stone-600 font-semibold mb-1">
-                    Courier Partner
+                    Active Courier Partner
                   </label>
                   <input
                     type="text"
@@ -297,61 +994,132 @@ export default function AdminOrderDetailPage() {
 
                 <div>
                   <label className="block text-stone-600 font-semibold mb-1">
-                    Airway Bill / Tracking ID
+                    Airway Bill (AWB) Tracking Number
                   </label>
                   <input
                     type="text"
                     value={trackingNumber}
                     onChange={(e) => setTrackingNumber(e.target.value)}
-                    className="w-full px-3 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                    className="w-full px-3 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs font-mono text-[#0A251C]"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Patron & Delivery Information */}
+          {/* Right Column: Customer & Financial Summary */}
           <div className="space-y-4">
+            {/* Customer Profile Card */}
             <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-3">
-              <h3 className="text-sm font-bold text-[#0A251C] font-serif">
-                Patron Customer
+              <h3 className="text-sm font-bold text-[#0A251C] flex items-center gap-2">
+                <User className="w-4 h-4 text-[#C5A059]" />
+                <span>Patron Information</span>
               </h3>
-              <div className="text-xs space-y-1 text-stone-700">
-                <div className="font-bold text-stone-900 text-sm">
-                  {shipping.fullName || order.guest_name || "Valued Client"}
+
+              <div className="text-xs space-y-1.5">
+                <div className="font-bold text-[#0A251C]">
+                  {shipping.fullName || "Valued Patron"}
                 </div>
-                <div>{order.guest_email}</div>
-                <div>{order.guest_phone || shipping.phone}</div>
+                <div className="text-stone-600">{order.guest_email}</div>
+                <div className="text-stone-600 font-mono">{order.guest_phone}</div>
               </div>
 
-              <div className="border-t border-stone-100 pt-3 text-xs space-y-1 text-stone-700">
-                <span className="font-semibold text-stone-900 block mb-1">Delivery Address:</span>
-                <div>{shipping.streetAddress}</div>
-                {shipping.apartment && <div>{shipping.apartment}</div>}
-                <div>
-                  {shipping.city}, {shipping.state} - {shipping.pincode}
+              <div className="pt-2 border-t border-stone-100 text-xs space-y-1">
+                <div className="font-semibold text-stone-700 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-stone-400" />
+                  <span>Shipping Address</span>
                 </div>
-                <div>{shipping.country || "India"}</div>
+                <p className="text-stone-600 text-[11px] leading-relaxed pl-5">
+                  {shipping.streetAddress}, {shipping.city}, {shipping.state} - {shipping.pincode},{" "}
+                  {shipping.country || "India"}
+                </p>
               </div>
             </div>
 
-            <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-3">
-              <h3 className="text-sm font-bold text-[#0A251C] font-serif">
-                Payment Verification
+            {/* Payment & Financial Ledger */}
+            <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-3 text-xs">
+              <h3 className="text-sm font-bold text-[#0A251C] flex items-center gap-2">
+                <CreditCard className="w-4 h-4 text-[#C5A059]" />
+                <span>Financial Ledger</span>
               </h3>
-              <div className="text-xs space-y-2">
+
+              <div className="space-y-2 text-stone-600 pt-1">
                 <div className="flex justify-between">
-                  <span className="text-stone-500">Method:</span>
-                  <span className="font-semibold text-stone-900 uppercase">{order.payment_method}</span>
+                  <span>Subtotal</span>
+                  <span className="font-semibold text-[#0A251C]">
+                    {formatCurrency(Number(order.subtotal))}
+                  </span>
                 </div>
+
+                {Number(order.discount_amount) > 0 && (
+                  <div className="flex justify-between text-emerald-700">
+                    <span>Discount ({order.coupon_code || "Special Offer"})</span>
+                    <span>-{formatCurrency(Number(order.discount_amount))}</span>
+                  </div>
+                )}
+
                 <div className="flex justify-between">
-                  <span className="text-stone-500">Status:</span>
-                  <StatusBadge status={order.payment_status} size="sm" />
+                  <span>Insured Express Shipping</span>
+                  <span className="text-emerald-700 font-medium">Free</span>
                 </div>
+
+                <div className="pt-2 border-t border-stone-200 flex justify-between font-bold text-sm text-[#0A251C]">
+                  <span>Total Amount Paid</span>
+                  <span>{formatCurrency(Number(order.total_amount))}</span>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-stone-100 space-y-2 text-[11px]">
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-500">Method</span>
+                  <span className="font-semibold text-stone-800 uppercase">
+                    {order.payment_method === "upi" || (typeof order.payment_method === "string" && order.payment_method.toLowerCase().includes("upi"))
+                      ? "Razorpay UPI"
+                      : order.payment_method === "card" || (typeof order.payment_method === "string" && order.payment_method.toLowerCase().includes("card"))
+                      ? "Razorpay Cards"
+                      : order.payment_method === "netbanking"
+                      ? "Razorpay NetBanking"
+                      : "Cash on Delivery"}
+                  </span>
+                </div>
+
                 {order.payment_id && (
-                  <div className="flex justify-between">
-                    <span className="text-stone-500">Reference:</span>
-                    <span className="font-mono text-[10px] text-stone-800">{order.payment_id}</span>
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="text-stone-500">Gateway Txn ID</span>
+                    <div className="flex items-center gap-1 font-mono text-[11px] text-[#0A251C]">
+                      <span className="font-bold">{order.payment_id}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(order.payment_id);
+                          setCopiedTxId(true);
+                          toast.success("Transaction ID copied");
+                          setTimeout(() => setCopiedTxId(false), 2000);
+                        }}
+                        className="text-stone-400 hover:text-stone-700 transition-colors p-0.5 cursor-pointer"
+                        title="Copy transaction ID"
+                      >
+                        {copiedTxId ? (
+                          <Check className="w-3 h-3 text-emerald-600" />
+                        ) : (
+                          <Copy className="w-3 h-3" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {order.payment_details?.razorpay_order_id && (
+                  <div className="flex items-center justify-between text-[10px] text-stone-400 pt-0.5">
+                    <span>Gateway Order</span>
+                    <span className="font-mono">{order.payment_details.razorpay_order_id}</span>
+                  </div>
+                )}
+
+                {order.payment_id && order.payment_status === "paid" && (
+                  <div className="mt-2 p-2 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center gap-1.5 text-[11px] text-emerald-800 font-semibold">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>HMAC-SHA256 Cryptographically Verified</span>
                   </div>
                 )}
               </div>
@@ -360,21 +1128,21 @@ export default function AdminOrderDetailPage() {
         </div>
       </div>
 
-      {/* PRINTABLE GST TAX INVOICE (@media print) */}
-      <div className="hidden print:block bg-white text-black p-8 max-w-[800px] mx-auto font-sans text-xs">
-        {/* Header */}
-        <div className="flex justify-between items-start border-b border-black pb-4 mb-4">
+      {/* Printable Luxury Optical Tax Invoice & Lab Dispatch Slip */}
+      <div className="hidden print:block p-8 bg-white text-black font-sans max-w-4xl mx-auto">
+        {/* Atelier Letterhead */}
+        <div className="border-b-2 border-black pb-4 mb-6 flex justify-between items-start">
           <div>
-            <h1 className="text-xl font-bold uppercase tracking-wider font-serif">
-              SHIVAM OPTICS
+            <h1 className="text-2xl font-bold tracking-tight uppercase font-serif">
+              Shivam Optics
             </h1>
-            <p className="text-[10px] tracking-widest uppercase font-semibold text-stone-700">
-              Haute Lunetterie Atelier & Optometry • Mayur Vihar, Delhi
+            <p className="text-xs tracking-widest uppercase font-semibold text-stone-700">
+              Luxury Eyewear Atelier &amp; Clinical Optometry • Estd. 1995
             </p>
-            <p className="text-[10px] text-stone-600 mt-1 max-w-md">
-              Regd. Atelier: Pocket 1, Mayur Vihar Phase 1, New Delhi - 110091
+            <p className="text-[11px] text-stone-600 mt-1 max-w-md">
+              Regd. Office: Pocket 1, Mayur Vihar Phase 1, New Delhi - 110091
               <br />
-              GSTIN: 07AABCS1234F1Z9 | Phone: 097799 90207 | concierge@shivamoptics.in
+              GSTIN: 07AAACS1234F1Z9 | CIN: U33201DL1995PTC091240 | concierge@shivamoptics.in
             </p>
           </div>
           <div className="text-right">
@@ -384,7 +1152,7 @@ export default function AdminOrderDetailPage() {
             <div className="text-xs font-mono font-semibold mt-0.5">
               INV-{order.order_number}
             </div>
-            <div className="text-[10px] text-stone-600">
+            <div className="text-[11px] text-stone-600">
               Date: {new Date(order.created_at).toLocaleDateString("en-IN", {
                 day: "2-digit",
                 month: "short",
@@ -398,10 +1166,10 @@ export default function AdminOrderDetailPage() {
         <div className="grid grid-cols-2 gap-6 mb-6 text-xs border border-stone-300 p-4 rounded">
           <div>
             <div className="font-bold uppercase tracking-wider text-[10px] text-stone-500 mb-1">
-              Billed & Shipped To:
+              Billed &amp; Shipped To:
             </div>
             <div className="font-bold text-sm text-black">
-              {shipping.fullName || order.guest_name || "Valued Patron"}
+              {shipping.fullName || "Valued Patron"}
             </div>
             <div className="text-stone-700 mt-0.5">
               {shipping.streetAddress}
@@ -418,14 +1186,14 @@ export default function AdminOrderDetailPage() {
 
           <div className="text-right">
             <div className="font-bold uppercase tracking-wider text-[10px] text-stone-500 mb-1">
-              Dispatch & Logistics:
+              Dispatch &amp; Logistics:
             </div>
             <div>
               <span className="font-semibold">Courier Partner:</span> {order.courier_partner || courierPartner || "Delhivery Air"}
             </div>
             <div>
-              <span className="font-semibold">Tracking AWB:</span>{" "}
-              <span className="font-mono">{order.tracking_number || trackingNumber || "Pending"}</span>
+              <span className="font-semibold">Airway Bill / AWB:</span>{" "}
+              <span className="font-mono">{order.tracking_number || trackingNumber || "Pending Dispatch"}</span>
             </div>
             <div>
               <span className="font-semibold">Payment Mode:</span> {order.payment_method?.toUpperCase()}
@@ -435,7 +1203,7 @@ export default function AdminOrderDetailPage() {
             </div>
             {order.payment_id && (
               <div>
-                <span className="font-semibold">Txn Reference:</span>{" "}
+                <span className="font-semibold">Gateway Txn Ref:</span>{" "}
                 <span className="font-mono">{order.payment_id}</span>
               </div>
             )}
@@ -448,7 +1216,7 @@ export default function AdminOrderDetailPage() {
             <thead>
               <tr className="bg-stone-100 border-b border-black text-[10px] uppercase font-bold">
                 <th className="p-2 border-r border-black">S.No</th>
-                <th className="p-2 border-r border-black">Item Description & Finish</th>
+                <th className="p-2 border-r border-black">Item Description &amp; Finish</th>
                 <th className="p-2 border-r border-black">HSN Code</th>
                 <th className="p-2 border-r border-black text-center">Qty</th>
                 <th className="p-2 border-r border-black text-right">Unit Rate (₹)</th>
@@ -456,34 +1224,66 @@ export default function AdminOrderDetailPage() {
               </tr>
             </thead>
             <tbody>
-              {items.map((it: any, idx: number) => (
-                <tr key={idx} className="border-b border-stone-300">
-                  <td className="p-2 border-r border-stone-300 font-mono text-center">
-                    {idx + 1}
-                  </td>
-                  <td className="p-2 border-r border-stone-300">
-                    <div className="font-bold">{it.product_name}</div>
-                    <div className="text-[10px] text-stone-600">
-                      Colorway: {it.color} {it.lens_package ? `| ${it.lens_package}` : ""}
-                    </div>
-                  </td>
-                  <td className="p-2 border-r border-stone-300 font-mono text-[10px]">
-                    90031100
-                  </td>
-                  <td className="p-2 border-r border-stone-300 text-center font-mono">
-                    {it.quantity}
-                  </td>
-                  <td className="p-2 border-r border-stone-300 text-right font-mono">
-                    ₹{Number(it.unit_price).toLocaleString("en-IN")}
-                  </td>
-                  <td className="p-2 text-right font-bold font-mono">
-                    ₹{Number(it.total_price).toLocaleString("en-IN")}
-                  </td>
-                </tr>
-              ))}
+              {items.map((it: any, idx: number) => {
+                const snap = it.product_snapshot || {};
+                return (
+                  <tr key={idx} className="border-b border-stone-300">
+                    <td className="p-2 border-r border-stone-300 font-mono text-center">
+                      {idx + 1}
+                    </td>
+                    <td className="p-2 border-r border-stone-300">
+                      <div className="font-bold">{snap.name || it.product_name || "Luxury Frame"}</div>
+                      <div className="text-[10px] text-stone-600">
+                        Finish: {snap.color || it.color || "Standard"} | Lens: {snap.lensPackage || snap.lensType || it.lens_package || "Plano Demonstration"}
+                      </div>
+                    </td>
+                    <td className="p-2 border-r border-stone-300 font-mono text-[10px]">
+                      90031100
+                    </td>
+                    <td className="p-2 border-r border-stone-300 text-center font-mono">
+                      {it.quantity}
+                    </td>
+                    <td className="p-2 border-r border-stone-300 text-right font-mono">
+                      {formatCurrency(Number(it.unit_price) + Number(it.lens_price || 0))}
+                    </td>
+                    <td className="p-2 text-right font-bold font-mono">
+                      {formatCurrency(Number(it.total_price))}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
+
+        {/* Clinical Eye Power Rx Summary on Invoice */}
+        {items.some((it: any) => it.product_snapshot?.prescription) && (
+          <div className="border border-stone-400 p-3 mb-6 bg-stone-50 text-xs">
+            <div className="font-bold uppercase tracking-wider text-[10px] mb-2 text-stone-700">
+              Verified Optical Prescription Specifications (Rx)
+            </div>
+            {items
+              .filter((it: any) => it.product_snapshot?.prescription)
+              .map((it: any, idx: number) => {
+                const rx = it.product_snapshot.prescription;
+                return (
+                  <div key={idx} className="space-y-1">
+                    <div className="text-[11px] font-semibold text-stone-800">
+                      Frame: {it.product_snapshot.name} (PD: {rx.pd} mm)
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 font-mono text-[10px]">
+                      <div>
+                        Right Eye (OD): SPH {rx.rightEye?.sph || "0.00"} | CYL {rx.rightEye?.cyl || "0.00"} | AXIS {rx.rightEye?.axis || "0"}° | ADD {rx.rightEye?.add || "—"}
+                      </div>
+                      <div>
+                        Left Eye (OS): SPH {rx.leftEye?.sph || "0.00"} | CYL {rx.leftEye?.cyl || "0.00"} | AXIS {rx.leftEye?.axis || "0"}° | ADD {rx.leftEye?.add || "—"}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        )}
 
         {/* Financial Summary & Totals */}
         <div className="flex justify-end mb-8">
@@ -491,30 +1291,28 @@ export default function AdminOrderDetailPage() {
             <div className="flex justify-between">
               <span className="text-stone-600">Taxable Value:</span>
               <span className="font-mono">
-                ₹{Math.round(Number(order.total_amount) / 1.18).toLocaleString("en-IN")}
+                {formatCurrency(Math.round(Number(order.total_amount) / 1.18))}
               </span>
             </div>
             <div className="flex justify-between text-[11px]">
               <span className="text-stone-600">CGST (9.0%):</span>
               <span className="font-mono">
-                ₹{Math.round((Number(order.total_amount) / 1.18) * 0.09).toLocaleString("en-IN")}
+                {formatCurrency(Math.round((Number(order.total_amount) / 1.18) * 0.09))}
               </span>
             </div>
             <div className="flex justify-between text-[11px]">
               <span className="text-stone-600">SGST (9.0%):</span>
               <span className="font-mono">
-                ₹{Math.round((Number(order.total_amount) / 1.18) * 0.09).toLocaleString("en-IN")}
+                {formatCurrency(Math.round((Number(order.total_amount) / 1.18) * 0.09))}
               </span>
             </div>
             <div className="flex justify-between text-[11px]">
               <span className="text-stone-600">Insured Shipping:</span>
-              <span className="font-mono text-emerald-700 font-semibold">
-                {order.shipping_fee === 0 ? "FREE" : `₹${order.shipping_fee}`}
-              </span>
+              <span className="font-mono text-emerald-700 font-semibold">FREE</span>
             </div>
             <div className="flex justify-between font-bold text-sm border-t border-black pt-1.5">
               <span>Total Invoice Amount:</span>
-              <span className="font-mono">₹{Number(order.total_amount).toLocaleString("en-IN")}</span>
+              <span className="font-mono">{formatCurrency(Number(order.total_amount))}</span>
             </div>
           </div>
         </div>
@@ -523,20 +1321,20 @@ export default function AdminOrderDetailPage() {
         <div className="grid grid-cols-2 gap-8 text-xs pt-4 border-t border-stone-200">
           <div>
             <div className="text-[10px] uppercase tracking-wider text-stone-500 font-semibold">
-              Terms & Conditions:
+              Terms &amp; Conditions:
             </div>
             <p className="text-[9px] text-stone-500 leading-normal mt-0.5">
-              1. Optical lenses are surfaced accurately according to verified optometric prescriptions.
+              1. Custom Rx Zeiss progressive lenses are surfaced specifically for the patron&apos;s optometric measurements.
               <br />
-              2. Handcrafted titanium frames carry a comprehensive manufacturing warranty.
+              2. Titanium frames carry a 24-month comprehensive manufacturing warranty.
               <br />
-              3. Computer-generated tax invoice from Shivam Optics Mayur Vihar atelier.
+              3. This is a computer-generated luxury atelier tax invoice.
             </p>
           </div>
           <div className="text-right flex flex-col items-end justify-end">
             <div className="w-36 border-b border-black mb-1"></div>
             <div className="font-bold text-xs uppercase">For Shivam Optics</div>
-            <div className="text-[10px] text-stone-500">Authorized Optician & Signatory</div>
+            <div className="text-[10px] text-stone-500">Authorized Optician &amp; Signatory</div>
           </div>
         </div>
       </div>

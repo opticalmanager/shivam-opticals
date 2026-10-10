@@ -97,6 +97,7 @@ export interface StoredCategory {
   description: string;
   display_order: number;
   is_active: boolean;
+  product_count?: number;
   created_at: string;
 }
 
@@ -106,7 +107,10 @@ export interface StoredBrand {
   name: string;
   origin: string;
   tagline: string;
+  description?: string;
+  is_featured?: boolean;
   is_active: boolean;
+  product_count?: number;
   created_at: string;
 }
 
@@ -1127,10 +1131,21 @@ export function deleteCoupon(id: string): boolean {
 // ================= CATEGORIES ENGINE =================
 export function getCategories(): StoredCategory[] {
   const store = getStore();
-  return store.categories || [];
+  const categories = store.categories || [];
+  return categories.map((c) => {
+    const count = (store.products || []).filter(
+      (p) => (p.category || "").trim().toLowerCase() === (c.name || "").trim().toLowerCase()
+    ).length;
+    return {
+      ...c,
+      product_count: count,
+      is_active: c.is_active ?? true,
+      display_order: c.display_order ?? 1,
+    };
+  });
 }
 
-export function createCategory(data: Partial<StoredCategory>): StoredCategory {
+export function createCategory(data: any): StoredCategory {
   const store = getStore();
   if (!store.categories) store.categories = [];
   const slug = data.slug || (data.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -1139,8 +1154,8 @@ export function createCategory(data: Partial<StoredCategory>): StoredCategory {
     slug,
     name: data.name || "New Category",
     description: data.description || "",
-    display_order: data.display_order ?? store.categories.length + 1,
-    is_active: data.is_active ?? true,
+    display_order: Number(data.display_order ?? data.displayOrder ?? (store.categories.length + 1)),
+    is_active: data.is_active !== undefined ? Boolean(data.is_active) : (data.isActive !== undefined ? Boolean(data.isActive) : true),
     created_at: new Date().toISOString(),
   };
   store.categories.push(newCat);
@@ -1148,12 +1163,20 @@ export function createCategory(data: Partial<StoredCategory>): StoredCategory {
   return newCat;
 }
 
-export function updateCategory(id: string, data: Partial<StoredCategory>): StoredCategory | null {
+export function updateCategory(id: string, data: any): StoredCategory | null {
   const store = getStore();
   if (!store.categories) return null;
   const cat = store.categories.find((c) => c.id === id);
   if (!cat) return null;
-  Object.assign(cat, data);
+  if (data.name !== undefined) cat.name = data.name.trim();
+  if (data.slug !== undefined) cat.slug = data.slug.trim();
+  if (data.description !== undefined) cat.description = data.description.trim();
+  if (data.display_order !== undefined || data.displayOrder !== undefined) {
+    cat.display_order = Number(data.display_order ?? data.displayOrder);
+  }
+  if (data.is_active !== undefined || data.isActive !== undefined) {
+    cat.is_active = Boolean(data.is_active ?? data.isActive);
+  }
   saveStore(store);
   return cat;
 }
@@ -1171,10 +1194,21 @@ export function deleteCategory(id: string): boolean {
 // ================= BRANDS ENGINE =================
 export function getBrands(): StoredBrand[] {
   const store = getStore();
-  return store.brands || [];
+  const brands = store.brands || [];
+  return brands.map((b) => {
+    const count = (store.products || []).filter(
+      (p) => (p.brand || "").trim().toLowerCase() === (b.name || "").trim().toLowerCase()
+    ).length;
+    return {
+      ...b,
+      product_count: count,
+      is_featured: Boolean(b.is_featured),
+      is_active: b.is_active ?? true,
+    };
+  });
 }
 
-export function createBrand(data: Partial<StoredBrand>): StoredBrand {
+export function createBrand(data: any): StoredBrand {
   const store = getStore();
   if (!store.brands) store.brands = [];
   const slug = data.slug || (data.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -1184,7 +1218,9 @@ export function createBrand(data: Partial<StoredBrand>): StoredBrand {
     name: data.name || "New Brand",
     origin: data.origin || "International",
     tagline: data.tagline || "",
-    is_active: data.is_active ?? true,
+    description: data.description || "",
+    is_featured: Boolean(data.is_featured ?? data.isFeatured ?? false),
+    is_active: data.is_active !== undefined ? Boolean(data.is_active) : (data.isActive !== undefined ? Boolean(data.isActive) : true),
     created_at: new Date().toISOString(),
   };
   store.brands.push(newBrand);
@@ -1192,12 +1228,22 @@ export function createBrand(data: Partial<StoredBrand>): StoredBrand {
   return newBrand;
 }
 
-export function updateBrand(id: string, data: Partial<StoredBrand>): StoredBrand | null {
+export function updateBrand(id: string, data: any): StoredBrand | null {
   const store = getStore();
   if (!store.brands) return null;
   const brand = store.brands.find((b) => b.id === id);
   if (!brand) return null;
-  Object.assign(brand, data);
+  if (data.name !== undefined) brand.name = data.name.trim();
+  if (data.slug !== undefined) brand.slug = data.slug.trim();
+  if (data.origin !== undefined) brand.origin = data.origin.trim();
+  if (data.tagline !== undefined) brand.tagline = data.tagline.trim();
+  if (data.description !== undefined) brand.description = data.description.trim();
+  if (data.is_featured !== undefined || data.isFeatured !== undefined) {
+    brand.is_featured = Boolean(data.is_featured ?? data.isFeatured);
+  }
+  if (data.is_active !== undefined || data.isActive !== undefined) {
+    brand.is_active = Boolean(data.is_active ?? data.isActive);
+  }
   saveStore(store);
   return brand;
 }

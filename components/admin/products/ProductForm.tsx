@@ -14,36 +14,21 @@ import {
   DollarSign,
   Layers,
   Image as ImageIcon,
-  Loader2,
-  Palette,
   Check,
-  Building2,
-  FolderPlus,
-  Sparkles,
+  Loader2,
+  Box,
+  Camera,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Product, ColorVariant } from "@/types";
+import { invalidateProductsCache } from "@/lib/productsService";
 
 interface ProductFormProps {
-  initialData?: Product;
+  initialData?: any;
   categories: { id: string; slug: string; name: string }[];
   brands: { id: string; slug: string; name: string }[];
   isEdit?: boolean;
 }
-
-const OPTICAL_SHAPES = [
-  "Aviator",
-  "Cat Eye",
-  "Geometric",
-  "Hexagon",
-  "Octagonal",
-  "Oval",
-  "Rectangle",
-  "Round",
-  "Square",
-  "Wayfarer",
-];
 
 export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
@@ -52,159 +37,159 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   isEdit = false,
 }) => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<"basic" | "media" | "variants" | "pricing" | "specs">("basic");
+  const [activeTab, setActiveTab] = useState<"basic" | "media" | "pricing" | "specs" | "variants">("basic");
   const [saving, setSaving] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingModel, setUploadingModel] = useState(false);
 
-  // Dynamic Brand & Category Lists (allowing inline addition without losing form state)
+  // Dynamic Brand & Category Lists
   const [brandList, setBrandList] = useState(brands);
   const [categoryList, setCategoryList] = useState(categories);
-
-  // Inline Brand Modal State
-  const [isAddBrandOpen, setIsAddBrandOpen] = useState(false);
-  const [newBrandName, setNewBrandName] = useState("");
-  const [newBrandOrigin, setNewBrandOrigin] = useState("France");
-  const [newBrandTagline, setNewBrandTagline] = useState("");
+  const [showBrandModal, setShowBrandModal] = useState(false);
+  const [showCatModal, setShowCatModal] = useState(false);
+  const [newBrand, setNewBrand] = useState({ name: "", origin: "", tagline: "" });
+  const [newCat, setNewCat] = useState({ name: "", description: "" });
   const [creatingBrand, setCreatingBrand] = useState(false);
-
-  // Inline Category Modal State
-  const [isAddCategoryOpen, setIsAddCategoryOpen] = useState(false);
-  const [newCategoryName, setNewCategoryName] = useState("");
-  const [newCategoryDesc, setNewCategoryDesc] = useState("");
-  const [creatingCategory, setCreatingCategory] = useState(false);
+  const [creatingCat, setCreatingCat] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
     name: initialData?.name || "",
-    brand: initialData?.brand || (brands[0]?.name || "Cartier"),
-    category: initialData?.category || (categories[0]?.name || "Eyeglasses"),
-    type: initialData?.type || "eyeglasses",
-    shape: initialData?.shape || "Rectangle",
+    slug: initialData?.slug || "",
+    subtitle: initialData?.subtitle || "",
+    brand: initialData?.brand_slug || initialData?.brand || (brands[0]?.slug || "cartier"),
+    category: initialData?.category_slug || initialData?.category || (categories[0]?.slug || "eyeglasses"),
     gender: initialData?.gender || "unisex",
-    size: initialData?.size || "M",
-    price: initialData?.price || 1990,
-    originalPrice: initialData?.originalPrice || 2990,
-    discountPct: initialData?.discountPct || 33,
-    material: initialData?.material || "Italian Acetate & Beta Titanium",
-    description: initialData?.description || "Handcrafted luxury optical frame from atelier collection.",
-    tag: initialData?.tag || "NEW ARRIVAL",
-    tagType: initialData?.tagType || "new",
-    measurements: initialData?.measurements || { lensWidth: 54, bridgeWidth: 17, templeLength: 142 },
+    shape: initialData?.shape || "rectangle",
+    rimType: initialData?.rim_type || initialData?.rimType || "rimless",
+    material: initialData?.material || "acetate",
+    color: initialData?.color || "Black",
+    colorHex: initialData?.color_hex || initialData?.colorHex || "#1A1A1A",
+    basePrice: initialData?.base_price || initialData?.price || 1990,
+    originalPrice: initialData?.original_price || initialData?.originalPrice || "",
+    stock: initialData?.total_stock || initialData?.stock || 12,
+    description: initialData?.description || "",
+    isActive: initialData?.is_active !== undefined ? initialData.is_active : true,
+    isNewArrival: initialData?.is_new_arrival || initialData?.tag === "NEW ARRIVAL" || false,
+    isBestSeller: initialData?.is_best_seller || false,
+    tryOnEnabled: initialData?.try_on_enabled ?? initialData?.tryOnEnabled ?? false,
+    tryOnModelUrl: initialData?.try_on_model_url || initialData?.tryOnModelUrl || "",
+    tryOnConfiguration: initialData?.try_on_configuration || initialData?.tryOnConfig || null,
+    lensProperties: initialData?.lens_properties || ["uv-protection", "anti-reflective"],
+    specs: initialData?.specs || {
+      lensWidth: initialData?.measurements?.lensWidth || 53,
+      bridgeWidth: initialData?.measurements?.bridgeWidth || 18,
+      templeLength: initialData?.measurements?.templeLength || 145,
+      frameWidth: 140,
+      weight: "22g",
+    },
+    packageDimensions: initialData?.package_dimensions || initialData?.packageDimensions || {
+      lengthCm: 18,
+      breadthCm: 9,
+      heightCm: 7,
+      weightKg: 0.25,
+    },
   });
 
-  // Primary Images State
+  // Images State
   const [images, setImages] = useState<string[]>(
-    initialData?.images && initialData.images.length > 0
-      ? initialData.images
-      : initialData?.img
-      ? [initialData.img]
-      : ["/images/clean_frame_1.png"]
+    initialData?.images?.map((img: any) => (typeof img === "string" ? img : img.url)) ||
+      (initialData?.img ? [initialData.img] : [
+        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+      ])
   );
   const [newImageUrl, setNewImageUrl] = useState("");
 
-  // Primary Hex Swatches
-  const [colors, setColors] = useState<string[]>(
-    initialData?.colors && initialData.colors.length > 0
-      ? initialData.colors
-      : ["#0A251C", "#C5A059"]
+  // Variants State
+  const [variants, setVariants] = useState<any[]>(
+    initialData?.variants?.map((v: any) => ({
+      id: v.id,
+      colorName: v.color_name || v.colorName,
+      colorHex: v.color_hex || v.colorHex,
+      sku: v.sku || `SKU-${(initialData?.slug || "SHIV").slice(0, 6).toUpperCase()}-01`,
+      stock: v.stock_quantity ?? v.stock ?? 10,
+    })) || [
+      {
+        colorName: "Gold / Deep Emerald",
+        colorHex: "#C5A059",
+        sku: `SKU-${(initialData?.slug || "SHIV").slice(0, 6).toUpperCase()}-01`,
+        stock: 10,
+      },
+    ]
   );
-  const [newColor, setNewColor] = useState("#1A1816");
 
-  // Rich Colorway Variants State
-  const [colorVariants, setColorVariants] = useState<ColorVariant[]>(() => {
-    if (initialData?.colorVariants && initialData.colorVariants.length > 0) {
-      return initialData.colorVariants;
-    }
-    // Fallback initialize from colors
-    return (initialData?.colors || ["#0A251C", "#C5A059"]).map((c, idx) => ({
-      id: `var-init-${idx}`,
-      sku: initialData?.id ? `${initialData.id.toUpperCase()}-00${idx + 1}` : `SKU-FRAME-00${idx + 1}`,
-      colorName: idx === 0 ? "Signature Black / Gold" : `Colorway ${idx + 1}`,
-      colorHex: c,
-      price: initialData?.price || 1990,
-      compareAtPrice: initialData?.originalPrice || 2990,
-      available: true,
-      featuredImage: initialData?.images?.[idx] || initialData?.img || "/images/clean_frame_1.png",
-      gallery: initialData?.images || ["/images/clean_frame_1.png"],
-    }));
-  });
+  // File Upload to Cloudflare R2
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  // State for adding photo angle to a specific variant
-  const [variantNewPhotoUrl, setVariantNewPhotoUrl] = useState<{ [variantIdx: number]: string }>({});
+    setUploadingImage(true);
+    const form = new FormData();
+    form.append("file", file);
+    form.append("folder", "products");
 
-  // Handlers for Brand Inline Creation
-  const handleCreateBrandSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newBrandName.trim()) {
-      toast.error("Brand name is required");
-      return;
-    }
-
-    setCreatingBrand(true);
     try {
-      const res = await fetch("/api/admin/brands", {
+      const res = await fetch("/api/upload", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: newBrandName.trim(),
-          origin: newBrandOrigin.trim() || "Haute Lunetterie",
-          tagline: newBrandTagline.trim() || "Independent Luxury Eyewear Architecture",
-        }),
+        body: form,
       });
       const data = await res.json();
-      if (data.success && data.brand) {
-        setBrandList((prev) => [...prev, data.brand]);
-        setFormData((prev) => ({ ...prev, brand: data.brand.name }));
-        toast.success(`Brand "${data.brand.name}" registered successfully`);
-        setIsAddBrandOpen(false);
-        setNewBrandName("");
-        setNewBrandTagline("");
+      if (data.success && data.url) {
+        setImages((prev) => [...prev, data.url]);
+        toast.success("Image uploaded directly to Cloudflare R2 CDN");
       } else {
-        toast.error("Failed to register brand", { description: data.error });
+        toast.error("Upload failed", { description: data.error });
       }
     } catch (err: any) {
-      toast.error("Error creating brand", { description: err.message });
+      toast.error("Upload error", { description: err.message });
     } finally {
-      setCreatingBrand(false);
+      setUploadingImage(false);
     }
   };
 
-  // Handlers for Category Inline Creation
-  const handleCreateCategorySubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newCategoryName.trim()) {
-      toast.error("Category name is required");
+  // 3D GLB Model Upload to Cloudflare R2
+  const handleModelUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const ext = file.name.split(".").pop()?.toLowerCase();
+    if (ext !== "glb" && ext !== "gltf") {
+      toast.error("Invalid file format. Please upload a .glb or .gltf 3D model.");
       return;
     }
 
-    setCreatingCategory(true);
+    setUploadingModel(true);
+    const form = new FormData();
+    form.append("file", file);
+    form.append("folder", "models");
+
     try {
-      const res = await fetch("/api/admin/categories", {
+      const res = await fetch("/api/upload", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: newCategoryName.trim(),
-          description: newCategoryDesc.trim() || `Bespoke optical collection for ${newCategoryName.trim()}`,
-        }),
+        body: form,
       });
+
       const data = await res.json();
-      if (data.success && data.category) {
-        setCategoryList((prev) => [...prev, data.category]);
-        setFormData((prev) => ({ ...prev, category: data.category.name }));
-        toast.success(`Category "${data.category.name}" registered successfully`);
-        setIsAddCategoryOpen(false);
-        setNewCategoryName("");
-        setNewCategoryDesc("");
+
+      if (data.success && data.url) {
+        setFormData((prev) => ({
+          ...prev,
+          tryOnModelUrl: data.url,
+          tryOnEnabled: true,
+        }));
+        toast.success("3D GLB model uploaded to Cloudflare R2", {
+          description: file.name,
+        });
       } else {
-        toast.error("Failed to register category", { description: data.error });
+        toast.error("Failed to upload 3D model", { description: data.error });
       }
     } catch (err: any) {
-      toast.error("Error creating category", { description: err.message });
+      toast.error("Upload error", { description: err.message });
     } finally {
-      setCreatingCategory(false);
+      setUploadingModel(false);
     }
   };
 
-  // Primary Images Handlers
   const handleAddImageUrl = () => {
     if (!newImageUrl.trim()) return;
     setImages((prev) => [...prev, newImageUrl.trim()]);
@@ -215,74 +200,82 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     setImages((prev) => prev.filter((_, i) => i !== idx));
   };
 
-  // Color Swatches Handlers
-  const handleAddColor = () => {
-    if (!newColor) return;
-    if (!colors.includes(newColor)) {
-      setColors((prev) => [...prev, newColor]);
+  const handleAddVariant = () => {
+    setVariants((prev) => [
+      ...prev,
+      {
+        colorName: "Platinum Silver",
+        colorHex: "#C0C0C0",
+        sku: `SKU-${(formData.slug || "SHIV").slice(0, 6).toUpperCase()}-0${prev.length + 1}`,
+        stock: 8,
+      },
+    ]);
+  };
+
+  const handleRemoveVariant = (idx: number) => {
+    setVariants((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  const handleCreateBrand = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newBrand.name.trim()) {
+      toast.error("Brand name is required");
+      return;
+    }
+    setCreatingBrand(true);
+    try {
+      const res = await fetch("/api/admin/brands", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newBrand),
+      });
+      const data = await res.json();
+      if (data.success && data.brand) {
+        const created = data.brand;
+        setBrandList((prev) => [...prev, created]);
+        setFormData((prev) => ({ ...prev, brand: created.slug }));
+        setShowBrandModal(false);
+        setNewBrand({ name: "", origin: "", tagline: "" });
+        toast.success(`Brand "${created.name}" created and selected`);
+      } else {
+        toast.error("Failed to create brand", { description: data.error });
+      }
+    } catch (err: any) {
+      toast.error("Error creating brand", { description: err.message });
+    } finally {
+      setCreatingBrand(false);
     }
   };
 
-  const handleRemoveColor = (idx: number) => {
-    setColors((prev) => prev.filter((_, i) => i !== idx));
-  };
-
-  // Variant Handlers
-  const handleAddVariant = () => {
-    const nextIdx = colorVariants.length + 1;
-    const newVar: ColorVariant = {
-      id: `var-new-${Date.now()}`,
-      sku: `SKU-${formData.name.replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, 6) || "FRAME"}-00${nextIdx}`,
-      colorName: `Colorway ${nextIdx}`,
-      colorHex: "#1A1816",
-      price: formData.price,
-      compareAtPrice: formData.originalPrice,
-      available: true,
-      featuredImage: images[0] || "/images/clean_frame_1.png",
-      gallery: images.length > 0 ? [...images] : ["/images/clean_frame_1.png"],
-    };
-    setColorVariants((prev) => [...prev, newVar]);
-  };
-
-  const handleUpdateVariant = (index: number, updates: Partial<ColorVariant>) => {
-    setColorVariants((prev) =>
-      prev.map((v, i) => (i === index ? { ...v, ...updates } : v))
-    );
-  };
-
-  const handleRemoveVariant = (index: number) => {
-    setColorVariants((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const handleAddVariantPhoto = (variantIdx: number) => {
-    const url = variantNewPhotoUrl[variantIdx]?.trim();
-    if (!url) return;
-    setColorVariants((prev) =>
-      prev.map((v, i) => {
-        if (i !== variantIdx) return v;
-        const currentGallery = v.gallery || [];
-        return {
-          ...v,
-          gallery: [...currentGallery, url],
-          featuredImage: v.featuredImage || url,
-        };
-      })
-    );
-    setVariantNewPhotoUrl((prev) => ({ ...prev, [variantIdx]: "" }));
-  };
-
-  const handleRemoveVariantPhoto = (variantIdx: number, photoIdx: number) => {
-    setColorVariants((prev) =>
-      prev.map((v, i) => {
-        if (i !== variantIdx) return v;
-        const updatedGallery = (v.gallery || []).filter((_, pI) => pI !== photoIdx);
-        return {
-          ...v,
-          gallery: updatedGallery,
-          featuredImage: updatedGallery[0] || v.featuredImage,
-        };
-      })
-    );
+  const handleCreateCategory = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newCat.name.trim()) {
+      toast.error("Category name is required");
+      return;
+    }
+    setCreatingCat(true);
+    try {
+      const res = await fetch("/api/admin/categories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newCat),
+      });
+      const data = await res.json();
+      if (data.success && data.category) {
+        const created = data.category;
+        setCategoryList((prev) => [...prev, created]);
+        setFormData((prev) => ({ ...prev, category: created.slug }));
+        setShowCatModal(false);
+        setNewCat({ name: "", description: "" });
+        toast.success(`Category "${created.name}" created and selected`);
+      } else {
+        toast.error("Failed to create category", { description: data.error });
+      }
+    } catch (err: any) {
+      toast.error("Error creating category", { description: err.message });
+    } finally {
+      setCreatingCat(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -293,26 +286,15 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     }
 
     setSaving(true);
-
-    // Collect all hex colors from colorVariants if defined
-    const variantColors = colorVariants.map((v) => v.colorHex).filter(Boolean);
-    const mergedColors = Array.from(new Set([...colors, ...variantColors]));
-
-    // Collect all unique images
-    const variantImages = colorVariants.flatMap((v) => [v.featuredImage, ...(v.gallery || [])]).filter(Boolean) as string[];
-    const mergedImages = Array.from(new Set([...images, ...variantImages]));
-
     const payload = {
       ...formData,
-      img: images[0] || colorVariants[0]?.featuredImage || "/images/clean_frame_1.png",
-      images: mergedImages.length > 0 ? mergedImages : ["/images/clean_frame_1.png"],
-      colors: mergedColors.length > 0 ? mergedColors : ["#0A251C"],
-      colorVariants,
+      images,
+      variants,
     };
 
     try {
       const endpoint = isEdit
-        ? `/api/admin/products/${initialData?.id}`
+        ? `/api/admin/products/${initialData.id}`
         : `/api/admin/products`;
       const method = isEdit ? "PUT" : "POST";
 
@@ -325,13 +307,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       const data = await res.json();
 
       if (data.success) {
-        toast.success(isEdit ? "Frame updated successfully" : "Frame added to catalog");
+        invalidateProductsCache();
+        toast.success(isEdit ? "Product updated successfully" : "Product created in catalog");
         router.push("/admin/products");
       } else {
-        toast.error("Failed to save frame", { description: data.error });
+        toast.error("Failed to save product", { description: data.error });
       }
     } catch (err: any) {
-      toast.error("Error saving frame", { description: err.message });
+      toast.error("Error saving product", { description: err.message });
     } finally {
       setSaving(false);
     }
@@ -350,10 +333,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           </Link>
           <div>
             <h1 className="text-lg font-bold text-[#0A251C] font-serif">
-              {isEdit ? `Edit Frame: ${formData.name}` : "Add New Frame to Catalog"}
+              {isEdit ? `Edit Product: ${formData.name}` : "Create New Eyewear Product"}
             </h1>
             <p className="text-xs text-stone-500">
-              Configure luxury frame specifications, optical geometry, and colorway galleries
+              Configure luxury frame specifications, optical properties, and high-res media
             </p>
           </div>
         </div>
@@ -364,7 +347,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             variant="outline"
             size="sm"
             onClick={() => router.push("/admin/products")}
-            className="text-xs bg-white border-stone-300"
+            className="text-xs bg-white border-[#E8DCCF] text-stone-700 hover:bg-[#FAF7F2] cursor-pointer"
           >
             Cancel
           </Button>
@@ -372,7 +355,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             type="submit"
             size="sm"
             disabled={saving}
-            className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white shadow-xs font-semibold"
+            className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white shadow-xs cursor-pointer"
           >
             {saving ? (
               <>
@@ -382,7 +365,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             ) : (
               <>
                 <Save className="w-3.5 h-3.5 mr-1.5" />
-                <span>{isEdit ? "Update Frame" : "Save Frame"}</span>
+                <span>{isEdit ? "Update Product" : "Publish Product"}</span>
               </>
             )}
           </Button>
@@ -393,10 +376,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       <div className="flex items-center gap-1 border-b border-[#E8DCCF] text-xs font-medium overflow-x-auto">
         {[
           { id: "basic", label: "1. Basic Details", icon: Layers },
-          { id: "media", label: "2. Primary Media & Swatches", icon: ImageIcon },
-          { id: "variants", label: "3. Colorways & Variants", icon: Palette, badge: colorVariants.length },
-          { id: "pricing", label: "4. Pricing & Margin", icon: DollarSign },
-          { id: "specs", label: "5. Optical Measurements", icon: Glasses },
+          { id: "media", label: "2. Product Media & 3D VTO", icon: ImageIcon },
+          { id: "pricing", label: "3. Pricing & Stock", icon: DollarSign },
+          { id: "specs", label: "4. Optical Specifications & Packaging", icon: Glasses },
+          { id: "variants", label: "5. Color Variants", icon: Plus },
         ].map((tab) => {
           const Icon = tab.icon;
           return (
@@ -412,11 +395,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             >
               <Icon className="w-3.5 h-3.5" />
               <span>{tab.label}</span>
-              {typeof tab.badge === "number" && (
-                <span className="ml-1 text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-stone-100 text-stone-700 border border-stone-200">
-                  {tab.badge}
-                </span>
-              )}
             </button>
           );
         })}
@@ -428,19 +406,44 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Frame Model Name *
+                Product Title / Frame Model *
               </label>
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="e.g. Santos de Cartier Titanium Aviator Eyeglasses"
+                placeholder="e.g. Cartier Première CT0012O 001"
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               />
             </div>
 
-            {/* Brand Dropdown with Inline "+ Add Brand" Modal Button */}
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                Subtitle / Marketing Tagline
+              </label>
+              <input
+                type="text"
+                value={formData.subtitle}
+                onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
+                placeholder="e.g. Hand-Polished 18k Gold Electroplated Rimless"
+                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                URL Slug (auto-generated if blank)
+              </label>
+              <input
+                type="text"
+                value={formData.slug}
+                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                placeholder="e.g. cartier-premiere-ct0012o"
+                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+              />
+            </div>
+
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="block text-xs font-semibold text-stone-700">
@@ -448,11 +451,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 </label>
                 <button
                   type="button"
-                  onClick={() => setIsAddBrandOpen(true)}
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#C5A059] hover:text-[#0A251C] transition-colors"
+                  onClick={() => setShowBrandModal(true)}
+                  className="text-[11px] font-semibold text-[#C5A059] hover:text-[#9A4C16] flex items-center gap-1 cursor-pointer"
                 >
                   <Plus className="w-3 h-3" />
-                  <span>Add Brand</span>
+                  <span>+ New Brand</span>
                 </button>
               </div>
               <select
@@ -461,26 +464,25 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               >
                 {brandList.map((b) => (
-                  <option key={b.slug || b.id} value={b.name}>
+                  <option key={b.slug} value={b.slug}>
                     {b.name}
                   </option>
                 ))}
               </select>
             </div>
 
-            {/* Category Dropdown with Inline "+ Add Category" Modal Button */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="block text-xs font-semibold text-stone-700">
-                  Eyewear Category *
+                  Category *
                 </label>
                 <button
                   type="button"
-                  onClick={() => setIsAddCategoryOpen(true)}
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#C5A059] hover:text-[#0A251C] transition-colors"
+                  onClick={() => setShowCatModal(true)}
+                  className="text-[11px] font-semibold text-[#C5A059] hover:text-[#9A4C16] flex items-center gap-1 cursor-pointer"
                 >
                   <Plus className="w-3 h-3" />
-                  <span>Add Category</span>
+                  <span>+ New Category</span>
                 </button>
               </div>
               <select
@@ -489,55 +491,73 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               >
                 {categoryList.map((c) => (
-                  <option key={c.slug || c.id} value={c.name}>
+                  <option key={c.slug} value={c.slug}>
                     {c.name}
                   </option>
                 ))}
               </select>
             </div>
 
-            {/* Extended Frame Shape Options */}
             <div>
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Optical Frame Shape
-              </label>
-              <select
-                value={formData.shape}
-                onChange={(e) => setFormData({ ...formData, shape: e.target.value })}
-                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
-              >
-                {OPTICAL_SHAPES.map((shape) => (
-                  <option key={shape} value={shape}>
-                    {shape}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Gender Classification
+                Target Gender
               </label>
               <select
                 value={formData.gender}
-                onChange={(e) => setFormData({ ...formData, gender: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               >
                 <option value="unisex">Unisex</option>
                 <option value="men">Men</option>
                 <option value="women">Women</option>
+                <option value="kids">Junior / Kids</option>
               </select>
+            </div>
+
+            <div className="sm:col-span-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg p-4 space-y-3">
+              <div className="text-xs font-bold text-[#0A251C] uppercase tracking-wider">
+                Storefront Merchandising &amp; Placement Flags
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label className="flex items-start gap-2.5 text-xs text-stone-700 cursor-pointer p-3 rounded-md bg-white border border-[#E8DCCF] hover:border-[#C5A059]/50 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={formData.isActive}
+                    onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                    className="mt-0.5 rounded text-[#C5A059] focus:ring-[#C5A059] accent-[#C5A059]"
+                  />
+                  <div>
+                    <span className="font-semibold block text-[#0A251C]">Published in Catalog</span>
+                    <span className="text-[11px] text-stone-500">Enable customers to browse, view, and purchase this frame.</span>
+                  </div>
+                </label>
+
+                <label className="flex items-start gap-2.5 text-xs text-stone-700 cursor-pointer p-3 rounded-md bg-white border border-[#E8DCCF] hover:border-[#C5A059]/50 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={formData.isNewArrival}
+                    onChange={(e) => setFormData({ ...formData, isNewArrival: e.target.checked })}
+                    className="mt-0.5 rounded text-[#C5A059] focus:ring-[#C5A059] accent-[#C5A059]"
+                  />
+                  <div>
+                    <span className="font-semibold block text-[#0A251C]">Show in &quot;New Arrivals&quot;</span>
+                    <span className="text-[11px] text-stone-500">
+                      Flag as a new arrival: frame appears in New In collections across the storefront.
+                    </span>
+                  </div>
+                </label>
+              </div>
             </div>
 
             <div className="sm:col-span-2">
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Description & Craftsmanship Details
+                Atelier Narrative &amp; Detailed Description
               </label>
               <textarea
-                rows={3}
+                rows={4}
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Details of acetate polishing, titanium hinges, and precision optical ergonomics..."
+                placeholder="Describe craftsmanship, titanium construction, hinge technology, and luxury pedigree..."
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               />
             </div>
@@ -545,60 +565,90 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         </div>
       )}
 
-      {/* TAB 2: PRIMARY MEDIA & SWATCHES */}
+      {/* TAB 2: PRODUCT MEDIA & 3D VTO */}
       {activeTab === "media" && (
-        <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-5">
+        <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
-              Primary Frame Photography
+              Cloudflare R2 Object Storage &amp; Gallery
             </h3>
             <p className="text-xs text-stone-500">
-              Provide high-resolution transparent or studio images of the eyewear.
+              Upload high-resolution luxury product photographs directly to the global R2 CDN.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* Upload Box */}
+          <div className="border-2 border-dashed border-[#E8DCCF] rounded-xl p-6 text-center bg-[#FAF7F2] hover:bg-[#FAF3EB] transition-colors">
+            <Upload className="w-8 h-8 text-stone-400 mx-auto mb-2" />
+            <div className="text-xs font-semibold text-[#0A251C] mb-1">
+              Upload frame photos to Cloudflare R2 CDN
+            </div>
+            <p className="text-[11px] text-stone-500 mb-3">
+              Supports PNG, JPG, WEBP with transparent or luxury studio background
+            </p>
+
+            <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#0A251C] text-[#FAF7F2] text-xs font-medium cursor-pointer hover:bg-[#143e30] transition-colors">
+              {uploadingImage ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Uploading to R2...</span>
+                </>
+              ) : (
+                <>
+                  <Upload className="w-3.5 h-3.5" />
+                  <span>Choose Image File</span>
+                </>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileUpload}
+                disabled={uploadingImage}
+                className="hidden"
+              />
+            </label>
+          </div>
+
+          {/* Or Add Image URL */}
+          <div className="flex items-center gap-2 pt-2">
             <input
-              type="text"
+              type="url"
               value={newImageUrl}
               onChange={(e) => setNewImageUrl(e.target.value)}
-              placeholder="Paste image URL (e.g. /images/clean_frame_1.png or CDN link)..."
-              className="flex-1 px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+              placeholder="Or paste external image URL (e.g. Unsplash, CDN URL)..."
+              className="flex-1 px-3 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
             />
             <Button
               type="button"
               size="sm"
               onClick={handleAddImageUrl}
-              className="text-xs bg-[#0A251C] text-white hover:bg-[#1a382e]"
+              className="text-xs bg-stone-700 hover:bg-stone-800 text-white cursor-pointer"
             >
-              Add Image
+              Add URL
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {/* Image Thumbnails Gallery */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 pt-3">
             {images.map((url, idx) => (
               <div
                 key={idx}
-                className="relative aspect-4/3 rounded-lg border border-[#E8DCCF] overflow-hidden bg-[#FAF7F2] p-2 flex items-center justify-center group"
+                className="group relative aspect-square rounded-lg border border-[#E8DCCF] overflow-hidden bg-[#FAF7F2] flex items-center justify-center p-1"
               >
                 <img
                   src={url}
                   alt={`Angle ${idx + 1}`}
                   className="w-full h-full object-contain"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/images/clean_frame_1.png";
-                  }}
                 />
                 {idx === 0 && (
-                  <span className="absolute top-1 left-1 bg-[#C5A059] text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                  <span className="absolute top-1 left-1 bg-[#C5A059] text-white text-[9px] font-bold px-1.5 py-0.2 rounded shadow-xs">
                     Primary
                   </span>
                 )}
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(idx)}
-                  className="absolute top-1 right-1 p-1 bg-black/60 text-white rounded hover:bg-rose-600 opacity-0 group-hover:opacity-100 transition"
-                  title="Remove image"
+                  className="absolute top-1 right-1 p-1 bg-black/60 text-white rounded hover:bg-rose-600 transition-colors opacity-0 group-hover:opacity-100 cursor-pointer"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -606,263 +656,219 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             ))}
           </div>
 
-          <div className="pt-4 border-t border-[#E8DCCF] space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600">
-              Colorways & Hex Swatches
-            </h3>
-            <div className="flex items-center gap-2">
-              <input
-                type="color"
-                value={newColor}
-                onChange={(e) => setNewColor(e.target.value)}
-                className="w-9 h-9 rounded border border-[#E8DCCF] cursor-pointer"
-              />
-              <Button
-                type="button"
-                size="sm"
-                onClick={handleAddColor}
-                className="text-xs bg-stone-700 text-white"
-              >
-                Add Swatch
-              </Button>
-            </div>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {colors.map((c, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-1.5 px-2 py-1 rounded bg-[#FAF7F2] border border-[#E8DCCF] text-xs"
-                >
-                  <span
-                    className="w-3.5 h-3.5 rounded-full border border-stone-300"
-                    style={{ backgroundColor: c }}
-                  />
-                  <span className="font-mono text-[10px] text-stone-600">{c}</span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveColor(idx)}
-                    className="text-stone-400 hover:text-rose-600 ml-1"
-                  >
-                    <X className="w-3 h-3" />
-                  </button>
+          {/* 3D Virtual Try-On Asset (.GLB / .GLTF) - Cloudflare R2 */}
+          <div className="mt-8 pt-6 border-t border-[#E8DCCF] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <div className="flex items-center gap-2">
+                  <Box className="w-4 h-4 text-[#C5A059]" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0A251C]">
+                    3D Virtual Try-On Model (.GLB / .GLTF)
+                  </h3>
+                  <span className="bg-amber-100 text-amber-800 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Cloudflare R2 Storage
+                  </span>
                 </div>
-              ))}
+                <p className="text-xs text-stone-500 mt-0.5">
+                  Upload or link a 3D eyewear model in binary GLB format for live augmented reality try-on.
+                </p>
+              </div>
+
+              {/* Try-On Enable Toggle */}
+              <label className="inline-flex items-center gap-2 text-xs font-semibold text-[#0A251C] cursor-pointer bg-[#FAF7F2] px-3 py-1.5 rounded-lg border border-[#E8DCCF]">
+                <input
+                  type="checkbox"
+                  checked={formData.tryOnEnabled}
+                  onChange={(e) => setFormData({ ...formData, tryOnEnabled: e.target.checked })}
+                  className="rounded text-[#C5A059] focus:ring-[#C5A059] accent-[#C5A059]"
+                />
+                <span>Enable 3D Virtual Try-On</span>
+              </label>
             </div>
-          </div>
-        </div>
-      )}
 
-      {/* TAB 3: RICH COLORWAYS & MULTI-ANGLE GALLERIES */}
-      {activeTab === "variants" && (
-        <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600 mb-0.5">
-                Colorway Variants & Angle Galleries ({colorVariants.length})
-              </h3>
-              <p className="text-xs text-stone-500">
-                Manage individual frame finishes, SKUs, pricing overrides, and multi-angle photo catalogs.
-              </p>
-            </div>
-            <Button
-              type="button"
-              size="sm"
-              onClick={handleAddVariant}
-              className="text-xs bg-[#0A251C] hover:bg-[#1a382e] text-white flex items-center gap-1.5"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add Colorway</span>
-            </Button>
-          </div>
-
-          {colorVariants.length === 0 ? (
-            <div className="py-10 text-center border-2 border-dashed border-[#E8DCCF] rounded-xl">
-              <Palette className="w-8 h-8 text-stone-400 mx-auto mb-2" />
-              <p className="text-xs text-stone-600 font-semibold">No colorway variants configured</p>
-              <p className="text-[11px] text-stone-400 mt-1 mb-3">Add distinct colorways to enable multi-finish selection for customers</p>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                onClick={handleAddVariant}
-                className="text-xs border-[#E8DCCF]"
-              >
-                <Plus className="w-3.5 h-3.5 mr-1" />
-                <span>Create First Colorway</span>
-              </Button>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {colorVariants.map((variant, vIdx) => (
-                <div
-                  key={variant.id || vIdx}
-                  className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-xl p-4 space-y-3"
-                >
-                  {/* Variant Top Meta */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E8DCCF]">
-                    <div className="flex items-center gap-3">
-                      <div className="relative">
-                        <input
-                          type="color"
-                          value={variant.colorHex}
-                          onChange={(e) => handleUpdateVariant(vIdx, { colorHex: e.target.value })}
-                          className="w-8 h-8 rounded-full border border-stone-300 cursor-pointer overflow-hidden p-0"
-                          title="Click to pick swatch hex"
-                        />
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1">
-                        <input
-                          type="text"
-                          value={variant.colorName}
-                          onChange={(e) => handleUpdateVariant(vIdx, { colorName: e.target.value })}
-                          placeholder="Colorway Name (e.g. Brushed Gold / Matte Black)"
-                          className="px-2.5 py-1.5 bg-white border border-[#E8DCCF] rounded text-xs font-semibold text-[#0A251C]"
-                        />
-                        <input
-                          type="text"
-                          value={variant.sku}
-                          onChange={(e) => handleUpdateVariant(vIdx, { sku: e.target.value })}
-                          placeholder="SKU Code (e.g. CT0087O-001)"
-                          className="px-2.5 py-1.5 bg-white border border-[#E8DCCF] rounded text-xs font-mono text-stone-700"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-[11px] font-semibold text-stone-600">₹</span>
-                        <input
-                          type="number"
-                          value={variant.price}
-                          onChange={(e) => handleUpdateVariant(vIdx, { price: Number(e.target.value) })}
-                          className="w-24 px-2 py-1 bg-white border border-[#E8DCCF] rounded text-xs font-semibold text-[#0A251C]"
-                          title="Variant Price"
-                        />
-                      </div>
-
-                      <label className="flex items-center gap-1.5 text-xs text-stone-600 cursor-pointer select-none">
-                        <input
-                          type="checkbox"
-                          checked={variant.available !== false}
-                          onChange={(e) => handleUpdateVariant(vIdx, { available: e.target.checked })}
-                          className="rounded border-[#E8DCCF] text-[#C5A059] focus:ring-[#C5A059]"
-                        />
-                        <span>In Stock</span>
-                      </label>
-
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveVariant(vIdx)}
-                        className="p-1.5 text-stone-400 hover:text-rose-600 transition-colors"
-                        title="Remove Variant"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
+            {/* Active Model Status Card */}
+            {formData.tryOnModelUrl ? (
+              <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-lg bg-white border border-[#E8DCCF] flex items-center justify-center shrink-0 shadow-2xs">
+                    <Box className="w-5 h-5 text-[#C5A059]" />
                   </div>
-
-                  {/* Multi-Angle Gallery for this Variant */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-stone-600">
-                        Angle Photography ({(variant.gallery || []).length} photos)
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-[#0A251C] truncate">
+                        {formData.tryOnModelUrl.split("/").pop()}
+                      </span>
+                      <span className="bg-emerald-100 text-emerald-800 text-[9px] font-bold px-1.5 py-0.2 rounded">
+                        Active 3D Model
                       </span>
                     </div>
-
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="text"
-                        value={variantNewPhotoUrl[vIdx] || ""}
-                        onChange={(e) =>
-                          setVariantNewPhotoUrl((prev) => ({ ...prev, [vIdx]: e.target.value }))
-                        }
-                        placeholder="Paste angle image URL for this colorway..."
-                        className="flex-1 px-3 py-1.5 bg-white border border-[#E8DCCF] rounded text-xs text-[#0A251C]"
-                      />
-                      <Button
-                        type="button"
-                        size="sm"
-                        onClick={() => handleAddVariantPhoto(vIdx)}
-                        className="text-xs h-8 bg-stone-800 text-white hover:bg-stone-900"
-                      >
-                        Add Photo
-                      </Button>
-                    </div>
-
-                    <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 pt-1">
-                      {(variant.gallery || []).map((imgUrl, pIdx) => (
-                        <div
-                          key={pIdx}
-                          className="relative aspect-square rounded-md border border-[#E8DCCF] bg-white overflow-hidden p-1 flex items-center justify-center group"
-                        >
-                          <img
-                            src={imgUrl}
-                            alt={`${variant.colorName} Angle ${pIdx + 1}`}
-                            className="w-full h-full object-contain"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = "/images/clean_frame_1.png";
-                            }}
-                          />
-                          {pIdx === 0 && (
-                            <span className="absolute bottom-1 left-1 bg-[#C5A059] text-white text-[8px] font-bold px-1 rounded">
-                              Main
-                            </span>
-                          )}
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveVariantPhoto(vIdx, pIdx)}
-                            className="absolute top-1 right-1 p-0.5 bg-black/60 text-white rounded hover:bg-rose-600 opacity-0 group-hover:opacity-100 transition"
-                            title="Delete angle photo"
-                          >
-                            <X className="w-2.5 h-2.5" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
+                    <span className="text-[11px] text-stone-400 font-mono truncate block max-w-md">
+                      {formData.tryOnModelUrl}
+                    </span>
                   </div>
                 </div>
-              ))}
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href={`/admin/try-on-calibrator?product=${initialData?.id || initialData?.slug || formData.slug || ""}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#0A251C] text-[#FAF7F2] text-xs font-medium hover:bg-[#143e30] transition-colors"
+                    title="Open Calibrator Studio"
+                  >
+                    <Camera className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <span>Calibrate in 3D</span>
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, tryOnModelUrl: "", tryOnEnabled: false })}
+                    className="p-1.5 rounded-md text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                    title="Remove Model"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ) : null}
+
+            {/* Upload Area for .GLB */}
+            <div className="border-2 border-dashed border-[#E8DCCF] rounded-xl p-6 text-center bg-[#FAF7F2] hover:bg-[#FAF3EB] transition-colors">
+              <Box className="w-8 h-8 text-[#C5A059] mx-auto mb-2" />
+              <div className="text-xs font-semibold text-[#0A251C] mb-1">
+                Upload .GLB or .GLTF 3D Model to Cloudflare R2
+              </div>
+              <p className="text-[11px] text-stone-500 mb-3">
+                Binary GLB with embedded PBR textures (maximum 2.5 MB recommended)
+              </p>
+
+              <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#0A251C] text-[#FAF7F2] text-xs font-medium cursor-pointer hover:bg-[#143e30] transition-colors">
+                {uploadingModel ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Uploading 3D Model to R2...</span>
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-3.5 h-3.5" />
+                    <span>Choose .GLB File</span>
+                  </>
+                )}
+                <input
+                  type="file"
+                  accept=".glb,.gltf,model/gltf-binary,model/gltf+json"
+                  onChange={handleModelUpload}
+                  disabled={uploadingModel}
+                  className="hidden"
+                />
+              </label>
             </div>
-          )}
+
+            {/* Or Paste direct model URL */}
+            <div className="space-y-1.5">
+              <label className="block text-[11px] font-semibold text-stone-600">
+                Or Enter Model URL Directly:
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={formData.tryOnModelUrl}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      tryOnModelUrl: e.target.value,
+                      tryOnEnabled: e.target.value.trim().length > 0 ? formData.tryOnEnabled : false,
+                    })
+                  }
+                  placeholder="https://pub-4770ee76ded14c04b1a8924c300214b5.r2.dev/models/... or /models/eyewear/..."
+                  className="flex-1 px-3 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] font-mono focus:outline-hidden focus:border-[#C5A059]"
+                />
+                {formData.tryOnModelUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, tryOnModelUrl: "" })}
+                    className="p-1.5 text-stone-400 hover:text-stone-700 cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Quick Presets for Built-in Models */}
+            <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg p-3 space-y-1.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block">
+                Quick Select Canonical Model Preset:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: "Cartier Rimless Round", url: "/models/eyewear/cartier_rimless_round.glb" },
+                  { label: "Fastrack Wayfarer Black", url: "/models/eyewear/fastrack_wayfarer_black.glb" },
+                  { label: "Classic Aviator Gold", url: "/models/eyewear/classic_aviator_gold.glb" },
+                  { label: "Titanium Rectangle Gold", url: "/models/eyewear/rectangle_titanium_gold.glb" },
+                  { label: "Cat-Eye Luxury Havana", url: "/models/eyewear/cateye_luxury_havana.glb" },
+                ].map((preset) => (
+                  <button
+                    key={preset.url}
+                    type="button"
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        tryOnModelUrl: preset.url,
+                        tryOnEnabled: true,
+                      })
+                    }
+                    className={`text-[11px] px-2.5 py-1 rounded-md border transition-all cursor-pointer ${
+                      formData.tryOnModelUrl === preset.url
+                        ? "bg-[#0A251C] text-white border-[#C5A059]"
+                        : "bg-white text-stone-700 border-stone-200 hover:border-stone-400"
+                    }`}
+                  >
+                    {preset.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* TAB 4: PRICING */}
+      {/* TAB 3: PRICING & INVENTORY */}
       {activeTab === "pricing" && (
         <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Selling Price (INR ₹) *
+                Selling Base Price (INR ₹) *
               </label>
               <input
                 type="number"
                 required
-                value={formData.price}
-                onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+                value={formData.basePrice}
+                onChange={(e) => setFormData({ ...formData, basePrice: Number(e.target.value) })}
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                MRP / Strike Price (INR ₹)
+                Original MRP / Cross-out Price (INR ₹)
               </label>
               <input
                 type="number"
                 value={formData.originalPrice}
-                onChange={(e) => setFormData({ ...formData, originalPrice: Number(e.target.value) })}
+                onChange={(e) => setFormData({ ...formData, originalPrice: e.target.value })}
+                placeholder="Optional higher retail price"
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Discount Badge (% off)
+                Initial Stock Units
               </label>
               <input
                 type="number"
-                value={formData.discountPct}
-                onChange={(e) => setFormData({ ...formData, discountPct: Number(e.target.value) })}
+                value={formData.stock}
+                onChange={(e) => setFormData({ ...formData, stock: Number(e.target.value) })}
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               />
             </div>
@@ -870,24 +876,105 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         </div>
       )}
 
-      {/* TAB 5: OPTICAL SPECIFICATIONS */}
+      {/* TAB 4: OPTICAL SPECIFICATIONS & PACKAGING */}
       {activeTab === "specs" && (
         <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+              Optical Geometry &amp; Physical Dimensions
+            </h3>
+            <p className="text-xs text-stone-500">
+              Crucial millimetric specifications for optician surfacing and customer fit.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                Frame Shape
+              </label>
+              <select
+                value={formData.shape}
+                onChange={(e) => setFormData({ ...formData, shape: e.target.value })}
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+              >
+                <option value="rectangle">Rectangle</option>
+                <option value="aviator">Aviator</option>
+                <option value="round">Round</option>
+                <option value="square">Square</option>
+                <option value="cat-eye">Cat-Eye</option>
+                <option value="geometric">Geometric</option>
+                <option value="oval">Oval</option>
+                <option value="wayfarer">Wayfarer</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                Rim Type
+              </label>
+              <select
+                value={formData.rimType}
+                onChange={(e) => setFormData({ ...formData, rimType: e.target.value })}
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+              >
+                <option value="rimless">Rimless (Minimalist)</option>
+                <option value="full-rim">Full Rim</option>
+                <option value="half-rim">Half Rim</option>
+                <option value="semi-rimless">Semi-Rimless</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                Material
+              </label>
+              <select
+                value={formData.material}
+                onChange={(e) => setFormData({ ...formData, material: e.target.value })}
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+              >
+                <option value="titanium">Japanese Beta Titanium</option>
+                <option value="acetate">Mazzucchelli Acetate</option>
+                <option value="18k-gold-plated">18k Gold Plated</option>
+                <option value="metal">Monel &amp; Stainless Steel</option>
+                <option value="horn">Natural Buffalo Horn</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                Weight (grams)
+              </label>
+              <input
+                type="text"
+                value={formData.specs?.weight || "20g"}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    specs: { ...formData.specs, weight: e.target.value },
+                  })
+                }
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
             <div>
               <label className="block text-xs font-semibold text-stone-700 mb-1">
                 Lens Width (mm)
               </label>
               <input
                 type="number"
-                value={formData.measurements.lensWidth}
+                value={formData.specs?.lensWidth || 53}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    measurements: { ...formData.measurements, lensWidth: Number(e.target.value) },
+                    specs: { ...formData.specs, lensWidth: Number(e.target.value) },
                   })
                 }
-                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
               />
             </div>
 
@@ -897,14 +984,14 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               </label>
               <input
                 type="number"
-                value={formData.measurements.bridgeWidth}
+                value={formData.specs?.bridgeWidth || 18}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    measurements: { ...formData.measurements, bridgeWidth: Number(e.target.value) },
+                    specs: { ...formData.specs, bridgeWidth: Number(e.target.value) },
                   })
                 }
-                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
               />
             </div>
 
@@ -914,206 +1001,362 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               </label>
               <input
                 type="number"
-                value={formData.measurements.templeLength}
+                value={formData.specs?.templeLength || 145}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    measurements: { ...formData.measurements, templeLength: Number(e.target.value) },
+                    specs: { ...formData.specs, templeLength: Number(e.target.value) },
                   })
                 }
-                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
               />
             </div>
 
-            <div className="sm:col-span-3">
+            <div>
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Material Composition
+                Total Frame Width (mm)
               </label>
               <input
-                type="text"
-                value={formData.material}
-                onChange={(e) => setFormData({ ...formData, material: e.target.value })}
-                placeholder="e.g. Beta Titanium & Italian Mazzucchelli Acetate"
-                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                type="number"
+                value={formData.specs?.frameWidth || 140}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    specs: { ...formData.specs, frameWidth: Number(e.target.value) },
+                  })
+                }
+                className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
               />
             </div>
           </div>
+
+          {/* Shiprocket Logistics Package Dimensions */}
+          <div className="pt-4 border-t border-[#E8DCCF]">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+              Shiprocket Logistics &amp; Shipping Dimensions
+            </h3>
+            <p className="text-xs text-stone-500 mb-3">
+              Automated package dimensions sent to Shiprocket API for courier routing and dead-weight calculation.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  Length (cm)
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={formData.packageDimensions?.lengthCm || 18}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      packageDimensions: {
+                        ...formData.packageDimensions,
+                        lengthCm: Number(e.target.value),
+                      },
+                    })
+                  }
+                  className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  Breadth (cm)
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={formData.packageDimensions?.breadthCm || 9}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      packageDimensions: {
+                        ...formData.packageDimensions,
+                        breadthCm: Number(e.target.value),
+                      },
+                    })
+                  }
+                  className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  Height (cm)
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={formData.packageDimensions?.heightCm || 7}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      packageDimensions: {
+                        ...formData.packageDimensions,
+                        heightCm: Number(e.target.value),
+                      },
+                    })
+                  }
+                  className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-stone-700 mb-1">
+                  Dead Weight (kg)
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  value={formData.packageDimensions?.weightKg || 0.25}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      packageDimensions: {
+                        ...formData.packageDimensions,
+                        weightKg: Number(e.target.value),
+                      },
+                    })
+                  }
+                  className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* INLINE MODAL: ADD BRAND */}
-      {isAddBrandOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-[#FAF7F2] border border-[#E8DCCF] w-full max-w-md rounded-xl shadow-2xl p-5 space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-[#E8DCCF]">
-              <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-[#C5A059]" />
-                <h3 className="text-sm font-bold text-[#0A251C] font-serif">
-                  Add New Luxury Brand
-                </h3>
+      {/* TAB 5: COLOR VARIANTS */}
+      {activeTab === "variants" && (
+        <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">
+                Color Variants &amp; SKU Stock
+              </h3>
+              <p className="text-xs text-stone-500">
+                Manage distinct finishes, hardware colors, and individual inventory allocations.
+              </p>
+            </div>
+            <Button
+              type="button"
+              size="sm"
+              onClick={handleAddVariant}
+              className="text-xs bg-[#0A251C] hover:bg-[#143e30] text-[#FAF7F2] cursor-pointer"
+            >
+              <Plus className="w-3.5 h-3.5 mr-1" />
+              <span>Add Variant</span>
+            </Button>
+          </div>
+
+          <div className="space-y-3">
+            {variants.map((v, idx) => (
+              <div
+                key={v.id || idx}
+                className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-xs"
+              >
+                <div className="flex items-center gap-2">
+                  <input
+                    type="color"
+                    value={v.colorHex || "#C5A059"}
+                    onChange={(e) => {
+                      const updated = [...variants];
+                      updated[idx].colorHex = e.target.value;
+                      setVariants(updated);
+                    }}
+                    className="w-7 h-7 rounded border border-stone-300 cursor-pointer p-0.5 bg-white"
+                  />
+                  <input
+                    type="text"
+                    value={v.colorName}
+                    onChange={(e) => {
+                      const updated = [...variants];
+                      updated[idx].colorName = e.target.value;
+                      setVariants(updated);
+                    }}
+                    placeholder="Color Name"
+                    className="w-36 px-2.5 py-1.5 bg-white border border-[#E8DCCF] rounded text-xs text-[#0A251C]"
+                  />
+                </div>
+
+                <div className="flex items-center gap-2 flex-1">
+                  <input
+                    type="text"
+                    value={v.sku}
+                    onChange={(e) => {
+                      const updated = [...variants];
+                      updated[idx].sku = e.target.value;
+                      setVariants(updated);
+                    }}
+                    placeholder="SKU"
+                    className="flex-1 px-2.5 py-1.5 bg-white border border-[#E8DCCF] rounded text-xs font-mono text-[#0A251C]"
+                  />
+                  <div className="flex items-center gap-1">
+                    <span className="text-[11px] text-stone-500">Stock:</span>
+                    <input
+                      type="number"
+                      value={v.stock}
+                      onChange={(e) => {
+                        const updated = [...variants];
+                        updated[idx].stock = Number(e.target.value);
+                        setVariants(updated);
+                      }}
+                      className="w-16 px-2 py-1.5 bg-white border border-[#E8DCCF] rounded text-xs text-center text-[#0A251C]"
+                    />
+                  </div>
+                </div>
+
+                {variants.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveVariant(idx)}
+                    className="p-1.5 text-stone-400 hover:text-rose-600 transition-colors cursor-pointer self-end sm:self-auto"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
               </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Inline Brand Creation */}
+      {showBrandModal && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-[#E8DCCF] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-stone-100">
+              <h3 className="font-bold text-sm text-[#0A251C] font-serif">Add New Luxury Brand</h3>
               <button
                 type="button"
-                onClick={() => setIsAddBrandOpen(false)}
-                className="text-stone-400 hover:text-stone-600 p-1"
+                onClick={() => setShowBrandModal(false)}
+                className="text-stone-400 hover:text-stone-700"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 text-xs">
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
-                  Brand Name *
-                </label>
+                <label className="block font-semibold text-stone-700 mb-1">Brand Name *</label>
                 <input
                   type="text"
                   required
-                  value={newBrandName}
-                  onChange={(e) => setNewBrandName(e.target.value)}
-                  placeholder="e.g. Jacques Marie Mage, Matsuda, Cartier"
-                  className="w-full px-3 py-2 bg-white border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+                  value={newBrand.name}
+                  onChange={(e) => setNewBrand({ ...newBrand, name: e.target.value })}
+                  placeholder="e.g. Maybach Eyewear"
+                  className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-[#0A251C]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
-                  Country of Origin / Atelier Region
-                </label>
+                <label className="block font-semibold text-stone-700 mb-1">Origin / Atelier</label>
                 <input
                   type="text"
-                  value={newBrandOrigin}
-                  onChange={(e) => setNewBrandOrigin(e.target.value)}
-                  placeholder="e.g. France, Japan, Italy, Germany"
-                  className="w-full px-3 py-2 bg-white border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+                  value={newBrand.origin}
+                  onChange={(e) => setNewBrand({ ...newBrand, origin: e.target.value })}
+                  placeholder="e.g. Germany"
+                  className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-[#0A251C]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
-                  Brand Tagline
-                </label>
+                <label className="block font-semibold text-stone-700 mb-1">Brand Tagline</label>
                 <input
                   type="text"
-                  value={newBrandTagline}
-                  onChange={(e) => setNewBrandTagline(e.target.value)}
-                  placeholder="e.g. Haute Lunetterie & Handcrafted Heritage"
-                  className="w-full px-3 py-2 bg-white border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+                  value={newBrand.tagline}
+                  onChange={(e) => setNewBrand({ ...newBrand, tagline: e.target.value })}
+                  placeholder="e.g. Icons of Luxury"
+                  className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-[#0A251C]"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E8DCCF]">
+            <div className="flex justify-end gap-2 pt-2 border-t border-stone-100">
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => setIsAddBrandOpen(false)}
-                className="text-xs bg-white border-stone-300"
+                onClick={() => setShowBrandModal(false)}
+                className="text-xs"
               >
                 Cancel
               </Button>
               <Button
                 type="button"
                 size="sm"
+                onClick={handleCreateBrand}
                 disabled={creatingBrand}
-                onClick={handleCreateBrandSubmit}
                 className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white"
               >
-                {creatingBrand ? (
-                  <>
-                    <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                    <span>Saving...</span>
-                  </>
-                ) : (
-                  <>
-                    <Plus className="w-3 h-3 mr-1" />
-                    <span>Save Brand</span>
-                  </>
-                )}
+                {creatingBrand ? <Loader2 className="w-3 h-3 mr-1 animate-spin" /> : <Plus className="w-3 h-3 mr-1" />}
+                <span>Create Brand</span>
               </Button>
             </div>
           </div>
         </div>
       )}
 
-      {/* INLINE MODAL: ADD CATEGORY */}
-      {isAddCategoryOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-[#FAF7F2] border border-[#E8DCCF] w-full max-w-md rounded-xl shadow-2xl p-5 space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-[#E8DCCF]">
-              <div className="flex items-center gap-2">
-                <FolderPlus className="w-4 h-4 text-[#C5A059]" />
-                <h3 className="text-sm font-bold text-[#0A251C] font-serif">
-                  Add New Eyewear Category
-                </h3>
-              </div>
+      {/* Modal: Inline Category Creation */}
+      {showCatModal && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-[#E8DCCF] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-stone-100">
+              <h3 className="font-bold text-sm text-[#0A251C] font-serif">Add New Eyewear Category</h3>
               <button
                 type="button"
-                onClick={() => setIsAddCategoryOpen(false)}
-                className="text-stone-400 hover:text-stone-600 p-1"
+                onClick={() => setShowCatModal(false)}
+                className="text-stone-400 hover:text-stone-700"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 text-xs">
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
-                  Category Name *
-                </label>
+                <label className="block font-semibold text-stone-700 mb-1">Category Name *</label>
                 <input
                   type="text"
                   required
-                  value={newCategoryName}
-                  onChange={(e) => setNewCategoryName(e.target.value)}
-                  placeholder="e.g. Rimless Luxury, Blue-Light Blocking"
-                  className="w-full px-3 py-2 bg-white border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+                  value={newCat.name}
+                  onChange={(e) => setNewCat({ ...newCat, name: e.target.value })}
+                  placeholder="e.g. Prescription Sunglasses"
+                  className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-[#0A251C]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-stone-700 mb-1">
-                  Description
-                </label>
-                <textarea
-                  rows={2}
-                  value={newCategoryDesc}
-                  onChange={(e) => setNewCategoryDesc(e.target.value)}
-                  placeholder="Description of the category collection..."
-                  className="w-full px-3 py-2 bg-white border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+                <label className="block font-semibold text-stone-700 mb-1">Description</label>
+                <input
+                  type="text"
+                  value={newCat.description}
+                  onChange={(e) => setNewCat({ ...newCat, description: e.target.value })}
+                  placeholder="e.g. Polarized Rx sunglasses with custom optical powers"
+                  className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-[#0A251C]"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#E8DCCF]">
+            <div className="flex justify-end gap-2 pt-2 border-t border-stone-100">
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => setIsAddCategoryOpen(false)}
-                className="text-xs bg-white border-stone-300"
+                onClick={() => setShowCatModal(false)}
+                className="text-xs"
               >
                 Cancel
               </Button>
               <Button
                 type="button"
                 size="sm"
-                disabled={creatingCategory}
-                onClick={handleCreateCategorySubmit}
+                onClick={handleCreateCategory}
+                disabled={creatingCat}
                 className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white"
               >
-                {creatingCategory ? (
-                  <>
-                    <Loader2 className="w-3 h-3 mr-1 animate-spin" />
-                    <span>Saving...</span>
-                  </>
-                ) : (
-                  <>
-                    <Plus className="w-3 h-3 mr-1" />
-                    <span>Save Category</span>
-                  </>
-                )}
+                {creatingCat ? <Loader2 className="w-3 h-3 mr-1 animate-spin" /> : <Plus className="w-3 h-3 mr-1" />}
+                <span>Create Category</span>
               </Button>
             </div>
           </div>
