@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 import { query, getPgPool } from "@/lib/db";
 import { normalizePhoneNumber } from "@/lib/phoneUtils";
+import { resolvePatronName } from "@/lib/patronUtils";
 
 const OTP_PEPPER = process.env.OTP_SECRET_PEPPER || "shivam_optics_super_secure_otp_pepper_2026";
 
@@ -47,43 +48,6 @@ export async function POST(req: Request) {
     );
 
     if (recordRes.rows.length === 0) {
-      // Check if user recently verified within the last 90 seconds (handle double-click or fast re-submits)
-      const recentlyVerifiedRes = await query(
-        `SELECT id FROM public.otp_verifications
-         WHERE phone = $1 AND verified_at > NOW() - INTERVAL '90 seconds'
-         ORDER BY verified_at DESC LIMIT 1;`,
-        [canonicalPhone]
-      );
-
-      if (recentlyVerifiedRes.rows.length > 0) {
-        // Find existing user and return success
-        const profileRes = await query(
-          `SELECT id, full_name, email, phone, role, gem_loyalty_points, created_at
-           FROM public.profiles WHERE phone = $1 LIMIT 1;`,
-          [canonicalPhone]
-        );
-        if (profileRes.rows.length > 0) {
-          const prof = profileRes.rows[0];
-          return NextResponse.json({
-            success: true,
-            message: "Authentication successful",
-            user: {
-              id: prof.id,
-              name: prof.full_name || name || "Valued Patron",
-              email: prof.email || undefined,
-              phone: prof.phone || canonicalPhone,
-              role: prof.role || "customer",
-              joinedDate: new Date(prof.created_at).toLocaleDateString("en-US", { month: "long", year: "numeric" }),
-              gemPoints: prof.gem_loyalty_points ?? 0,
-              phoneVerified: true,
-              savedAddresses: [],
-              savedPrescriptions: [],
-            },
-            orders: [],
-          });
-        }
-      }
-
       return NextResponse.json(
         {
           success: false,
@@ -98,7 +62,7 @@ export async function POST(req: Request) {
     // 4. Check maximum attempts limit
     if (record.attempts >= record.max_attempts) {
       await query(
-        `UPDATE public.otp_verifications SET verified_at = NOW() WHERE id = $1;`,
+        `UPDATE public.otp_verifications SET expires_at = NOW() WHERE id = $1;`,
         [record.id]
       );
       return NextResponse.json(
@@ -142,7 +106,7 @@ export async function POST(req: Request) {
 
       if (remainingAttempts <= 0) {
         await query(
-          `UPDATE public.otp_verifications SET verified_at = NOW() WHERE id = $1;`,
+          `UPDATE public.otp_verifications SET expires_at = NOW() WHERE id = $1;`,
           [record.id]
         );
       }
@@ -158,7 +122,7 @@ export async function POST(req: Request) {
 
     // 7. Atomic Database Transaction:
     // Create/link auth.users + upsert public.profiles + mark OTP verified
-    const userName = name?.trim() || "";
+    const resolvedPatronName = resolvePatronName(name, { phone: canonicalPhone });
     let profile: any = null;
     let pastOrders: any[] = [];
 
@@ -203,7 +167,7 @@ export async function POST(req: Request) {
             NOW(),
             NOW()
           ) RETURNING id;`,
-          [canonicalPhone, userName]
+          [canonicalPhone, resolvedPatronName]
         );
         userId = newAuthRes.rows[0].id;
       }
@@ -227,7 +191,7 @@ export async function POST(req: Request) {
           phone_verification_channel = EXCLUDED.phone_verification_channel,
           updated_at = NOW()
         RETURNING id, full_name, email, phone, role, gem_loyalty_points, created_at;`,
-        [userId, userName || "Valued Patron", canonicalPhone, record.channel]
+        [userId, resolvedPatronName, canonicalPhone, record.channel]
       );
 
       profile = profileUpsertRes.rows[0];
@@ -313,7 +277,7 @@ export async function POST(req: Request) {
       message: "Authentication successful",
       user: {
         id: profile?.id || "patron-shivam",
-        name: profile?.full_name || userName || "Valued Patron",
+        name: profile?.full_name || resolvedPatronName || "Valued Patron",
         email: profile?.email || undefined,
         phone: canonicalPhone,
         role: profile?.role || "customer",

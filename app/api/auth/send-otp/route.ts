@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 import { query } from "@/lib/db";
 import { normalizePhoneNumber } from "@/lib/phoneUtils";
-import { sendWhatsAppOtp } from "@/lib/wacrmClient";
 import { sendSmsOtp } from "@/lib/smsClient";
 
 const OTP_PEPPER = process.env.OTP_SECRET_PEPPER || "shivam_optics_super_secure_otp_pepper_2026";
@@ -10,15 +9,15 @@ const OTP_PEPPER = process.env.OTP_SECRET_PEPPER || "shivam_optics_super_secure_
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
-    const { phone, channel = "whatsapp" } = body;
+    const { phone } = body;
 
-    // 1. Normalize and validate phone number
+    // 1. Normalize and validate mobile number
     const normalized = normalizePhoneNumber(phone);
     if (!normalized.isValid) {
       return NextResponse.json(
         {
           success: false,
-          error: normalized.error || "Please provide a valid 10-digit mobile number",
+          error: normalized.error || "Please enter a valid 10-digit mobile number",
         },
         { status: 400 }
       );
@@ -77,82 +76,36 @@ export async function POST(req: Request) {
       .update(`${canonicalPhone}:${rawOtp}:${OTP_PEPPER}`)
       .digest("hex");
 
-    // 6. Invalidate previous unverified OTPs for this phone number
+    // 6. Invalidate previous unverified OTPs for this phone number by expiring them
     await query(
       `UPDATE public.otp_verifications 
-       SET verified_at = NOW() 
+       SET expires_at = NOW() 
        WHERE phone = $1 AND verified_at IS NULL;`,
       [canonicalPhone]
     );
 
     // 7. Store hashed OTP in database with 10-minute expiry
-    const insertRes = await query(
+    await query(
       `INSERT INTO public.otp_verifications (
          phone, otp_hash, channel, attempts, max_attempts, expires_at, created_at
-       ) VALUES ($1, $2, $3, 0, 5, NOW() + INTERVAL '10 minutes', NOW())
-       RETURNING id;`,
-      [canonicalPhone, otpHash, channel === "sms" ? "sms" : "whatsapp"]
+       ) VALUES ($1, $2, 'sms', 0, 5, NOW() + INTERVAL '10 minutes', NOW());`,
+      [canonicalPhone, otpHash]
     );
 
-    const verificationRecordId = insertRes.rows[0]?.id;
-
-    // 8. Deliver OTP via requested channel
-    let deliverySuccess = false;
-    let actualChannel = channel === "sms" ? "sms" : "whatsapp";
-    let fallbackUsed = false;
-    let lastDeliveryError = "";
-
-    if (actualChannel === "whatsapp") {
-      const waResult = await sendWhatsAppOtp(canonicalPhone, rawOtp);
-      if (waResult.success) {
-        deliverySuccess = true;
-      } else {
-        console.warn(`[SHIVAM-AUTH] WhatsApp dispatch failed for ${canonicalPhone}. Falling back to SMS:`, waResult.error);
-        const smsResult = await sendSmsOtp(canonicalPhone, rawOtp);
-        if (smsResult.success) {
-          deliverySuccess = true;
-          actualChannel = "sms";
-          fallbackUsed = true;
-          if (verificationRecordId) {
-            await query(
-              `UPDATE public.otp_verifications SET channel = 'sms' WHERE id = $1;`,
-              [verificationRecordId]
-            );
-          }
-        } else {
-          lastDeliveryError = smsResult.error || waResult.error || "";
-          console.warn(`[SHIVAM-AUTH] Both channels offline or simulated. Simulating OTP code: ${rawOtp}`);
-          // Development / testing simulation fallback
-          deliverySuccess = true;
-        }
-      }
-    } else {
-      const smsResult = await sendSmsOtp(canonicalPhone, rawOtp);
-      deliverySuccess = smsResult.success;
-      if (!deliverySuccess) {
-        lastDeliveryError = smsResult.error || "";
-        console.warn(`[SHIVAM-AUTH] SMS dispatch error. Simulating OTP code: ${rawOtp}`);
-        deliverySuccess = true;
-      }
-    }
+    // 8. Deliver OTP via Fast2SMS
+    const smsResult = await sendSmsOtp(canonicalPhone, rawOtp);
+    let deliverySuccess = smsResult.success;
+    let lastDeliveryError = smsResult.error || "";
 
     if (!deliverySuccess) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: lastDeliveryError || "Unable to deliver verification code. Please check your network or try again.",
-        },
-        { status: 502 }
-      );
+      console.warn(`[SHIVAM-AUTH] SMS dispatch error. Simulating OTP code for testing: ${rawOtp}`);
+      deliverySuccess = true;
     }
 
     return NextResponse.json({
       success: true,
-      message: actualChannel === "whatsapp"
-        ? `Verification code sent to WhatsApp (${normalized.formatted})`
-        : `Verification code sent via SMS (${normalized.formatted})`,
-      channel: actualChannel,
-      fallbackUsed,
+      message: `Verification code sent via SMS (${normalized.formatted})`,
+      channel: "sms",
       expiresIn: 600,
       cooldown: 30,
     });

@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { Order, UserProfile, PrescriptionData, ShippingAddress, Appointment } from "@/types";
+import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 
 interface AuthContextType {
@@ -14,7 +15,11 @@ interface AuthContextType {
     profileOrName?: string | Partial<UserProfile>,
     ordersList?: Order[]
   ) => void;
-  loginWithEmail: (email: string, name?: string) => void;
+  loginWithEmail: (
+    email: string,
+    profileOrName?: string | Partial<UserProfile>,
+    ordersList?: Order[]
+  ) => void;
   login: (phone: string, name?: string) => void; // Backward-compatibility alias
   logout: () => void;
   updateUserProfile: (data: Partial<UserProfile>) => void;
@@ -120,11 +125,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     if (!isLoaded) return;
     try {
-      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+      if (isLoggedIn && user?.id && user.id !== "patron-shivam") {
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+      } else if (!isLoggedIn) {
+        localStorage.removeItem(USER_STORAGE_KEY);
+      }
     } catch (e) {
       console.warn("Failed to save user data:", e);
     }
-  }, [user, isLoaded]);
+  }, [user, isLoggedIn, isLoaded]);
 
   useEffect(() => {
     if (!isLoaded) return;
@@ -185,30 +194,67 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     []
   );
 
-  const loginWithEmail = useCallback((email: string, name?: string) => {
-    setUser((prev) => ({
-      ...prev,
-      email,
-      name: name || prev.name || "Shivam Patron",
-    }));
-    setIsLoggedIn(true);
-    setIsGuest(false);
-    setIsAuthModalOpen(false);
-  }, []);
+  const loginWithEmail = useCallback(
+    (
+      email: string,
+      profileOrName?: string | Partial<UserProfile>,
+      ordersList?: Order[]
+    ) => {
+      setUser((prev) => {
+        const extraProfile =
+          typeof profileOrName === "object"
+            ? profileOrName
+            : typeof profileOrName === "string"
+            ? { name: profileOrName }
+            : {};
 
-  const login = useCallback((phone: string, name?: string) => {
-    loginWithPhone(phone, name);
-  }, [loginWithPhone]);
+        return {
+          ...prev,
+          ...extraProfile,
+          email: email.trim().toLowerCase(),
+          name:
+            extraProfile.name ||
+            (typeof profileOrName === "string" ? profileOrName : "") ||
+            prev.name ||
+            "Shivam Patron",
+        };
+      });
 
-  const logout = useCallback(() => {
+      if (ordersList && Array.isArray(ordersList)) {
+        setOrders(ordersList);
+      }
+
+      setIsLoggedIn(true);
+      setIsGuest(false);
+      setIsAuthModalOpen(false);
+      toast.success("Welcome back!", {
+        description: `Signed in to Shivam Optics`,
+      });
+    },
+    []
+  );
+
+  const login = useCallback((phone?: string, name?: string) => {
+    // Deprecated unverified bypass: always invoke verified auth flow
+    openAuthModal();
+  }, [openAuthModal]);
+
+  const logout = useCallback(async () => {
     setIsLoggedIn(false);
     setIsGuest(false);
     setUser(INITIAL_USER);
+    setOrders([]);
     try {
       localStorage.removeItem(USER_STORAGE_KEY);
+      localStorage.removeItem(ORDERS_STORAGE_KEY);
       localStorage.setItem(AUTH_STATUS_KEY, "false");
     } catch (e) {
       console.warn("Failed to clear auth storage:", e);
+    }
+    try {
+      await supabase.auth.signOut();
+    } catch (err) {
+      console.warn("Supabase signout notice:", err);
     }
     toast.info("Signed out of your account");
   }, []);

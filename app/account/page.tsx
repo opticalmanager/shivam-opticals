@@ -28,6 +28,7 @@ import { useAuth } from "@/context/AuthContext";
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner";
 import { StoredOrder } from "@/lib/adminDb";
+import { AuthForm } from "@/components/auth/AuthForm";
 
 type AccountTab = "orders" | "prescriptions" | "consultations" | "addresses" | "loyalty";
 
@@ -46,9 +47,6 @@ function AccountDashboard() {
     }
   }, [searchParams]);
 
-  // Sign-in gate state
-  const [phoneInput, setPhoneInput] = useState("");
-  const [nameInput, setNameInput] = useState("");
 
   // Orders state
   const [orders, setOrders] = useState<StoredOrder[]>([]);
@@ -91,83 +89,12 @@ function AccountDashboard() {
     }
   }, [isLoggedIn]);
 
-  const handleSignIn = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phoneInput) {
-      toast.error("Please provide your phone number");
-      return;
-    }
-    login(phoneInput, nameInput || "Patron");
-    toast.success("Welcome back to Shivam Optical Atelier!");
-  };
-
-  // If user is not logged in, render luxury phone verification gate
+  // If user is not logged in, render luxury authentication gate
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen bg-[#FAF7F2] py-16 px-4 sm:px-6">
-        <div className="max-w-md mx-auto bg-white rounded-3xl border border-[#E8DEC8] p-8 sm:p-10 shadow-sm space-y-6">
-          <div className="text-center space-y-2">
-            <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C5A059] block">
-              PATRON ATELIER PRIVILEGE
-            </span>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
-              Access Your Account
-            </h1>
-            <p className="text-xs text-stone-500">
-              Sign in with your phone number to track your optical lab assembly, inspect prescriptions, and manage Mayur Vihar appointments.
-            </p>
-          </div>
-
-          <form onSubmit={handleSignIn} className="space-y-4">
-            <div>
-              <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1">
-                Full Name
-              </label>
-              <input
-                type="text"
-                value={nameInput}
-                onChange={(e) => setNameInput(e.target.value)}
-                placeholder="e.g. Rahul Sharma"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm outline-none focus:border-[#C5A059]"
-              />
-            </div>
-
-            <div>
-              <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1">
-                Mobile Number *
-              </label>
-              <input
-                type="tel"
-                required
-                value={phoneInput}
-                onChange={(e) => setPhoneInput(e.target.value)}
-                placeholder="+91 98765 43210"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm outline-none focus:border-[#C5A059]"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full py-3.5 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-[0.18em] rounded-xl transition cursor-pointer flex items-center justify-center gap-2 shadow-sm"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>CONTINUE TO DASHBOARD</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => openAuthModal()}
-              className="w-full py-3 border border-[#C5A059] bg-[#FAF3EB] hover:bg-[#F4EFEA] text-[#0A251C] text-xs font-bold uppercase tracking-wider rounded-xl transition cursor-pointer flex items-center justify-center gap-2"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#C5A059]" />
-              <span>VERIFY WITH SECURE PHONE OTP</span>
-            </button>
-          </form>
-
-          <div className="pt-2 text-center border-t border-[#E8DEC8]/60 text-[11px] text-stone-400 flex items-center justify-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Encrypted patron authentication under clinical privacy standards.</span>
-          </div>
+        <div className="max-w-md mx-auto bg-[#FCFAF7] rounded-3xl border border-[#E8DEC8] p-6 sm:p-8 shadow-sm">
+          <AuthForm mode="page" returnUrl="/account" />
         </div>
       </div>
     );
@@ -208,7 +135,10 @@ function AccountDashboard() {
               <span>Book Eye Test</span>
             </button>
             <button
-              onClick={logout}
+              onClick={async () => {
+                await logout();
+                router.replace("/login");
+              }}
               className="py-2.5 px-4 bg-white hover:bg-stone-50 border border-stone-300 text-stone-700 text-xs font-bold uppercase tracking-wider rounded-xl transition cursor-pointer flex items-center gap-1.5"
             >
               <LogOut className="w-3.5 h-3.5 text-stone-400" />
