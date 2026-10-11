@@ -26,6 +26,7 @@ import {
   Sliders,
   Bell,
   Camera,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -231,8 +232,8 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       </div>
 
       {/* Sidebar Footer */}
-      <div className="p-3 border-t border-[#E8DCCF] bg-[#FAF3EB] text-xs">
-        <div className="flex items-center justify-between text-[11px] text-stone-500 mb-1.5">
+      <div className="p-3 border-t border-[#E8DCCF] bg-[#FAF3EB] text-xs space-y-2">
+        <div className="flex items-center justify-between text-[11px] text-stone-500">
           <span>Catalog Database</span>
           <span className="text-emerald-700 font-semibold flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -249,6 +250,21 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           <span>Customer Storefront</span>
           <ExternalLink className="w-3 h-3 text-stone-400 ml-auto" />
         </Link>
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              await fetch("/api/admin/auth/logout", { method: "POST" });
+              window.location.href = "/admin/login";
+            } catch {
+              window.location.href = "/admin/login";
+            }
+          }}
+          className="flex items-center justify-center gap-1.5 w-full py-1.5 px-2.5 rounded-md bg-white border border-[#E8DCCF] text-stone-600 hover:text-red-700 hover:border-red-300 text-xs font-medium transition-colors cursor-pointer group"
+        >
+          <LogOut className="w-3.5 h-3.5 text-stone-400 group-hover:text-red-600" />
+          <span>Sign Out Admin</span>
+        </button>
       </div>
     </div>
   );

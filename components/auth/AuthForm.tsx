@@ -38,8 +38,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 
   const [authType, setAuthType] = useState<"signin" | "signup">(initialType);
 
-  // Primary Method: 'phone' by default; switchable to 'email'
-  const [method, setMethod] = useState<"phone" | "email">("phone");
+  // Primary Method: 'email' by default as requested; secondary switchable to 'phone'
+  const [method, setMethod] = useState<"phone" | "email">("email");
   const [step, setStep] = useState<"input" | "verify">("input");
 
   // Form inputs
@@ -76,7 +76,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
     }
   }, [step]);
 
-  // Step 1: Send Verification Code (Phone via SMS or Email via Supabase)
+  // Step 1: Send Verification Code & 1-Click Link
   const handleSendCode = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
@@ -115,7 +115,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         setIsSendingCode(false);
       }
     } else {
-      // Email authentication flow
+      // Email authentication flow (Primary)
       const cleanEmail = email.trim().toLowerCase();
       if (!isValidEmail(cleanEmail)) {
         toast.error("Please enter a valid email address");
@@ -123,6 +123,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({
       }
 
       const inferredName = resolvePatronName(name, { email: cleanEmail });
+      const redirectUrl =
+        typeof window !== "undefined"
+          ? `${window.location.origin}/auth/callback?returnUrl=${encodeURIComponent(targetReturnUrl || "/account")}`
+          : undefined;
 
       setIsSendingCode(true);
       try {
@@ -130,6 +134,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           email: cleanEmail,
           options: {
             shouldCreateUser: true,
+            emailRedirectTo: redirectUrl,
             data: {
               full_name: inferredName,
             },
@@ -144,7 +149,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 
           toast.error("Unable to dispatch verification email", {
             description: isSmtpFailure
-              ? "Supabase SMTP connection failed. Please verify your SMTP host, port, and App Password in Supabase Settings, or sign in with Mobile OTP."
+              ? "Supabase SMTP connection failed. Please check your Supabase SMTP settings or sign in with Mobile OTP."
               : error.message || "Please check your email address and try again.",
           });
           return;
@@ -153,13 +158,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         setVerifiedTarget(cleanEmail);
         setStep("verify");
         setOtp(["", "", "", "", "", ""]);
-        setResendTimer(30);
-        toast.success("Verification code sent to your email", {
-          description: `Sent to ${cleanEmail}. Valid for 10 minutes.`,
+        setResendTimer(45);
+        toast.success("Verification dispatched to your email", {
+          description: `We sent a 6-digit code and a 1-click sign-in link to ${cleanEmail}.`,
         });
       } catch (err: any) {
         console.warn("Supabase Email OTP dispatch error:", err);
-        toast.error("Network error while requesting email code");
+        toast.error("Network error while requesting email verification");
       } finally {
         setIsSendingCode(false);
       }
@@ -221,15 +226,28 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         const cleanEmail = (verifiedTarget || email).trim().toLowerCase();
         const inferredName = resolvePatronName(name, { email: cleanEmail });
 
-        const { data, error } = await supabase.auth.verifyOtp({
+        let { data, error } = await supabase.auth.verifyOtp({
           email: cleanEmail,
           token: fullOtp.trim(),
           type: "email",
         });
 
+        // Fallback: in case Supabase registered user under type 'signup'
+        if (error && (error.message?.toLowerCase().includes("invalid") || error.message?.toLowerCase().includes("expired"))) {
+          const fallbackRes = await supabase.auth.verifyOtp({
+            email: cleanEmail,
+            token: fullOtp.trim(),
+            type: "signup",
+          });
+          if (!fallbackRes.error && fallbackRes.data?.user) {
+            data = fallbackRes.data;
+            error = null;
+          }
+        }
+
         if (error || !data?.user) {
           toast.error("Invalid or expired verification code", {
-            description: error?.message || "Please check the code received in your email.",
+            description: error?.message || "Please check the 6-digit code received in your email or click the link.",
           });
           return;
         }
@@ -254,6 +272,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           email: cleanEmail,
           name: inferredName,
           role: "customer",
+        });
+
+        toast.success("Patron Session Verified", {
+          description: "Welcome to Shivam Optics Atelier.",
         });
 
         if (onSuccess) {
@@ -329,10 +351,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           </button>
 
           <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059] block">
-            TWO-STEP VERIFICATION
+            TWO-WAY VERIFICATION
           </span>
           <h2 className="text-2xl font-serif font-bold text-[#0A251C]">
-            Verify Your Identity
+            {method === "email" ? "Verify Your Email" : "Verify Mobile Number"}
           </h2>
           <p className="text-xs text-stone-600 max-w-sm mx-auto leading-relaxed">
             {method === "phone" ? (
@@ -342,15 +364,29 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               </>
             ) : (
               <>
-                Enter the 6-digit verification code sent to{" "}
+                We sent a 6-digit code <strong className="text-[#0A251C]">and</strong> a 1-click login link to{" "}
                 <span className="font-semibold text-[#0A251C]">{verifiedTarget || email}</span>
               </>
             )}
           </p>
         </div>
 
+        {/* Dual Verification helper notice for Email */}
+        {method === "email" && (
+          <div className="p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#E8DEC8] text-xs space-y-1 text-left">
+            <div className="flex items-center gap-2 font-bold text-[#0A251C]">
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+              <span>Two Ways to Verify:</span>
+            </div>
+            <ul className="text-[11px] text-stone-600 space-y-0.5 list-disc list-inside pl-0.5">
+              <li><strong className="text-stone-800">Enter 6-digit code below</strong> (ideal if logging in on a laptop)</li>
+              <li><strong className="text-stone-800">Or click the 1-click link</strong> inside the email to sign in instantly</li>
+            </ul>
+          </div>
+        )}
+
         {/* 6 Discrete Digit Boxes */}
-        <div className="flex items-center justify-center gap-2 sm:gap-2.5 my-4">
+        <div className="flex items-center justify-center gap-2 sm:gap-2.5 my-3">
           {otp.map((digit, idx) => (
             <input
               key={idx}
@@ -401,7 +437,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               className="font-bold text-[#0A251C] hover:text-[#C5A059] transition flex items-center gap-1 cursor-pointer underline"
             >
               <RotateCcw className="w-3 h-3" />
-              <span>Resend Code</span>
+              <span>Resend {method === "email" ? "Code & Link" : "SMS Code"}</span>
             </button>
           )}
         </div>
@@ -415,9 +451,45 @@ export const AuthForm: React.FC<AuthFormProps> = ({
     );
   }
 
-  // Step 1: Input View (Phone Primary + Email Option)
+  // Step 1: Input View (Industrial Segmented Control + Email Primary)
   return (
     <div className="space-y-6">
+      {/* Industrial Tab Segment: Sign In vs Create Account */}
+      <div className="grid grid-cols-2 p-1 bg-[#FAF7F2] border border-[#E8DEC8] rounded-2xl">
+        <button
+          type="button"
+          onClick={() => {
+            setAuthType("signin");
+            if (mode === "page" && window.location.pathname !== "/login") {
+              router.push(`/login${targetReturnUrl ? `?returnUrl=${encodeURIComponent(targetReturnUrl)}` : ""}`);
+            }
+          }}
+          className={`py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer ${
+            authType === "signin"
+              ? "bg-[#0A251C] text-[#C5A059] shadow-xs"
+              : "text-stone-500 hover:text-[#0A251C]"
+          }`}
+        >
+          Sign In
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setAuthType("signup");
+            if (mode === "page" && window.location.pathname !== "/signup") {
+              router.push(`/signup${targetReturnUrl ? `?returnUrl=${encodeURIComponent(targetReturnUrl)}` : ""}`);
+            }
+          }}
+          className={`py-2.5 text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer ${
+            authType === "signup"
+              ? "bg-[#0A251C] text-[#C5A059] shadow-xs"
+              : "text-stone-500 hover:text-[#0A251C]"
+          }`}
+        >
+          Create Account
+        </button>
+      </div>
+
       {/* Header */}
       <div className="text-center space-y-2">
         <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059] block">
@@ -425,26 +497,26 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         </span>
         <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
           {authType === "signup"
-            ? method === "phone"
-              ? "Register with Mobile"
-              : "Register with Email"
-            : method === "phone"
-            ? "Sign in with Mobile"
-            : "Sign in with Email"}
+            ? method === "email"
+              ? "Register with Email"
+              : "Register with Mobile"
+            : method === "email"
+            ? "Sign in with Email"
+            : "Sign in with Mobile"}
         </h2>
         <p className="text-xs text-stone-500 max-w-sm mx-auto leading-relaxed">
           {authType === "signup"
-            ? method === "phone"
-              ? "Join Shivam Optical Atelier with your mobile number to receive a secure SMS verification code"
-              : "Join Shivam Optical Atelier with your email address for instant digital Rx vault access"
-            : method === "phone"
-            ? "Enter your mobile number to receive a secure SMS verification code"
-            : "Enter your registered email address to receive an instant verification code"}
+            ? method === "email"
+              ? "Join Shivam Optics Atelier with your email to receive an instant verification code & 1-click confirmation link."
+              : "Join Shivam Optics Atelier with your mobile number to receive a secure SMS verification code."
+            : method === "email"
+            ? "Enter your email address to receive an instant 6-digit code and 1-click sign-in link."
+            : "Enter your mobile number to receive a secure SMS verification code."}
         </p>
       </div>
 
       <form onSubmit={handleSendCode} className="space-y-4">
-        {/* Full Name Field (Optional for both Phone and Email) */}
+        {/* Full Name Field (Optional for both Email and Mobile) */}
         <div>
           <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1.5">
             Full Name <span className="text-stone-400 font-normal lowercase">(optional)</span>
@@ -464,8 +536,29 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           </p>
         </div>
 
-        {/* Primary Input based on Method */}
-        {method === "phone" ? (
+        {/* Primary Input: Email First */}
+        {method === "email" ? (
+          <div>
+            <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1.5">
+              Email Address <span className="text-[#0A251C]">*</span>
+            </label>
+            <div className="relative">
+              <Mail className="w-4 h-4 text-[#C5A059] absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="email"
+                required
+                autoFocus
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="patron@example.com"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-[#E8DCCF] text-xs sm:text-sm text-[#0A251C] placeholder:text-stone-400 outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] transition shadow-2xs"
+              />
+            </div>
+            <p className="text-[10px] text-stone-400 mt-1 pl-1">
+              Dispatches both a 6-digit OTP code and a 1-click confirmation link.
+            </p>
+          </div>
+        ) : (
           <div>
             <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1.5">
               Mobile Number <span className="text-[#0A251C]">*</span>
@@ -478,6 +571,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               <input
                 type="tel"
                 required
+                autoFocus
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="98765 43210"
@@ -488,29 +582,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               Instant 6-digit verification code dispatched via SMS.
             </p>
           </div>
-        ) : (
-          <div>
-            <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1.5">
-              Email Address <span className="text-[#0A251C]">*</span>
-            </label>
-            <div className="relative">
-              <Mail className="w-4 h-4 text-[#C5A059] absolute left-3.5 top-1/2 -translate-y-1/2" />
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="patron@example.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-[#E8DCCF] text-xs sm:text-sm text-[#0A251C] placeholder:text-stone-400 outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] transition shadow-2xs"
-              />
-            </div>
-            <p className="text-[10px] text-stone-400 mt-1 pl-1">
-              Secure authentication code sent to your email inbox.
-            </p>
-          </div>
         )}
 
-        {/* Primary Action Button: Send Verification Code */}
+        {/* Primary Action Button */}
         <button
           type="submit"
           disabled={isSendingCode}
@@ -519,11 +593,19 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           {isSendingCode ? (
             <span className="flex items-center gap-2">
               <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
-              <span>Sending Verification Code...</span>
+              <span>Sending Verification...</span>
             </span>
           ) : (
             <span className="flex items-center gap-1.5">
-              <span>{authType === "signup" ? "Create Account & Receive Code" : "Send Verification Code"}</span>
+              <span>
+                {authType === "signup"
+                  ? method === "email"
+                    ? "Create Account & Send Link"
+                    : "Create Account & Send SMS"
+                  : method === "email"
+                  ? "Send Verification Code & Link"
+                  : "Send Mobile Verification Code"}
+              </span>
               <ArrowRight className="w-3.5 h-3.5" />
             </span>
           )}
@@ -541,18 +623,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
       </div>
 
       <div>
-        {method === "phone" ? (
-          <button
-            type="button"
-            onClick={() => {
-              setMethod("email");
-            }}
-            className="w-full py-2.5 px-4 rounded-xl border border-[#E8DCCF] bg-white hover:bg-[#FAF7F2] text-[#0A251C] font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs cursor-pointer hover:border-[#C5A059]"
-          >
-            <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Continue with Email</span>
-          </button>
-        ) : (
+        {method === "email" ? (
           <button
             type="button"
             onClick={() => {
@@ -562,6 +633,17 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           >
             <Smartphone className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>Continue with Mobile Number</span>
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => {
+              setMethod("email");
+            }}
+            className="w-full py-2.5 px-4 rounded-xl border border-[#E8DCCF] bg-white hover:bg-[#FAF7F2] text-[#0A251C] font-semibold text-xs transition-all flex items-center justify-center gap-2 shadow-2xs cursor-pointer hover:border-[#C5A059]"
+          >
+            <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span>Continue with Email (Primary)</span>
           </button>
         )}
       </div>
@@ -578,7 +660,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         </div>
       </div>
 
-      {/* Sign In <-> Sign Up Toggle */}
+      {/* Sign In <-> Sign Up Footer Link */}
       <div className="text-center pt-1 border-t border-[#E8DCCF]/40">
         {authType === "signin" ? (
           <p className="text-xs text-stone-600">

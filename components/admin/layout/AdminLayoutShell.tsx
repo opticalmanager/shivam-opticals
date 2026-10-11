@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 import { AdminSidebar } from "./AdminSidebar";
 import { AdminHeader } from "./AdminHeader";
 
@@ -10,6 +11,12 @@ interface AdminLayoutShellProps {
 
 export const AdminLayoutShell: React.FC<AdminLayoutShellProps> = ({ children }) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const pathname = usePathname();
+
+  // If on admin login page, render full-screen gateway without admin sidebar & header
+  if (pathname === "/admin/login" || pathname === "/login") {
+    return <>{children}</>;
+  }
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#0A251C] flex print:block print:bg-white">
