@@ -348,13 +348,19 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
         )}
       </div>
 
-      {/* 3. Shipping Method */}
+      {/* 3. Shipping Method — Powered by Shiprocket */}
       <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs space-y-4">
-        <div className="flex items-center gap-2">
-          <Truck className="w-4 h-4 text-[#C5A059]" />
-          <h3 className="font-serif font-bold text-[#0A251C] text-base">
-            Shipping & White-Glove Handling
-          </h3>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Truck className="w-4 h-4 text-[#C5A059]" />
+            <h3 className="font-serif font-bold text-[#0A251C] text-base">
+              Delivery Logistics Partner
+            </h3>
+          </div>
+          <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FAF3EB] border border-[#E8DEC8] text-[10px] font-bold uppercase tracking-wider text-[#0A251C]">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span>Shiprocket Verified</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -368,11 +374,11 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
           >
             <div>
               <div className="flex items-center gap-1.5 mb-1">
-                <span className="font-bold text-[#0A251C]">Standard Insured Shipping</span>
+                <span className="font-bold text-[#0A251C]">Shiprocket Standard Surface</span>
               </div>
-              <p className="text-[#716B64]">3-5 Business Days Delivery</p>
+              <p className="text-[#716B64]">3–5 Business Days • Real-time SMS Tracking</p>
               <p className="text-[11px] text-[#C5A059] font-medium mt-1">
-                Estimated: {getEstimatedDeliveryDate(4)}
+                Estimated Delivery: {getEstimatedDeliveryDate(4)}
               </p>
             </div>
             <div className="font-mono font-bold text-xs text-[#0A251C]">
@@ -390,11 +396,11 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
           >
             <div>
               <div className="flex items-center gap-1.5 mb-1">
-                <span className="font-bold text-[#0A251C]">Express Priority Air</span>
+                <span className="font-bold text-[#0A251C]">Shiprocket Priority Air Express</span>
               </div>
-              <p className="text-[#716B64]">1-2 Business Days via BlueDart Air</p>
+              <p className="text-[#716B64]">1–2 Business Days • Insured Express Dispatch</p>
               <p className="text-[11px] text-[#C5A059] font-medium mt-1">
-                Estimated: {getEstimatedDeliveryDate(2)}
+                Estimated Delivery: {getEstimatedDeliveryDate(2)}
               </p>
             </div>
             <div className="font-mono font-bold text-xs text-[#0A251C]">
@@ -404,99 +410,81 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
         </div>
       </div>
 
-      {/* 4. Payment Method */}
+      {/* 4. Payment Method — Razorpay Exclusive */}
       <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs space-y-4">
-        <div className="flex items-center gap-2">
-          <CreditCard className="w-4 h-4 text-[#C5A059]" />
-          <h3 className="font-serif font-bold text-[#0A251C] text-base">
-            Payment Method
-          </h3>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <CreditCard className="w-4 h-4 text-[#C5A059]" />
+            <h3 className="font-serif font-bold text-[#0A251C] text-base">
+              Secure Payment Gateway
+            </h3>
+          </div>
+          <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#16803E]/10 border border-[#16803E]/20 text-[10px] font-bold uppercase tracking-wider text-[#16803E]">
+            <Lock className="w-3 h-3" />
+            <span>256-Bit SSL Encrypted</span>
+          </div>
         </div>
 
-        <div className="space-y-3">
-          {/* Razorpay Option */}
-          <div
-            onClick={() => onPaymentMethodChange("razorpay")}
-            className={`p-4 rounded-xl border text-xs cursor-pointer transition ${
-              paymentMethod === "razorpay"
-                ? "border-[#0A251C] bg-[#FAF7F2] ring-1 ring-[#0A251C]"
-                : "border-[#E8DEC8] hover:border-neutral-400 bg-white"
-            }`}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                  paymentMethod === "razorpay" ? "border-[#0A251C] bg-[#0A251C]" : "border-neutral-400"
-                }`}>
-                  {paymentMethod === "razorpay" && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
-                </div>
-                <span className="font-bold text-[#0A251C]">
-                  Razorpay Secure Gateway (Instant UPI, Cards, Netbanking)
+        {/* Exclusive Razorpay Gateway Card */}
+        <div
+          onClick={() => onPaymentMethodChange("razorpay")}
+          className="p-5 rounded-2xl border border-[#0A251C] bg-[#FAF7F2] ring-1 ring-[#0A251C] cursor-pointer transition shadow-2xs space-y-3"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-5 rounded-full border border-[#0A251C] bg-[#0A251C] flex items-center justify-center shrink-0">
+                <div className="w-2 h-2 bg-[#C5A059] rounded-full" />
+              </div>
+              <div>
+                <span className="font-bold text-sm text-[#0A251C] block">
+                  Razorpay Official Gateway
+                </span>
+                <span className="text-[11px] text-[#716B64]">
+                  Instant UPI (GPay, PhonePe, Paytm), Cards, NetBanking, and Wallets
                 </span>
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803E] bg-[#16803E]/10 px-2 py-0.5 rounded">
-                RECOMMENDED
-              </span>
             </div>
-            <p className="text-[#716B64] mt-1 pl-6 text-[11px]">
-              Instant confirmation, zero transaction fee, bank-grade 256-bit SSL encryption.
-            </p>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803E] bg-[#16803E]/10 border border-[#16803E]/30 px-2.5 py-0.5 rounded-full shrink-0">
+              OFFICIAL INTEGRATION
+            </span>
           </div>
 
-          {/* Cash on Delivery Option */}
-          <div
-            onClick={() => onPaymentMethodChange("cod")}
-            className={`p-4 rounded-xl border text-xs cursor-pointer transition ${
-              paymentMethod === "cod"
-                ? "border-[#0A251C] bg-[#FAF7F2] ring-1 ring-[#0A251C]"
-                : "border-[#E8DEC8] hover:border-neutral-400 bg-white"
-            }`}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                  paymentMethod === "cod" ? "border-[#0A251C] bg-[#0A251C]" : "border-neutral-400"
-                }`}>
-                  {paymentMethod === "cod" && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
-                </div>
-                <span className="font-bold text-[#0A251C]">Cash on Delivery (COD)</span>
-              </div>
-              <span className="text-[10px] text-[#716B64] font-medium">Mayur Vihar Lab Verified</span>
-            </div>
-            <p className="text-[#716B64] mt-1 pl-6 text-[11px]">
-              Pay cash or UPI upon doorstep delivery. Phone verification call is required prior to lab assembly.
-            </p>
+          {/* Supported Methods Badges */}
+          <div className="pt-2 border-t border-[#E8DEC8]/60 flex flex-wrap items-center gap-2 text-[10px] font-semibold text-[#716B64]">
+            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">UPI (GPay / PhonePe / Paytm / BHIM)</span>
+            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">Credit & Debit Cards</span>
+            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">NetBanking (50+ Banks)</span>
+            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">Zero Surcharge</span>
           </div>
         </div>
 
         {/* Submit Pay Button */}
-        <div className="pt-4">
+        <div className="pt-2">
           <button
             type="button"
             disabled={isSubmitting}
             onClick={onSubmitPay}
-            className={`w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition cursor-pointer shadow-sm ${
+            className={`w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition cursor-pointer shadow-md ${
               isSubmitting
                 ? "bg-neutral-300 text-neutral-500 cursor-not-allowed"
-                : "bg-[#0A251C] hover:bg-[#C5A059] text-white hover:text-[#0A251C]"
+                : "bg-[#0A251C] hover:bg-black text-[#C5A059] hover:scale-[1.005]"
             }`}
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Processing Atelier Order...</span>
+                <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
+                <span>Launching Razorpay Secure Window...</span>
               </>
             ) : (
               <>
-                <Lock className="w-4 h-4" />
-                <span>
-                  {paymentMethod === "cod"
-                    ? `Confirm Order (${formatCurrency(totalPayable)})`
-                    : `Pay Securely (${formatCurrency(totalPayable)})`}
-                </span>
+                <Lock className="w-4 h-4 text-[#C5A059]" />
+                <span>Pay Securely via Razorpay ({formatCurrency(totalPayable)})</span>
               </>
             )}
           </button>
+          <p className="text-[11px] text-center text-[#716B64] mt-2">
+            By proceeding, your payment will be securely processed by Razorpay with end-to-end encryption.
+          </p>
         </div>
       </div>
     </div>

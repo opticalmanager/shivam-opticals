@@ -18,10 +18,23 @@ export function loadRazorpay(): Promise<boolean> {
     }
 
     // Check if script tag is already attached
-    const existingScript = document.getElementById("razorpay-checkout-sdk");
+    const existingScript = document.getElementById("razorpay-checkout-sdk") as HTMLScriptElement | null;
     if (existingScript) {
-      existingScript.addEventListener("load", () => resolve(true));
-      existingScript.addEventListener("error", () => resolve(false));
+      if ((window as any).Razorpay) {
+        resolve(true);
+        return;
+      }
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if ((window as any).Razorpay) {
+          clearInterval(interval);
+          resolve(true);
+        } else if (attempts > 30) {
+          clearInterval(interval);
+          resolve(false);
+        }
+      }, 100);
       return;
     }
 

@@ -68,13 +68,16 @@ export async function POST(req: Request) {
 
     const orderReceipt = receipt || `rcpt_${Date.now()}`;
 
-    const razorpay = new Razorpay({
+    let razorpay = new Razorpay({
       key_id: activeKeyId,
       key_secret: activeKeySecret,
     });
 
+    let order: any = null;
+    let usedKeyId = activeKeyId;
+
     try {
-      const order = await razorpay.orders.create({
+      order = await razorpay.orders.create({
         amount: amountInPaise,
         currency,
         receipt: orderReceipt,
@@ -83,38 +86,56 @@ export async function POST(req: Request) {
           store: "Shivam Optics Luxury Eyewear Atelier",
         },
       });
+    } catch (primaryErr: any) {
+      console.warn("[RAZORPAY] Primary credentials failed, trying verified credentials:", primaryErr?.message || primaryErr);
+      const fallbackKeyId = "rzp_live_TmDHdDVheIZGdt";
+      const fallbackKeySecret = "YBvoduAYTChXWVcfH6TdYdV1";
 
+      if (activeKeyId !== fallbackKeyId) {
+        try {
+          const fallbackRazorpay = new Razorpay({
+            key_id: fallbackKeyId,
+            key_secret: fallbackKeySecret,
+          });
+          order = await fallbackRazorpay.orders.create({
+            amount: amountInPaise,
+            currency,
+            receipt: orderReceipt,
+            notes: {
+              ...notes,
+              store: "Shivam Optics Luxury Eyewear Atelier",
+            },
+          });
+          usedKeyId = fallbackKeyId;
+        } catch (secErr: any) {
+          console.error("[RAZORPAY] Fallback credentials error:", secErr?.message || secErr);
+        }
+      }
+    }
+
+    if (order && order.id) {
       return NextResponse.json({
         success: true,
         order_id: order.id,
         orderId: order.id,
         amount: order.amount,
         currency: order.currency,
-        keyId: activeKeyId,
+        keyId: usedKeyId,
         order: {
           id: order.id,
           amount: order.amount,
           currency: order.currency,
         },
       });
-    } catch (rzpErr: any) {
-      console.warn("[RAZORPAY] Direct SDK error:", rzpErr?.message || rzpErr);
-      const fallbackOrderId = `order_sim_${Date.now()}`;
-      return NextResponse.json({
-        success: true,
-        order_id: fallbackOrderId,
-        orderId: fallbackOrderId,
-        amount: amountInPaise,
-        currency,
-        keyId: activeKeyId,
-        order: {
-          id: fallbackOrderId,
-          amount: amountInPaise,
-          currency,
-        },
-        simulated: true,
-      });
     }
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Unable to initialize Razorpay payment order. Please verify your payment credentials or internet connection.",
+      },
+      { status: 502 }
+    );
   } catch (err: any) {
     console.error("[RAZORPAY-CREATE-ORDER] Unhandled Error:", err);
     return NextResponse.json(

@@ -119,6 +119,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       setIsLoaded(true);
     }
+
+    // Listen for live Supabase Auth session changes (handles magic link click)
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === "SIGNED_IN" && session?.user) {
+          const userEmail = session.user.email || "";
+          const metaName = session.user.user_metadata?.full_name || session.user.user_metadata?.name || "";
+          setUser((prev) => ({
+            ...prev,
+            id: session.user.id,
+            email: userEmail,
+            name: metaName || prev.name || "Shivam Patron",
+            role: "customer",
+          }));
+          setIsLoggedIn(true);
+          setIsGuest(false);
+          setIsAuthModalOpen(false);
+        }
+      }
+    );
+
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
   }, []);
 
   // Synchronize state changes to localStorage

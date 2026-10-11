@@ -113,9 +113,7 @@ function CheckoutContent() {
       paymentMethod: orderData.paymentMethod || selectedPaymentMethod,
       paymentId: orderData.paymentId,
       paymentDetails: orderData.paymentDetails,
-      paymentStatus:
-        orderData.paymentStatus ||
-        (orderData.paymentMethod === "cod" ? "unpaid" : "paid"),
+      paymentStatus: orderData.paymentStatus || "paid",
       subtotal: effectiveSubtotal,
       discount: discountAmount,
       couponApplied: appliedCoupon || undefined,
@@ -192,16 +190,7 @@ function CheckoutContent() {
     setIsSubmittingOrder(true);
     const trackingNumber = generateTrackingId();
 
-    // 1. Cash on Delivery Flow
-    if (selectedPaymentMethod === "cod") {
-      await finalizeOrder({
-        paymentMethod: "cod",
-        paymentStatus: "unpaid",
-      });
-      return;
-    }
-
-    // 2. Razorpay Flow
+    // Exclusive Razorpay Gateway Flow
     try {
       const amountInPaise = Math.round(totalPayable * 100);
 
@@ -212,13 +201,14 @@ function CheckoutContent() {
           amount: amountInPaise,
           currency: "INR",
           receipt: trackingNumber,
+          isPaise: true,
           notes: {
             orderNumber: trackingNumber,
             customerName:
               shippingAddress.fullName ||
               `${shippingAddress.firstName} ${shippingAddress.lastName}`.trim(),
-            customerEmail: shippingAddress.email || user.email,
-            customerPhone: shippingAddress.phone || user.phone,
+            customerEmail: shippingAddress.email || user?.email || "",
+            customerPhone: shippingAddress.phone || user?.phone || "",
             shippingMethod,
           },
         }),
@@ -226,10 +216,10 @@ function CheckoutContent() {
 
       const createData = await createRes.json();
 
-      if (!createData.success) {
+      if (!createData.success || !createData.order_id) {
         setIsSubmittingOrder(false);
         toast.error("Payment Gateway Error", {
-          description: createData.error || "Failed to initialize payment gateway order",
+          description: createData.error || "Failed to initialize secure payment order. Please try again.",
         });
         return;
       }
@@ -238,7 +228,7 @@ function CheckoutContent() {
       if (!isLoaded) {
         setIsSubmittingOrder(false);
         toast.error("Payment Gateway Unavailable", {
-          description: "Could not load Razorpay secure checkout. Please check internet connection.",
+          description: "Could not load Razorpay secure checkout SDK. Please verify your connection.",
         });
         return;
       }
@@ -248,15 +238,16 @@ function CheckoutContent() {
         amount: createData.amount,
         currency: createData.currency || "INR",
         name: "Shivam Optics",
-        description: "Designer Eyewear & Precision Lenses Atelier",
-        image: "/logo.png",
+        description: "Designer Eyewear & Clinical Lenses Atelier",
         order_id: createData.order_id,
         prefill: {
           name:
             shippingAddress.fullName ||
-            `${shippingAddress.firstName} ${shippingAddress.lastName}`.trim(),
-          email: shippingAddress.email || user.email || "",
-          contact: shippingAddress.phone || user.phone || "",
+            `${shippingAddress.firstName} ${shippingAddress.lastName}`.trim() ||
+            user?.name ||
+            "",
+          email: shippingAddress.email || user?.email || "",
+          contact: shippingAddress.phone || user?.phone || "",
         },
         theme: {
           color: "#0A251C",
@@ -310,6 +301,17 @@ function CheckoutContent() {
       };
 
       const razorpayInstance = new (window as any).Razorpay(options);
+
+      razorpayInstance.on("payment.failed", function (response: any) {
+        setIsSubmittingOrder(false);
+        toast.error("Payment Failed", {
+          description:
+            response?.error?.description ||
+            response?.error?.reason ||
+            "The transaction could not be processed. Please try again.",
+        });
+      });
+
       razorpayInstance.open();
     } catch (err: any) {
       console.error("Payment initialization failure:", err);
