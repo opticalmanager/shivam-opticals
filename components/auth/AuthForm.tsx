@@ -137,8 +137,15 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         });
 
         if (error) {
+          const isSmtpFailure =
+            error.message?.toLowerCase().includes("confirmation email") ||
+            error.message?.toLowerCase().includes("smtp") ||
+            (error as any).status === 500;
+
           toast.error("Unable to dispatch verification email", {
-            description: error.message || "Please check your email address and try again.",
+            description: isSmtpFailure
+              ? "Supabase SMTP connection failed. Please verify your SMTP host, port, and App Password in Supabase Settings, or sign in with Mobile OTP."
+              : error.message || "Please check your email address and try again.",
           });
           return;
         }
