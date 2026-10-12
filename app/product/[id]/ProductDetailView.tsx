@@ -290,8 +290,8 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Gallery & Accordions (Span 7) */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
-            {/* White Rounded Main Image Card */}
-            <div className="bg-white rounded-2xl border border-[#E8DEC8] w-full min-h-[420px] sm:min-h-[460px] lg:h-[490px] relative flex items-center justify-center p-4 sm:p-6 shadow-xs group overflow-hidden select-none isolate">
+            {/* Spacious Luxury Eyewear Image Stage */}
+            <div className="bg-white rounded-3xl border border-[#E8DEC8] w-full min-h-[480px] sm:min-h-[540px] lg:h-[580px] relative flex items-center justify-center p-6 sm:p-10 shadow-sm group overflow-hidden select-none isolate">
               {/* Top Left Craftsmanship Tag */}
               <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold tracking-widest uppercase bg-[#0A251C] text-white shadow-2xs">
                 <Sparkles className="w-3 h-3 text-[#C5A059]" />
@@ -322,12 +322,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
               )}
 
-              {/* Main Eyewear Image */}
-              <div className="w-full h-full flex items-center justify-center p-2">
+              {/* Main Eyewear Image - Spacious & Full-Canvas Fitted */}
+              <div className="w-full h-full flex items-center justify-center p-2 sm:p-6">
                 <img
-                  src={currentImage}
+                  src={
+                    currentImage.includes("cdn.shopify.com") && !currentImage.includes("width=")
+                      ? `${currentImage}${currentImage.includes("?") ? "&" : "?"}width=1400`
+                      : currentImage
+                  }
                   alt={product.name}
-                  className="w-full h-full max-h-[380px] object-contain filter drop-shadow-sm transition-transform duration-500 group-hover:scale-105 select-none"
+                  className="w-full h-full max-h-[460px] sm:max-h-[500px] object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105 select-none"
                   loading="eager"
                 />
               </div>
@@ -491,7 +495,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
             {/* Price */}
             <div className="font-sans text-[17px] font-normal text-[#1A1816] flex items-center gap-3">
-              <span className="font-bold text-lg text-[#0A251C]">
+              <span className="font-bold text-xl text-[#0A251C]">
                 {formatCurrency(product.price)}
               </span>
               {product.originalPrice && product.originalPrice > product.price && (
@@ -499,11 +503,17 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   {formatCurrency(product.originalPrice)}
                 </span>
               )}
-              {product.discountPct && product.discountPct > 0 && (
-                <span className="px-2 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase">
-                  SAVE {product.discountPct}%
-                </span>
-              )}
+              {(() => {
+                const hasDiscount = Boolean(product.originalPrice && product.originalPrice > product.price);
+                const discount = hasDiscount
+                  ? Math.round(((product.originalPrice! - product.price) / product.originalPrice!) * 100)
+                  : (product.discountPct && product.discountPct > 0 ? product.discountPct : 0);
+                return discount > 0 ? (
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase">
+                    SAVE {discount}%
+                  </span>
+                ) : null;
+              })()}
             </div>
 
             {/* Colorway Variant Selection */}

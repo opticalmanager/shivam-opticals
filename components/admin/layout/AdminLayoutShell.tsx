@@ -14,7 +14,12 @@ export const AdminLayoutShell: React.FC<AdminLayoutShellProps> = ({ children }) 
   const pathname = usePathname();
 
   // If on admin login page, render full-screen gateway without admin sidebar & header
-  if (pathname === "/admin/login" || pathname === "/login") {
+  if (
+    pathname === "/admin/login" ||
+    pathname === "/login" ||
+    pathname?.endsWith("/login") ||
+    pathname?.includes("/login")
+  ) {
     return <>{children}</>;
   }
 

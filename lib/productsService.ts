@@ -41,14 +41,63 @@ function mapRowToProduct(row: any): Product {
       ? [row.img]
       : ["/images/placeholder.jpg"];
 
+  const price = Number(row.base_price || row.price || localMatch?.price || 0);
+  const originalPrice = row.original_price ? Number(row.original_price) : localMatch?.originalPrice;
+  const calculatedDiscountPct =
+    originalPrice && originalPrice > price
+      ? Math.round(((originalPrice - price) / originalPrice) * 100)
+      : row.discount_pct || localMatch?.discountPct;
+
+  const mappedVariants: ProductVariant[] =
+    row.product_variants && row.product_variants.length > 0
+      ? row.product_variants.map((v: any) => {
+          const variantImgObj = (row.product_images || []).find((img: any) => img.variant_id === v.id);
+          const rawVarUrl = variantImgObj?.url || variantImgObj?.image_url;
+          const validVarImg =
+            rawVarUrl && (rawVarUrl.startsWith("/") || rawVarUrl.startsWith("http"))
+              ? rawVarUrl.trim()
+              : resolvedImages[0];
+
+          return {
+            id: v.id,
+            colorName: (v.color_name || "").replace(/\s+/g, " ").trim(),
+            colorHex: v.color_hex || "#1A1A1A",
+            image: validVarImg,
+            inStock: v.stock_quantity > 0,
+          };
+        })
+      : row.color_variants && row.color_variants.length > 0
+      ? row.color_variants.map((cv: any, cIdx: number) => ({
+          id: cv.id || `var-${row.slug || row.id}-${cIdx}`,
+          colorName: (cv.colorName || "").replace(/\s+/g, " ").trim(),
+          colorHex: cv.colorHex || "#1A1A1A",
+          image: cv.featuredImage || cv.gallery?.[0] || resolvedImages[0],
+          inStock: cv.available !== false,
+        }))
+      : (localMatch?.variants || []).map((v: any) => ({
+          ...v,
+          colorName: (v.colorName || "").replace(/\s+/g, " ").trim(),
+        }));
+
+  // Derive distinct color hex values from variants or product row
+  const variantColorHexes = mappedVariants
+    .map((v) => v.colorHex)
+    .filter((hex): hex is string => Boolean(hex && typeof hex === "string" && hex.startsWith("#")));
+
+  const distinctColors = Array.from(new Set(variantColorHexes));
+  const resolvedColors =
+    distinctColors.length > 0
+      ? distinctColors
+      : row.colors || localMatch?.colors || (row.color_hex ? [row.color_hex] : ["#1A1A1A"]);
+
   return {
     id: row.slug || row.id,
     brand: row.brand?.name || localMatch?.brand || "Shivam Optics",
     name: row.name,
     subtitle: row.subtitle || localMatch?.subtitle,
-    price: Number(row.base_price || row.price || localMatch?.price || 0),
-    originalPrice: row.original_price ? Number(row.original_price) : localMatch?.originalPrice,
-    discountPct: row.discount_pct || localMatch?.discountPct,
+    price,
+    originalPrice,
+    discountPct: calculatedDiscountPct,
     category: row.category?.slug || row.category || localMatch?.category || "sunglasses",
     type: row.type || localMatch?.type || "sunglasses",
     gender: (row.gender || localMatch?.gender || "unisex") as any,
@@ -57,7 +106,7 @@ function mapRowToProduct(row: any): Product {
     material: (row.material || localMatch?.material || "acetate") as any,
     color: row.color || localMatch?.color || "Black",
     colorHex: row.color_hex || localMatch?.colorHex || "#1A1A1A",
-    colors: row.colors || localMatch?.colors || ["Black"],
+    colors: resolvedColors,
     lensProperties: row.lens_properties || localMatch?.lensProperties || ["uv-protection"],
     size: row.size || localMatch?.size || "M",
     isNewArrival: Boolean(row.is_new_arrival ?? localMatch?.isNewArrival),
@@ -88,36 +137,7 @@ function mapRowToProduct(row: any): Product {
       colorName: (cv.colorName || "").replace(/\s+/g, " ").trim(),
     })),
     sourceUrl: row.source_url || localMatch?.sourceUrl,
-    variants:
-      row.product_variants && row.product_variants.length > 0
-        ? row.product_variants.map((v: any) => {
-            const variantImgObj = (row.product_images || []).find((img: any) => img.variant_id === v.id);
-            const rawVarUrl = variantImgObj?.url || variantImgObj?.image_url;
-            const validVarImg =
-              rawVarUrl && (rawVarUrl.startsWith("/") || rawVarUrl.startsWith("http"))
-                ? rawVarUrl.trim()
-                : resolvedImages[0];
-
-            return {
-              id: v.id,
-              colorName: (v.color_name || "").replace(/\s+/g, " ").trim(),
-              colorHex: v.color_hex,
-              image: validVarImg,
-              inStock: v.stock_quantity > 0,
-            };
-          })
-        : row.color_variants && row.color_variants.length > 0
-        ? row.color_variants.map((cv: any, cIdx: number) => ({
-            id: cv.id || `var-${row.slug || row.id}-${cIdx}`,
-            colorName: (cv.colorName || "").replace(/\s+/g, " ").trim(),
-            colorHex: cv.colorHex || "#1A1A1A",
-            image: cv.featuredImage || cv.gallery?.[0] || resolvedImages[0],
-            inStock: cv.available !== false,
-          }))
-        : (localMatch?.variants || []).map((v: any) => ({
-            ...v,
-            colorName: (v.colorName || "").replace(/\s+/g, " ").trim(),
-          })),
+    variants: mappedVariants,
     tryOnEnabled: row.try_on_enabled ?? localMatch?.tryOnEnabled ?? false,
     tryOnModelUrl: row.try_on_model_url || localMatch?.tryOnModelUrl,
     tryOnConfig: row.try_on_configuration || localMatch?.tryOnConfig,

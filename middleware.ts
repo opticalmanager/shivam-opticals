@@ -75,11 +75,11 @@ export async function middleware(req: NextRequest) {
   // SCENARIO 1: Request arrives on admin.shivamoptical.in
   // =========================================================================
   if (isAdminSubdomain) {
-    // If accessing root "/" on admin subdomain -> point to /admin
+    // If accessing root "/" on admin subdomain
     if (pathname === "/") {
       if (!isAuthenticatedAdmin) {
-        url.pathname = "/admin/login";
-        return NextResponse.rewrite(url);
+        url.pathname = "/login";
+        return NextResponse.redirect(url);
       }
       url.pathname = "/admin";
       return NextResponse.rewrite(url);
@@ -95,31 +95,33 @@ export async function middleware(req: NextRequest) {
       return NextResponse.rewrite(url);
     }
 
+    // If accessing direct "/admin/login" on admin subdomain, normalize to clean "/login"
+    if (pathname === "/admin/login") {
+      if (isAuthenticatedAdmin) {
+        url.pathname = "/admin";
+        return NextResponse.redirect(url);
+      }
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
+
     // Rewrite clean paths like "/orders" -> "/admin/orders" if not starting with /admin or /api
     if (!pathname.startsWith("/admin") && !pathname.startsWith("/api") && !pathname.startsWith("/_next")) {
-      url.pathname = `/admin${pathname}`;
-      
-      // If not authenticated and not the login route -> redirect to login
-      if (!isAuthenticatedAdmin && url.pathname !== "/admin/login") {
-        url.pathname = "/admin/login";
+      // If not authenticated -> redirect to clean /login
+      if (!isAuthenticatedAdmin) {
+        url.pathname = "/login";
         url.searchParams.set("returnUrl", pathname);
         return NextResponse.redirect(url);
       }
+      url.pathname = `/admin${pathname}`;
       return NextResponse.rewrite(url);
     }
 
     // If explicit path /admin/* on admin subdomain
     if (pathname.startsWith("/admin")) {
-      const isLoginRoute = pathname === "/admin/login";
-
-      if (isLoginRoute && isAuthenticatedAdmin) {
-        url.pathname = "/admin";
-        return NextResponse.redirect(url);
-      }
-
-      if (!isLoginRoute && !isAuthenticatedAdmin) {
-        url.pathname = "/admin/login";
-        url.searchParams.set("returnUrl", pathname);
+      if (!isAuthenticatedAdmin) {
+        url.pathname = "/login";
+        url.searchParams.set("returnUrl", pathname.replace(/^\/admin/, "") || "/");
         return NextResponse.redirect(url);
       }
 
