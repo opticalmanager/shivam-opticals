@@ -160,7 +160,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         activeEl.scrollIntoView({
           behavior: "smooth",
           block: "nearest",
-          inline: "center",
+          inline: "nearest",
         });
       }
     }
@@ -294,78 +294,24 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Gallery & Accordions (Span 7) */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
-            {/* Spacious Luxury Eyewear Image Stage */}
-            <div className="bg-white rounded-3xl border border-[#E8DEC8] w-full min-h-[480px] sm:min-h-[540px] lg:h-[580px] relative flex items-center justify-center p-6 sm:p-10 shadow-sm group overflow-hidden select-none isolate">
-              {/* Top Left Craftsmanship Tag */}
-              <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold tracking-widest uppercase bg-[#0A251C] text-white shadow-2xs">
-                <Sparkles className="w-3 h-3 text-[#C5A059]" />
-                <span>HAUTE LUNETTERIE</span>
-              </div>
-
-              {/* Floating Wishlist Heart Button */}
-              <button
-                onClick={() => toggleWishlist(product.id)}
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-[#E8DEC8] text-[#1A1816] flex items-center justify-center shadow-xs transition-all duration-200 cursor-pointer hover:scale-105 z-20"
-                aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
-              >
-                <Heart
-                  className={`w-4 h-4 transition-colors ${
-                    saved ? "fill-red-500 text-red-500" : "text-neutral-400 hover:text-red-500"
-                  }`}
-                />
-              </button>
-
-              {/* Left Carousel Arrow */}
+            {/* Gallery Showcase: Vertical Thumbnails on Left + Fitted Main Hero Image on Right */}
+            <div className="flex flex-col-reverse sm:flex-row gap-3 lg:gap-4 items-start w-full">
+              {/* Left Column: Thumbnails (Horizontal on Mobile, Vertical Rail on sm+) */}
               {imagesToDisplay.length > 1 && (
-                <button
-                  onClick={handlePrevImage}
-                  className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-[#E8DEC8] text-[#1A1816] flex items-center justify-center shadow-xs transition-all duration-200 cursor-pointer hover:scale-105 opacity-80 group-hover:opacity-100 z-10"
-                  aria-label="Previous view angle"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-              )}
-
-              {/* Main Eyewear Image - Spacious & Full-Canvas Fitted */}
-              {/* Main Eyewear Image - Pristine Ultra-HD Quality & Full-Canvas Fitted */}
-              <div className="w-full h-full flex items-center justify-center p-2 sm:p-6">
-                <img
-                  src={getHdImageUrl(currentImage)}
-                  alt={product.name}
-                  className="w-full h-full max-h-[480px] sm:max-h-[520px] object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105 select-none"
-                  loading="eager"
-                  style={{ imageRendering: "-webkit-optimize-contrast" }}
-                />
-              </div>
-
-              {/* Right Carousel Arrow */}
-              {imagesToDisplay.length > 1 && (
-                <button
-                  onClick={handleNextImage}
-                  className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-[#E8DEC8] text-[#1A1816] flex items-center justify-center shadow-xs transition-all duration-200 cursor-pointer hover:scale-105 opacity-80 group-hover:opacity-100 z-10"
-                  aria-label="Next view angle"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-
-            {/* Horizontal Thumbnail Gallery */}
-            {imagesToDisplay.length > 1 && (
-              <div className="space-y-2 select-none">
                 <div
                   ref={thumbnailContainerRef}
-                  className="flex items-center gap-2 overflow-x-auto py-1 scroll-smooth scrollbar-none"
+                  className="w-full sm:w-20 shrink-0 flex flex-row sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto max-h-[440px] lg:max-h-[480px] scrollbar-none py-1 sm:py-0 select-none"
                 >
                   {imagesToDisplay.map((imgUrl, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActiveImgIdx(idx)}
-                      className={`relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl bg-white border p-1 transition-all cursor-pointer flex items-center justify-center overflow-hidden ${
+                      className={`relative w-14 h-14 sm:w-20 sm:h-20 shrink-0 rounded-xl bg-white border p-1 transition-all cursor-pointer flex items-center justify-center overflow-hidden ${
                         activeImgIdx === idx
-                          ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 shadow-xs scale-102"
+                          ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 shadow-xs"
                           : "border-[#E8DEC8] hover:border-neutral-400 opacity-80 hover:opacity-100"
                       }`}
+                      aria-label={`View angle ${idx + 1}`}
                     >
                       <img
                         src={imgUrl}
@@ -376,27 +322,70 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     </button>
                   ))}
                 </div>
+              )}
 
-                {/* View Angle Counter */}
-                <div className="flex items-center justify-between text-[11px] text-[#716B64] px-1">
-                  <span>
-                    Angle {activeImgIdx + 1} of {imagesToDisplay.length}
-                  </span>
-                  <div className="flex items-center gap-1">
-                    {imagesToDisplay.map((_, idx) => (
-                      <span
-                        key={idx}
-                        className={`rounded-full transition-all ${
-                          activeImgIdx === idx
-                            ? "w-2.5 h-2.5 bg-[#0A251C]"
-                            : "w-1.5 h-1.5 bg-neutral-300"
-                        }`}
-                      />
-                    ))}
-                  </div>
+              {/* Right Column: Main Hero Eyewear Image Stage */}
+              <div className="bg-white rounded-2xl border border-[#E8DEC8] flex-1 w-full h-[380px] sm:h-[440px] lg:h-[480px] relative flex items-center justify-center p-4 sm:p-6 shadow-xs group overflow-hidden select-none isolate">
+                {/* Top Left Craftsmanship Tag */}
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold tracking-widest uppercase bg-[#0A251C] text-white shadow-2xs">
+                  <Sparkles className="w-3 h-3 text-[#C5A059]" />
+                  <span>HAUTE LUNETTERIE</span>
                 </div>
+
+                {/* Floating Wishlist Heart Button */}
+                <button
+                  onClick={() => toggleWishlist(product.id)}
+                  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-[#E8DEC8] text-[#1A1816] flex items-center justify-center shadow-xs transition-all duration-200 cursor-pointer hover:scale-105 z-20"
+                  aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
+                >
+                  <Heart
+                    className={`w-4 h-4 transition-colors ${
+                      saved ? "fill-red-500 text-red-500" : "text-neutral-400 hover:text-red-500"
+                    }`}
+                  />
+                </button>
+
+                {/* Left Carousel Arrow */}
+                {imagesToDisplay.length > 1 && (
+                  <button
+                    onClick={handlePrevImage}
+                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-[#E8DEC8] text-[#1A1816] flex items-center justify-center shadow-xs transition-all duration-200 cursor-pointer hover:scale-105 opacity-80 group-hover:opacity-100 z-10"
+                    aria-label="Previous view angle"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                )}
+
+                {/* Main Eyewear Image - Pristine Ultra-HD Quality & Cleanly Fitted */}
+                <div className="w-full h-full flex items-center justify-center p-2 sm:p-4">
+                  <img
+                    src={getHdImageUrl(currentImage)}
+                    alt={product.name}
+                    className="w-full h-full max-h-[340px] sm:max-h-[400px] object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105 select-none"
+                    loading="eager"
+                    style={{ imageRendering: "-webkit-optimize-contrast" }}
+                  />
+                </div>
+
+                {/* Right Carousel Arrow */}
+                {imagesToDisplay.length > 1 && (
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white border border-[#E8DEC8] text-[#1A1816] flex items-center justify-center shadow-xs transition-all duration-200 cursor-pointer hover:scale-105 opacity-80 group-hover:opacity-100 z-10"
+                    aria-label="Next view angle"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                )}
+
+                {/* View Angle Counter Indicator */}
+                {imagesToDisplay.length > 1 && (
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 px-2.5 py-1 rounded-full bg-white/85 backdrop-blur-xs border border-[#E8DEC8] text-[10px] text-[#716B64] font-medium flex items-center gap-1.5 shadow-2xs">
+                    <span>Angle {activeImgIdx + 1} of {imagesToDisplay.length}</span>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
 
             {/* Information Accordions */}
             <div className="border-t border-[#E8DEC8] divide-y divide-[#E8DEC8] pt-2">
