@@ -25,7 +25,6 @@ import {
   Shield,
   Sliders,
   Bell,
-  Camera,
   LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -85,7 +84,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         { label: "Discounts", href: "/admin/discounts", icon: Percent },
         { label: "Appointments", href: "/admin/appointments", icon: Calendar },
         { label: "Marketing", href: "/admin/marketing", icon: Megaphone },
-        { label: "3D VTO Calibrator", href: "/admin/try-on-calibrator", icon: Camera },
       ],
     },
     {

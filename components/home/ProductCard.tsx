@@ -2,12 +2,11 @@
 
 import React, { useMemo } from "react";
 import Link from "next/link";
-import { Heart, ShoppingBag, Camera } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 import { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { formatCurrency } from "@/lib/utils";
-import { hasTryOnModel } from "@/lib/try-on/products/TryOnProductConfig";
 
 interface ProductCardProps {
   product: Product;
@@ -75,46 +74,33 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className="product-card group bg-white border border-[#E8DEC8] hover:border-[#C5A059]/60 rounded-2xl flex flex-col justify-between overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative select-none">
-      {/* Upper Card Area */}
-      <div className="p-3.5 sm:p-4 pb-2 flex flex-col items-center">
-        {/* Top Header: Actions & Dynamic Discount Pill */}
-        <div className="w-full flex items-center justify-between mb-1.5 z-10">
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={handleToggleWishlist}
-              className="w-7 h-7 rounded-full border border-[#E8DEC8] bg-white/95 hover:bg-white flex items-center justify-center text-neutral-400 hover:text-red-500 transition shadow-xs cursor-pointer"
-              title={isSaved ? "Remove from Wishlist" : "Save to Wishlist"}
-              aria-label="Wishlist toggle"
-            >
-              <Heart
-                className={`w-3.5 h-3.5 ${
-                  isSaved ? "fill-red-500 text-red-500" : "text-neutral-400"
-                }`}
-              />
-            </button>
-            {hasTryOnModel(product) && (
-              <span
-                className="px-2 py-0.5 rounded-full bg-[#0A251C] text-[#C5A059] text-[9px] font-bold tracking-wider uppercase shadow-2xs flex items-center gap-1"
-                title="3D Virtual Try-On Available"
-              >
-                <Camera className="w-2.5 h-2.5 text-[#C5A059]" />
-                <span>3D</span>
-              </span>
-            )}
-          </div>
+      {/* Upper Space: Image Canvas with Overlaid Discount Badge and Heart Icon */}
+      <div className="relative w-full h-48 sm:h-52 bg-[#FAF7F2]/60 flex items-center justify-center p-3 sm:p-4 overflow-hidden border-b border-[#E8DEC8]/60">
+        {/* Dynamic Discount Badge (Overlaid Top-Left) */}
+        {discountPct > 0 && (
+          <span className="absolute top-2.5 left-2.5 z-10 px-2.5 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase shadow-xs pointer-events-none">
+            SAVE {discountPct}%
+          </span>
+        )}
 
-          {/* Dynamic Real Discount Badge */}
-          {discountPct > 0 && (
-            <span className="px-2.5 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase shadow-xs">
-              SAVE {discountPct}%
-            </span>
-          )}
-        </div>
+        {/* Wishlist Heart Icon (Overlaid Top-Right) */}
+        <button
+          onClick={handleToggleWishlist}
+          className="absolute top-2.5 right-2.5 z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#E8DEC8] bg-white/95 hover:bg-white flex items-center justify-center text-neutral-400 hover:text-red-500 transition shadow-xs cursor-pointer hover:scale-105"
+          title={isSaved ? "Remove from Wishlist" : "Save to Wishlist"}
+          aria-label="Wishlist toggle"
+        >
+          <Heart
+            className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
+              isSaved ? "fill-red-500 text-red-500" : "text-neutral-400"
+            }`}
+          />
+        </button>
 
-        {/* Spacious Eyewear Image Stage (Generous breathing room, no cramped box) */}
+        {/* Eyewear Image Perfectly Centered & Fitting the Canvas */}
         <Link
           href={`/product/${product.id}`}
-          className="w-full h-44 sm:h-48 flex items-center justify-center p-2 sm:p-3 my-1 relative overflow-hidden cursor-pointer bg-transparent block"
+          className="w-full h-full flex items-center justify-center cursor-pointer"
         >
           <img
             src={displayImg}
@@ -123,60 +109,65 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
             }}
-            className="max-h-full max-w-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-500 ease-out"
+            className="w-full h-full max-h-full max-w-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         </Link>
+      </div>
 
-        {/* Brand Header */}
-        <div className="text-[10px] font-semibold tracking-[0.25em] text-[#6B7280] uppercase mt-1.5 text-center">
-          {product.brand}
-        </div>
+      {/* Lower Space: Product Details */}
+      <div className="p-3 sm:p-4 pt-3 flex flex-col flex-1 justify-between">
+        <div className="flex flex-col items-center text-center">
+          {/* Brand Header */}
+          <div className="text-[10px] font-semibold tracking-[0.25em] text-[#6B7280] uppercase mb-0.5">
+            {product.brand}
+          </div>
 
-        {/* Product Model Name */}
-        <Link href={`/product/${product.id}`} className="block text-center w-full">
-          <h4
-            className="text-sm font-bold text-[#1A1816] tracking-wide mt-0.5 text-center truncate w-full hover:text-[#C5A059] transition cursor-pointer"
-            title={product.name}
-          >
-            {product.name}
-          </h4>
-        </Link>
+          {/* Product Model Name */}
+          <Link href={`/product/${product.id}`} className="block text-center w-full">
+            <h4
+              className="text-xs sm:text-sm font-bold text-[#1A1816] tracking-wide text-center truncate w-full hover:text-[#C5A059] transition cursor-pointer"
+              title={product.name}
+            >
+              {product.name}
+            </h4>
+          </Link>
 
-        {/* Price Row: Real Base Price and Strikethrough Original Price */}
-        <div className="flex items-center justify-center gap-2 mt-1.5 flex-wrap">
-          <span className="text-xs text-[#6B7280]">From</span>
-          <span className="text-xs sm:text-sm font-bold text-[#16803E]">
-            {formatCurrency(product.price)}
-          </span>
-          {hasRealDiscount && (
-            <span className="text-xs text-[#DD2E2E] line-through font-normal">
-              {formatCurrency(product.originalPrice!)}
+          {/* Price Row: Real Selling Price and Strikethrough Original Price */}
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-1.5 flex-wrap">
+            <span className="text-[11px] sm:text-xs text-[#6B7280]">From</span>
+            <span className="text-xs sm:text-sm font-bold text-[#16803E]">
+              {formatCurrency(product.price)}
             </span>
-          )}
-        </div>
+            {hasRealDiscount && (
+              <span className="text-[11px] sm:text-xs text-[#DD2E2E] line-through font-normal">
+                {formatCurrency(product.originalPrice!)}
+              </span>
+            )}
+          </div>
 
-        {/* Colors Row: Swatches & Accurate Count */}
-        <div className="flex flex-col items-center gap-1 mt-2 mb-1">
-          {availableVariants.length > 1 && (
-            <div className="flex items-center gap-1.5 justify-center flex-wrap max-w-full">
-              {availableVariants.slice(0, 5).map((v, idx) => (
-                <span
-                  key={v.id || idx}
-                  className="w-2.5 h-2.5 rounded-full border border-neutral-300 shadow-2xs shrink-0"
-                  style={{ backgroundColor: v.colorHex || "#1A1816" }}
-                  title={v.colorName}
-                />
-              ))}
-              {availableVariants.length > 5 && (
-                <span className="text-[9px] text-[#6B7280] font-mono font-medium">
-                  +{availableVariants.length - 5}
-                </span>
-              )}
-            </div>
-          )}
-          <span className="text-[11px] text-[#6B7280] text-center">
-            Available in {totalColors} {totalColors === 1 ? "Colour" : "Colours"}
-          </span>
+          {/* Colors Row: Swatches & Accurate Count */}
+          <div className="flex flex-col items-center gap-1 mt-1.5 mb-0.5">
+            {availableVariants.length > 1 && (
+              <div className="flex items-center gap-1.5 justify-center flex-wrap max-w-full">
+                {availableVariants.slice(0, 5).map((v, idx) => (
+                  <span
+                    key={v.id || idx}
+                    className="w-2.5 h-2.5 rounded-full border border-neutral-300 shadow-2xs shrink-0"
+                    style={{ backgroundColor: v.colorHex || "#1A1816" }}
+                    title={v.colorName}
+                  />
+                ))}
+                {availableVariants.length > 5 && (
+                  <span className="text-[9px] text-[#6B7280] font-mono font-medium">
+                    +{availableVariants.length - 5}
+                  </span>
+                )}
+              </div>
+            )}
+            <span className="text-[10px] sm:text-[11px] text-[#6B7280]">
+              Available in {totalColors} {totalColors === 1 ? "Colour" : "Colours"}
+            </span>
+          </div>
         </div>
       </div>
 

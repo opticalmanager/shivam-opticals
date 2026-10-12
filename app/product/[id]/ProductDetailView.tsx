@@ -17,7 +17,6 @@ import {
   Minus,
   MessageCircle,
   Share2,
-  Camera,
   Sparkles,
 } from "lucide-react";
 import { Product, ProductVariant, SelectedLensConfig } from "@/types";
@@ -27,9 +26,7 @@ import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner";
 import { ProductCard } from "@/components/home/ProductCard";
 import { LensCustomizerModal } from "@/components/optical/LensCustomizerModal";
-import { VirtualTryOnModal } from "@/components/optical/VirtualTryOnModal";
 import { PincodeEstimator } from "@/components/product/PincodeEstimator";
-import { hasTryOnModel } from "@/lib/try-on/products/TryOnProductConfig";
 
 interface ProductDetailViewProps {
   product: Product;
@@ -46,7 +43,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const [activeImgIdx, setActiveImgIdx] = useState(0);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [copiedCoupon, setCopiedCoupon] = useState(false);
-  const [isTryOnOpen, setIsTryOnOpen] = useState(false);
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
 
   // Reset indices when product changes
@@ -170,20 +166,28 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     }
   }, [activeImgIdx]);
 
-  // Preload secondary images in background
+  const getHdImageUrl = useCallback((url?: string): string => {
+    if (!url || typeof url !== "string") return "/images/placeholder.jpg";
+    let clean = url.trim();
+    if (clean.includes("cdn.shopify.com")) {
+      clean = clean.replace(/_([0-9]+x[0-9]*|_compact|_medium|_grande|_large)/g, "");
+      const sep = clean.includes("?") ? "&" : "?";
+      return `${clean}${sep}width=2048&quality=95`;
+    }
+    return clean;
+  }, []);
+
+  // Preload secondary images in pristine HD background
   useEffect(() => {
     if (typeof window !== "undefined" && imagesToDisplay.length > 1) {
       imagesToDisplay.slice(1).forEach((imgUrl) => {
         if (!imgUrl) return;
-        const targetSrc =
-          imgUrl.includes("cdn.shopify.com") && !imgUrl.includes("width=")
-            ? `${imgUrl}${imgUrl.includes("?") ? "&" : "?"}width=1000`
-            : imgUrl;
+        const targetSrc = getHdImageUrl(imgUrl);
         const preloader = new window.Image();
         preloader.src = targetSrc;
       });
     }
-  }, [imagesToDisplay]);
+  }, [imagesToDisplay, getHdImageUrl]);
 
   const handlePrevImage = useCallback(() => {
     setActiveImgIdx((prev) => (prev > 0 ? prev - 1 : imagesToDisplay.length - 1));
@@ -323,16 +327,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               )}
 
               {/* Main Eyewear Image - Spacious & Full-Canvas Fitted */}
+              {/* Main Eyewear Image - Pristine Ultra-HD Quality & Full-Canvas Fitted */}
               <div className="w-full h-full flex items-center justify-center p-2 sm:p-6">
                 <img
-                  src={
-                    currentImage.includes("cdn.shopify.com") && !currentImage.includes("width=")
-                      ? `${currentImage}${currentImage.includes("?") ? "&" : "?"}width=1400`
-                      : currentImage
-                  }
+                  src={getHdImageUrl(currentImage)}
                   alt={product.name}
-                  className="w-full h-full max-h-[460px] sm:max-h-[500px] object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105 select-none"
+                  className="w-full h-full max-h-[480px] sm:max-h-[520px] object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105 select-none"
                   loading="eager"
+                  style={{ imageRendering: "-webkit-optimize-contrast" }}
                 />
               </div>
 
@@ -344,18 +346,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   aria-label="Next view angle"
                 >
                   <ChevronRight className="w-4 h-4" />
-                </button>
-              )}
-
-              {/* 3D Virtual Try-On Badge */}
-              {hasTryOnModel(product) && (
-                <button
-                  type="button"
-                  onClick={() => setIsTryOnOpen(true)}
-                  className="absolute bottom-4 right-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-[#0A251C]/90 hover:bg-[#0A251C] text-[#C5A059] border border-[#C5A059]/40 backdrop-blur-md shadow-md transition-all cursor-pointer hover:scale-105"
-                >
-                  <Camera className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>3D TRY-ON</span>
                 </button>
               )}
             </div>
@@ -556,15 +546,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               className="w-full bg-[#0A251C] hover:bg-[#C5A059] text-white py-3.5 px-6 font-sans font-medium text-[12px] sm:text-[13px] uppercase tracking-[0.16em] transition-all duration-200 cursor-pointer shadow-sm active:scale-[0.99] text-center rounded-xl"
             >
               ADD TO CART
-            </button>
-
-            {/* 3D Virtual Try-On */}
-            <button
-              onClick={() => setIsTryOnOpen(true)}
-              className="w-full bg-[#FCFAF7] hover:bg-[#FAF3EB] border-2 border-[#C5A059] text-[#1A1816] py-3.5 px-6 font-sans font-semibold text-[12px] sm:text-[13px] uppercase tracking-[0.14em] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.99] rounded-xl"
-            >
-              <Camera className="w-4 h-4 text-[#C5A059]" />
-              <span>3D VIRTUAL TRY-ON (LIVE MIRROR)</span>
             </button>
 
             {/* Secondary Action: ADD PRESCRIPTION LENSES */}
@@ -799,19 +780,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       </section>
 
       {/* 4. Modals */}
-      {isTryOnOpen && (
-        <VirtualTryOnModal
-          product={product}
-          onClose={() => setIsTryOnOpen(false)}
-          onAddToCart={() => handleAddToCart()}
-          allProducts={allProducts}
-          onOpenLensCustomizer={() => {
-            setIsTryOnOpen(false);
-            setIsCustomizerOpen(true);
-          }}
-        />
-      )}
-
       {isCustomizerOpen && (
         <LensCustomizerModal
           product={product}

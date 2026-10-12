@@ -105,16 +105,16 @@ export default function PrivacyPolicyPage() {
 
               <button
                 type="button"
-                onClick={() => setActiveTab("vto")}
+                onClick={() => setActiveTab("prescription")}
                 className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
-                  activeTab === "vto"
+                  activeTab === "prescription"
                     ? "bg-[#0A251C] text-[#C5A059]"
                     : "text-stone-600 hover:bg-[#FAF7F2]"
                 }`}
               >
                 <div className="flex items-center gap-2">
                   <Eye className="w-3.5 h-3.5" />
-                  <span>3D Virtual Try-On & Biometrics</span>
+                  <span>Prescription & Lens Records</span>
                 </div>
               </button>
 
@@ -202,41 +202,30 @@ export default function PrivacyPolicyPage() {
             )}
 
             {/* Section 2: 3D VTO & Biometrics */}
-            {activeTab === "vto" && (
+            {activeTab === "prescription" && (
               <div className="space-y-5 animate-in fade-in duration-200">
                 <div className="border-b border-[#E8DEC8] pb-4">
                   <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A059] block">
-                    BIOMETRIC PRIVACY
+                    CLINICAL DATA
                   </span>
                   <h2 className="text-2xl font-serif font-bold text-[#0A251C] mt-1">
-                    2. 3D Virtual Try-On & Facial Geometry Processing
+                    2. Prescription Lenses &amp; Optical Parameters
                   </h2>
                 </div>
 
                 <div className="prose text-xs text-stone-600 space-y-4 leading-relaxed">
                   <p>
-                    Shivam Optics features a real-time WebGL and WebAssembly 3D Virtual Try-On engine that enables patrons to preview designer frames on their face using live webcam video.
+                    Shivam Optics processes clinical prescription measurements (Sphere, Cylinder, Axis, Pupillary Distance, and Add power) exclusively to engineer custom corrective lenses.
                   </p>
                   <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 space-y-2 text-emerald-900">
                     <h3 className="font-bold text-xs uppercase tracking-wide flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-emerald-700" />
-                      Client-Side Only Processing Guarantee
+                      Confidential Clinical Handling
                     </h3>
                     <p className="text-emerald-800">
-                      All 478 face landmark calculations and optical perspective matrices are performed exclusively on your own browser device using client-side WebAssembly.
+                      All prescription diopter records are safeguarded with strict optical laboratory confidentiality standards and are never sold or shared with third parties.
                     </p>
                   </div>
-                  <ul className="list-disc pl-5 space-y-1 text-stone-600">
-                    <li>
-                      <strong>Zero Video Transmission:</strong> Video frames and camera streams are NEVER transmitted to or saved on Shivam Optics servers.
-                    </li>
-                    <li>
-                      <strong>No Facial Recognition:</strong> Our algorithm calculates relative frame alignment (pupil distance, bridge depth) and does not store facial identities or biometric hashes.
-                    </li>
-                    <li>
-                      <strong>Camera Permission Control:</strong> Camera access is only initiated when explicitly permitted by the user and terminates immediately when try-on mode is closed.
-                    </li>
-                  </ul>
                 </div>
               </div>
             )}
