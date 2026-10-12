@@ -3,13 +3,14 @@ import crypto from "node:crypto";
 import { query, getPgPool } from "@/lib/db";
 import { normalizePhoneNumber } from "@/lib/phoneUtils";
 import { resolvePatronName } from "@/lib/patronUtils";
+import { hashPassword } from "@/lib/passwordUtils";
 
 const OTP_PEPPER = process.env.OTP_SECRET_PEPPER || "shivam_optics_super_secure_otp_pepper_2026";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
-    const { phone, otp, name } = body;
+    const { phone, otp, name, password } = body;
 
     // 1. Validate and normalize phone number
     const normalized = normalizePhoneNumber(phone);
@@ -172,26 +173,38 @@ export async function POST(req: Request) {
         userId = newAuthRes.rows[0].id;
       }
 
+      // Hash password if provided during signup
+      const passwordHash =
+        password && typeof password === "string" && password.trim().length >= 6
+          ? hashPassword(password.trim())
+          : null;
+
+      // Ensure password_hash column exists in public.profiles
+      await dbClient.query(`ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS password_hash TEXT;`);
+
       // Upsert into public.profiles matching auth.users foreign key
       const profileUpsertRes = await dbClient.query(
         `INSERT INTO public.profiles (
           id, full_name, phone, role, gem_loyalty_points,
           phone_verified, phone_verified_at, phone_verification_channel,
+          password_hash,
           created_at, updated_at
         ) VALUES (
           $1, $2, $3, 'customer', 0,
           true, NOW(), $4,
+          $5,
           NOW(), NOW()
         )
         ON CONFLICT (id) DO UPDATE SET
           full_name = COALESCE(NULLIF(EXCLUDED.full_name, ''), public.profiles.full_name),
           phone = EXCLUDED.phone,
+          password_hash = COALESCE(EXCLUDED.password_hash, public.profiles.password_hash),
           phone_verified = true,
           phone_verified_at = NOW(),
           phone_verification_channel = EXCLUDED.phone_verification_channel,
           updated_at = NOW()
         RETURNING id, full_name, email, phone, role, gem_loyalty_points, created_at;`,
-        [userId, resolvedPatronName, canonicalPhone, record.channel]
+        [userId, resolvedPatronName, canonicalPhone, record.channel, passwordHash]
       );
 
       profile = profileUpsertRes.rows[0];

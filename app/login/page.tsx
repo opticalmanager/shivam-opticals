@@ -30,20 +30,20 @@ function LoginContent() {
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 hover:text-[#0A251C] transition cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Storefront</span>
+            <span>Back to Store</span>
           </Link>
         </div>
 
-        {/* Luxury Login Card */}
+        {/* Login Card */}
         <div className="bg-[#FCFAF7] rounded-3xl border border-[#E8DEC8] p-6 sm:p-8 shadow-sm">
           <AuthForm mode="page" initialType="signin" returnUrl={returnUrl} />
         </div>
 
-        {/* Security & Atelier Assurance */}
+        {/* Security Assurance */}
         <div className="text-center space-y-1">
           <p className="flex items-center justify-center gap-1.5 text-[11px] text-stone-400">
             <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Encrypted 256-bit patron authentication • Mayur Vihar Atelier</span>
+            <span>Secure account authentication • Shivam Optics</span>
           </p>
         </div>
       </div>
@@ -58,8 +58,8 @@ export default function LoginPage() {
         <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center p-8">
           <div className="text-center space-y-2">
             <Loader2 className="w-6 h-6 animate-spin text-[#C5A059] mx-auto" />
-            <p className="text-xs text-stone-500 uppercase tracking-widest font-semibold">
-              Loading Atelier Sign In...
+            <p className="text-xs text-stone-500 uppercase tracking-wider font-semibold">
+              Loading Sign In...
             </p>
           </div>
         </div>
