@@ -48,8 +48,8 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                 </button>
               </th>
               <th className="py-3 px-3">Frame Model</th>
-              <th className="py-3 px-3">Category & Brand</th>
-              <th className="py-3 px-3">Shape & Material</th>
+              <th className="py-3 px-3">Category &amp; Brand</th>
+              <th className="py-3 px-3">Shape &amp; Material</th>
               <th className="py-3 px-3">Price</th>
               <th className="py-3 px-3">Status</th>
               <th className="py-3 px-4 text-right">Actions</th>
@@ -58,7 +58,25 @@ export const ProductTable: React.FC<ProductTableProps> = ({
           <tbody className="divide-y divide-stone-100">
             {products.map((p) => {
               const isSelected = selectedIds.includes(p.id);
-              const primaryImage = p.img || (p.images && p.images[0]) || "/images/placeholder.jpg";
+              const primaryImage =
+                (typeof p.img === "string" && p.img) ||
+                (Array.isArray(p.images) && typeof p.images[0] === "string" && p.images[0]) ||
+                (Array.isArray(p.images) && (p.images[0] as any)?.url) ||
+                (p as any).primary_image_url ||
+                "/images/clean_frame_1.png";
+
+              const brandName = p.brand || (p as any).brand_name || "Shivam Opticals";
+              const categoryName = p.category || (p as any).category_name || "Eyewear";
+              const price = typeof p.price === "number" ? p.price : Number(p.price || (p as any).base_price || 0);
+              const origPrice = p.originalPrice
+                ? Number(p.originalPrice)
+                : (p as any).original_price
+                ? Number((p as any).original_price)
+                : undefined;
+              const colorwaysCount =
+                p.colorVariants?.length ||
+                (p as any).variants?.length ||
+                (Array.isArray(p.colors) ? p.colors.length : 1);
 
               return (
                 <tr
@@ -92,7 +110,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                           alt={p.name}
                           className="w-full h-full object-contain p-0.5"
                           onError={(e) => {
-                            (e.target as HTMLElement).style.display = "none";
+                            (e.target as HTMLImageElement).src = "/images/clean_frame_1.png";
                           }}
                         />
                       </div>
@@ -104,10 +122,10 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                           {p.name}
                         </Link>
                         <div className="text-[11px] text-stone-500 truncate flex items-center gap-1.5 mt-0.5">
-                          <span>{p.shape}</span>
-                          <span>•</span>
-                          <span>{p.colorVariants?.length || p.colors?.length || 1} Colorway(s)</span>
-                          {p.colors && p.colors.length > 0 && (
+                          <span>{p.shape || "Eyewear"}</span>
+                          <span>&bull;</span>
+                          <span>{colorwaysCount} Colorway(s)</span>
+                          {Array.isArray(p.colors) && p.colors.length > 0 && (
                             <div className="inline-flex items-center gap-0.5 ml-1">
                               {p.colors.slice(0, 4).map((c, i) => (
                                 <span
@@ -133,13 +151,13 @@ export const ProductTable: React.FC<ProductTableProps> = ({
 
                   {/* Category & Brand */}
                   <td className="py-2.5 px-3">
-                    <div className="font-semibold text-stone-800">{p.brand}</div>
-                    <div className="text-[10px] text-stone-500">{p.category}</div>
+                    <div className="font-semibold text-stone-800">{brandName}</div>
+                    <div className="text-[10px] text-stone-500">{categoryName}</div>
                   </td>
 
                   {/* Shape & Material */}
                   <td className="py-2.5 px-3">
-                    <div className="font-medium text-stone-800">{p.shape}</div>
+                    <div className="font-medium text-stone-800 capitalize">{p.shape || "Spectacles"}</div>
                     <div className="text-[10px] text-stone-400 truncate max-w-[140px]">
                       {p.material || "Beta Titanium"}
                     </div>
@@ -148,18 +166,18 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                   {/* Price */}
                   <td className="py-2.5 px-3">
                     <div className="font-bold text-[#0A251C]">
-                      ₹{p.price.toLocaleString("en-IN")}
+                      ₹{price.toLocaleString("en-IN")}
                     </div>
-                    {p.originalPrice && p.originalPrice > p.price && (
+                    {origPrice && origPrice > price && (
                       <div className="text-[10px] text-stone-400 line-through">
-                        ₹{p.originalPrice.toLocaleString("en-IN")}
+                        ₹{origPrice.toLocaleString("en-IN")}
                       </div>
                     )}
                   </td>
 
                   {/* Status */}
                   <td className="py-2.5 px-3">
-                    <StatusBadge status="published" size="sm" />
+                    <StatusBadge status={(p as any).is_active !== false ? "published" : "draft"} size="sm" />
                   </td>
 
                   {/* Actions */}

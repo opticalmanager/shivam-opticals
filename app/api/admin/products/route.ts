@@ -156,9 +156,31 @@ export async function GET(req: NextRequest) {
       [...params, limit, offset]
     );
 
+    const normalizedProducts = productsRes.rows.map((row: any) => {
+      const images = Array.isArray(row.images)
+        ? row.images.map((img: any) => (typeof img === "string" ? img : img.url)).filter(Boolean)
+        : [];
+      const primaryImg = row.primary_image_url || images[0] || "/images/clean_frame_1.png";
+      const colors = Array.isArray(row.variants)
+        ? Array.from(new Set(row.variants.map((v: any) => v.color_hex).filter(Boolean)))
+        : [row.color_hex || "#1A1816"];
+
+      return {
+        ...row,
+        price: Number(row.base_price || 0),
+        originalPrice: row.original_price ? Number(row.original_price) : undefined,
+        brand: row.brand_name || "Shivam Opticals",
+        category: row.category_name || "Eyewear",
+        img: primaryImg,
+        images: images.length > 0 ? images : [primaryImg],
+        colors,
+        colorVariants: row.variants || [],
+      };
+    });
+
     return NextResponse.json({
       success: true,
-      products: productsRes.rows,
+      products: normalizedProducts,
       pagination: {
         total,
         page,
