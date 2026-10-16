@@ -27,8 +27,8 @@ export default function AdminShippingPage() {
     trialDepositAmount: 3000,
     shiprocketEmail: "service.viralnest@gmail.com",
     shiprocketPickupLocation: "work",
-    shiprocketPickupCity: "New Delhi",
-    shiprocketPickupPincode: "110091",
+    shiprocketPickupCity: "Noida",
+    shiprocketPickupPincode: "201316",
     fulfillmentMode: "manual_1click",
   });
 

@@ -10,7 +10,7 @@ async function run() {
   if (res.rows.length > 0) {
     const val = res.rows[0].value;
     val.contactEmail = 'info@shivamoptical.in';
-    val.storeUrl = 'https://shivamoptical.in';
+    val.storeUrl = 'https://www.shivamoptical.in';
     await pool.query(
       "UPDATE public.admin_settings SET value = $1, updated_at = NOW() WHERE key = 'general'",
       [JSON.stringify(val)]

@@ -316,7 +316,7 @@ export async function bookShiprocketShipment(params: {
         billing_pincode: params.address.pincode,
         billing_state: params.address.state,
         billing_country: params.address.country || "India",
-        billing_email: params.customerEmail || "client@precisionoptics.com",
+        billing_email: params.customerEmail || "patron@shivamoptical.in",
         billing_phone: cleanPhone || "9810012345",
         shipping_is_billing: true,
         order_items: params.items.map((it) => ({
@@ -416,7 +416,7 @@ export async function bookShiprocketShipment(params: {
     shipmentId: mockShipmentId,
     awbCode: mockAwb,
     courierName: "BlueDart Express Air",
-    labelUrl: `https://precisionoptics.com/api/shipping/labels/sample-${mockShipmentId}.pdf`,
+    labelUrl: `https://www.shivamoptical.in/api/shipping/labels/sample-${mockShipmentId}.pdf`,
     isSimulation: true,
   };
 }
@@ -452,7 +452,7 @@ export async function trackShiprocketAwb(awbCode: string) {
       shipment_track: [
         {
           current_status: "PICKUP SCHEDULED",
-          activity: "Consignment booked at Precision Optics Atelier",
+          activity: "Consignment booked at Shivam Opticals Atelier",
           date: new Date().toISOString(),
           location: "Noida / Delhi NCR",
         },

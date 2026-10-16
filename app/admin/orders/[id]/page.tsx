@@ -109,10 +109,10 @@ export default function AdminOrderDetailPage() {
         if (data.pickupLocation) {
           const loaded = {
             location: data.pickupLocation,
-            address: data.pickupAddress || "Pocket 1, Mayur Vihar Phase 1",
-            city: data.pickupCity || "New Delhi",
-            state: data.pickupState || "Delhi",
-            pincode: data.pickupPincode || "110091",
+            address: data.pickupAddress || "GF-45D, Spectrum metro mall, Phase-1, Sector 75",
+            city: data.pickupCity || "Noida",
+            state: data.pickupState || "Uttar Pradesh",
+            pincode: data.pickupPincode || "201316",
           };
           setPickupDetails(loaded);
           setEditLocationName(loaded.location);
@@ -133,9 +133,9 @@ export default function AdminOrderDetailPage() {
     const updated = {
       location: editLocationName.trim() || "work",
       address: editAddress.trim(),
-      city: editCity.trim() || "New Delhi",
-      state: editState.trim() || "Delhi",
-      pincode: editPincode.trim() || "110091",
+      city: editCity.trim() || "Noida",
+      state: editState.trim() || "Uttar Pradesh",
+      pincode: editPincode.trim() || "201316",
     };
     setPickupDetails(updated);
     setIsEditingPickup(false);

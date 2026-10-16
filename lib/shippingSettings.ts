@@ -49,11 +49,11 @@ export const DEFAULT_SHIPPING_CONFIG: ShippingConfig = {
   shiprocketPickupLocation: process.env.SHIPROCKET_PICKUP_LOCATION || "work",
   shiprocketPickupAddress:
     process.env.SHIPROCKET_PICKUP_ADDRESS ||
-    "Shivam Opticals Atelier, Main Market",
-  shiprocketPickupCity: process.env.SHIPROCKET_PICKUP_CITY || "Delhi",
-  shiprocketPickupState: process.env.SHIPROCKET_PICKUP_STATE || "Delhi",
-  shiprocketPickupPincode: process.env.SHIPROCKET_PICKUP_PINCODE || "110001",
-  shiprocketWebhookSecret: process.env.SHIPROCKET_WEBHOOK_SECRET || "shivam_shiprocket_sec_2026",
+    "GF-45D, Spectrum metro mall, Phase-1, Sector 75",
+  shiprocketPickupCity: process.env.SHIPROCKET_PICKUP_CITY || "Noida",
+  shiprocketPickupState: process.env.SHIPROCKET_PICKUP_STATE || "Uttar Pradesh",
+  shiprocketPickupPincode: process.env.SHIPROCKET_PICKUP_PINCODE || "201316",
+  shiprocketWebhookSecret: process.env.SHIPROCKET_WEBHOOK_SECRET || "#$#%OMw956hgchpCZLULEGW3B573on0g",
 
   fulfillmentMode: "manual_1click",
   defaultWeightKg: 0.35, // Typical luxury eyeglass frame + protective case + microfiber cloth

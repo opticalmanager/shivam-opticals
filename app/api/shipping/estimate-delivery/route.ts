@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     const config = await getShippingConfig();
     const result = await checkCourierServiceability({
       deliveryPincode: pincode,
-      pickupPincode: config.shiprocketPickupPincode || "110091", // Mayur Vihar Phase 1 Ext pickup
+      pickupPincode: config.shiprocketPickupPincode || "201316", // Sector 75 Noida pickup
       weightKg: config.defaultWeightKg || 0.35,
     });
 

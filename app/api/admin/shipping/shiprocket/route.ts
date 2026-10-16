@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
 
     if (action === "calculate_rates") {
       const deliveryPincode = body.deliveryPincode?.trim();
-      const pickupPincode = body.pickupPincode?.trim() || config.shiprocketPickupPincode || "110001";
+      const pickupPincode = body.pickupPincode?.trim() || config.shiprocketPickupPincode || "201316";
       const customWeight = body.weight !== undefined ? Number(body.weight) : (body.weightKg !== undefined ? Number(body.weightKg) : config.defaultWeightKg || 0.35);
 
       if (!deliveryPincode || !/^\d{6}$/.test(deliveryPincode)) {

@@ -2,6 +2,43 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { query } from "@/lib/db";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
+  "Access-Control-Allow-Headers": "Content-Type, x-razorpay-signature, authorization",
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
+
+export async function HEAD() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
+
+export async function GET() {
+  return NextResponse.json(
+    {
+      success: true,
+      service: "Shivam Opticals Razorpay Payment Webhook",
+      status: "active",
+      supportedMethods: ["GET", "POST", "OPTIONS", "HEAD"],
+      message: "Razorpay payment webhook endpoint is active and accessible.",
+      timestamp: new Date().toISOString(),
+    },
+    {
+      status: 200,
+      headers: corsHeaders,
+    }
+  );
+}
+
 export async function POST(req: NextRequest) {
   try {
     const rawBody = await req.text();
@@ -28,7 +65,10 @@ export async function POST(req: NextRequest) {
 
       if (!valid) {
         console.warn("[RAZORPAY-WEBHOOK] Signature mismatch for incoming webhook event");
-        return NextResponse.json({ success: false, error: "Invalid signature" }, { status: 400 });
+        return NextResponse.json(
+          { success: false, error: "Invalid signature" },
+          { status: 400, headers: corsHeaders }
+        );
       }
     }
 
@@ -36,7 +76,7 @@ export async function POST(req: NextRequest) {
     try {
       payload = JSON.parse(rawBody);
     } catch {
-      return NextResponse.json({ received: true }, { status: 200 });
+      return NextResponse.json({ received: true }, { status: 200, headers: corsHeaders });
     }
 
     const event = payload.event;
@@ -74,9 +114,12 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true, event }, { status: 200 });
+    return NextResponse.json({ success: true, event }, { status: 200, headers: corsHeaders });
   } catch (err: any) {
     console.error("[RAZORPAY-WEBHOOK] Error:", err);
-    return NextResponse.json({ success: false, error: err?.message }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: err?.message },
+      { status: 500, headers: corsHeaders }
+    );
   }
 }

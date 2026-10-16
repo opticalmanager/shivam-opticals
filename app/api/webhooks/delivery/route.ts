@@ -2,6 +2,43 @@ import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db";
 import { getShippingConfig } from "@/lib/shippingSettings";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
+  "Access-Control-Allow-Headers": "Content-Type, x-api-key, x-shiprocket-secret, authorization",
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
+
+export async function HEAD() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders,
+  });
+}
+
+export async function GET() {
+  return NextResponse.json(
+    {
+      success: true,
+      service: "Shivam Opticals Logistics Delivery Webhook",
+      status: "active",
+      supportedMethods: ["GET", "POST", "OPTIONS", "HEAD"],
+      message: "Delivery webhook endpoint is healthy and accessible.",
+      timestamp: new Date().toISOString(),
+    },
+    {
+      status: 200,
+      headers: corsHeaders,
+    }
+  );
+}
+
 export async function POST(req: NextRequest) {
   try {
     const rawBody = await req.text();
@@ -22,7 +59,7 @@ export async function POST(req: NextRequest) {
       req.headers.get("x-shiprocket-secret") ||
       req.headers.get("authorization");
 
-    const expectedSecret = config.shiprocketWebhookSecret || "shivam_shiprocket_sec_2026";
+    const expectedSecret = config.shiprocketWebhookSecret || process.env.SHIPROCKET_WEBHOOK_SECRET || "#$#%OMw956hgchpCZLULEGW3B573on0g";
     if (providedSecret) {
       const cleanSecret = providedSecret.replace(/^Bearer\s+/i, "");
       if (cleanSecret !== expectedSecret) {
@@ -31,10 +68,10 @@ export async function POST(req: NextRequest) {
     }
 
     // Extract essential Shiprocket shipment identifiers
-    const orderNumber = payload.order_id || payload.channel_order_id;
-    const awb = payload.awb || payload.awb_code;
+    const orderNumber = payload.order_id || payload.channel_order_id || null;
+    const awb = payload.awb || payload.awb_code || null;
     const currentStatus = (payload.current_status || payload.shipment_status || "").toUpperCase();
-    const courier = payload.courier_name || payload.courier_company_id;
+    const courier = payload.courier_name || payload.courier_company_id || "BlueDart Express";
     const location = payload.location || payload.current_location || "";
     const activity = payload.activity || payload.status_description || currentStatus;
 
@@ -47,7 +84,7 @@ export async function POST(req: NextRequest) {
           endpoint: "/api/webhooks/delivery",
           message: "Shivam Opticals Shiprocket delivery webhook endpoint verified successfully",
         },
-        { status: 200 }
+        { status: 200, headers: corsHeaders }
       );
     }
 
@@ -91,27 +128,30 @@ export async function POST(req: NextRequest) {
            WHERE order_number = $5;`;
 
       const params = awb
-        ? [mappedOrderStatus, awb, courier || "BlueDart Express", JSON.stringify(trackingMilestone), orderNumber]
-        : [mappedOrderStatus, courier || "BlueDart Express", JSON.stringify(trackingMilestone), orderNumber];
+        ? [mappedOrderStatus, awb, courier, JSON.stringify(trackingMilestone), orderNumber]
+        : [mappedOrderStatus, courier, JSON.stringify(trackingMilestone), orderNumber];
 
       await query(targetQuery, params);
     } catch (dbErr) {
       console.warn("[DELIVERY-WEBHOOK] Order DB update notice:", dbErr);
     }
 
-    return NextResponse.json({
-      success: true,
-      processed: true,
-      orderNumber,
-      awb,
-      currentStatus,
-      mappedOrderStatus,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        processed: true,
+        orderNumber,
+        awb,
+        currentStatus,
+        mappedOrderStatus,
+      },
+      { status: 200, headers: corsHeaders }
+    );
   } catch (error: any) {
     console.error("[DELIVERY-WEBHOOK] Internal error:", error);
     return NextResponse.json(
       { success: false, error: error?.message || "Webhook processing error" },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     );
   }
 }

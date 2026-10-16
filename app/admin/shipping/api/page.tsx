@@ -26,11 +26,11 @@ export default function AdminShippingApiSettingsPage() {
     shiprocketEmail: "service.viralnest@gmail.com",
     shiprocketPassword: "ou6wb4ob*JiuAl6zW5^KM7DWX*Ln#wpx",
     shiprocketPickupLocation: "work",
-    shiprocketPickupAddress: "Pocket 1, Mayur Vihar Phase 1",
-    shiprocketPickupCity: "New Delhi",
-    shiprocketPickupState: "Delhi",
-    shiprocketPickupPincode: "110091",
-    shiprocketWebhookSecret: "shivam_shiprocket_sec_2026",
+    shiprocketPickupAddress: "GF-45D, Spectrum metro mall, Phase-1, Sector 75",
+    shiprocketPickupCity: "Noida",
+    shiprocketPickupState: "Uttar Pradesh",
+    shiprocketPickupPincode: "201316",
+    shiprocketWebhookSecret: "#$#%OMw956hgchpCZLULEGW3B573on0g",
     fulfillmentMode: "manual_1click",
   });
 
@@ -49,9 +49,11 @@ export default function AdminShippingApiSettingsPage() {
     connected: false,
   });
 
-  const webhookUrl = typeof window !== "undefined"
-    ? `${window.location.origin}/api/webhooks/delivery`
-    : "https://shivamoptical.in/api/webhooks/delivery";
+  const webhookUrl = typeof window !== "undefined" && !window.location.hostname.includes("localhost")
+    ? `https://shivamoptical.in/api/webhooks/shiprocket`
+    : typeof window !== "undefined"
+    ? `${window.location.origin}/api/webhooks/shiprocket`
+    : "https://shivamoptical.in/api/webhooks/shiprocket";
 
   useEffect(() => {
     fetch("/api/admin/settings?key=shipping")
@@ -137,7 +139,7 @@ export default function AdminShippingApiSettingsPage() {
   };
 
   const handleCopySecret = () => {
-    navigator.clipboard.writeText(shippingConfig.shiprocketWebhookSecret || "shivam_shiprocket_sec_2026");
+    navigator.clipboard.writeText(shippingConfig.shiprocketWebhookSecret || "#$#%OMw956hgchpCZLULEGW3B573on0g");
     setCopiedSecret(true);
     toast.success("Webhook Secret copied to clipboard");
     setTimeout(() => setCopiedSecret(false), 2000);
