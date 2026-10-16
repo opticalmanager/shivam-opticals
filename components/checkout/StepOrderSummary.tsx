@@ -48,10 +48,10 @@ export const StepOrderSummary: React.FC<StepOrderSummaryProps> = ({
         </div>
 
         <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C5A059] block mb-1">
-          SHIVAM OPTICS ATELIER ORDER CONFIRMED
+          SHIVAM OPTICALS ATELIER ORDER CONFIRMED
         </span>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#0A251C] tracking-tight mb-2">
-          Thank you for choosing Shivam Optics
+          Thank you for choosing Shivam Opticals
         </h2>
         <p className="text-xs sm:text-sm text-[#716B64] max-w-lg mx-auto">
           An SMS confirmation and order invoice have been queued for{" "}

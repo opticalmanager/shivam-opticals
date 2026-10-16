@@ -167,7 +167,7 @@ export async function getProducts(options?: {
 
       return {
         id: row.slug || row.id,
-        brand: row.brand?.name || "Shivam Optics",
+        brand: row.brand?.name || "Shivam Opticals",
         name: row.name,
         subtitle: row.subtitle,
         price: Number(row.base_price),
@@ -229,7 +229,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
     return {
       id: data.slug,
-      brand: data.brand?.name || "Shivam Optics",
+      brand: data.brand?.name || "Shivam Opticals",
       name: data.name,
       subtitle: data.subtitle,
       price: Number(data.base_price),

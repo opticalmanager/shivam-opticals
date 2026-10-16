@@ -29,9 +29,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Shivam Optics | Luxury Eyewear & Haute Lunetterie",
+  title: "Shivam Opticals | Luxury Eyewear & Haute Lunetterie",
   description:
-    "Shivam Optics - Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Premium lenses, Free Express Shipping & 14-Day Returns.",
+    "Shivam Opticals - Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Premium lenses, Free Express Shipping & 14-Day Returns.",
   icons: {
     icon: "/favicon.ico",
   },

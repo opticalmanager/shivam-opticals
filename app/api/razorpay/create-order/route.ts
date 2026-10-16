@@ -83,7 +83,7 @@ export async function POST(req: Request) {
         receipt: orderReceipt,
         notes: {
           ...notes,
-          store: "Shivam Optics Luxury Eyewear Atelier",
+          store: "Shivam Opticals Luxury Eyewear Atelier",
         },
       });
     } catch (primaryErr: any) {
@@ -103,7 +103,7 @@ export async function POST(req: Request) {
             receipt: orderReceipt,
             notes: {
               ...notes,
-              store: "Shivam Optics Luxury Eyewear Atelier",
+              store: "Shivam Opticals Luxury Eyewear Atelier",
             },
           });
           usedKeyId = fallbackKeyId;

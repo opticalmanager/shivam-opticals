@@ -62,7 +62,7 @@ export default function AdminCustomersPage() {
             Clientele &amp; Patron Profiles
           </h1>
           <p className="text-xs text-stone-500">
-            Shivam Optics luxury patrons, lifetime value, and prescription archives
+            Shivam Opticals luxury patrons, lifetime value, and prescription archives
           </p>
         </div>
       </div>

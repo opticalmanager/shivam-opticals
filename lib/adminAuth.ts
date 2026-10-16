@@ -1,5 +1,5 @@
 /**
- * Shivam Optics - Enterprise Admin Authentication & Session Security Engine
+ * Shivam Opticals - Enterprise Admin Authentication & Session Security Engine
  * Cryptographically signed HttpOnly session tokens with Edge and Node.js compatibility.
  */
 

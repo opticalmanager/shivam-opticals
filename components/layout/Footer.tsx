@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Store Address & Contact */}
           <div className="lg:col-span-4 space-y-3">
-            <h5 className="text-xs font-bold tracking-[0.2em] uppercase text-[#1A1816]">Shivam Optical</h5>
+            <h5 className="text-xs font-bold tracking-[0.2em] uppercase text-[#1A1816]">Shivam Opticals</h5>
             <p className="text-xs text-[#716B64] leading-relaxed">
               SAMACHAR market, Shop No-1, Kanishka Complex, Mayur Vihar Phase I, extention, Mayur Vihar, Delhi, 110091.
               <br />
@@ -143,7 +143,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#716B64] gap-4">
-          <p>© 2026 SHIVAM OPTICAL. ALL RIGHTS RESERVED. MAYUR VIHAR PHASE I, DELHI - 110091.</p>
+          <p>© 2026 SHIVAM OPTICALS. ALL RIGHTS RESERVED. MAYUR VIHAR PHASE I, DELHI - 110091.</p>
           <div className="flex items-center space-x-6">
             <span>SECURE ENCRYPTED CHECKOUT</span>
             <span>•</span>

@@ -238,7 +238,7 @@ async function seedDatabase() {
     // 6. Seed Admin Settings
     console.log("🌱 Seeding Universal Admin Settings...");
     const generalSettings = {
-      storeName: "Shivam Optical Atelier",
+      storeName: "Shivam Opticals Atelier",
       tagline: "Precision Eyecare & Haute Lunetterie",
       contactEmail: "info@shivamoptics.in",
       contactPhone: "097799 90207",
@@ -255,7 +255,7 @@ async function seedDatabase() {
     );
     console.log("  ✓ Admin settings seeded.");
 
-    console.log("\n🎉 Database seeded successfully with authentic Shivam Optics catalog!");
+    console.log("\n🎉 Database seeded successfully with authentic Shivam Opticals catalog!");
   } catch (err: any) {
     console.error("❌ Seeding failed:", err.message);
     throw err;

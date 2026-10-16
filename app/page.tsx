@@ -95,7 +95,7 @@ const FAQ_ITEMS = [
     content: (
       <>
         <p className="mb-2">
-          <strong>UV400 vs. Polarized:</strong> All Shivam Optics sunglasses offer
+          <strong>UV400 vs. Polarized:</strong> All Shivam Opticals sunglasses offer
           certified 100% UV400 protection against both UVA and UVB rays. Our
           polarized editions incorporate an acoustic multi-layer iodine filter to
           eliminate blinding glare from water, tarmac, and snow without
@@ -148,7 +148,7 @@ const FAQ_ITEMS = [
     content: (
       <>
         <p className="mb-2">
-          <strong>Shield Against Digital Eye Strain:</strong> Shivam Optics
+          <strong>Shield Against Digital Eye Strain:</strong> Shivam Opticals
           Blue-Block lenses filter out 98% of harmful 410-455nm high-energy blue
           radiation emitted by laptops, tablets, and smartphone displays.
         </p>
@@ -265,7 +265,7 @@ export default function HomePage() {
           >
             <img
               src="/images/banner.png"
-              alt="Shivam Optics - Beach Club Eyewear Collection"
+              alt="Shivam Opticals - Beach Club Eyewear Collection"
               className="w-full h-auto object-cover object-center block select-none"
               fetchPriority="high"
             />
@@ -454,7 +454,7 @@ export default function HomePage() {
             Words we <span className="italic font-normal text-[#8C6239]">live by</span>
           </h2>
           <p className="text-xs uppercase tracking-widest text-[#716B64] mt-2">
-            Over 45,000+ discerning patrons across India wear Shivam Optics
+            Over 45,000+ discerning patrons across India wear Shivam Opticals
           </p>
         </div>
 
@@ -470,7 +470,7 @@ export default function HomePage() {
               <p className="text-xs sm:text-sm text-[#2D2926] font-light leading-relaxed italic mb-6">
                 &ldquo;The Italian acetate frame feels extraordinarily light yet ultra
                 sturdy. Better than international luxury brands at 3x the cost!
-                Shivam Optics delivered it with my high prescription within 3
+                Shivam Opticals delivered it with my high prescription within 3
                 days.&rdquo;
               </p>
             </div>
@@ -669,7 +669,7 @@ export default function HomePage() {
                   VISIT OUR STORE
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#1A1816] leading-tight">
-                  Shivam Optical
+                  Shivam Opticals
                 </h2>
 
                 <div className="space-y-3.5 pt-2 text-sm text-[#2D2926]">

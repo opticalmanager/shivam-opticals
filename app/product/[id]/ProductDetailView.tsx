@@ -219,7 +219,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
   const handleWhatsAppChat = () => {
     const text = encodeURIComponent(
-      `Hi Shivam Optics Atelier, I am inquiring about ${product.brand} - ${product.name} (Price: ${formatCurrency(product.price)}). Could you provide live photos and concierge styling guidance?`
+      `Hi Shivam Opticals Atelier, I am inquiring about ${product.brand} - ${product.name} (Price: ${formatCurrency(product.price)}). Could you provide live photos and concierge styling guidance?`
     );
     window.open(`https://wa.me/919779990207?text=${text}`, "_blank");
   };
@@ -395,7 +395,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   onClick={() => toggleAccordion("about")}
                   className="w-full flex items-center justify-between text-left text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-[#1A1816] hover:text-[#C5A059] transition-colors cursor-pointer"
                 >
-                  <span>ABOUT SHIVAM OPTICS ATELIER</span>
+                  <span>ABOUT SHIVAM OPTICALS ATELIER</span>
                   {openAccordions.about ? (
                     <Minus className="w-4 h-4 text-neutral-500" />
                   ) : (
@@ -404,7 +404,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
                 {openAccordions.about && (
                   <div className="pt-3.5 pb-1 text-xs sm:text-sm leading-relaxed text-neutral-600 font-normal animate-in fade-in duration-200">
-                    Shivam Optics is India&apos;s premier luxury optical atelier and clinical vision center.
+                    Shivam Opticals is India&apos;s premier luxury optical atelier and clinical vision center.
                     For over decades, we have curated the world&apos;s most prestigious eyewear houses,
                     delivering master craftsmanship, digital wavefront prescription lenses, and bespoke optical
                     solutions engineered with certified European laboratory precision.
@@ -427,7 +427,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
                 {openAccordions.pledge && (
                   <div className="pt-3.5 pb-1 text-xs sm:text-sm leading-relaxed text-neutral-600 font-normal animate-in fade-in duration-200">
-                    Every spectacle frame and sunglass sold at Shivam Optics is 100% authentic, sourced
+                    Every spectacle frame and sunglass sold at Shivam Opticals is 100% authentic, sourced
                     directly from certified brand distributors with original certificate of authenticity,
                     branded protective hard case, microfiber cleaning cloth, and a 1-year manufacturer warranty
                     covering manufacturing defects.

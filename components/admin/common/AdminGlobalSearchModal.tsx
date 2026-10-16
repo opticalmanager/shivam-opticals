@@ -68,7 +68,7 @@ export const AdminGlobalSearchModal: React.FC<AdminGlobalSearchModalProps> = ({
             aggregated.push({
               type: "product",
               title: p.name,
-              subtitle: `${p.brand || "Shivam Optics"} • ₹${Number(p.price).toLocaleString("en-IN")} • ${p.category || "Eyewear"}`,
+              subtitle: `${p.brand || "Shivam Opticals"} • ₹${Number(p.price).toLocaleString("en-IN")} • ${p.category || "Eyewear"}`,
               badge: "Published",
               url: `/admin/products/${p.id}`,
             });

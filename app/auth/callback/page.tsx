@@ -72,7 +72,7 @@ function CallbackContent() {
 
             setStatus("success");
             toast.success("Email Verified Successfully", {
-              description: "Welcome to Shivam Optics Atelier.",
+              description: "Welcome to Shivam Opticals Atelier.",
             });
 
             setTimeout(() => {
@@ -124,7 +124,7 @@ function CallbackContent() {
 
               setStatus("success");
               toast.success("Email Confirmed", {
-                description: "Welcome to Shivam Optics.",
+                description: "Welcome to Shivam Opticals.",
               });
 
               setTimeout(() => {
@@ -178,7 +178,7 @@ function CallbackContent() {
                 Confirming Your Email...
               </h2>
               <p className="text-xs text-stone-500 mt-2 max-w-xs mx-auto">
-                Validating your cryptographic verification link and initializing your Shivam Optics vault session.
+                Validating your cryptographic verification link and initializing your Shivam Opticals vault session.
               </p>
             </div>
           </div>

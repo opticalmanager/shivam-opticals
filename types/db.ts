@@ -1,5 +1,5 @@
 /**
- * Shivam Optics - Database Entity Models & Types
+ * Shivam Opticals - Database Entity Models & Types
  * Mirroring PostgreSQL schemas with strict type-safety
  */
 

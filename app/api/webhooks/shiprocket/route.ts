@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
           success: true,
           status: "active",
           endpoint: "/api/webhooks/shiprocket",
-          message: "Shivam Optics Shiprocket webhook endpoint verified successfully",
+          message: "Shivam Opticals Shiprocket webhook endpoint verified successfully",
         },
         { status: 200 }
       );

@@ -46,7 +46,7 @@ function AdminSettingsContent() {
 
   // General store settings state
   const [generalConfig, setGeneralConfig] = useState({
-    storeName: "Shivam Optics",
+    storeName: "Shivam Opticals",
     tagline: "Haute Lunetterie Atelier & Optometry",
     email: "concierge@shivamoptics.in",
     phone: "097799 90207",

@@ -127,7 +127,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           </div>
           <div>
             <div className="text-xs font-bold tracking-wider font-serif text-[#0A251C] uppercase">
-              Shivam Optics
+              Shivam Opticals
             </div>
             <div className="text-[10px] text-stone-500 font-medium tracking-wide">
               Admin Operating System

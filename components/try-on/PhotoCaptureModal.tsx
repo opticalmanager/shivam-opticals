@@ -55,7 +55,7 @@ export const PhotoCaptureModal: React.FC<PhotoCaptureModalProps> = ({
             />
             {/* Watermark */}
             <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded text-[9px] font-serif text-[#C5A059] tracking-widest uppercase">
-              SHIVAM OPTICS
+              SHIVAM OPTICALS
             </div>
           </div>
         </div>

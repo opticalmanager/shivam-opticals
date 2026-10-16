@@ -1,7 +1,7 @@
 import { Pool, QueryResult, QueryResultRow } from "pg";
 
 /**
- * Shivam Optics - Direct PostgreSQL Database Service
+ * Shivam Opticals - Direct PostgreSQL Database Service
  * Connects directly to the PostgreSQL pooler using server-side DATABASE_URL.
  * Supports Supabase, Neon, AWS RDS, or local PostgreSQL.
  */

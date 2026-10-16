@@ -485,7 +485,7 @@ export default function AdminOrderDetailPage() {
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <div className="font-bold text-sm text-[#0A251C]">
-                            {snap.name || it.product_name || "Shivam Optics Designer Frame"}
+                            {snap.name || it.product_name || "Shivam Opticals Designer Frame"}
                           </div>
                           <div className="text-xs text-stone-500">
                             Finish: <span className="font-medium text-stone-800">{snap.color || it.color || "Standard"}</span> • Lens Option:{" "}
@@ -1134,7 +1134,7 @@ export default function AdminOrderDetailPage() {
         <div className="border-b-2 border-black pb-4 mb-6 flex justify-between items-start">
           <div>
             <h1 className="text-2xl font-bold tracking-tight uppercase font-serif">
-              Shivam Optics
+              Shivam Opticals
             </h1>
             <p className="text-xs tracking-widest uppercase font-semibold text-stone-700">
               Luxury Eyewear Atelier &amp; Clinical Optometry • Estd. 1995
@@ -1333,7 +1333,7 @@ export default function AdminOrderDetailPage() {
           </div>
           <div className="text-right flex flex-col items-end justify-end">
             <div className="w-36 border-b border-black mb-1"></div>
-            <div className="font-bold text-xs uppercase">For Shivam Optics</div>
+            <div className="font-bold text-xs uppercase">For Shivam Opticals</div>
             <div className="text-[10px] text-stone-500">Authorized Optician &amp; Signatory</div>
           </div>
         </div>

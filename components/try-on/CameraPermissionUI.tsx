@@ -44,7 +44,7 @@ export const CameraPermissionUI: React.FC<CameraPermissionUIProps> = ({
         <p className="font-sans text-xs sm:text-sm text-stone-600 mb-6 leading-relaxed">
           {isError
             ? errorInfo?.message || "Please allow camera access to try on luxury frames in real-time."
-            : "Shivam Optics uses your device camera to accurately place 3D frames on your face in real time."}
+            : "Shivam Opticals uses your device camera to accurately place 3D frames on your face in real time."}
         </p>
 
         {isError && errorInfo?.instructions && errorInfo.instructions.length > 0 && (

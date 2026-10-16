@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy & Optical Data Charter
           </h1>
           <p className="text-xs sm:text-sm text-stone-600 max-w-3xl leading-relaxed">
-            At Shivam Optical Atelier, we hold the privacy of your optical diagnostic records, pupil distance measurements, and transaction history to the highest standards of confidentiality and medical integrity.
+            At Shivam Opticals Atelier, we hold the privacy of your optical diagnostic records, pupil distance measurements, and transaction history to the highest standards of confidentiality and medical integrity.
           </p>
           <p className="text-[11px] text-stone-400">
             Last Updated & Certified: October 2026 • Effective for all storefront purchases and in-store consultations.
@@ -154,7 +154,7 @@ export default function PrivacyPolicyPage() {
               <h4 className="font-bold text-[#0A251C] uppercase tracking-wider text-[11px]">
                 Data Protection Officer
               </h4>
-              <p>Shivam Optical Atelier Grievance Redressal</p>
+              <p>Shivam Opticals Atelier Grievance Redressal</p>
               <p className="text-[#0A251C] font-medium">dpo@shivamoptics.in</p>
               <p>Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Ph 1 Ext, Delhi</p>
             </div>
@@ -215,7 +215,7 @@ export default function PrivacyPolicyPage() {
 
                 <div className="prose text-xs text-stone-600 space-y-4 leading-relaxed">
                   <p>
-                    Shivam Optics processes clinical prescription measurements (Sphere, Cylinder, Axis, Pupillary Distance, and Add power) exclusively to engineer custom corrective lenses.
+                    Shivam Opticals processes clinical prescription measurements (Sphere, Cylinder, Axis, Pupillary Distance, and Add power) exclusively to engineer custom corrective lenses.
                   </p>
                   <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 space-y-2 text-emerald-900">
                     <h3 className="font-bold text-xs uppercase tracking-wide flex items-center gap-1.5">

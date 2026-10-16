@@ -43,7 +43,7 @@ function LoginContent() {
         <div className="text-center space-y-1">
           <p className="flex items-center justify-center gap-1.5 text-[11px] text-stone-400">
             <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Secure account authentication • Shivam Optics</span>
+            <span>Secure account authentication • Shivam Opticals</span>
           </p>
         </div>
       </div>

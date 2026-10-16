@@ -439,10 +439,10 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
             <Camera className="w-5 h-5 text-[#C5A059]" />
             <div>
               <h3 className="font-serif text-xs sm:text-sm tracking-widest uppercase font-bold text-[#C5A059]">
-                SHIVAM OPTICS 3D VIRTUAL TRY-ON
+                SHIVAM OPTICALS 3D VIRTUAL TRY-ON
               </h3>
               <p className="text-[10px] text-stone-300 font-sans tracking-wider uppercase">
-                {activeProduct.brand || "SHIVAM OPTICS"} • {activeProduct.name}
+                {activeProduct.brand || "SHIVAM OPTICALS"} • {activeProduct.name}
               </p>
             </div>
           </div>
@@ -526,7 +526,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
             <div className="space-y-4">
               <div>
                 <span className="font-serif text-[11px] font-bold text-[#C5A059] tracking-widest uppercase block">
-                  {activeProduct.brand || "SHIVAM OPTICS"}
+                  {activeProduct.brand || "SHIVAM OPTICALS"}
                 </span>
                 <h4 className="font-serif text-base sm:text-lg font-bold text-[#0A251C] leading-tight mt-0.5">
                   {activeProduct.name}

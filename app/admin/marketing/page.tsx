@@ -110,7 +110,7 @@ export default function AdminMarketingPage() {
           </div>
           <div>
             <h3 className="text-sm font-semibold text-[#0A251C]">Storefront Announcement Ticker</h3>
-            <p className="text-xs text-stone-500">Appears at the very top of the Shivam Optics storefront</p>
+            <p className="text-xs text-stone-500">Appears at the very top of the Shivam Opticals storefront</p>
           </div>
         </div>
 

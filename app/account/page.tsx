@@ -68,7 +68,7 @@ function AccountDashboard() {
     rightEye: { sph: "-1.25", cyl: "-0.50", axis: "90" },
     leftEye: { sph: "-1.50", cyl: "-0.50", axis: "85" },
     pd: "63.5",
-    doctor: "Dr. K. Sharma (Shivam Optical Atelier)",
+    doctor: "Dr. K. Sharma (Shivam Opticals Atelier)",
     date: "14 Sept 2026",
   });
   const [isEditingRx, setIsEditingRx] = useState(false);

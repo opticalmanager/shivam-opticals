@@ -3,7 +3,7 @@ import { PRODUCTS } from "@/data/products";
 import { Product, FilterState, ProductVariant } from "@/types";
 
 /**
- * Shivam Optics - Product Service
+ * Shivam Opticals - Product Service
  * Dual-layer product loading: fetches from Supabase / PostgreSQL if available,
  * with instantaneous in-memory caching, comprehensive filtering, and fallback to static catalog.
  */
@@ -92,7 +92,7 @@ function mapRowToProduct(row: any): Product {
 
   return {
     id: row.slug || row.id,
-    brand: row.brand?.name || localMatch?.brand || "Shivam Optics",
+    brand: row.brand?.name || localMatch?.brand || "Shivam Opticals",
     name: row.name,
     subtitle: row.subtitle || localMatch?.subtitle,
     price,

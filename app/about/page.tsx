@@ -45,7 +45,7 @@ export default function AboutPage() {
               <div className="rounded-2xl overflow-hidden shadow-lg border border-[#E8DEC8] bg-[#FCFAF7] relative">
                 <img
                   src="/images/artisan_craft_banner.png"
-                  alt="Shivam Optical Eyewear Fitting and Care"
+                  alt="Shivam Opticals Eyewear Fitting and Care"
                   className="w-full h-auto object-cover"
                 />
                 <div className="p-5 bg-white border-t border-[#E8DEC8]">
@@ -55,7 +55,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-[#0A251C]">
-                        Shivam Optical
+                        Shivam Opticals
                       </h4>
                       <p className="text-xs text-[#7A7571]">
                         Mayur Vihar Phase 1, Delhi • Est. Store
@@ -79,7 +79,7 @@ export default function AboutPage() {
 
               <div className="space-y-4 text-sm text-neutral-600 leading-relaxed font-normal">
                 <p>
-                  At <strong className="text-[#0A251C] font-semibold">Shivam Optical</strong>,
+                  At <strong className="text-[#0A251C] font-semibold">Shivam Opticals</strong>,
                   our goal is very simple: to make sure you see clearly and feel
                   comfortable in your glasses every single day.
                 </p>
@@ -131,7 +131,7 @@ export default function AboutPage() {
               OUR SERVICES
             </span>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
-              What You Get at Shivam Optical
+              What You Get at Shivam Opticals
             </h2>
             <p className="text-xs sm:text-sm text-neutral-600">
               Everything you need for your vision under one roof
@@ -208,7 +208,7 @@ export default function AboutPage() {
                   VISIT OUR STORE
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#0A251C] leading-tight">
-                  Shivam Optical
+                  Shivam Opticals
                 </h2>
                 <div className="space-y-3.5 pt-2 text-sm text-[#1A1816]">
                   <div className="flex items-start gap-3.5">

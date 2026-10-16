@@ -9,8 +9,8 @@ export async function GET() {
 
     return NextResponse.json({
       status: "ok",
-      brand: "Shivam Optics",
-      service: "Shivam Optics Atelier & Clinical Eyewear System",
+      brand: "Shivam Opticals",
+      service: "Shivam Opticals Atelier & Clinical Eyewear System",
       timestamp: new Date().toISOString(),
       database: {
         connected: dbConnected,
@@ -21,8 +21,8 @@ export async function GET() {
     return NextResponse.json(
       {
         status: "degraded",
-        brand: "Shivam Optics",
-        service: "Shivam Optics Atelier & Clinical Eyewear System",
+        brand: "Shivam Opticals",
+        service: "Shivam Opticals Atelier & Clinical Eyewear System",
         timestamp: new Date().toISOString(),
         database: {
           connected: false,

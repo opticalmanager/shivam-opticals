@@ -68,7 +68,7 @@ export default function ContactPage() {
             <span className="text-[#C5A059] font-bold">Contact & Atelier Store</span>
           </div>
           <span className="text-[11px] font-bold tracking-[0.25em] text-[#C5A059] uppercase block">
-            SHIVAM OPTICAL ATELIER • MAYUR VIHAR PHASE 1
+            SHIVAM OPTICALS ATELIER • MAYUR VIHAR PHASE 1
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0A251C] tracking-tight">
             Consult With Our Optical Masters
@@ -90,7 +90,7 @@ export default function ContactPage() {
                   PHYSICAL FLAGSHIP
                 </span>
                 <h2 className="text-xl font-serif font-bold text-[#0A251C]">
-                  Shivam Optical Flagship Atelier
+                  Shivam Opticals Flagship Atelier
                 </h2>
               </div>
 
@@ -238,7 +238,7 @@ export default function ContactPage() {
                   Inquiry Received
                 </h3>
                 <p className="text-xs text-stone-600 max-w-md mx-auto leading-relaxed">
-                  Thank you for reaching out to Shivam Optical. A senior optometrist concierge has been notified and will contact you via phone or email shortly.
+                  Thank you for reaching out to Shivam Opticals. A senior optometrist concierge has been notified and will contact you via phone or email shortly.
                 </p>
                 <button
                   type="button"

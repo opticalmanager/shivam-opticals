@@ -49,7 +49,7 @@ export const DEFAULT_SHIPPING_CONFIG: ShippingConfig = {
   shiprocketPickupLocation: process.env.SHIPROCKET_PICKUP_LOCATION || "work",
   shiprocketPickupAddress:
     process.env.SHIPROCKET_PICKUP_ADDRESS ||
-    "Shivam Optics Atelier, Main Market",
+    "Shivam Opticals Atelier, Main Market",
   shiprocketPickupCity: process.env.SHIPROCKET_PICKUP_CITY || "Delhi",
   shiprocketPickupState: process.env.SHIPROCKET_PICKUP_STATE || "Delhi",
   shiprocketPickupPincode: process.env.SHIPROCKET_PICKUP_PINCODE || "110001",

@@ -97,7 +97,7 @@ export const CheckoutBillDetails: React.FC<CheckoutBillDetailsProps> = ({
             </div>
             {isDiscountExpanded && (
               <div className="pl-3 pr-1 py-1 text-[11px] text-[#16803E] flex justify-between">
-                <span>Shivam Optics Privilege Voucher</span>
+                <span>Shivam Opticals Privilege Voucher</span>
                 <span>- {formatCurrency(discount)}</span>
               </div>
             )}

@@ -1,5 +1,5 @@
 /**
- * Shivam Optics - Patron Identity & Fallback Resolution Utilities
+ * Shivam Opticals - Patron Identity & Fallback Resolution Utilities
  * Industrial logic for patron name formatting, email validation, and luxury identity fallback.
  */
 
