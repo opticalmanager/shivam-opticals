@@ -48,7 +48,7 @@ export const CheckoutBillDetails: React.FC<CheckoutBillDetailsProps> = ({
 
         {/* Bill Heading */}
         <h3 className="font-serif font-bold text-[#0A251C] text-base sm:text-lg tracking-tight mb-4">
-          Order Summary & Tax Statement
+          Order Summary
         </h3>
 
         {/* Breakdown Items */}
@@ -71,7 +71,7 @@ export const CheckoutBillDetails: React.FC<CheckoutBillDetailsProps> = ({
             </div>
             {isPriceExpanded && (
               <div className="pl-3 pr-1 py-1 text-[11px] text-[#716B64] flex justify-between">
-                <span>Includes Designer Frames & Precision Lenses</span>
+                <span>Includes Frames &amp; Lenses</span>
                 <span>{formatCurrency(subtotal)}</span>
               </div>
             )}
@@ -97,7 +97,7 @@ export const CheckoutBillDetails: React.FC<CheckoutBillDetailsProps> = ({
             </div>
             {isDiscountExpanded && (
               <div className="pl-3 pr-1 py-1 text-[11px] text-[#16803E] flex justify-between">
-                <span>Shivam Opticals Privilege Voucher</span>
+                <span>Coupon Discount</span>
                 <span>- {formatCurrency(discount)}</span>
               </div>
             )}
@@ -105,7 +105,7 @@ export const CheckoutBillDetails: React.FC<CheckoutBillDetailsProps> = ({
 
           {/* Shipping fee */}
           <div className="flex items-center justify-between text-[#716B64]">
-            <span>Shipping & White-Glove Handling</span>
+            <span>Delivery Charges</span>
             <span className="font-semibold text-[#1A1816]">
               {shippingFee === 0 ? (
                 <span className="text-[#16803E] uppercase font-bold tracking-wider text-[11px]">
@@ -119,13 +119,13 @@ export const CheckoutBillDetails: React.FC<CheckoutBillDetailsProps> = ({
 
           {/* GST */}
           <div className="flex items-center justify-between text-[11px] text-[#716B64]">
-            <span>Estimated GST (12% Optical Frames / 18% Lenses)</span>
+            <span>Taxes (GST)</span>
             <span>Included in Price</span>
           </div>
 
           {/* Divider */}
           <div className="border-t border-[#E8DEC8] pt-3 flex items-center justify-between text-sm sm:text-base font-bold text-[#0A251C]">
-            <span>Total Payable Amount</span>
+            <span>Total Amount</span>
             <span className="text-lg font-mono font-bold text-[#0A251C]">
               {formatCurrency(totalPayable)}
             </span>
@@ -154,7 +154,7 @@ export const CheckoutBillDetails: React.FC<CheckoutBillDetailsProps> = ({
         {/* Security badge */}
         <div className="mt-4 pt-4 border-t border-[#E8DEC8]/60 flex items-center justify-center gap-2 text-[11px] text-[#716B64]">
           <ShieldCheck className="w-4 h-4 text-[#C5A059]" />
-          <span>256-bit Bank Grade Encryption • Official Razorpay Gateway</span>
+          <span>100% Safe &amp; Secure Payment</span>
         </div>
       </div>
     </div>

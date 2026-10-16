@@ -79,7 +79,7 @@ export default function StandaloneCartPage() {
             Your Eyewear Atelier Bag
           </h1>
           <p className="text-xs text-stone-500">
-            Review your selected designer frames and clinical optical configurations before lab assembly.
+            Review your selected frames and lenses before checkout.
           </p>
         </div>
       </section>
@@ -249,7 +249,7 @@ export default function StandaloneCartPage() {
                 {/* Subtotals */}
                 <div className="space-y-2 text-xs text-stone-600 font-sans">
                   <div className="flex justify-between">
-                    <span>Catalog Subtotal</span>
+                    <span>Subtotal</span>
                     <span className="font-mono font-bold text-[#0A251C]">{formatCurrency(rawSubtotal)}</span>
                   </div>
 
@@ -262,20 +262,20 @@ export default function StandaloneCartPage() {
 
                   {discountAmount > 0 && (
                     <div className="flex justify-between text-emerald-700 font-semibold">
-                      <span>Privilege Discount ({discountPercentage}%)</span>
+                      <span>Coupon Discount ({discountPercentage}%)</span>
                       <span className="font-mono">-{formatCurrency(discountAmount)}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between">
-                    <span>Insured Courier Shipping</span>
+                    <span>Delivery</span>
                     <span className="font-mono font-bold text-[#0A251C]">
                       {isDeliveryFree ? "FREE" : formatCurrency(deliveryCharge)}
                     </span>
                   </div>
 
                   <div className="pt-2 border-t border-[#E8DEC8] flex justify-between text-sm font-bold text-[#0A251C]">
-                    <span>Grand Total</span>
+                    <span>Total</span>
                     <span className="font-mono text-base text-[#0A251C]">
                       {formatCurrency(finalPayable)}
                     </span>
@@ -305,7 +305,7 @@ export default function StandaloneCartPage() {
                           type="text"
                           value={promoInput}
                           onChange={(e) => setPromoInput(e.target.value)}
-                          placeholder="Promo code (e.g. FLAT12)"
+                          placeholder="Coupon code (e.g. FLAT12)"
                           className="flex-1 uppercase px-3 py-2 bg-[#FCFAF7] border border-[#E8DEC8] text-xs rounded-xl focus:outline-none focus:border-[#C5A059]"
                         />
                         <button
@@ -330,7 +330,7 @@ export default function StandaloneCartPage() {
                   className="w-full py-4 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold tracking-[0.2em] uppercase rounded-xl transition flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
                   <Lock className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>PROCEED TO SECURE CHECKOUT</span>
+                  <span>PROCEED TO CHECKOUT</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
 
@@ -338,11 +338,11 @@ export default function StandaloneCartPage() {
                 <div className="pt-2 border-t border-[#E8DEC8] grid grid-cols-2 gap-2 text-[10px] text-stone-500">
                   <div className="flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>1-Year Atelier Warranty</span>
+                    <span>1-Year Warranty</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Truck className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>Insured Delivery</span>
+                    <span>Free Delivery</span>
                   </div>
                 </div>
               </div>

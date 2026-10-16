@@ -130,10 +130,10 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
             </div>
             <div>
               <span className="text-[10px] font-bold uppercase tracking-wider text-[#716B64]">
-                Patron Identification
+                Account Details
               </span>
               <h3 className="text-sm font-bold text-[#0A251C]">
-                {isLoggedIn ? user.name || user.phone : "Guest Patron"}
+                {isLoggedIn ? user.name || user.phone : "Guest Checkout"}
               </h3>
             </div>
           </div>
@@ -153,7 +153,7 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
               onClick={() => openAuthModal("/checkout")}
               className="px-4 py-2 rounded-xl bg-[#0A251C] hover:bg-[#C5A059] text-white hover:text-[#0A251C] text-xs font-bold uppercase tracking-wider transition cursor-pointer"
             >
-              Sign In with OTP
+              Sign In
             </button>
           )}
         </div>
@@ -174,7 +174,7 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
         {isLoggedIn && savedAddresses.length > 0 && (
           <div className="space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#716B64]">
-              Select Saved Destination
+              Saved Addresses
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {savedAddresses.map((addr, idx) => {
@@ -348,18 +348,18 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
         )}
       </div>
 
-      {/* 3. Shipping Method — Powered by Shiprocket */}
+      {/* 3. Shipping Method */}
       <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Truck className="w-4 h-4 text-[#C5A059]" />
             <h3 className="font-serif font-bold text-[#0A251C] text-base">
-              Delivery Logistics Partner
+              Delivery Method
             </h3>
           </div>
           <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FAF3EB] border border-[#E8DEC8] text-[10px] font-bold uppercase tracking-wider text-[#0A251C]">
             <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Shiprocket Verified</span>
+            <span>Tracked Delivery</span>
           </div>
         </div>
 
@@ -374,9 +374,9 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
           >
             <div>
               <div className="flex items-center gap-1.5 mb-1">
-                <span className="font-bold text-[#0A251C]">Shiprocket Standard Surface</span>
+                <span className="font-bold text-[#0A251C]">Standard Delivery</span>
               </div>
-              <p className="text-[#716B64]">3–5 Business Days • Real-time SMS Tracking</p>
+              <p className="text-[#716B64]">3–5 Business Days • Doorstep Delivery</p>
               <p className="text-[11px] text-[#C5A059] font-medium mt-1">
                 Estimated Delivery: {getEstimatedDeliveryDate(4)}
               </p>
@@ -396,9 +396,9 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
           >
             <div>
               <div className="flex items-center gap-1.5 mb-1">
-                <span className="font-bold text-[#0A251C]">Shiprocket Priority Air Express</span>
+                <span className="font-bold text-[#0A251C]">Express Delivery</span>
               </div>
-              <p className="text-[#716B64]">1–2 Business Days • Insured Express Dispatch</p>
+              <p className="text-[#716B64]">1–2 Business Days • Priority Dispatch</p>
               <p className="text-[11px] text-[#C5A059] font-medium mt-1">
                 Estimated Delivery: {getEstimatedDeliveryDate(2)}
               </p>
@@ -410,22 +410,22 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
         </div>
       </div>
 
-      {/* 4. Payment Method — Razorpay Exclusive */}
+      {/* 4. Payment Method */}
       <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <CreditCard className="w-4 h-4 text-[#C5A059]" />
             <h3 className="font-serif font-bold text-[#0A251C] text-base">
-              Secure Payment Gateway
+              Payment Method
             </h3>
           </div>
           <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#16803E]/10 border border-[#16803E]/20 text-[10px] font-bold uppercase tracking-wider text-[#16803E]">
             <Lock className="w-3 h-3" />
-            <span>256-Bit SSL Encrypted</span>
+            <span>100% Secure Checkout</span>
           </div>
         </div>
 
-        {/* Exclusive Razorpay Gateway Card */}
+        {/* Razorpay Gateway Card */}
         <div
           onClick={() => onPaymentMethodChange("razorpay")}
           className="p-5 rounded-2xl border border-[#0A251C] bg-[#FAF7F2] ring-1 ring-[#0A251C] cursor-pointer transition shadow-2xs space-y-3"
@@ -437,24 +437,24 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
               </div>
               <div>
                 <span className="font-bold text-sm text-[#0A251C] block">
-                  Razorpay Official Gateway
+                  Online Payment (UPI, Cards, NetBanking)
                 </span>
                 <span className="text-[11px] text-[#716B64]">
-                  Instant UPI (GPay, PhonePe, Paytm), Cards, NetBanking, and Wallets
+                  Instant UPI (Google Pay, PhonePe, Paytm), Credit &amp; Debit Cards, NetBanking
                 </span>
               </div>
             </div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803E] bg-[#16803E]/10 border border-[#16803E]/30 px-2.5 py-0.5 rounded-full shrink-0">
-              OFFICIAL INTEGRATION
+              RECOMMENDED
             </span>
           </div>
 
           {/* Supported Methods Badges */}
           <div className="pt-2 border-t border-[#E8DEC8]/60 flex flex-wrap items-center gap-2 text-[10px] font-semibold text-[#716B64]">
-            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">UPI (GPay / PhonePe / Paytm / BHIM)</span>
-            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">Credit & Debit Cards</span>
+            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">UPI (Google Pay, PhonePe, Paytm)</span>
+            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">Credit &amp; Debit Cards</span>
             <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">NetBanking (50+ Banks)</span>
-            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">Zero Surcharge</span>
+            <span className="px-2 py-1 rounded-md bg-white border border-[#E8DEC8]">Zero Extra Charges</span>
           </div>
         </div>
 
@@ -473,17 +473,17 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
             {isSubmitting ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
-                <span>Launching Razorpay Secure Window...</span>
+                <span>Opening Payment Window...</span>
               </>
             ) : (
               <>
                 <Lock className="w-4 h-4 text-[#C5A059]" />
-                <span>Pay Securely via Razorpay ({formatCurrency(totalPayable)})</span>
+                <span>Complete Payment ({formatCurrency(totalPayable)})</span>
               </>
             )}
           </button>
           <p className="text-[11px] text-center text-[#716B64] mt-2">
-            By proceeding, your payment will be securely processed by Razorpay with end-to-end encryption.
+            Your payment information is encrypted and securely processed with full fraud protection.
           </p>
         </div>
       </div>

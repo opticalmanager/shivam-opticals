@@ -17,10 +17,10 @@ export const CheckoutBreadcrumbs: React.FC<CheckoutBreadcrumbsProps> = ({
   canNavigateTo,
 }) => {
   const steps: { key: CheckoutStep; label: string }[] = [
-    { key: "login", label: "Identification" },
-    { key: "address", label: "Shipping Address" },
-    { key: "payment", label: "Payment & Verification" },
-    { key: "summary", label: "Order Receipt" },
+    { key: "login", label: "Account" },
+    { key: "address", label: "Address" },
+    { key: "payment", label: "Payment" },
+    { key: "summary", label: "Confirmation" },
   ];
 
   return (

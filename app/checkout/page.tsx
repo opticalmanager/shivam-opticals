@@ -145,7 +145,7 @@ function CheckoutContent() {
       window.scrollTo({ top: 0, behavior: "smooth" });
 
       toast.success("Order Placed Successfully", {
-        description: `Order #${trackingNumber} registered in Mayur Vihar optical lab queue.`,
+        description: `Order #${trackingNumber} has been confirmed. Thank you!`,
       });
     } catch (e) {
       console.warn("Order save fallback:", e);
@@ -224,8 +224,8 @@ function CheckoutContent() {
 
       if (!createData.success || !createData.order_id) {
         setIsSubmittingOrder(false);
-        toast.error("Payment Gateway Error", {
-          description: createData.error || "Failed to initialize secure payment order. Please try again.",
+        toast.error("Unable to Start Payment", {
+          description: createData.error || "Please try again or select another payment option.",
         });
         return;
       }
@@ -233,8 +233,8 @@ function CheckoutContent() {
       const isLoaded = await loadRazorpay();
       if (!isLoaded) {
         setIsSubmittingOrder(false);
-        toast.error("Payment Gateway Unavailable", {
-          description: "Could not load Razorpay secure checkout SDK. Please verify your connection.",
+        toast.error("Payment Unavailable", {
+          description: "Could not load the payment window. Please check your internet connection.",
         });
         return;
       }
@@ -246,7 +246,7 @@ function CheckoutContent() {
         amount: createData.amount,
         currency: createData.currency || "INR",
         name: "Shivam Opticals",
-        description: "Designer Eyewear & Clinical Lenses Atelier",
+        description: "Eyewear & Prescription Lenses",
         order_id: createData.order_id,
         prefill: {
           name:
@@ -287,15 +287,15 @@ function CheckoutContent() {
               );
             } else {
               setIsSubmittingOrder(false);
-              toast.error("Payment Signature Verification Failed", {
-                description: "Security check failed. Please contact customer support with Payment ID: " + response.razorpay_payment_id,
+              toast.error("Payment Verification Failed", {
+                description: "We could not verify this transaction. Please contact support with Payment ID: " + response.razorpay_payment_id,
               });
             }
           } catch (verErr) {
             console.error("Verification network error:", verErr);
             setIsSubmittingOrder(false);
-            toast.error("Network Verification Delayed", {
-              description: "Payment captured on gateway. Our systems are verifying confirmation.",
+            toast.error("Verification Delayed", {
+              description: "Payment received. We are confirming your order now.",
             });
           }
         },
@@ -383,10 +383,10 @@ function CheckoutContent() {
         <div className="mb-6 flex items-center justify-between">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C5A059] block mb-0.5">
-              SECURE CHECKOUT PIPELINE
+              SECURE CHECKOUT
             </span>
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
-              Delivery Destination & Payment
+              Shipping &amp; Payment
             </h1>
           </div>
           <Link
@@ -394,7 +394,7 @@ function CheckoutContent() {
             className="text-xs text-[#716B64] hover:text-[#0A251C] flex items-center gap-1.5 transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Modify Cart Items</span>
+            <span>Back to Cart</span>
           </Link>
         </div>
 
@@ -441,7 +441,7 @@ export default function CheckoutPage() {
         <div className="min-h-screen bg-[#FAF7F2] py-24 text-center">
           <div className="inline-block w-8 h-8 border-2 border-[#C5A059] border-t-transparent rounded-full animate-spin"></div>
           <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-[#716B64]">
-            Initializing Secure Checkout...
+            Loading Checkout...
           </p>
         </div>
       }

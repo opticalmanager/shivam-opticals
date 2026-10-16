@@ -172,13 +172,13 @@ function CallbackContent() {
             </div>
             <div>
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059] block mb-1">
-                AUTHENTICATING PATRON TOKEN
+                CONFIRMING YOUR ACCOUNT
               </span>
               <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0A251C]">
                 Confirming Your Email...
               </h2>
               <p className="text-xs text-stone-500 mt-2 max-w-xs mx-auto">
-                Validating your cryptographic verification link and initializing your Shivam Opticals vault session.
+                Verifying your confirmation link and logging you in to your account.
               </p>
             </div>
           </div>
@@ -194,10 +194,10 @@ function CallbackContent() {
                 VERIFICATION COMPLETE
               </span>
               <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0A251C]">
-                Authentication Verified
+                Email Confirmed
               </h2>
               <p className="text-xs text-stone-500 mt-2">
-                Your patron privileges are active. Transferring you to your destination now...
+                Your account has been verified. Redirecting you now...
               </p>
             </div>
           </div>
@@ -235,7 +235,7 @@ function CallbackContent() {
         {/* Security badge */}
         <div className="pt-4 border-t border-[#E8DEC8]/60 flex items-center justify-center gap-1.5 text-[11px] text-stone-400">
           <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-          <span>256-Bit SSL Encrypted Session • Mayur Vihar Atelier</span>
+          <span>100% Safe &amp; Secure</span>
         </div>
       </div>
     </div>
@@ -250,7 +250,7 @@ export default function AuthCallbackPage() {
           <div className="text-center space-y-2">
             <Loader2 className="w-6 h-6 animate-spin text-[#C5A059] mx-auto" />
             <p className="text-xs text-stone-500 uppercase tracking-widest font-semibold">
-              Loading Atelier Verification...
+              Loading...
             </p>
           </div>
         </div>

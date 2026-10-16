@@ -75,7 +75,7 @@ export const Header: React.FC = () => {
                 type="button"
                 onClick={openLoginModal}
                 className="relative inline-flex items-center justify-center p-1 group hover:scale-105 transition-transform cursor-pointer"
-                title="Sign In / Patron Account"
+                title="Sign In / My Account"
               >
                 <User className="w-[20px] h-[20px] text-[#2B2825] group-hover:text-black transition" />
               </button>

@@ -19,6 +19,7 @@ This documentation serves as:
 | **[5. Catalog Variants & 3D Virtual Try-On](file:///c:/Users/Gaurav/Desktop/shivam-optics/docs/catalog_variants_and_tryon.md)** | Multi-color variant SKU matrix (1:N), Cloudflare R2 high-res image streaming, and client-side 3D try-on with MediaPipe 478 face landmarks and Three.js. |
 | **[6. Dayal Eyewear Scraper Guide](file:///c:/Users/Gaurav/Desktop/shivam-optics/docs/dayal_scraper_guide.md)** | High-throughput catalog ingestion, media downloading, and variant normalization pipeline. |
 | **[7. Supabase Email Templates Suite](file:///c:/Users/Gaurav/Desktop/shivam-optics/docs/supabase_email_templates.md)** | Responsive HTML email templates for patron registration, email verification, password reset, and invites. |
+| **[8. Storefront UX & Copywriting Standards](file:///c:/Users/Gaurav/Desktop/shivam-optics/docs/storefront_ux_and_copywriting_standards.md)** | Translation of developer/infrastructure jargon into industry-standard luxury e-commerce copy, clean trust signals, and zero-emoji UI standards. |
 
 ---
 

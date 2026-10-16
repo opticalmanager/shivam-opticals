@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs text-[#716B64]">
               <li>
                 <Link href="/account" className="hover:text-[#1A1816] transition">
-                  Patron Account & Orders
+                  My Account &amp; Orders
                 </Link>
               </li>
               <li>
@@ -145,7 +145,7 @@ export const Footer: React.FC = () => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#716B64] gap-4">
           <p>© 2026 SHIVAM OPTICALS. ALL RIGHTS RESERVED. MAYUR VIHAR PHASE I, DELHI - 110091.</p>
           <div className="flex items-center space-x-6">
-            <span>SECURE ENCRYPTED CHECKOUT</span>
+            <span>100% SECURE CHECKOUT</span>
             <span>•</span>
             <span>UPI / CARDS / NETBANKING</span>
             <span>•</span>

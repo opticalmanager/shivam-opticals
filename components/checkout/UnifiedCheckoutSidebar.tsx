@@ -190,12 +190,12 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
         })}
       </div>
 
-      {/* 3. Shiprocket Free Shipping Incentive Bar */}
+      {/* 3. Delivery Incentive Bar */}
       <div className="p-3 rounded-xl bg-white border border-[#E8DEC8] text-xs space-y-1.5">
         <div className="flex items-center justify-between text-[11px] font-semibold">
           <span className="flex items-center gap-1.5 text-[#0A251C]">
             <Truck className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Shiprocket Insured Delivery</span>
+            <span>Delivery</span>
           </span>
           <span className={amountNeededForFreeShipping === 0 ? "text-[#16803E] font-bold" : "text-[#716B64]"}>
             {amountNeededForFreeShipping === 0
@@ -211,7 +211,7 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
         </div>
       </div>
 
-      {/* 4. Privilege Voucher Form */}
+      {/* 4. Promo Code Form */}
       <div>
         {appliedCoupon ? (
           <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-[#16803E]/30 text-xs">
@@ -221,14 +221,14 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
                 <span className="font-bold text-[#16803E] uppercase tracking-wider">
                   {appliedCoupon}
                 </span>
-                <span className="text-[#716B64] ml-2 text-[11px]">Privilege Applied</span>
+                <span className="text-[#716B64] ml-2 text-[11px]">Coupon Applied</span>
               </div>
             </div>
             <button
               type="button"
               onClick={removeCoupon}
               className="text-[#716B64] hover:text-red-600 transition p-1 cursor-pointer"
-              title="Remove privilege voucher"
+              title="Remove coupon code"
             >
               <X className="w-4 h-4" />
             </button>
@@ -237,7 +237,7 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
           <form onSubmit={handleApplyCoupon} className="flex gap-2">
             <input
               type="text"
-              placeholder="Privilege Voucher (e.g. FLAT12)"
+              placeholder="Coupon Code (e.g. FLAT12)"
               value={couponInput}
               onChange={(e) => setCouponInput(e.target.value)}
               className="flex-1 bg-white border border-[#E8DEC8] rounded-xl px-3.5 py-2 text-xs text-[#0A251C] uppercase placeholder:normal-case placeholder:text-neutral-400 focus:outline-none focus:border-[#C5A059] transition"
@@ -253,7 +253,7 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
         )}
       </div>
 
-      {/* 5. Itemized Financial Charges Breakdown */}
+      {/* 5. Financial Charges Breakdown */}
       <div className="space-y-2.5 pt-3 border-t border-[#E8DEC8] text-xs sm:text-sm">
         <div className="flex justify-between text-[#716B64]">
           <span>Frames Subtotal</span>
@@ -271,14 +271,14 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
           <div className="flex justify-between text-[#16803E]">
             <span className="flex items-center gap-1">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Privilege Voucher Discount</span>
+              <span>Coupon Discount</span>
             </span>
             <span className="font-semibold font-mono">- {formatCurrency(discountAmount)}</span>
           </div>
         )}
 
         <div className="flex justify-between text-[#716B64]">
-          <span>Shiprocket Insured Delivery</span>
+          <span>Delivery</span>
           <span className="font-semibold text-[#0A251C] font-mono">
             {shippingFee === 0 ? (
               <span className="text-[#16803E] font-bold uppercase tracking-wider text-[11px]">
@@ -294,7 +294,7 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
           <div>
             <span>Total Payable</span>
             <span className="block text-[10px] text-[#716B64] font-normal">
-              Includes 18% GST (HSN 9003 & 9001)
+              Inclusive of all taxes
             </span>
           </div>
           <span className="font-mono text-xl text-[#0A251C]">
@@ -307,15 +307,15 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
       <div className="pt-2 border-t border-[#E8DEC8]/60 space-y-2 text-[11px] text-[#716B64]">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-[#C5A059] shrink-0" />
-          <span>Shiprocket Insured Transit • Doorstep Delivery</span>
+          <span>Free &amp; Insured Doorstep Delivery</span>
         </div>
         <div className="flex items-center gap-2">
           <Lock className="w-4 h-4 text-[#C5A059] shrink-0" />
-          <span>Razorpay 256-bit SSL Secure Payment Gateway</span>
+          <span>100% Safe &amp; Secure Payment</span>
         </div>
         <div className="flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0" />
-          <span>Mayur Vihar Clinical Optical Lab Certified</span>
+          <span>100% Certified Authentic Eyewear</span>
         </div>
       </div>
     </div>

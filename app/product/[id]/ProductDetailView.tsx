@@ -736,11 +736,11 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     </span>
                   </div>
                 )}
-                {/* Optical HSN Tax Codes */}
+                {/* Authenticity Guarantee */}
                 <div className="grid grid-cols-2 px-3.5 py-2 bg-neutral-50/50">
-                  <span className="text-neutral-500 font-normal">Optical HSN Code</span>
+                  <span className="text-neutral-500 font-normal">Authenticity</span>
                   <span className="font-bold text-right text-[#1A1816]">
-                    {product.category === "contact-lenses" ? "9001 (Contact Lenses)" : "9003 (Spectacle Frames)"}
+                    100% Certified Original
                   </span>
                 </div>
               </div>

@@ -109,10 +109,10 @@ function AccountDashboard() {
             <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-stone-500 font-semibold">
               <Link href="/" className="hover:text-[#0A251C] transition">Home</Link>
               <span>/</span>
-              <span className="text-[#C5A059] font-bold">Patron Atelier Account</span>
+              <span className="text-[#C5A059] font-bold">My Account</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
-              Welcome, {user?.name || "Distinguished Patron"}
+              Welcome, {user?.name || "Valued Customer"}
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-xs text-stone-600">
               <span className="flex items-center gap-1.5">
@@ -121,7 +121,7 @@ function AccountDashboard() {
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#0A251C] text-[#C5A059]">
                 <Sparkles className="w-3 h-3" />
-                Shivam Atelier Gold Patron
+                Shivam Opticals Member
               </span>
             </div>
           </div>
@@ -240,10 +240,10 @@ function AccountDashboard() {
                 <div className="flex items-center justify-between border-b border-[#E8DEC8] pb-3">
                   <div>
                     <h2 className="text-xl font-serif font-bold text-[#0A251C]">
-                      Order History & Lab Assembly
+                      Order History &amp; Tracking
                     </h2>
                     <p className="text-xs text-stone-500">
-                      Live tracking through the 5-stage Mayur Vihar optical lab queue
+                      Live status of your orders, lens preparation, and delivery
                     </p>
                   </div>
                   <Link
@@ -258,7 +258,7 @@ function AccountDashboard() {
                 {loadingOrders ? (
                   <div className="bg-white rounded-2xl border border-[#E8DEC8] p-12 text-center text-xs text-stone-500">
                     <Loader2 className="w-5 h-5 animate-spin mx-auto mb-2 text-[#C5A059]" />
-                    Retrieving orders from atelier ledger...
+                    Loading your orders...
                   </div>
                 ) : orders.length === 0 ? (
                   <div className="bg-white rounded-2xl border border-[#E8DEC8] p-12 text-center space-y-4">
@@ -597,7 +597,7 @@ function AccountDashboard() {
                         PRIVILEGE STATUS
                       </span>
                       <h3 className="text-2xl font-serif font-bold text-white mt-1">
-                        Gold Atelier Member
+                        Gold Member
                       </h3>
                     </div>
                     <Sparkles className="w-8 h-8 text-[#C5A059]" />
@@ -642,7 +642,7 @@ export default function AccountPage() {
           <div className="text-center space-y-2">
             <Loader2 className="w-6 h-6 animate-spin text-[#C5A059] mx-auto" />
             <p className="text-xs text-stone-500 uppercase tracking-widest">
-              Loading Atelier Account...
+              Loading Account...
             </p>
           </div>
         </div>

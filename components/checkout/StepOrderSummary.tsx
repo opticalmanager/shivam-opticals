@@ -32,11 +32,11 @@ export const StepOrderSummary: React.FC<StepOrderSummaryProps> = ({
   };
 
   const steps = [
-    { label: "Confirmed", status: "completed", desc: "Payment received & verified" },
-    { label: "Lab Assembly", status: "current", desc: "Mayur Vihar optical lens grinding" },
-    { label: "Quality Check", status: "upcoming", desc: "Laser alignment & PD verification" },
-    { label: "Dispatched", status: "upcoming", desc: "Express courier with live tracking" },
-    { label: "Delivered", status: "upcoming", desc: "Doorstep handoff with microfiber kit" },
+    { label: "Confirmed", status: "completed", desc: "Order confirmed & verified" },
+    { label: "Lab Crafting", status: "current", desc: "Precision lens fitting & finishing" },
+    { label: "Quality Check", status: "upcoming", desc: "Multi-point precision inspection" },
+    { label: "Dispatched", status: "upcoming", desc: "Shipped with live tracking updates" },
+    { label: "Delivered", status: "upcoming", desc: "Delivered safely to your doorstep" },
   ];
 
   return (
@@ -48,13 +48,13 @@ export const StepOrderSummary: React.FC<StepOrderSummaryProps> = ({
         </div>
 
         <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C5A059] block mb-1">
-          SHIVAM OPTICALS ATELIER ORDER CONFIRMED
+          ORDER CONFIRMED
         </span>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#0A251C] tracking-tight mb-2">
           Thank you for choosing Shivam Opticals
         </h2>
         <p className="text-xs sm:text-sm text-[#716B64] max-w-lg mx-auto">
-          An SMS confirmation and order invoice have been queued for{" "}
+          An order confirmation and tracking details have been sent to{" "}
           <strong className="text-[#0A251C]">{order.shippingAddress.email || order.shippingAddress.phone}</strong>.
         </p>
 
@@ -84,7 +84,7 @@ export const StepOrderSummary: React.FC<StepOrderSummaryProps> = ({
             className="px-5 py-2.5 rounded-xl border border-[#E8DEC8] bg-[#FAF7F2] hover:bg-[#FAF3EB] text-[#0A251C] font-bold text-xs flex items-center gap-2 transition cursor-pointer shadow-2xs"
           >
             <Printer className="w-4 h-4 text-[#716B64]" />
-            <span>Print Tax Invoice (GST 9003)</span>
+            <span>Download / Print Invoice</span>
           </button>
 
           <button
@@ -104,11 +104,11 @@ export const StepOrderSummary: React.FC<StepOrderSummaryProps> = ({
           <div className="flex items-center gap-2.5">
             <FlaskConical className="w-5 h-5 text-[#C5A059]" />
             <h3 className="font-serif font-bold text-[#0A251C] text-base sm:text-lg">
-              Mayur Vihar Optical Lab Assembly Queue
+              Order Crafting &amp; Delivery Status
             </h3>
           </div>
           <span className="text-xs font-mono font-bold text-[#16803E] bg-[#16803E]/10 px-2.5 py-1 rounded-full border border-[#16803E]/20">
-            IN CLINICAL ASSEMBLY
+            IN PREPARATION
           </span>
         </div>
 
@@ -147,7 +147,7 @@ export const StepOrderSummary: React.FC<StepOrderSummaryProps> = ({
         <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs">
           <h4 className="font-serif font-bold text-[#0A251C] text-sm mb-4 flex items-center gap-2">
             <Package className="w-4 h-4 text-[#C5A059]" />
-            <span>Prescription & Frame Packages</span>
+            <span>Ordered Items</span>
           </h4>
           <div className="space-y-3">
             {order.items.map((item) => (
