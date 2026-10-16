@@ -322,9 +322,9 @@ export default function AdminShippingApiSettingsPage() {
             onClick={() =>
               setShippingConfig({
                 ...shippingConfig,
-                shiprocketPickupLocation: "work",
-                shiprocketPickupAddress: "Pocket 1, Mayur Vihar Phase 1",
-                shiprocketPickupCity: "New Delhi",
+                shiprocketPickupLocation: "Mayur Vihar Atelier",
+                shiprocketPickupAddress: "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
+                shiprocketPickupCity: "Delhi",
                 shiprocketPickupState: "Delhi",
                 shiprocketPickupPincode: "110091",
               })

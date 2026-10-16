@@ -29,8 +29,8 @@ async function runE2ETests() {
   assert(dbRes.rows.length > 0, "Shipping config exists in public.admin_settings");
   const cfg = dbRes.rows[0]?.value;
   assert(cfg?.shiprocketEmail === "service.viralnest@gmail.com", "Config has correct email");
-  assert(cfg?.shiprocketPickupLocation === "work", "Config has 'work' pickup location code");
-  assert(cfg?.shiprocketPickupPincode === "201316", "Config has '201316' Noida pickup postal code");
+  assert(cfg?.shiprocketPickupLocation === "Mayur Vihar Atelier", "Config has 'Mayur Vihar Atelier' pickup location code");
+  assert(cfg?.shiprocketPickupPincode === "110091", "Config has '110091' Mayur Vihar pickup postal code");
   assert(cfg?.shiprocketWebhookSecret === "#$#%OMw956hgchpCZLULEGW3B573on0g", "Config has secure webhook secret");
 
   // TEST 2: Live Shiprocket Production Auth
@@ -56,13 +56,13 @@ async function runE2ETests() {
   });
   const pickupData = await pickupRes.json();
   assert(pickupRes.status === 200, "Fetched company pickup locations successfully");
-  const primaryLoc = pickupData?.data?.shipping_address?.find(a => a.pickup_location === 'work');
-  assert(Boolean(primaryLoc), "Registered pickup location 'work' found");
-  assert(primaryLoc?.pin_code === '201316', "Primary pickup postal code is 201316 (Noida)");
-  console.log(`    Warehouse: ${primaryLoc?.address}, ${primaryLoc?.city} (${primaryLoc?.pin_code})`);
+  const mayurViharLoc = pickupData?.data?.shipping_address?.find(a => a.pickup_location === 'Mayur Vihar Atelier');
+  assert(Boolean(mayurViharLoc), "Registered pickup location 'Mayur Vihar Atelier' found");
+  assert(mayurViharLoc?.pin_code === '110091', "Primary pickup postal code is 110091 (Mayur Vihar, Delhi)");
+  console.log(`    Warehouse: ${mayurViharLoc?.address}, ${mayurViharLoc?.city} (${mayurViharLoc?.pin_code})`);
 
   // TEST 4: Multi-City Live Courier Serviceability
-  console.log('\n--- TEST 4: Multi-City Live Courier Serviceability ---');
+  console.log('\n--- TEST 4: Multi-City Live Courier Serviceability from Mayur Vihar (110091) ---');
   const testCities = [
     { city: 'Delhi', pincode: '110001' },
     { city: 'Mumbai', pincode: '400001' },
@@ -71,7 +71,7 @@ async function runE2ETests() {
   ];
 
   for (const t of testCities) {
-    const sRes = await fetch(`https://apiv2.shiprocket.in/v1/external/courier/serviceability?pickup_postcode=201316&delivery_postcode=${t.pincode}&weight=0.35&cod=0`, {
+    const sRes = await fetch(`https://apiv2.shiprocket.in/v1/external/courier/serviceability?pickup_postcode=110091&delivery_postcode=${t.pincode}&weight=0.35&cod=0`, {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     const sData = await sRes.json();

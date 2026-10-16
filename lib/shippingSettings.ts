@@ -46,13 +46,13 @@ export const DEFAULT_SHIPPING_CONFIG: ShippingConfig = {
 
   shiprocketEmail: process.env.SHIPROCKET_EMAIL || "service.viralnest@gmail.com",
   shiprocketPassword: process.env.SHIPROCKET_PASSWORD || "ou6wb4ob*JiuAl6zW5^KM7DWX*Ln#wpx",
-  shiprocketPickupLocation: process.env.SHIPROCKET_PICKUP_LOCATION || "work",
+  shiprocketPickupLocation: process.env.SHIPROCKET_PICKUP_LOCATION || "Mayur Vihar Atelier",
   shiprocketPickupAddress:
     process.env.SHIPROCKET_PICKUP_ADDRESS ||
-    "GF-45D, Spectrum metro mall, Phase-1, Sector 75",
-  shiprocketPickupCity: process.env.SHIPROCKET_PICKUP_CITY || "Noida",
-  shiprocketPickupState: process.env.SHIPROCKET_PICKUP_STATE || "Uttar Pradesh",
-  shiprocketPickupPincode: process.env.SHIPROCKET_PICKUP_PINCODE || "201316",
+    "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
+  shiprocketPickupCity: process.env.SHIPROCKET_PICKUP_CITY || "Delhi",
+  shiprocketPickupState: process.env.SHIPROCKET_PICKUP_STATE || "Delhi",
+  shiprocketPickupPincode: process.env.SHIPROCKET_PICKUP_PINCODE || "110091",
   shiprocketWebhookSecret: process.env.SHIPROCKET_WEBHOOK_SECRET || "#$#%OMw956hgchpCZLULEGW3B573on0g",
 
   fulfillmentMode: "manual_1click",

@@ -26,9 +26,9 @@ export default function AdminShippingPage() {
     enableWhiteGloveHomeTrial: true,
     trialDepositAmount: 3000,
     shiprocketEmail: "service.viralnest@gmail.com",
-    shiprocketPickupLocation: "work",
-    shiprocketPickupCity: "Noida",
-    shiprocketPickupPincode: "201316",
+    shiprocketPickupLocation: "Mayur Vihar Atelier",
+    shiprocketPickupCity: "Delhi",
+    shiprocketPickupPincode: "110091",
     fulfillmentMode: "manual_1click",
   });
 

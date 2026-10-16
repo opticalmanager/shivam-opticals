@@ -13,6 +13,33 @@ export async function GET(req: NextRequest) {
     const config = await getShippingConfig();
     const { token, error } = await getShiprocketToken(true); // force live test
 
+    // Fetch live registered pickup locations from Shiprocket if authenticated
+    let registeredLocations: any[] = [];
+    if (token) {
+      try {
+        const pRes = await fetch("https://apiv2.shiprocket.in/v1/external/settings/company/pickup", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (pRes.ok) {
+          const pData = await pRes.json();
+          registeredLocations = (pData?.data?.shipping_address || []).map((loc: any) => ({
+            id: loc.id,
+            pickupLocation: loc.pickup_location,
+            address: loc.address,
+            address2: loc.address_2 || "",
+            city: loc.city,
+            state: loc.state,
+            pincode: loc.pin_code,
+            phone: loc.phone,
+            name: loc.name,
+            isPrimary: Boolean(loc.is_primary_location),
+          }));
+        }
+      } catch (e) {
+        console.warn("[SHIPROCKET] Failed to fetch live pickup locations:", e);
+      }
+    }
+
     return NextResponse.json({
       success: true,
       connected: Boolean(token),
@@ -20,12 +47,15 @@ export async function GET(req: NextRequest) {
         ? "Successfully authenticated with Shiprocket Logistics API"
         : error || "API credentials stored. Verify API User in Shiprocket dashboard.",
       email: config.shiprocketEmail,
-      pickupLocation: config.shiprocketPickupLocation,
-      pickupAddress: config.shiprocketPickupAddress,
-      pickupCity: config.shiprocketPickupCity,
-      pickupState: config.shiprocketPickupState,
-      pickupPincode: config.shiprocketPickupPincode,
+      pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Atelier",
+      pickupAddress:
+        config.shiprocketPickupAddress ||
+        "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
+      pickupCity: config.shiprocketPickupCity || "Delhi",
+      pickupState: config.shiprocketPickupState || "Delhi",
+      pickupPincode: config.shiprocketPickupPincode || "110091",
       fulfillmentMode: config.fulfillmentMode,
+      registeredLocations,
     });
   } catch (err: any) {
     return NextResponse.json(
@@ -35,22 +65,63 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// 2. POST: Actions (calculate_rates, book_shipment, update_pickup_location)
+// 2. POST: Actions (calculate_rates, book_shipment, update_pickup_location, get_pickup_locations)
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const action = body.action || "calculate_rates";
     const config = await getShippingConfig();
 
+    if (action === "get_pickup_locations") {
+      const { token } = await getShiprocketToken();
+      let registeredLocations: any[] = [];
+      if (token) {
+        try {
+          const pRes = await fetch("https://apiv2.shiprocket.in/v1/external/settings/company/pickup", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (pRes.ok) {
+            const pData = await pRes.json();
+            registeredLocations = (pData?.data?.shipping_address || []).map((loc: any) => ({
+              id: loc.id,
+              pickupLocation: loc.pickup_location,
+              address: loc.address,
+              address2: loc.address_2 || "",
+              city: loc.city,
+              state: loc.state,
+              pincode: loc.pin_code,
+              phone: loc.phone,
+              name: loc.name,
+              isPrimary: Boolean(loc.is_primary_location),
+            }));
+          }
+        } catch (e) {
+          console.warn("[SHIPROCKET] Failed to fetch live pickup locations:", e);
+        }
+      }
+
+      return NextResponse.json({
+        success: true,
+        registeredLocations,
+        currentDefault: {
+          pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Atelier",
+          pickupAddress: config.shiprocketPickupAddress,
+          pickupCity: config.shiprocketPickupCity,
+          pickupState: config.shiprocketPickupState,
+          pickupPincode: config.shiprocketPickupPincode,
+        },
+      });
+    }
+
     if (action === "update_pickup_location") {
       const { pickupLocation, pickupAddress, pickupCity, pickupState, pickupPincode } = body;
       const updated = {
         ...config,
-        shiprocketPickupLocation: pickupLocation || config.shiprocketPickupLocation,
+        shiprocketPickupLocation: pickupLocation || config.shiprocketPickupLocation || "Mayur Vihar Atelier",
         shiprocketPickupAddress: pickupAddress || config.shiprocketPickupAddress,
-        shiprocketPickupCity: pickupCity || config.shiprocketPickupCity,
-        shiprocketPickupState: pickupState || config.shiprocketPickupState,
-        shiprocketPickupPincode: pickupPincode || config.shiprocketPickupPincode,
+        shiprocketPickupCity: pickupCity || config.shiprocketPickupCity || "Delhi",
+        shiprocketPickupState: pickupState || config.shiprocketPickupState || "Delhi",
+        shiprocketPickupPincode: pickupPincode || config.shiprocketPickupPincode || "110091",
       };
 
       try {
@@ -77,8 +148,13 @@ export async function POST(req: NextRequest) {
 
     if (action === "calculate_rates") {
       const deliveryPincode = body.deliveryPincode?.trim();
-      const pickupPincode = body.pickupPincode?.trim() || config.shiprocketPickupPincode || "201316";
-      const customWeight = body.weight !== undefined ? Number(body.weight) : (body.weightKg !== undefined ? Number(body.weightKg) : config.defaultWeightKg || 0.35);
+      const pickupPincode = body.pickupPincode?.trim() || config.shiprocketPickupPincode || "110091";
+      const customWeight =
+        body.weight !== undefined
+          ? Number(body.weight)
+          : body.weightKg !== undefined
+          ? Number(body.weightKg)
+          : config.defaultWeightKg || 0.35;
 
       if (!deliveryPincode || !/^\d{6}$/.test(deliveryPincode)) {
         return NextResponse.json(
@@ -96,7 +172,7 @@ export async function POST(req: NextRequest) {
 
       return NextResponse.json({
         ...result,
-        pickupLocation: config.shiprocketPickupLocation || "work",
+        pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Atelier",
         pickupAddress: config.shiprocketPickupAddress,
         pickupCity: config.shiprocketPickupCity,
         pickupState: config.shiprocketPickupState,
@@ -105,7 +181,8 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === "book_shipment") {
-      const { orderId, orderNumber, courierCompanyId, weightKg } = body;
+      const { orderId, orderNumber, courierCompanyId, courierId, weightKg, weight, pickupLocation, dimensions } =
+        body;
       if (!orderId && !orderNumber) {
         return NextResponse.json(
           { success: false, message: "orderId or orderNumber is required to book shipment" },
@@ -147,15 +224,22 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      const shippingAddr = typeof order.shipping_address === "string"
-        ? JSON.parse(order.shipping_address)
-        : order.shipping_address || {};
+      const shippingAddr =
+        typeof order.shipping_address === "string"
+          ? JSON.parse(order.shipping_address)
+          : order.shipping_address || {};
 
       const orderItems = (Array.isArray(order.items) ? order.items : []).map((it: any) => ({
         name: it.product_snapshot?.name || it.name || "Luxury Optical Frame",
         units: it.quantity || 1,
         sellingPrice: Number(it.unit_price || order.total_amount || 0),
       }));
+
+      const chosenPickupLocation =
+        pickupLocation || config.shiprocketPickupLocation || "Mayur Vihar Atelier";
+      const chosenCourierId = courierCompanyId || courierId ? Number(courierCompanyId || courierId) : undefined;
+      const chosenWeight = weightKg || weight ? Number(weightKg || weight) : config.defaultWeightKg || 0.35;
+      const chosenDimensions = dimensions || config.packageDimensions || { length: 18, breadth: 12, height: 8 };
 
       const bookingResult = await bookShiprocketShipment({
         orderNumber: order.order_number,
@@ -179,8 +263,10 @@ export async function POST(req: NextRequest) {
             : [{ name: "Optical Frame", units: 1, sellingPrice: Number(order.total_amount || 1000) }],
         subtotal: Number(order.total_amount || 1000),
         paymentMethod: order.payment_method === "cod" ? "cod" : "prepaid",
-        courierId: courierCompanyId ? Number(courierCompanyId) : undefined,
-        weight: weightKg ? Number(weightKg) : config.defaultWeightKg,
+        courierId: chosenCourierId,
+        weight: chosenWeight,
+        pickupLocation: chosenPickupLocation,
+        dimensions: chosenDimensions,
       });
 
       if (bookingResult.success && bookingResult.awbCode) {

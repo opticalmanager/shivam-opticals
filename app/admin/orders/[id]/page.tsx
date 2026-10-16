@@ -26,6 +26,7 @@ import {
   Edit3,
   Building2,
   Tag,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/admin/common/StatusBadge";
@@ -70,19 +71,26 @@ export default function AdminOrderDetailPage() {
 
   // Consignment Origin / Pickup Point details
   const [pickupDetails, setPickupDetails] = useState({
-    location: "work",
-    address: "Pocket 1, Mayur Vihar Phase 1",
-    city: "New Delhi",
+    location: "Mayur Vihar Atelier",
+    address: "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
+    city: "Delhi",
     state: "Delhi",
     pincode: "110091",
   });
   const [isEditingPickup, setIsEditingPickup] = useState(false);
-  const [editLocationName, setEditLocationName] = useState("work");
-  const [editAddress, setEditAddress] = useState("Pocket 1, Mayur Vihar Phase 1");
-  const [editCity, setEditCity] = useState("New Delhi");
+  const [editLocationName, setEditLocationName] = useState("Mayur Vihar Atelier");
+  const [editAddress, setEditAddress] = useState(
+    "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar"
+  );
+  const [editCity, setEditCity] = useState("Delhi");
   const [editState, setEditState] = useState("Delhi");
   const [editPincode, setEditPincode] = useState("110091");
   const [saveAsDefaultPickup, setSaveAsDefaultPickup] = useState(false);
+
+  // Shiprocket live registered locations & pre-dispatch confirmation modal
+  const [registeredLocations, setRegisteredLocations] = useState<any[]>([]);
+  const [showPreBookingModal, setShowPreBookingModal] = useState(false);
+  const [modalEditingPickup, setModalEditingPickup] = useState(false);
 
   const fetchCourierRates = async (deliveryPincode: string, customPickupPin?: string, customWeight?: number) => {
     if (!deliveryPincode || deliveryPincode.length !== 6) return;
@@ -106,13 +114,18 @@ export default function AdminOrderDetailPage() {
           const rec = data.couriers.find((c: any) => c.isRecommended) || data.couriers[0];
           setSelectedCourierId(rec.courierId);
         }
+        if (data.registeredLocations && Array.isArray(data.registeredLocations)) {
+          setRegisteredLocations(data.registeredLocations);
+        }
         if (data.pickupLocation) {
           const loaded = {
             location: data.pickupLocation,
-            address: data.pickupAddress || "GF-45D, Spectrum metro mall, Phase-1, Sector 75",
-            city: data.pickupCity || "Noida",
-            state: data.pickupState || "Uttar Pradesh",
-            pincode: data.pickupPincode || "201316",
+            address:
+              data.pickupAddress ||
+              "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
+            city: data.pickupCity || "Delhi",
+            state: data.pickupState || "Delhi",
+            pincode: data.pickupPincode || "110091",
           };
           setPickupDetails(loaded);
           setEditLocationName(loaded.location);
@@ -131,11 +144,11 @@ export default function AdminOrderDetailPage() {
 
   const handleUpdatePickupPoint = async () => {
     const updated = {
-      location: editLocationName.trim() || "work",
+      location: editLocationName.trim() || "Mayur Vihar Atelier",
       address: editAddress.trim(),
-      city: editCity.trim() || "Noida",
-      state: editState.trim() || "Uttar Pradesh",
-      pincode: editPincode.trim() || "201316",
+      city: editCity.trim() || "Delhi",
+      state: editState.trim() || "Delhi",
+      pincode: editPincode.trim() || "110091",
     };
     setPickupDetails(updated);
     setIsEditingPickup(false);
@@ -165,7 +178,7 @@ export default function AdminOrderDetailPage() {
     }
   };
 
-  const handleBookShiprocket = async () => {
+  const handleInitiateBooking = () => {
     if (
       !packageDimensions.weight ||
       !packageDimensions.length ||
@@ -179,6 +192,10 @@ export default function AdminOrderDetailPage() {
       return;
     }
 
+    setShowPreBookingModal(true);
+  };
+
+  const handleBookShiprocket = async () => {
     setBookingShiprocket(true);
     const selectedCourier =
       courierOptions.find((c) => c.courierId === selectedCourierId) || courierOptions[0];
@@ -203,6 +220,7 @@ export default function AdminOrderDetailPage() {
       });
       const data = await res.json();
       if (data.success && data.booking) {
+        setShowPreBookingModal(false);
         toast.success("Shipment Booked Successfully", {
           description: `${data.booking.courierName} • AWB: ${data.booking.awbCode}`,
         });
@@ -296,8 +314,40 @@ export default function AdminOrderDetailPage() {
     }
   };
 
+  const fetchRegisteredLocations = async () => {
+    try {
+      const res = await fetch("/api/admin/shipping/shiprocket");
+      const data = await res.json();
+      if (data.registeredLocations && Array.isArray(data.registeredLocations)) {
+        setRegisteredLocations(data.registeredLocations);
+      }
+      if (data.pickupLocation) {
+        const loaded = {
+          location: data.pickupLocation,
+          address:
+            data.pickupAddress ||
+            "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
+          city: data.pickupCity || "Delhi",
+          state: data.pickupState || "Delhi",
+          pincode: data.pickupPincode || "110091",
+        };
+        setPickupDetails(loaded);
+        setEditLocationName(loaded.location);
+        setEditAddress(loaded.address);
+        setEditCity(loaded.city);
+        setEditState(loaded.state);
+        setEditPincode(loaded.pincode);
+      }
+    } catch (e) {
+      console.warn("Failed to fetch registered pickup locations:", e);
+    }
+  };
+
   useEffect(() => {
-    if (id) fetchOrderDetail();
+    if (id) {
+      fetchOrderDetail();
+      fetchRegisteredLocations();
+    }
   }, [id]);
 
   const handleUpdateOrder = async () => {
@@ -741,17 +791,52 @@ export default function AdminOrderDetailPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          setEditLocationName("work");
-                          setEditAddress("Pocket 1, Mayur Vihar Phase 1");
-                          setEditCity("New Delhi");
+                          setEditLocationName("Mayur Vihar Atelier");
+                          setEditAddress(
+                            "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar"
+                          );
+                          setEditCity("Delhi");
                           setEditState("Delhi");
                           setEditPincode("110091");
                         }}
                         className="text-[10px] font-bold text-[#C5A059] hover:underline cursor-pointer"
                       >
-                        Reset to Mayur Vihar Lab Primary
+                        Reset to Mayur Vihar Atelier Primary
                       </button>
                     </div>
+
+                    {registeredLocations.length > 0 && (
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
+                          Registered Shiprocket Pickup Points:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {registeredLocations.map((loc) => {
+                            const isSelected = editLocationName === loc.pickupLocation;
+                            return (
+                              <button
+                                key={loc.id || loc.pickupLocation}
+                                type="button"
+                                onClick={() => {
+                                  setEditLocationName(loc.pickupLocation);
+                                  setEditAddress(loc.address2 ? `${loc.address}, ${loc.address2}` : loc.address);
+                                  setEditCity(loc.city);
+                                  setEditState(loc.state);
+                                  setEditPincode(loc.pincode);
+                                }}
+                                className={`text-[11px] px-2.5 py-1 rounded-md font-medium border transition-all cursor-pointer ${
+                                  isSelected
+                                    ? "bg-[#0A251C] text-white border-[#0A251C]"
+                                    : "bg-[#FAF7F2] text-stone-700 border-[#E8DCCF] hover:bg-stone-100"
+                                }`}
+                              >
+                                {loc.pickupLocation} ({loc.pincode})
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs">
                       <div>
@@ -964,7 +1049,7 @@ export default function AdminOrderDetailPage() {
                   <Button
                     type="button"
                     size="sm"
-                    onClick={handleBookShiprocket}
+                    onClick={handleInitiateBooking}
                     disabled={bookingShiprocket}
                     className="text-xs bg-[#0A251C] hover:bg-[#C5A059] text-white shadow-xs cursor-pointer"
                   >
@@ -973,7 +1058,7 @@ export default function AdminOrderDetailPage() {
                     ) : (
                       <Send className="w-3.5 h-3.5 mr-1.5 text-white" />
                     )}
-                    <span>{order.tracking_number ? "Re-book Courier" : "Confirm Booking & Generate AWB"}</span>
+                    <span>{order.tracking_number ? "Review & Re-book Courier" : "Confirm Booking & Generate AWB"}</span>
                   </Button>
                 </div>
               </div>
@@ -1338,6 +1423,299 @@ export default function AdminOrderDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* Shiprocket Pre-Booking Confirmation & Pickup Address Review Modal */}
+      {showPreBookingModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-white border border-[#E8DCCF] rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 space-y-5">
+            {/* Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8DCCF]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#0A251C] text-[#C5A059] flex items-center justify-center shadow-xs">
+                  <PackageCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-[#0A251C] font-serif">
+                    Confirm Dispatch &amp; Pickup Address
+                  </h3>
+                  <p className="text-xs text-stone-500">
+                    Review and confirm consignment origin before booking Shiprocket AWB
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPreBookingModal(false);
+                  setModalEditingPickup(false);
+                }}
+                className="text-stone-400 hover:text-stone-700 p-1 rounded-md cursor-pointer transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* 1. Pickup Origin Section */}
+            <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-xl p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Building2 className="w-4 h-4 text-[#C5A059]" />
+                  <span className="text-xs font-bold text-[#0A251C] uppercase tracking-wider">
+                    Consignment Pickup Origin
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setModalEditingPickup(!modalEditingPickup)}
+                  className="text-xs font-bold text-[#C5A059] hover:underline flex items-center gap-1 cursor-pointer"
+                >
+                  <Edit3 className="w-3.5 h-3.5" />
+                  <span>{modalEditingPickup ? "Close Editor" : "Edit / Change Address"}</span>
+                </button>
+              </div>
+
+              {/* Registered Locations Quick Selector */}
+              {registeredLocations.length > 0 && (
+                <div className="space-y-1.5">
+                  <span className="text-[11px] font-semibold text-stone-600">
+                    Select Registered Pickup Point:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {registeredLocations.map((loc) => {
+                      const isSelected = pickupDetails.location === loc.pickupLocation;
+                      return (
+                        <button
+                          key={loc.id || loc.pickupLocation}
+                          type="button"
+                          onClick={() => {
+                            const updated = {
+                              location: loc.pickupLocation,
+                              address: loc.address2 ? `${loc.address}, ${loc.address2}` : loc.address,
+                              city: loc.city,
+                              state: loc.state,
+                              pincode: loc.pincode,
+                            };
+                            setPickupDetails(updated);
+                            setEditLocationName(updated.location);
+                            setEditAddress(updated.address);
+                            setEditCity(updated.city);
+                            setEditState(updated.state);
+                            setEditPincode(updated.pincode);
+                            if (shipping?.pincode) {
+                              fetchCourierRates(
+                                shipping.pincode,
+                                updated.pincode,
+                                Number(packageDimensions.weight) || undefined
+                              );
+                            }
+                            toast.info(`Switched pickup point to ${loc.pickupLocation}`);
+                          }}
+                          className={`text-left p-2.5 rounded-lg border text-xs transition-all cursor-pointer ${
+                            isSelected
+                              ? "border-[#C5A059] bg-[#FAF3EB] ring-1 ring-[#C5A059]"
+                              : "border-stone-200 bg-white hover:border-stone-300"
+                          }`}
+                        >
+                          <div className="font-bold text-[#0A251C] flex items-center justify-between">
+                            <span>{loc.pickupLocation}</span>
+                            {isSelected && (
+                              <span className="text-[9px] bg-[#C5A059] text-white px-1.5 py-0.2 rounded font-bold uppercase">
+                                Selected
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-[11px] text-stone-500 truncate mt-0.5">
+                            {loc.city} ({loc.pincode})
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Modal Inline Pickup Editor */}
+              {modalEditingPickup ? (
+                <div className="bg-white border border-[#E8DCCF] rounded-lg p-3 space-y-2.5 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-[11px] font-semibold text-stone-600 mb-1">
+                        Location Nickname (Shiprocket Code)
+                      </label>
+                      <input
+                        type="text"
+                        value={editLocationName}
+                        onChange={(e) => setEditLocationName(e.target.value)}
+                        className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded text-xs text-[#0A251C]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-stone-600 mb-1">
+                        Postal PIN Code
+                      </label>
+                      <input
+                        type="text"
+                        maxLength={6}
+                        value={editPincode}
+                        onChange={(e) => setEditPincode(e.target.value.replace(/\D/g, ""))}
+                        className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded text-xs font-mono text-[#0A251C]"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-semibold text-stone-600 mb-1">
+                      Street Address / Atelier Unit
+                    </label>
+                    <input
+                      type="text"
+                      value={editAddress}
+                      onChange={(e) => setEditAddress(e.target.value)}
+                      className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded text-xs text-[#0A251C]"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-[11px] font-semibold text-stone-600 mb-1">City</label>
+                      <input
+                        type="text"
+                        value={editCity}
+                        onChange={(e) => setEditCity(e.target.value)}
+                        className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded text-xs text-[#0A251C]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-stone-600 mb-1">State</label>
+                      <input
+                        type="text"
+                        value={editState}
+                        onChange={(e) => setEditState(e.target.value)}
+                        className="w-full px-2.5 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded text-xs text-[#0A251C]"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-end pt-1">
+                    <Button
+                      type="button"
+                      size="sm"
+                      onClick={() => {
+                        const updated = {
+                          location: editLocationName.trim() || "Mayur Vihar Atelier",
+                          address: editAddress.trim(),
+                          city: editCity.trim() || "Delhi",
+                          state: editState.trim() || "Delhi",
+                          pincode: editPincode.trim() || "110091",
+                        };
+                        setPickupDetails(updated);
+                        setModalEditingPickup(false);
+                        if (shipping?.pincode) {
+                          fetchCourierRates(
+                            shipping.pincode,
+                            updated.pincode,
+                            Number(packageDimensions.weight) || undefined
+                          );
+                        }
+                        toast.success("Pickup address applied for this booking");
+                      }}
+                      className="text-xs h-7 bg-[#C5A059] hover:bg-[#b59049] text-white cursor-pointer"
+                    >
+                      Apply Address
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-white p-3 rounded-lg border border-[#E8DCCF] text-xs space-y-1">
+                  <div className="flex items-center justify-between font-bold text-[#0A251C]">
+                    <span>{pickupDetails.location}</span>
+                    <span className="font-mono text-[11px] bg-stone-100 px-2 py-0.5 rounded text-stone-700">
+                      PIN: {pickupDetails.pincode}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-stone-600 leading-relaxed">
+                    {pickupDetails.address}, {pickupDetails.city}, {pickupDetails.state}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* 2. Destination & Package Summary Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              {/* Delivery Destination */}
+              <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-xl p-3 space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-[#0A251C] text-[11px] uppercase tracking-wider">
+                  <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>Delivery Destination</span>
+                </div>
+                <div className="font-bold text-stone-800">{shipping.fullName || "Patron"}</div>
+                <p className="text-[11px] text-stone-600 leading-tight">
+                  {shipping.streetAddress}, {shipping.city}, {shipping.state} -{" "}
+                  <strong className="text-stone-800 font-mono">{shipping.pincode}</strong>
+                </p>
+                {shipping.phone && (
+                  <div className="text-[10px] text-stone-500 font-mono">Ph: {shipping.phone}</div>
+                )}
+              </div>
+
+              {/* Courier & Box Specs */}
+              <div className="bg-[#FAF7F2] border border-[#E8DCCF] rounded-xl p-3 space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-[#0A251C] text-[11px] uppercase tracking-wider">
+                  <Package className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>Parcel &amp; Courier</span>
+                </div>
+                <div className="font-bold text-emerald-800 flex items-center justify-between">
+                  <span>{selectedCourier?.courierName || "Blue Dart Air"}</span>
+                  <span className="font-mono text-xs">₹{selectedCourier?.rate ?? 95}</span>
+                </div>
+                <div className="text-[11px] text-stone-600">
+                  Weight: <strong className="text-stone-800 font-mono">{packageDimensions.weight} kg</strong>
+                </div>
+                <div className="text-[11px] text-stone-600">
+                  Box:{" "}
+                  <strong className="text-stone-800 font-mono">
+                    {packageDimensions.length} x {packageDimensions.breadth} x {packageDimensions.height} cm
+                  </strong>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#E8DCCF]">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setShowPreBookingModal(false);
+                  setModalEditingPickup(false);
+                }}
+                disabled={bookingShiprocket}
+                className="text-xs h-9 cursor-pointer"
+              >
+                Cancel
+              </Button>
+
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleBookShiprocket}
+                disabled={bookingShiprocket}
+                className="text-xs h-9 bg-[#0A251C] hover:bg-[#C5A059] text-white shadow-xs cursor-pointer font-bold px-4"
+              >
+                {bookingShiprocket ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
+                    <span>Generating AWB with Shiprocket...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 mr-1.5" />
+                    <span>Confirm &amp; Book Shipment</span>
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
