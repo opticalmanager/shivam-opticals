@@ -101,8 +101,8 @@ function CheckoutContent() {
   const totalPayable = grandTotal + currentShippingFee;
 
   // Finalize order helper
-  const finalizeOrder = async (orderData: Partial<Order>) => {
-    const trackingNumber = generateTrackingId();
+  const finalizeOrder = async (orderData: Partial<Order>, existingTrackingId?: string) => {
+    const trackingNumber = existingTrackingId || orderData.id || orderData.trackingNumber || generateTrackingId();
 
     const finalOrder: Order = {
       id: trackingNumber,
@@ -186,6 +186,12 @@ function CheckoutContent() {
       toast.error("Please enter your contact phone number");
       return;
     }
+    if (totalPayable < 1) {
+      toast.error("Invalid Order Amount", {
+        description: "Order total must be at least ₹1.00 for online checkout.",
+      });
+      return;
+    }
 
     setIsSubmittingOrder(true);
     const trackingNumber = generateTrackingId();
@@ -233,6 +239,8 @@ function CheckoutContent() {
         return;
       }
 
+      const cleanPhone = (shippingAddress.phone || user?.phone || "").replace(/\D/g, "").slice(-10);
+
       const options = {
         key: createData.keyId,
         amount: createData.amount,
@@ -247,7 +255,7 @@ function CheckoutContent() {
             user?.name ||
             "",
           email: shippingAddress.email || user?.email || "",
-          contact: shippingAddress.phone || user?.phone || "",
+          contact: cleanPhone,
         },
         theme: {
           color: "#0A251C",
@@ -268,25 +276,26 @@ function CheckoutContent() {
 
             const verifyData = await verifyRes.json();
             if (verifyData.success) {
-              await finalizeOrder({
-                paymentMethod: "razorpay",
-                paymentId: response.razorpay_payment_id,
-                paymentStatus: "paid",
-                paymentDetails: response,
-              });
+              await finalizeOrder(
+                {
+                  paymentMethod: "razorpay",
+                  paymentId: response.razorpay_payment_id,
+                  paymentStatus: "paid",
+                  paymentDetails: response,
+                },
+                trackingNumber
+              );
             } else {
               setIsSubmittingOrder(false);
               toast.error("Payment Signature Verification Failed", {
-                description: "Security check failed. Please contact customer support.",
+                description: "Security check failed. Please contact customer support with Payment ID: " + response.razorpay_payment_id,
               });
             }
           } catch (verErr) {
             console.error("Verification network error:", verErr);
-            await finalizeOrder({
-              paymentMethod: "razorpay",
-              paymentId: response.razorpay_payment_id,
-              paymentStatus: "paid",
-              paymentDetails: response,
+            setIsSubmittingOrder(false);
+            toast.error("Network Verification Delayed", {
+              description: "Payment captured on gateway. Our systems are verifying confirmation.",
             });
           }
         },

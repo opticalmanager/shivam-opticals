@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const signature = req.headers.get("x-razorpay-signature");
 
     const webhookSecret =
-      process.env.RAZORPAY_WEBHOOK_SECRET || "shivam_rzp_webhook_sec_2026";
+      process.env.RAZORPAY_WEBHOOK_SECRET || "shivam_opticals_webhook_sec_2026";
 
     // Verify webhook signature if present
     if (signature) {
@@ -27,7 +27,8 @@ export async function POST(req: NextRequest) {
       } catch {}
 
       if (!valid) {
-        console.warn("[RAZORPAY-WEBHOOK] Signature mismatch");
+        console.warn("[RAZORPAY-WEBHOOK] Signature mismatch for incoming webhook event");
+        return NextResponse.json({ success: false, error: "Invalid signature" }, { status: 400 });
       }
     }
 
@@ -43,18 +44,30 @@ export async function POST(req: NextRequest) {
       const paymentEntity = payload.payload?.payment?.entity;
       const orderId = paymentEntity?.order_id;
       const paymentId = paymentEntity?.id;
+      const receiptNumber = paymentEntity?.notes?.orderNumber || paymentEntity?.description;
 
       if (orderId && paymentId) {
         try {
-          await query(
+          const updateRes = await query(
             `UPDATE public.orders 
              SET payment_status = 'paid',
                  payment_id = $1,
+                 payment_details = jsonb_set(
+                   COALESCE(payment_details, '{}'::jsonb),
+                   '{webhook_verified}',
+                   'true'::jsonb
+                 ),
                  updated_at = NOW() 
              WHERE payment_details->>'razorpay_order_id' = $2 
-                OR order_number = $2;`,
-            [paymentId, orderId]
+                OR order_number = $2
+                OR order_number = $3
+                OR tracking_number = $3;`,
+            [paymentId, orderId, receiptNumber || orderId]
           );
+
+          if (updateRes.rowCount === 0) {
+            console.log(`[RAZORPAY-WEBHOOK] Order ${orderId} / ${receiptNumber} not yet created in DB or already handled.`);
+          }
         } catch (dbErr) {
           console.warn("[RAZORPAY-WEBHOOK] Order update warning:", dbErr);
         }

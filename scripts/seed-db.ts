@@ -253,7 +253,36 @@ async function seedDatabase() {
        ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;`,
       [JSON.stringify(generalSettings)]
     );
-    console.log("  ✓ Admin settings seeded.");
+
+    const paymentSettings = {
+      razorpayUpi: {
+        enabled: true,
+        mode: "live",
+        keyId: "rzp_live_Tn3v56njBS0cGX",
+        acceptedMethods: ["UPI", "GPay", "PhonePe", "Paytm", "NetBanking", "RuPay", "Cards"],
+      },
+      stripe: {
+        enabled: false,
+        mode: "test",
+      },
+      cod: {
+        enabled: true,
+        minOrderValue: 500,
+        maxOrderValue: 50000,
+        requiresPhoneVerification: true,
+      },
+      netbanking: {
+        enabled: true,
+      },
+    };
+
+    await pool.query(
+      `INSERT INTO public.admin_settings (key, value)
+       VALUES ('payments', $1)
+       ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;`,
+      [JSON.stringify(paymentSettings)]
+    );
+    console.log("  ✓ Admin settings (general, payments) seeded.");
 
     console.log("\n🎉 Database seeded successfully with authentic Shivam Opticals catalog!");
   } catch (err: any) {

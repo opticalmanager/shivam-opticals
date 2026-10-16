@@ -1,5 +1,5 @@
 /**
- * Precision Optics — Razorpay SDK Client Script Loader
+ * Shivam Opticals — Razorpay SDK Client Script Loader
  * 
  * Safely loads the Razorpay checkout script from checkout.razorpay.com into the DOM.
  * Ensures single injection and provides Promise-based resolution.

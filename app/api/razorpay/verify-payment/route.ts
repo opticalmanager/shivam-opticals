@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     }
 
     const keySecret =
-      process.env.RAZORPAY_KEY_SECRET || "YBvoduAYTChXWVcfH6TdYdV1";
+      process.env.RAZORPAY_KEY_SECRET || "5B0VMymOFpkJfPsiE1sBWaSy";
 
     let verificationType = "client_direct_verified";
 

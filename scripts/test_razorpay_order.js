@@ -1,7 +1,20 @@
 const Razorpay = require('razorpay');
 
-const key_id = process.env.RAZORPAY_KEY_ID || "rzp_test_TfX2gVZqD6Ern5";
-const key_secret = process.env.RAZORPAY_KEY_SECRET || "9lrOQWoB18TQgHvX46AcBk2a";
+const fs = require('fs');
+if (fs.existsSync('.env.local')) {
+  const envContent = fs.readFileSync('.env.local', 'utf8');
+  envContent.split('\n').forEach(line => {
+    const match = line.match(/^([^=]+)=(.*)$/);
+    if (match) {
+      const k = match[1].trim();
+      const v = match[2].trim().replace(/^["']|["']$/g, '');
+      if (!process.env[k]) process.env[k] = v;
+    }
+  });
+}
+
+const key_id = process.env.RAZORPAY_KEY_ID || "rzp_live_Tn3v56njBS0cGX";
+const key_secret = process.env.RAZORPAY_KEY_SECRET || "5B0VMymOFpkJfPsiE1sBWaSy";
 
 console.log("Testing Razorpay with Key ID:", key_id);
 
@@ -17,7 +30,7 @@ async function testOrder() {
       currency: "INR",
       receipt: `rcpt_${Date.now()}`,
       notes: {
-        store: "Shivam Optics Luxury Eyewear Atelier",
+        store: "Shivam Opticals Luxury Eyewear Atelier",
       },
     });
     console.log("Razorpay Order Created Successfully! Order:", order);

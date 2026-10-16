@@ -36,13 +36,13 @@ export async function POST(req: Request) {
       );
     }
 
-    // Dynamic resolution of credentials from environment or admin_settings
+    // Dynamic resolution of credentials from environment (server-side single source of truth)
     let activeKeyId =
       process.env.RAZORPAY_KEY_ID ||
       process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
-      "rzp_live_TmDHdDVheIZGdt";
+      "rzp_live_Tn3v56njBS0cGX";
     let activeKeySecret =
-      process.env.RAZORPAY_KEY_SECRET || "YBvoduAYTChXWVcfH6TdYdV1";
+      process.env.RAZORPAY_KEY_SECRET || "5B0VMymOFpkJfPsiE1sBWaSy";
 
     try {
       const settingsRes = await query(
@@ -58,9 +58,6 @@ export async function POST(req: Request) {
         if (val?.razorpayUpi?.keyId && !val.razorpayUpi.keyId.includes("•")) {
           activeKeyId = val.razorpayUpi.keyId;
         }
-        if (val?.razorpayUpi?.keySecret && !val.razorpayUpi.keySecret.includes("•")) {
-          activeKeySecret = val.razorpayUpi.keySecret;
-        }
       }
     } catch (dbErr) {
       console.warn("[RAZORPAY] Database settings read fallback:", dbErr);
@@ -68,13 +65,12 @@ export async function POST(req: Request) {
 
     const orderReceipt = receipt || `rcpt_${Date.now()}`;
 
-    let razorpay = new Razorpay({
+    const razorpay = new Razorpay({
       key_id: activeKeyId,
       key_secret: activeKeySecret,
     });
 
     let order: any = null;
-    let usedKeyId = activeKeyId;
 
     try {
       order = await razorpay.orders.create({
@@ -87,30 +83,14 @@ export async function POST(req: Request) {
         },
       });
     } catch (primaryErr: any) {
-      console.warn("[RAZORPAY] Primary credentials failed, trying verified credentials:", primaryErr?.message || primaryErr);
-      const fallbackKeyId = "rzp_live_TmDHdDVheIZGdt";
-      const fallbackKeySecret = "YBvoduAYTChXWVcfH6TdYdV1";
-
-      if (activeKeyId !== fallbackKeyId) {
-        try {
-          const fallbackRazorpay = new Razorpay({
-            key_id: fallbackKeyId,
-            key_secret: fallbackKeySecret,
-          });
-          order = await fallbackRazorpay.orders.create({
-            amount: amountInPaise,
-            currency,
-            receipt: orderReceipt,
-            notes: {
-              ...notes,
-              store: "Shivam Opticals Luxury Eyewear Atelier",
-            },
-          });
-          usedKeyId = fallbackKeyId;
-        } catch (secErr: any) {
-          console.error("[RAZORPAY] Fallback credentials error:", secErr?.message || secErr);
-        }
-      }
+      console.error("[RAZORPAY] Order creation failed:", primaryErr?.message || primaryErr);
+      return NextResponse.json(
+        {
+          success: false,
+          error: primaryErr?.error?.description || primaryErr?.message || "Failed to create Razorpay payment order.",
+        },
+        { status: 502 }
+      );
     }
 
     if (order && order.id) {
@@ -120,7 +100,7 @@ export async function POST(req: Request) {
         orderId: order.id,
         amount: order.amount,
         currency: order.currency,
-        keyId: usedKeyId,
+        keyId: activeKeyId,
         order: {
           id: order.id,
           amount: order.amount,

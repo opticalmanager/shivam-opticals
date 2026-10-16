@@ -38,9 +38,9 @@ export default function AdminPaymentsPage() {
     },
     razorpayUpi: {
       enabled: true,
-      mode: "test",
-      keyId: "rzp_test_TfX2gVZqD6Ern5",
-      keyIdMasked: "rzp_test_••••••••••••••••rn5",
+      mode: "live",
+      keyId: "rzp_live_Tn3v56njBS0cGX",
+      keyIdMasked: "rzp_live_••••••••••••••••cGX",
       acceptedMethods: ["UPI", "GPay", "PhonePe", "Paytm", "NetBanking", "RuPay", "Cards"],
     },
     cod: {

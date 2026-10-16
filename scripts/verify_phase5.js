@@ -63,7 +63,7 @@ console.log('================================================================\n'
 // -----------------------------------------------------------------------------
 console.log('TEST 1: Razorpay HMAC-SHA256 Signature Verification Edge Cases');
 {
-  const secret = 'YBvoduAYTChXWVcfH6TdYdV1';
+  const secret = process.env.RAZORPAY_KEY_SECRET || '5B0VMymOFpkJfPsiE1sBWaSy';
   const orderId = 'order_DA1234567890';
   const paymentId = 'pay_9876543210';
 
