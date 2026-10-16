@@ -66,7 +66,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       title: "SALES",
       items: [
         { label: "Orders", href: "/admin/orders", icon: ShoppingBag },
-        { label: "Customers", href: "/admin/customers", icon: Users },
+        { label: "Customers & Patrons", href: "/admin/customers", icon: Users },
       ],
     },
     {
@@ -75,28 +75,28 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         { label: "Products", href: "/admin/products", icon: Glasses },
         { label: "Categories", href: "/admin/categories", icon: Layers },
         { label: "Brands", href: "/admin/brands", icon: Sparkles },
-        { label: "Inventory", href: "/admin/inventory", icon: Archive },
+        { label: "Inventory Stock", href: "/admin/inventory", icon: Archive },
       ],
     },
     {
       title: "STORE",
       items: [
-        { label: "Discounts", href: "/admin/discounts", icon: Percent },
-        { label: "Appointments", href: "/admin/appointments", icon: Calendar },
-        { label: "Marketing", href: "/admin/marketing", icon: Megaphone },
+        { label: "Coupons & Offers", href: "/admin/discounts", icon: Percent },
+        { label: "Eye Exam Bookings", href: "/admin/appointments", icon: Calendar },
+        { label: "Marketing & Broadcasts", href: "/admin/marketing", icon: Megaphone },
       ],
     },
     {
       title: "OPERATIONS",
       items: [
-        { label: "Shipping", href: "/admin/shipping", icon: Truck },
-        { label: "Payments", href: "/admin/payments", icon: CreditCard },
+        { label: "Shipping & Logistics", href: "/admin/shipping", icon: Truck },
+        { label: "Payments & Settlements", href: "/admin/payments", icon: CreditCard },
       ],
     },
     {
       title: "ANALYTICS",
       items: [
-        { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+        { label: "Sales Analytics", href: "/admin/analytics", icon: BarChart3 },
       ],
     },
   ];

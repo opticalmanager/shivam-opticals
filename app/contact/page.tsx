@@ -159,10 +159,10 @@ export default function ContactPage() {
                     Concierge Inquiries
                   </h3>
                   <a
-                    href="mailto:info@shivamoptics.in"
+                    href="mailto:info@shivamoptical.in"
                     className="font-medium text-[#0A251C] hover:text-[#C5A059] transition"
                   >
-                    info@shivamoptics.in
+                    info@shivamoptical.in
                   </a>
                   <p className="text-[11px] text-stone-400 mt-0.5">
                     Response within 2-4 business hours

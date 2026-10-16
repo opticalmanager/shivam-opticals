@@ -65,11 +65,14 @@ export const AdminGlobalSearchModal: React.FC<AdminGlobalSearchModalProps> = ({
 
         if (prodRes.products) {
           prodRes.products.forEach((p: any) => {
+            const price = p.base_price !== undefined ? Number(p.base_price) : Number(p.price || 0);
+            const brand = p.brand_name || p.brand || "Shivam Opticals";
+            const category = p.category_name || p.category || "Eyewear";
             aggregated.push({
               type: "product",
               title: p.name,
-              subtitle: `${p.brand || "Shivam Opticals"} • ₹${Number(p.price).toLocaleString("en-IN")} • ${p.category || "Eyewear"}`,
-              badge: "Published",
+              subtitle: `${brand} • ₹${price.toLocaleString("en-IN")} • ${category}`,
+              badge: p.is_active ? "Published" : "Draft",
               url: `/admin/products/${p.id}`,
             });
           });

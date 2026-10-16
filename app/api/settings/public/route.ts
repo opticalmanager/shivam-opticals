@@ -78,7 +78,7 @@ export async function GET() {
     const general = settingsMap["general"] || {
       storeName: "Shivam Opticals",
       tagline: "Luxury Eyewear Atelier & Clinical Optometry",
-      email: "support@shivamoptics.com",
+      email: "info@shivamoptical.in",
       phone: "+91 98100 12345",
       address: "Shivam Opticals Atelier, Main Market, Delhi - 110001",
       operatingHours: "Monday - Sunday: 10:00 AM - 08:30 PM",

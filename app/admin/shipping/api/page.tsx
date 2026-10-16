@@ -51,7 +51,7 @@ export default function AdminShippingApiSettingsPage() {
 
   const webhookUrl = typeof window !== "undefined"
     ? `${window.location.origin}/api/webhooks/delivery`
-    : "https://shivam-opticals-bice.vercel.app/api/webhooks/delivery";
+    : "https://shivamoptical.in/api/webhooks/delivery";
 
   useEffect(() => {
     fetch("/api/admin/settings?key=shipping")

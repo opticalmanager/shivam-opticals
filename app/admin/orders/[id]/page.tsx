@@ -1142,7 +1142,7 @@ export default function AdminOrderDetailPage() {
             <p className="text-[11px] text-stone-600 mt-1 max-w-md">
               Regd. Office: Pocket 1, Mayur Vihar Phase 1, New Delhi - 110091
               <br />
-              GSTIN: 07AAACS1234F1Z9 | CIN: U33201DL1995PTC091240 | concierge@shivamoptics.in
+              GSTIN: 07AAACS1234F1Z9 | CIN: U33201DL1995PTC091240 | concierge@shivamoptical.in
             </p>
           </div>
           <div className="text-right">

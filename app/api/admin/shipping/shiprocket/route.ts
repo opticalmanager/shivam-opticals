@@ -164,7 +164,7 @@ export async function POST(req: NextRequest) {
           shippingAddr.fullName ||
           `${shippingAddr.firstName || ""} ${shippingAddr.lastName || ""}`.trim() ||
           "Valued Patron",
-        customerEmail: order.guest_email || shippingAddr.email || "patron@shivamoptics.in",
+        customerEmail: order.guest_email || shippingAddr.email || "customer@shivamoptical.in",
         customerPhone: order.guest_phone || shippingAddr.phone || "+919810012345",
         address: {
           streetAddress: shippingAddr.streetAddress || "Main Market",

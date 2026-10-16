@@ -240,7 +240,8 @@ async function seedDatabase() {
     const generalSettings = {
       storeName: "Shivam Opticals Atelier",
       tagline: "Precision Eyecare & Haute Lunetterie",
-      contactEmail: "info@shivamoptics.in",
+      contactEmail: "info@shivamoptical.in",
+      storeUrl: "https://shivamoptical.in",
       contactPhone: "097799 90207",
       address: "Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Phase 1 Extension, New Delhi - 110091",
       currency: "INR",

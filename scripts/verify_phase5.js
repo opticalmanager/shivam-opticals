@@ -196,7 +196,7 @@ async function runDbTests() {
       RETURNING id, order_number, tracking_number;`,
       [
         testOrderNumber,
-        'test.patron@shivamoptics.in',
+        'test.customer@shivamoptical.in',
         '+919810012345',
         JSON.stringify({ city: 'New Delhi', state: 'Delhi', pincode: '110091' }),
         testTracking,

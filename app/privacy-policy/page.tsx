@@ -155,7 +155,7 @@ export default function PrivacyPolicyPage() {
                 Data Protection Officer
               </h4>
               <p>Shivam Opticals Atelier Grievance Redressal</p>
-              <p className="text-[#0A251C] font-medium">dpo@shivamoptics.in</p>
+              <p className="text-[#0A251C] font-medium">dpo@shivamoptical.in</p>
               <p>Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Ph 1 Ext, Delhi</p>
             </div>
           </div>

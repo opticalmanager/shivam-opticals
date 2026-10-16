@@ -160,9 +160,9 @@ To activate server-to-server webhook fail-safe:
 3. Navigate to **Account & Settings** (gear icon) → **Webhooks** (under Website & App Settings).
 4. Click **+ Add New Webhook**.
 5. Fill in the fields:
-   - **Webhook URL**: `https://shivam-opticals-bice.vercel.app/api/razorpay/webhook`
+   - **Webhook URL**: `https://shivamoptical.in/api/razorpay/webhook`
    - **Secret**: `shivam_opticals_webhook_sec_2026`
-   - **Alert Email**: Enter your notification email (e.g. `info@shivamoptics.in`).
+   - **Alert Email**: Enter your notification email (e.g. `info@shivamoptical.in`).
    - **Active Events**: Check the following 3 events:
      - `payment.captured`
      - `order.paid`

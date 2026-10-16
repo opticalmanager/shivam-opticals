@@ -48,7 +48,7 @@ function AdminSettingsContent() {
   const [generalConfig, setGeneralConfig] = useState({
     storeName: "Shivam Opticals",
     tagline: "Haute Lunetterie Atelier & Optometry",
-    email: "concierge@shivamoptics.in",
+    email: "concierge@shivamoptical.in",
     phone: "097799 90207",
     currency: "INR (₹)",
     operatingHours: "Monday - Sunday: 10:30 AM - 09:00 PM",
@@ -188,28 +188,28 @@ function AdminSettingsContent() {
             {
               id: "role-01",
               name: "Principal Executive",
-              email: "executive@shivamoptics.in",
+              email: "executive@shivamoptical.in",
               role: "Super Admin",
               status: "Active",
             },
             {
               id: "role-02",
               name: "Master Optician & Lab Lead",
-              email: "optometry@shivamoptics.in",
+              email: "optometry@shivamoptical.in",
               role: "Master Optician & Lab Lead",
               status: "Active",
             },
             {
               id: "role-03",
               name: "Catalog Manager",
-              email: "catalog@shivamoptics.in",
+              email: "catalog@shivamoptical.in",
               role: "Catalog Manager",
               status: "Active",
             },
             {
               id: "role-04",
               name: "Order Fulfillment Manager",
-              email: "fulfillment@shivamoptics.in",
+              email: "fulfillment@shivamoptical.in",
               role: "Order Fulfillment Manager",
               status: "Active",
             },
@@ -1237,7 +1237,7 @@ function AdminSettingsContent() {
                           required
                           value={newStaff.email}
                           onChange={(e) => setNewStaff({ ...newStaff, email: e.target.value })}
-                          placeholder="e.g. v.rathore@shivamoptics.in"
+                          placeholder="e.g. v.rathore@shivamoptical.in"
                           className="w-full px-3 py-1.5 bg-white border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
                         />
                       </div>

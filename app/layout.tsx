@@ -29,11 +29,30 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://shivamoptical.in"),
   title: "Shivam Opticals | Luxury Eyewear & Haute Lunetterie",
   description:
     "Shivam Opticals - Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Premium lenses, Free Express Shipping & 14-Day Returns.",
   icons: {
     icon: "/favicon.ico",
+  },
+  alternates: {
+    canonical: "https://shivamoptical.in",
+  },
+  openGraph: {
+    title: "Shivam Opticals | Luxury Eyewear & Haute Lunetterie",
+    description:
+      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Premium lenses, Free Express Shipping & 14-Day Returns.",
+    url: "https://shivamoptical.in",
+    siteName: "Shivam Opticals",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shivam Opticals | Luxury Eyewear & Haute Lunetterie",
+    description:
+      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses.",
   },
 };
 

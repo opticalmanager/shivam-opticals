@@ -379,7 +379,8 @@ function getInitialStore(): DataStoreSchema {
     general: {
       storeName: "Shivam Opticals",
       tagline: "Haute Lunetterie & Optometric Atelier",
-      email: "contact@shivamoptics.in",
+      email: "contact@shivamoptical.in",
+      storeUrl: "https://shivamoptical.in",
       phone: "097799 90207",
       currency: "INR (₹)",
       operatingHours: "Open 7 Days • 10:30 AM to 9:00 PM",
@@ -442,9 +443,9 @@ function getInitialStore(): DataStoreSchema {
       ],
     },
     roles: [
-      { id: "r-1", name: "Sunil Sharma", email: "sunil@shivamoptics.in", role: "Chief Optometrist", status: "Active" },
-      { id: "r-2", name: "Anand Verma", email: "anand@shivamoptics.in", role: "Optical Lab Technician", status: "Active" },
-      { id: "r-3", name: "Pooja Malhotra", email: "pooja@shivamoptics.in", role: "Atelier Concierge", status: "Active" },
+      { id: "r-1", name: "Sunil Sharma", email: "sunil@shivamoptical.in", role: "Chief Optometrist", status: "Active" },
+      { id: "r-2", name: "Anand Verma", email: "anand@shivamoptical.in", role: "Optical Lab Technician", status: "Active" },
+      { id: "r-3", name: "Pooja Malhotra", email: "pooja@shivamoptical.in", role: "Atelier Concierge", status: "Active" },
     ],
   };
 
@@ -553,7 +554,7 @@ export function createOrder(data: Partial<StoredOrder>): StoredOrder {
     id: `ord-${Date.now()}`,
     order_number: data.order_number || `SO-${Math.floor(100000 + Math.random() * 900000)}`,
     guest_name: data.guest_name || data.shipping_address?.fullName || "Patron",
-    guest_email: data.guest_email || data.shipping_address?.email || "patron@shivamoptics.in",
+    guest_email: data.guest_email || data.shipping_address?.email || "customer@shivamoptical.in",
     guest_phone: data.guest_phone || data.shipping_address?.phone || "09779990207",
     status: "confirmed",
     payment_status: data.payment_status || (data.payment_method?.toLowerCase().includes("razorpay") ? "paid" : "pending"),

@@ -110,9 +110,9 @@ export default function AdminOrdersPage() {
         {[
           { id: "all", label: "All Orders", count: counts.all },
           { id: "confirmed", label: "Confirmed", count: counts.confirmed },
-          { id: "optician_assembly", label: "In Lab Assembly", count: counts.optician_assembly },
-          { id: "quality_check", label: "Quality Check", count: counts.quality_check },
-          { id: "dispatched", label: "Dispatched", count: counts.dispatched },
+          { id: "optician_assembly", label: "Lens Fitting & Assembly", count: counts.optician_assembly },
+          { id: "quality_check", label: "Quality Inspection", count: counts.quality_check },
+          { id: "dispatched", label: "Ready for Dispatch", count: counts.dispatched },
           { id: "delivered", label: "Delivered", count: counts.delivered },
         ].map((tab) => (
           <button

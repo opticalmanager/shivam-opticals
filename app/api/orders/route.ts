@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     estimatedDate.setDate(estimatedDate.getDate() + 4);
 
     const guestEmail =
-      body.shippingAddress?.email || body.email || "patron@shivamoptics.in";
+      body.shippingAddress?.email || body.email || "customer@shivamoptical.in";
     const guestPhone =
       body.shippingAddress?.phone || body.phone || "+91 9810012345";
     const paymentStatus =

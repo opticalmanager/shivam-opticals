@@ -220,30 +220,103 @@ export async function POST(req: NextRequest) {
     const colorHex = body.colorHex || body.color_hex || "#1A1816";
     const subtitle = body.subtitle || "";
     const description = body.description || "";
+    const isActive = body.isActive !== undefined ? Boolean(body.isActive) : true;
+    const isNewArrival = Boolean(body.isNewArrival);
+    const isBestSeller = Boolean(body.isBestSeller);
+    const tryOnEnabled = Boolean(body.tryOnEnabled);
+    const tryOnModelUrl = body.tryOnModelUrl || null;
+    const specs = body.specs || { lensWidth: 52, bridgeWidth: 18, templeLength: 145, frameWidth: 140, weight: "24g" };
 
-    try {
-      const res = await query(
+    const { runTransaction } = await import("@/lib/db");
+
+    const createdProduct = await runTransaction(async (client) => {
+      // 1. Resolve brand ID
+      let brandId = null;
+      if (body.brand) {
+        const bRes = await client.query(
+          `SELECT id FROM public.brands WHERE slug = $1 OR name ILIKE $1 LIMIT 1;`,
+          [body.brand]
+        );
+        if (bRes.rows.length > 0) brandId = bRes.rows[0].id;
+      }
+
+      // 2. Resolve category ID
+      let categoryId = null;
+      if (body.category) {
+        const cRes = await client.query(
+          `SELECT id FROM public.categories WHERE slug = $1 OR name ILIKE $1 LIMIT 1;`,
+          [body.category]
+        );
+        if (cRes.rows.length > 0) categoryId = cRes.rows[0].id;
+      }
+
+      // 3. Insert product
+      const pRes = await client.query(
         `INSERT INTO public.products (
-          slug, name, subtitle, gender, shape, rim_type, material, color, color_hex,
-          base_price, original_price, description, is_active
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, true)
+          slug, name, subtitle, brand_id, category_id, gender, shape, rim_type, material, color, color_hex,
+          base_price, original_price, description, specs, is_active, is_new_arrival, is_best_seller,
+          try_on_enabled, try_on_model_url
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+        ON CONFLICT (slug) DO UPDATE
+        SET name = EXCLUDED.name, base_price = EXCLUDED.base_price, is_active = EXCLUDED.is_active, updated_at = NOW()
         RETURNING *;`,
-        [slug, name, subtitle, gender, shape, rimType, material, color, colorHex, basePrice, originalPrice, description]
+        [
+          slug, name, subtitle, brandId, categoryId, gender, shape, rimType, material, color, colorHex,
+          basePrice, originalPrice, description, JSON.stringify(specs), isActive, isNewArrival, isBestSeller,
+          tryOnEnabled, tryOnModelUrl
+        ]
       );
+      const newProduct = pRes.rows[0];
 
-      return NextResponse.json({
-        success: true,
-        message: "Product created successfully in database",
-        product: res.rows[0],
-      });
-    } catch {
-      const product = createProduct(body);
-      return NextResponse.json({
-        success: true,
-        message: "Product created successfully in store",
-        product,
-      });
-    }
+      // 4. Insert variants
+      if (Array.isArray(body.variants) && body.variants.length > 0) {
+        for (const v of body.variants) {
+          const vSku = v.sku || `${slug}-${(v.colorName || v.color_name || "standard").toLowerCase().replace(/[^a-z0-9]/g, "")}`;
+          const vStock = Number(v.stock ?? v.stock_quantity ?? 10);
+          const vColor = v.colorName || v.color_name || color;
+          const vHex = v.colorHex || v.color_hex || colorHex;
+
+          await client.query(
+            `INSERT INTO public.product_variants (product_id, color_name, color_hex, sku, stock_quantity)
+             VALUES ($1, $2, $3, $4, $5)
+             ON CONFLICT (sku) DO UPDATE
+             SET stock_quantity = EXCLUDED.stock_quantity, updated_at = NOW();`,
+            [newProduct.id, vColor, vHex, vSku, vStock]
+          );
+        }
+      } else {
+        const defaultSku = `SKU-${slug.slice(0, 10).toUpperCase()}-01`;
+        const defaultStock = Number(body.stock || 12);
+        await client.query(
+          `INSERT INTO public.product_variants (product_id, color_name, color_hex, sku, stock_quantity)
+           VALUES ($1, $2, $3, $4, $5)
+           ON CONFLICT (sku) DO NOTHING;`,
+          [newProduct.id, color, colorHex, defaultSku, defaultStock]
+        );
+      }
+
+      // 5. Insert images
+      if (Array.isArray(body.images) && body.images.length > 0) {
+        for (let i = 0; i < body.images.length; i++) {
+          const imgUrl = typeof body.images[i] === "string" ? body.images[i] : body.images[i].url;
+          if (imgUrl) {
+            await client.query(
+              `INSERT INTO public.product_images (product_id, url, display_order, is_primary)
+               VALUES ($1, $2, $3, $4);`,
+              [newProduct.id, imgUrl, i, i === 0]
+            );
+          }
+        }
+      }
+
+      return newProduct;
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "Product created successfully in PostgreSQL",
+      product: createdProduct,
+    });
   } catch (error: any) {
     console.error("Products POST error:", error);
     return NextResponse.json(
