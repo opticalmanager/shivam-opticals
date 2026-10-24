@@ -255,13 +255,13 @@ export default function HomePage() {
 
   return (
     <div className="w-full">
-      {/* ================= HERO SECTION (RAY-BAN META GEN2 PROMOTIONAL BANNER) ================= */}
-      <section className="relative w-full overflow-hidden bg-gradient-to-r from-[#CACCC7] via-[#A6ACA5] to-[#7E837F] border-b border-[#E8E2D9]/60">
+      {/* ================= HERO SECTION (OUR MOST LOVED STYLES BANNER) ================= */}
+      <section className="relative w-full overflow-hidden bg-gradient-to-r from-[#EAE8E4] via-[#EAE7E2] to-[#E9E6E1] border-b border-[#E8E2D9]/60">
         <div className="w-full max-w-[1920px] mx-auto relative">
           <Link
             href="/products?brand=Ray-Ban"
             className="group block w-full relative cursor-pointer overflow-hidden"
-            title="Shop Ray-Ban Meta Smart Glasses & Eyewear Collection — 20% Off at Shivam Optical"
+            title="Shop Our Most Loved Styles — Iconic Ray-Ban Polarized Sunglasses & Frames at Shivam Optical"
           >
             <picture className="block w-full">
               <source
@@ -276,7 +276,7 @@ export default function HomePage() {
               />
               <img
                 src="/images/banner.png"
-                alt="Shivam Optical - 20% Off Ray-Ban Meta (Gen2) Smart Glasses"
+                alt="Shivam Optical - Our Most Loved Styles | Iconic Ray-Ban Polarized Sunglasses"
                 className="w-full h-auto aspect-[1024/426] object-cover object-center block select-none transition-transform duration-700 ease-out group-hover:scale-[1.008]"
                 width={1024}
                 height={426}
@@ -286,7 +286,7 @@ export default function HomePage() {
               />
             </picture>
             <span className="sr-only">
-              Shop 20% Off Ray-Ban Meta Gen2 Smart Glasses at Shivam Optical
+              Shop Our Most Loved Styles and Iconic Ray-Ban Polarized Sunglasses at Shivam Optical
             </span>
           </Link>
         </div>
