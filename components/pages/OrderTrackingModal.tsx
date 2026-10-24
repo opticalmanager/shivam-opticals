@@ -88,7 +88,7 @@ export const OrderTrackingModal: React.FC = () => {
             </div>
             <div>
               <h3 className="font-serif text-sm tracking-widest uppercase font-bold text-[#C5A059]">
-                SHIVAM OPTICALS ORDER TRACKER
+                SHIVAM OPTICAL ORDER TRACKER
               </h3>
               <p className="text-[10px] text-stone-300 font-sans tracking-wider uppercase">
                 Real-Time Clinical Assembly & Delivery Status

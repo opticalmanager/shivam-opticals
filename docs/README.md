@@ -1,6 +1,6 @@
-# Shivam Opticals — Technical Architecture & Engineering Documentation
+# Shivam Optical — Technical Architecture & Engineering Documentation
 
-Welcome to the **Shivam Opticals** engineering and architecture manual. This directory houses authoritative, validated architectural blueprints, security protocols, payment processing guides, and clinical optometry workflows.
+Welcome to the **Shivam Optical** engineering and architecture manual. This directory houses authoritative, validated architectural blueprints, security protocols, payment processing guides, and clinical optometry workflows.
 
 This documentation serves as:
 1. **The Single Source of Truth for AI Agents**: Preventing hallucinations, accidental code regressions, and credential mishandling.

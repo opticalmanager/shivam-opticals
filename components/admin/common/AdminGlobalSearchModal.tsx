@@ -66,7 +66,7 @@ export const AdminGlobalSearchModal: React.FC<AdminGlobalSearchModalProps> = ({
         if (prodRes.products) {
           prodRes.products.forEach((p: any) => {
             const price = p.base_price !== undefined ? Number(p.base_price) : Number(p.price || 0);
-            const brand = p.brand_name || p.brand || "Shivam Opticals";
+            const brand = p.brand_name || p.brand || "Shivam Optical";
             const category = p.category_name || p.category || "Eyewear";
             aggregated.push({
               type: "product",

@@ -116,7 +116,7 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
                     {item.product?.name || "Designer Frame"}
                   </h4>
                   <p className="text-[11px] text-[#716B64] mt-0.5">
-                    {item.product?.brand || "Shivam Opticals"}
+                    {item.product?.brand || "Shivam Optical"}
                     {item.selectedColor ? ` • ${item.selectedColor}` : ""}
                   </p>
                   

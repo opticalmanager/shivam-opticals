@@ -450,7 +450,7 @@ export default function AdminMarketingPage() {
                   rows={4}
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
-                  placeholder="Greetings from Shivam Opticals Atelier. Discover our newly curated luxury titanium and bio-acetate arrivals in Mayur Vihar Phase 1..."
+                  placeholder="Greetings from Shivam Optical Atelier. Discover our newly curated luxury titanium and bio-acetate arrivals in Mayur Vihar Phase 1..."
                   className="w-full px-3 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
                 />
               </div>

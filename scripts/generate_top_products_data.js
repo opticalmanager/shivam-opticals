@@ -8,7 +8,7 @@ const pool = new Pool({
 });
 
 async function main() {
-  console.log('Fetching diverse top luxury products from Shivam Optics Supabase...');
+  console.log('Fetching diverse top luxury products from Shivam Optical Supabase...');
 
   const query = `
     SELECT 

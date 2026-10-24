@@ -144,6 +144,12 @@ export async function PUT(
       addField("description", body.description);
       addField("base_price", body.basePrice !== undefined ? Number(body.basePrice) : (body.base_price !== undefined ? Number(body.base_price) : undefined));
       addField("original_price", body.originalPrice !== undefined ? (body.originalPrice ? Number(body.originalPrice) : null) : undefined);
+      if (body.rating !== undefined) {
+        addField("rating", Number(body.rating));
+      }
+      if (body.reviewCount !== undefined || body.review_count !== undefined) {
+        addField("review_count", Number(body.reviewCount ?? body.review_count));
+      }
       addField("gender", body.gender);
       addField("shape", body.shape);
       addField("rim_type", body.rimType || body.rim_type);
@@ -231,6 +237,9 @@ export async function PUT(
       return productUpdateRes.rows[0];
     });
 
+    const { invalidateProductsCache } = await import("@/lib/productsService");
+    invalidateProductsCache();
+
     return NextResponse.json({
       success: true,
       message: "Product updated successfully in PostgreSQL",
@@ -271,6 +280,9 @@ export async function DELETE(
     if (res.rows.length === 0) {
       return NextResponse.json({ success: false, error: "Product not found" }, { status: 404 });
     }
+
+    const { invalidateProductsCache } = await import("@/lib/productsService");
+    invalidateProductsCache();
 
     return NextResponse.json({
       success: true,

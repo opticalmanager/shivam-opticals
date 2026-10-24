@@ -79,7 +79,7 @@ export async function POST(req: Request) {
         receipt: orderReceipt,
         notes: {
           ...notes,
-          store: "Shivam Opticals Luxury Eyewear Atelier",
+          store: "Shivam Optical Luxury Eyewear Atelier",
         },
       });
     } catch (primaryErr: any) {

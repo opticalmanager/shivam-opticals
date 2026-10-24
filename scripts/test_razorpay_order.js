@@ -30,7 +30,7 @@ async function testOrder() {
       currency: "INR",
       receipt: `rcpt_${Date.now()}`,
       notes: {
-        store: "Shivam Opticals Luxury Eyewear Atelier",
+        store: "Shivam Optical Luxury Eyewear Atelier",
       },
     });
     console.log("Razorpay Order Created Successfully! Order:", order);

@@ -66,6 +66,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     colorHex: initialData?.color_hex || initialData?.colorHex || "#1A1A1A",
     basePrice: initialData?.base_price || initialData?.price || 1990,
     originalPrice: initialData?.original_price || initialData?.originalPrice || "",
+    rating: initialData?.rating !== undefined ? Number(initialData.rating) : 4.8,
+    reviewCount: initialData?.review_count !== undefined ? Number(initialData.review_count) : (initialData?.reviewCount || 24),
     stock: initialData?.total_stock || initialData?.stock || 12,
     description: initialData?.description || "",
     isActive: initialData?.is_active !== undefined ? initialData.is_active : true,
@@ -632,9 +634,26 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Original MRP / Cross-out Price (INR ₹)
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-xs font-semibold text-stone-700">
+                  Original MRP / Cross-out Price (INR ₹)
+                </label>
+                {Number(formData.basePrice) > 0 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        originalPrice: Math.round(Number(formData.basePrice) / 0.9),
+                      })
+                    }
+                    className="text-[10px] text-[#C5A059] hover:underline font-medium cursor-pointer"
+                    title="Set MRP such that selling price gives 10% discount"
+                  >
+                    Auto 10% on MRP (₹{Math.round(Number(formData.basePrice) / 0.9)})
+                  </button>
+                )}
+              </div>
               <input
                 type="number"
                 value={formData.originalPrice}
@@ -654,6 +673,39 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 onChange={(e) => setFormData({ ...formData, stock: Number(e.target.value) })}
                 className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
               />
+            </div>
+          </div>
+
+          {/* Customer Reviews & Ratings */}
+          <div className="pt-3 border-t border-stone-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                Client Rating (1.0 to 5.0)
+              </label>
+              <input
+                type="number"
+                step="0.1"
+                min="1.0"
+                max="5.0"
+                value={formData.rating}
+                onChange={(e) => setFormData({ ...formData, rating: Number(e.target.value) })}
+                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+              />
+              <span className="text-[10px] text-stone-400">Authentic client satisfaction score (e.g. 4.8)</span>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-stone-700 mb-1">
+                Verified Reviews Count
+              </label>
+              <input
+                type="number"
+                min="0"
+                value={formData.reviewCount}
+                onChange={(e) => setFormData({ ...formData, reviewCount: Number(e.target.value) })}
+                className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C] focus:outline-hidden focus:border-[#C5A059]"
+              />
+              <span className="text-[10px] text-stone-400">Total number of verified client review points</span>
             </div>
           </div>
         </div>

@@ -1,0 +1,46 @@
+[
+  {
+    "item": {
+      "brand": "French Connection",
+      "model": "FC8278",
+      "category": "sunglasses",
+      "colors": [
+        "MIX"
+      ],
+      "prices": [
+        8200
+      ],
+      "itemCodes": [
+        "SGOOO16B"
+      ]
+    },
+    "store": "R. Kumar Opticians",
+    "domain": "rkumar.in",
+    "query": "FC8278",
+    "title": "FCUK FC8278 CLIP-ON C3 53 SUNGLASSES",
+    "handle": "fcuk-fc8278-clipon-c3-53-sunglasses",
+    "image": "https://cdn.shopify.com/s/files/1/0958/3565/2388/files/FC8278CliponC3-LS_3e501e20-a7cf-41b8-84ff-5b598ce1d66d.png?v=1772922175"
+  },
+  {
+    "item": {
+      "brand": "Carrera",
+      "model": "CA37YG",
+      "category": "eyeglasses",
+      "colors": [
+        "2M2"
+      ],
+      "prices": [
+        10690
+      ],
+      "itemCodes": [
+        "FR01321B"
+      ]
+    },
+    "store": "Dayal Opticals",
+    "domain": "dayalopticalsindia.com",
+    "query": "CARRERA 37",
+    "title": "CARRERA     317/S",
+    "handle": "carrera-317-s",
+    "image": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/653578_1697506158927.webp?v=1709795343"
+  }
+]

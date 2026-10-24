@@ -245,7 +245,7 @@ function CheckoutContent() {
         key: createData.keyId,
         amount: createData.amount,
         currency: createData.currency || "INR",
-        name: "Shivam Opticals",
+        name: "Shivam Optical",
         description: "Eyewear & Prescription Lenses",
         order_id: createData.order_id,
         prefill: {

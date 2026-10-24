@@ -1,0 +1,48 @@
+[
+  {
+    "itemIndex": 28,
+    "originalItem": {
+      "brand": "Ray-Ban",
+      "model": "RB6531",
+      "category": "eyeglasses",
+      "colors": [
+        "MIX"
+      ],
+      "prices": [
+        2503
+      ],
+      "itemCodes": [
+        "FR01178B"
+      ]
+    },
+    "store": "Ramavision",
+    "domain": "ramavision.in",
+    "query": "RX6531",
+    "matchedTitle": "RAY-BAN RX6531I 2500 - Arista gold",
+    "handle": "ray-ban-rx6531i-2500-arista-gold",
+    "image": "https://cdn.shopify.com/s/files/1/0825/5543/7365/files/RX6531I25001.jpg?v=1741514233"
+  },
+  {
+    "itemIndex": 29,
+    "originalItem": {
+      "brand": "Ray-Ban",
+      "model": "RB6463",
+      "category": "eyeglasses",
+      "colors": [
+        "MIX"
+      ],
+      "prices": [
+        2500
+      ],
+      "itemCodes": [
+        "FR01205B"
+      ]
+    },
+    "store": "Prism Eye Care",
+    "domain": "prismeyecare.in",
+    "query": "6463I",
+    "matchedTitle": "RAYBAN 6463I 2500 53",
+    "handle": "rayban-6463i-2500-53",
+    "image": "https://cdn.shopify.com/s/files/1/0631/4079/0462/files/5GG.webp?v=1710663392"
+  }
+]

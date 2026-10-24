@@ -31,10 +31,10 @@ export const Header: React.FC = () => {
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
-          {/* Brand Name Centered: SHIVAM OPTICALS */}
+          {/* Brand Name Centered: SHIVAM OPTICAL */}
           <Link href="/" className="inline-block py-0.5 text-center group">
             <span className="text-[17px] sm:text-[19px] md:text-[21px] font-serif font-bold tracking-[0.28em] text-[#0A251C] uppercase whitespace-nowrap group-hover:text-[#C5A059] transition-colors">
-              SHIVAM OPTICALS
+              SHIVAM OPTICAL
             </span>
           </Link>
 

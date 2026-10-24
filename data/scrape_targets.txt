@@ -1,0 +1,4 @@
+# Paste target product URLs from Dayal Opticals and Gem Opticians below (one URL per line)
+# Examples:
+# https://dayalopticalsindia.com/products/ray-ban-0rx-7027i
+# https://gemopticians.com/products/1142-1lh-57

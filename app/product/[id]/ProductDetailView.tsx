@@ -219,7 +219,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
   const handleWhatsAppChat = () => {
     const text = encodeURIComponent(
-      `Hi Shivam Opticals Atelier, I am inquiring about ${product.brand} - ${product.name} (Price: ${formatCurrency(product.price)}). Could you provide live photos and concierge styling guidance?`
+      `Hi Shivam Optical Atelier, I am inquiring about ${product.brand} - ${product.name} (Price: ${formatCurrency(product.price)}). Could you provide live photos and concierge styling guidance?`
     );
     window.open(`https://wa.me/919779990207?text=${text}`, "_blank");
   };
@@ -395,7 +395,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   onClick={() => toggleAccordion("about")}
                   className="w-full flex items-center justify-between text-left text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-[#1A1816] hover:text-[#C5A059] transition-colors cursor-pointer"
                 >
-                  <span>ABOUT SHIVAM OPTICALS ATELIER</span>
+                  <span>ABOUT SHIVAM OPTICAL ATELIER</span>
                   {openAccordions.about ? (
                     <Minus className="w-4 h-4 text-neutral-500" />
                   ) : (
@@ -404,7 +404,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
                 {openAccordions.about && (
                   <div className="pt-3.5 pb-1 text-xs sm:text-sm leading-relaxed text-neutral-600 font-normal animate-in fade-in duration-200">
-                    Shivam Opticals is India&apos;s premier luxury optical atelier and clinical vision center.
+                    Shivam Optical is India&apos;s premier luxury optical atelier and clinical vision center.
                     For over decades, we have curated the world&apos;s most prestigious eyewear houses,
                     delivering master craftsmanship, digital wavefront prescription lenses, and bespoke optical
                     solutions engineered with certified European laboratory precision.
@@ -427,7 +427,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
                 {openAccordions.pledge && (
                   <div className="pt-3.5 pb-1 text-xs sm:text-sm leading-relaxed text-neutral-600 font-normal animate-in fade-in duration-200">
-                    Every spectacle frame and sunglass sold at Shivam Opticals is 100% authentic, sourced
+                    Every spectacle frame and sunglass sold at Shivam Optical is 100% authentic, sourced
                     directly from certified brand distributors with original certificate of authenticity,
                     branded protective hard case, microfiber cleaning cloth, and a 1-year manufacturer warranty
                     covering manufacturing defects.
@@ -621,17 +621,27 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             <div className="border border-[#E8DEC8] bg-white rounded-xl px-4 py-2.5 flex items-center justify-between font-sans text-[12px] shadow-2xs">
               <div className="flex items-center gap-1.5 text-[#1A1816]">
                 <div className="flex items-center gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-3.5 h-3.5 fill-[#C5A059] text-[#C5A059]"
-                    />
-                  ))}
+                  {[...Array(5)].map((_, i) => {
+                    const currentScore = Number(product.rating || 4.8);
+                    const isFilled = i < Math.floor(currentScore);
+                    return (
+                      <Star
+                        key={i}
+                        className={`w-3.5 h-3.5 ${
+                          isFilled
+                            ? "fill-[#C5A059] text-[#C5A059]"
+                            : "fill-neutral-200 text-neutral-300"
+                        }`}
+                      />
+                    );
+                  })}
                 </div>
-                <span className="font-bold ml-1">{product.rating || 5.0}/5</span>
+                <span className="font-bold ml-1">
+                  {Number(product.rating || 4.8).toFixed(1)} / 5
+                </span>
               </div>
-              <span className="text-neutral-500 text-xs">
-                {product.reviewCount || 38} certified client reviews
+              <span className="text-[#716B64] text-xs">
+                Based on {product.reviewCount || 24} verified ratings
               </span>
             </div>
 

@@ -179,7 +179,7 @@ export async function GET(req: NextRequest) {
     const topProductsRes = await query(`
       SELECT 
         COALESCE(oi.product_snapshot->>'name', p.name, 'Optical Frame') as name,
-        COALESCE(b.name, 'Shivam Opticals') as brand,
+        COALESCE(b.name, 'Shivam Optical') as brand,
         SUM(oi.quantity)::int as "unitsSold",
         SUM(oi.total_price)::numeric as revenue,
         p.base_price as price
@@ -197,7 +197,7 @@ export async function GET(req: NextRequest) {
       const catalogTop = await query(`
         SELECT 
           p.name,
-          COALESCE(b.name, 'Shivam Opticals') as brand,
+          COALESCE(b.name, 'Shivam Optical') as brand,
           0 as "unitsSold",
           p.base_price as price,
           0 as revenue

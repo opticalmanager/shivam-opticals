@@ -166,7 +166,7 @@ async function runSettingsDbTest() {
   try {
     const testKey = `test_setting_p6_${Date.now()}`;
     const testPayload = {
-      facility: 'Shivam Optics Mayur Vihar Central Lab',
+      facility: 'Shivam Optical Mayur Vihar Central Lab',
       cleanRoomStandard: 'ISO-7',
       opticalEngineers: 4,
       timestamp: new Date().toISOString(),

@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { notFound } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
 import { getProductById, getCatalogProducts } from "@/lib/productsService";
 import { ProductDetailView } from "./ProductDetailView";
@@ -8,6 +9,8 @@ export function generateStaticParams() {
     id: product.id,
   }));
 }
+
+export const dynamicParams = true;
 
 export default async function ProductPage({
   params,
@@ -19,8 +22,11 @@ export default async function ProductPage({
   const product =
     (await getProductById(resolvedParams.id)) ||
     allProducts.find((p) => p.id === resolvedParams.id) ||
-    PRODUCTS.find((p) => p.id === resolvedParams.id) ||
-    PRODUCTS[0];
+    PRODUCTS.find((p) => p.id === resolvedParams.id);
+
+  if (!product) {
+    notFound();
+  }
 
   return (
     <Suspense

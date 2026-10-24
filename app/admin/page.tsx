@@ -72,7 +72,7 @@ export default function AdminDashboardPage() {
             Executive Command Center
           </h1>
           <p className="text-xs text-stone-500">
-            Shivam Opticals (Mayur Vihar Atelier) Luxury Eyewear & Laboratory Analytics
+            Shivam Optical (Mayur Vihar Atelier) Luxury Eyewear & Laboratory Analytics
           </p>
         </div>
         <button

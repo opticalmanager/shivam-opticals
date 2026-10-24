@@ -1,5 +1,5 @@
 /**
- * Shivam Opticals - Virtual Try-On TypeScript Definitions
+ * Shivam Optical - Virtual Try-On TypeScript Definitions
  * Strict types for face tracking, 3D coordinate mapping, calibration, and product configs.
  */
 

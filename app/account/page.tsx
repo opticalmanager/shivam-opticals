@@ -68,7 +68,7 @@ function AccountDashboard() {
     rightEye: { sph: "-1.25", cyl: "-0.50", axis: "90" },
     leftEye: { sph: "-1.50", cyl: "-0.50", axis: "85" },
     pd: "63.5",
-    doctor: "Dr. K. Sharma (Shivam Opticals Atelier)",
+    doctor: "Dr. K. Sharma (Shivam Optical Atelier)",
     date: "14 Sept 2026",
   });
   const [isEditingRx, setIsEditingRx] = useState(false);
@@ -121,7 +121,7 @@ function AccountDashboard() {
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#0A251C] text-[#C5A059]">
                 <Sparkles className="w-3 h-3" />
-                Shivam Opticals Member
+                Shivam Optical Member
               </span>
             </div>
           </div>

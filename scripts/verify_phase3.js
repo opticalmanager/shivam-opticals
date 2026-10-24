@@ -27,7 +27,7 @@ function loadEnv() {
 
 async function verifyPhase3() {
   loadEnv();
-  console.log("=== Shivam Optics — Phase 3 Verification Suite ===\n");
+  console.log("=== Shivam Optical — Phase 3 Verification Suite ===\n");
 
   let allPassed = true;
 

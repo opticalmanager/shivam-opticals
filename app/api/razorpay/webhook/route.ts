@@ -26,7 +26,7 @@ export async function GET() {
   return NextResponse.json(
     {
       success: true,
-      service: "Shivam Opticals Razorpay Payment Webhook",
+      service: "Shivam Optical Razorpay Payment Webhook",
       status: "active",
       supportedMethods: ["GET", "POST", "OPTIONS", "HEAD"],
       message: "Razorpay payment webhook endpoint is active and accessible.",

@@ -212,7 +212,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsGuest(false);
       setIsAuthModalOpen(false);
       toast.success("Welcome back!", {
-        description: `Signed in to Shivam Opticals`,
+        description: `Signed in to Shivam Optical`,
       });
     },
     []
@@ -252,7 +252,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsGuest(false);
       setIsAuthModalOpen(false);
       toast.success("Welcome back!", {
-        description: `Signed in to Shivam Opticals`,
+        description: `Signed in to Shivam Optical`,
       });
     },
     []
@@ -343,7 +343,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             id: `rx-${Date.now()}`,
             title,
             date: new Date().toISOString().split("T")[0],
-            doctorName: doctorName || "Shivam Opticals Certified Optometrist",
+            doctorName: doctorName || "Shivam Optical Certified Optometrist",
             data,
           },
         ],

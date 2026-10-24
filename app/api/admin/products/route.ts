@@ -104,6 +104,8 @@ export async function GET(req: NextRequest) {
         p.color_hex,
         p.base_price,
         p.original_price,
+        p.rating,
+        p.review_count,
         p.is_active,
         p.is_new_arrival,
         p.is_best_seller,
@@ -169,7 +171,7 @@ export async function GET(req: NextRequest) {
         ...row,
         price: Number(row.base_price || 0),
         originalPrice: row.original_price ? Number(row.original_price) : undefined,
-        brand: row.brand_name || "Shivam Opticals",
+        brand: row.brand_name || "Shivam Optical",
         category: row.category_name || "Eyewear",
         img: primaryImg,
         images: images.length > 0 ? images : [primaryImg],
@@ -233,7 +235,21 @@ export async function POST(req: NextRequest) {
 
     const slug = body.slug?.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
     const basePrice = Number(body.basePrice || body.base_price || 0);
-    const originalPrice = body.originalPrice ? Number(body.originalPrice) : null;
+    let originalPrice = body.originalPrice ? Number(body.originalPrice) : null;
+
+    if (!originalPrice && basePrice > 0) {
+      try {
+        const sRes = await query(`SELECT value FROM public.admin_settings WHERE key = 'pricing' LIMIT 1;`);
+        const pVal = sRes.rows[0]?.value;
+        const parsed = typeof pVal === "string" ? JSON.parse(pVal) : pVal;
+        const discountPct = Number(parsed?.defaultDiscountPercent || 10);
+        if (discountPct > 0 && discountPct < 100) {
+          originalPrice = Math.round(basePrice / (1.0 - (discountPct / 100.0)));
+        }
+      } catch {
+        originalPrice = Math.round(basePrice / 0.90);
+      }
+    }
     const gender = body.gender || "unisex";
     const shape = body.shape || "rectangle";
     const rimType = body.rimType || body.rim_type || "full-rim";
@@ -247,6 +263,8 @@ export async function POST(req: NextRequest) {
     const isBestSeller = Boolean(body.isBestSeller);
     const tryOnEnabled = Boolean(body.tryOnEnabled);
     const tryOnModelUrl = body.tryOnModelUrl || null;
+    const rating = body.rating !== undefined ? Number(body.rating) : 4.8;
+    const reviewCount = body.reviewCount !== undefined ? Number(body.reviewCount) : (body.review_count !== undefined ? Number(body.review_count) : 24);
     const specs = body.specs || { lensWidth: 52, bridgeWidth: 18, templeLength: 145, frameWidth: 140, weight: "24g" };
 
     const { runTransaction } = await import("@/lib/db");
@@ -276,15 +294,15 @@ export async function POST(req: NextRequest) {
       const pRes = await client.query(
         `INSERT INTO public.products (
           slug, name, subtitle, brand_id, category_id, gender, shape, rim_type, material, color, color_hex,
-          base_price, original_price, description, specs, is_active, is_new_arrival, is_best_seller,
+          base_price, original_price, rating, review_count, description, specs, is_active, is_new_arrival, is_best_seller,
           try_on_enabled, try_on_model_url
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
         ON CONFLICT (slug) DO UPDATE
         SET name = EXCLUDED.name, base_price = EXCLUDED.base_price, is_active = EXCLUDED.is_active, updated_at = NOW()
         RETURNING *;`,
         [
           slug, name, subtitle, brandId, categoryId, gender, shape, rimType, material, color, colorHex,
-          basePrice, originalPrice, description, JSON.stringify(specs), isActive, isNewArrival, isBestSeller,
+          basePrice, originalPrice, rating, reviewCount, description, JSON.stringify(specs), isActive, isNewArrival, isBestSeller,
           tryOnEnabled, tryOnModelUrl
         ]
       );
@@ -333,6 +351,9 @@ export async function POST(req: NextRequest) {
 
       return newProduct;
     });
+
+    const { invalidateProductsCache } = await import("@/lib/productsService");
+    invalidateProductsCache();
 
     return NextResponse.json({
       success: true,

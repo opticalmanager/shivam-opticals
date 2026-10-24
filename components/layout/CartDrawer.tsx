@@ -172,7 +172,7 @@ export const CartDrawer: React.FC = () => {
                               <span className="text-[10px] font-bold text-[#C5A059] uppercase tracking-wider block">
                                 {item.product.brand}
                               </span>
-                              <h4 className="text-xs font-bold text-[#0A251C] truncate">
+                              <h4 className="font-sans text-xs sm:text-[13px] font-semibold text-[#0A251C] truncate leading-snug">
                                 {item.product.name}
                               </h4>
                             </div>

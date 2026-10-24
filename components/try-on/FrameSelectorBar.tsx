@@ -51,7 +51,7 @@ export const FrameSelectorBar: React.FC<FrameSelectorBarProps> = ({
               </div>
               <div className="pr-1">
                 <div className={`text-[10px] font-bold truncate max-w-[110px] ${isActive ? "text-[#C5A059]" : "text-white"}`}>
-                  {p.brand || "SHIVAM OPTICALS"}
+                  {p.brand || "SHIVAM OPTICAL"}
                 </div>
                 <div className="text-[9px] text-stone-300 font-mono">
                   {formatCurrency(p.price)}

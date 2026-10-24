@@ -1,5 +1,5 @@
 /**
- * Precision Optics -> Shivam Optics Product Catalog Migration Verification
+ * Precision Optics -> Shivam Optical Product Catalog Migration Verification
  * 
  * Deep Edge Case Test Suite:
  * 1. Database Entity Counts (Brands: 42, Categories: 5, Products: 1297, Variants: 4138, Images: 12821).
@@ -60,14 +60,14 @@ function assert(condition, message) {
 
 async function runTests() {
   console.log('================================================================');
-  console.log('   PRECISION -> SHIVAM OPTICS CATALOG VERIFICATION SUITE       ');
+  console.log('   PRECISION -> SHIVAM OPTICAL CATALOG VERIFICATION SUITE      ');
   console.log('================================================================\n');
 
   try {
     // -------------------------------------------------------------
     // TEST SUITE 1: Entity Counts
     // -------------------------------------------------------------
-    console.log('1. Checking Database Entity Counts in Shivam Optics Supabase...');
+    console.log('1. Checking Database Entity Counts in Shivam Optical Supabase...');
     const bCount = (await pool.query('SELECT count(*) FROM brands')).rows[0].count;
     const cCount = (await pool.query('SELECT count(*) FROM categories')).rows[0].count;
     const pCount = (await pool.query('SELECT count(*) FROM products')).rows[0].count;

@@ -1,4 +1,4 @@
-# Shivam Optics — Supabase Email Templates Suite
+# Shivam Optical — Supabase Email Templates Suite
 
 This document contains the production-ready HTML email templates for all 6 Supabase Authentication events. Each template is engineered with:
 - **Dual-Verification Support**: Both the 6-digit OTP code (`{{ .Token }}`) and the 1-click confirmation link (`{{ .ConfirmationURL }}`) are provided.
@@ -10,7 +10,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 
 ## 1. Confirm Sign Up
 **Supabase Dashboard Location**: `Authentication` -> `Email Templates` -> **Confirm sign up**  
-**Subject Line**: `Confirm your Shivam Optics registration`
+**Subject Line**: `Confirm your Shivam Optical registration`
 
 ```html
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 CLINICAL EYEWEAR &amp; ZEISS VISION CARE
               </div>
               <div style="font-family: Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.05em; color: #FFFFFF;">
-                SHIVAM OPTICS
+                SHIVAM OPTICAL
               </div>
               <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #A3B8B0; margin-top: 4px;">
                 MAYUR VIHAR ATELIER &bull; NEW DELHI
@@ -50,7 +50,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 Confirm Your Account Registration
               </h1>
               <p style="font-size: 14px; line-height: 1.6; color: #57534E; margin: 0 0 24px 0;">
-                Welcome to Shivam Optics. To activate your patron account and access your personal clinical prescription vault, please verify your email address.
+                Welcome to Shivam Optical. To activate your patron account and access your personal clinical prescription vault, please verify your email address.
               </p>
 
               <!-- Option A: 6-Digit Verification Code -->
@@ -99,7 +99,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 
               <!-- Expiry Note -->
               <p style="font-size: 11px; color: #A8A29E; line-height: 1.5; margin: 20px 0 0 0;">
-                This code and link will expire in 10 minutes. If you did not create an account with Shivam Optics, please disregard this email.
+                This code and link will expire in 10 minutes. If you did not create an account with Shivam Optical, please disregard this email.
               </p>
             </td>
           </tr>
@@ -108,7 +108,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
           <tr>
             <td style="background-color: #FAF7F2; border-top: 1px solid #E8DEC8; padding: 22px 30px; text-align: center;">
               <div style="font-size: 11px; font-weight: 600; color: #0A251C; margin-bottom: 4px;">
-                Shivam Optics Atelier &bull; Clinical Vision Care
+                Shivam Optical Atelier &bull; Clinical Vision Care
               </div>
               <div style="font-size: 10px; color: #78716C; line-height: 1.4;">
                 Mayur Vihar Phase 1, Pocket 1, New Delhi 110091<br>
@@ -128,7 +128,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 
 ## 2. Magic Link or OTP (Primary Sign-In)
 **Supabase Dashboard Location**: `Authentication` -> `Email Templates` -> **Magic link or OTP**  
-**Subject Line**: `Your Shivam Optics verification code & sign-in link`
+**Subject Line**: `Your Shivam Optical verification code & sign-in link`
 
 ```html
 <!DOCTYPE html>
@@ -136,7 +136,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In to Shivam Optics</title>
+  <title>Sign In to Shivam Optical</title>
 </head>
 <body style="margin: 0; padding: 0; background-color: #FAF7F2; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #2A1E17; -webkit-font-smoothing: antialiased;">
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #FAF7F2; padding: 40px 15px;">
@@ -150,7 +150,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 PATRON AUTHENTICATION
               </div>
               <div style="font-family: Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.05em; color: #FFFFFF;">
-                SHIVAM OPTICS
+                SHIVAM OPTICAL
               </div>
               <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #A3B8B0; margin-top: 4px;">
                 MAYUR VIHAR ATELIER &bull; NEW DELHI
@@ -204,7 +204,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 <tr>
                   <td align="center">
                     <a href="{{ .ConfirmationURL }}" style="display: inline-block; background-color: #0A251C; color: #C5A059; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; padding: 14px 32px; border-radius: 10px; border: 1px solid #0A251C;">
-                      Sign In to Shivam Optics
+                      Sign In to Shivam Optical
                     </a>
                   </td>
                 </tr>
@@ -226,7 +226,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
           <tr>
             <td style="background-color: #FAF7F2; border-top: 1px solid #E8DEC8; padding: 22px 30px; text-align: center;">
               <div style="font-size: 11px; font-weight: 600; color: #0A251C; margin-bottom: 4px;">
-                Shivam Optics Atelier &bull; Clinical Vision Care
+                Shivam Optical Atelier &bull; Clinical Vision Care
               </div>
               <div style="font-size: 10px; color: #78716C; line-height: 1.4;">
                 Mayur Vihar Phase 1, Pocket 1, New Delhi 110091<br>
@@ -246,7 +246,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 
 ## 3. Reset Password
 **Supabase Dashboard Location**: `Authentication` -> `Email Templates` -> **Reset password**  
-**Subject Line**: `Reset your Shivam Optics password`
+**Subject Line**: `Reset your Shivam Optical password`
 
 ```html
 <!DOCTYPE html>
@@ -268,7 +268,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 SECURITY &amp; RECOVERY
               </div>
               <div style="font-family: Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.05em; color: #FFFFFF;">
-                SHIVAM OPTICS
+                SHIVAM OPTICAL
               </div>
               <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #A3B8B0; margin-top: 4px;">
                 MAYUR VIHAR ATELIER &bull; NEW DELHI
@@ -286,7 +286,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 Reset Your Account Password
               </h1>
               <p style="font-size: 14px; line-height: 1.6; color: #57534E; margin: 0 0 24px 0;">
-                We received a request to reset your Shivam Optics account password. You can enter the reset code or click the direct button below to create a new password.
+                We received a request to reset your Shivam Optical account password. You can enter the reset code or click the direct button below to create a new password.
               </p>
 
               <!-- Option A: 6-Digit Reset Code -->
@@ -338,7 +338,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
           <tr>
             <td style="background-color: #FAF7F2; border-top: 1px solid #E8DEC8; padding: 22px 30px; text-align: center;">
               <div style="font-size: 11px; font-weight: 600; color: #0A251C; margin-bottom: 4px;">
-                Shivam Optics Atelier &bull; Mayur Vihar, New Delhi
+                Shivam Optical Atelier &bull; Mayur Vihar, New Delhi
               </div>
               <div style="font-size: 10px; color: #78716C; line-height: 1.4;">
                 Automated Security Notification &bull; Do Not Reply
@@ -357,7 +357,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 
 ## 4. Invite User
 **Supabase Dashboard Location**: `Authentication` -> `Email Templates` -> **Invite user**  
-**Subject Line**: `You're invited to join Shivam Optics Atelier`
+**Subject Line**: `You're invited to join Shivam Optical Atelier`
 
 ```html
 <!DOCTYPE html>
@@ -379,7 +379,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 EXCLUSIVE INVITATION
               </div>
               <div style="font-family: Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.05em; color: #FFFFFF;">
-                SHIVAM OPTICS
+                SHIVAM OPTICAL
               </div>
               <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #A3B8B0; margin-top: 4px;">
                 MAYUR VIHAR ATELIER &bull; NEW DELHI
@@ -397,7 +397,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 You Have Been Invited to Join the Atelier
               </h1>
               <p style="font-size: 14px; line-height: 1.6; color: #57534E; margin: 0 0 24px 0;">
-                You have received an invitation to join Shivam Optics Atelier. As an invited patron, you gain access to our precision lens customization, designer frames catalog, and clinical optical assembly tracking.
+                You have received an invitation to join Shivam Optical Atelier. As an invited patron, you gain access to our precision lens customization, designer frames catalog, and clinical optical assembly tracking.
               </p>
 
               <!-- Acceptance Button -->
@@ -421,7 +421,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
           <tr>
             <td style="background-color: #FAF7F2; border-top: 1px solid #E8DEC8; padding: 22px 30px; text-align: center;">
               <div style="font-size: 11px; font-weight: 600; color: #0A251C; margin-bottom: 4px;">
-                Shivam Optics &bull; Mayur Vihar Phase 1, Pocket 1, Delhi 110091
+                Shivam Optical &bull; Mayur Vihar Phase 1, Pocket 1, Delhi 110091
               </div>
             </td>
           </tr>
@@ -437,7 +437,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 
 ## 5. Change Email Address
 **Supabase Dashboard Location**: `Authentication` -> `Email Templates` -> **Change email address**  
-**Subject Line**: `Confirm your new email address for Shivam Optics`
+**Subject Line**: `Confirm your new email address for Shivam Optical`
 
 ```html
 <!DOCTYPE html>
@@ -459,7 +459,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 ACCOUNT SECURITY
               </div>
               <div style="font-family: Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.05em; color: #FFFFFF;">
-                SHIVAM OPTICS
+                SHIVAM OPTICAL
               </div>
               <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #A3B8B0; margin-top: 4px;">
                 MAYUR VIHAR ATELIER &bull; NEW DELHI
@@ -477,7 +477,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 Confirm Your New Email Address
               </h1>
               <p style="font-size: 14px; line-height: 1.6; color: #57534E; margin: 0 0 24px 0;">
-                We received a request to update your registered email address on Shivam Optics. To complete this change, please verify this email address.
+                We received a request to update your registered email address on Shivam Optical. To complete this change, please verify this email address.
               </p>
 
               <!-- Option A: 6-Digit Code -->
@@ -515,7 +515,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
           <tr>
             <td style="background-color: #FAF7F2; border-top: 1px solid #E8DEC8; padding: 22px 30px; text-align: center;">
               <div style="font-size: 11px; font-weight: 600; color: #0A251C;">
-                Shivam Optics &bull; Mayur Vihar Phase 1, Pocket 1, Delhi 110091
+                Shivam Optical &bull; Mayur Vihar Phase 1, Pocket 1, Delhi 110091
               </div>
             </td>
           </tr>
@@ -531,7 +531,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
 
 ## 6. Reauthentication
 **Supabase Dashboard Location**: `Authentication` -> `Email Templates` -> **Reauthentication**  
-**Subject Line**: `Shivam Optics security verification code`
+**Subject Line**: `Shivam Optical security verification code`
 
 ```html
 <!DOCTYPE html>
@@ -553,7 +553,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 SECURITY CHALLENGE
               </div>
               <div style="font-family: Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.05em; color: #FFFFFF;">
-                SHIVAM OPTICS
+                SHIVAM OPTICAL
               </div>
               <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #A3B8B0; margin-top: 4px;">
                 MAYUR VIHAR ATELIER &bull; NEW DELHI
@@ -571,7 +571,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
                 Authorize Sensitive Action
               </h1>
               <p style="font-size: 14px; line-height: 1.6; color: #57534E; margin: 0 0 24px 0;">
-                A sensitive operation was initiated on your Shivam Optics account. Please enter the single-use authorization code below to confirm your identity.
+                A sensitive operation was initiated on your Shivam Optical account. Please enter the single-use authorization code below to confirm your identity.
               </p>
 
               <!-- 6-Digit Reauthentication Code -->
@@ -592,7 +592,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
               </table>
 
               <p style="font-size: 11px; color: #A8A29E; line-height: 1.5; margin: 20px 0 0 0;">
-                If you did not initiate this request, change your credentials immediately or contact Shivam Optics support.
+                If you did not initiate this request, change your credentials immediately or contact Shivam Optical support.
               </p>
             </td>
           </tr>
@@ -601,7 +601,7 @@ This document contains the production-ready HTML email templates for all 6 Supab
           <tr>
             <td style="background-color: #FAF7F2; border-top: 1px solid #E8DEC8; padding: 22px 30px; text-align: center;">
               <div style="font-size: 11px; font-weight: 600; color: #0A251C;">
-                Shivam Optics Atelier &bull; Mayur Vihar Phase 1, Pocket 1, Delhi 110091
+                Shivam Optical Atelier &bull; Mayur Vihar Phase 1, Pocket 1, Delhi 110091
               </div>
             </td>
           </tr>

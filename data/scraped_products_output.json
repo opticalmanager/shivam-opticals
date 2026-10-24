@@ -1,0 +1,62 @@
+[
+  {
+    "sourceUrl": "https://dayalopticalsindia.com/products/dolce-gabbana-0dg-5103",
+    "slug": "dolce-gabbana-0dg-5103",
+    "name": "DOLCE GABBANA 0DG 5103",
+    "subtitle": "Dolce Gabbana Square full-rim",
+    "brand": "Dolce Gabbana",
+    "category": "eyeglasses",
+    "gender": "men",
+    "shape": "Square",
+    "rimType": "full-rim",
+    "material": "Acetate",
+    "color": "BLACK 501",
+    "colorHex": "#1A1816",
+    "basePrice": 29790,
+    "originalPrice": null,
+    "description": "Model No 5103 Material Acetate Gender Men Shape Square Type Full Rim",
+    "specs": {
+      "lensWidth": 53,
+      "bridgeWidth": 18,
+      "templeLength": 145,
+      "frameWidth": 140,
+      "weight": "22g"
+    },
+    "packageDimensions": {
+      "lengthCm": 18,
+      "breadthCm": 9,
+      "heightCm": 7,
+      "weightKg": 0.25
+    },
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_501............webp?v=1792587794",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_501....................webp?v=1792587793",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_501................webp?v=1792587794",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_502............webp?v=1792588062",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_502...............webp?v=1792588063",
+      "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_502..................webp?v=1792588063"
+    ],
+    "variants": [
+      {
+        "sku": "SO-DOLCEGAB-DOLCEGABBA-1",
+        "colorName": "BLACK 501",
+        "colorHex": "#1A1816",
+        "price": 29790,
+        "originalPrice": null,
+        "stockQuantity": 0,
+        "image": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_501............webp?v=1792587794",
+        "available": true
+      },
+      {
+        "sku": "SO-DOLCEGAB-DOLCEGABBA-2",
+        "colorName": "HAVANA 502",
+        "colorHex": "#5A381E",
+        "price": 29790,
+        "originalPrice": null,
+        "stockQuantity": 0,
+        "image": "https://cdn.shopify.com/s/files/1/0608/8563/1222/files/Dolce_Gabbana_5103_502............webp?v=1792588062",
+        "available": true
+      }
+    ]
+  }
+]

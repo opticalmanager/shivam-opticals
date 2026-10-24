@@ -1,0 +1,5923 @@
+[
+  {
+    "id": "cb788547-431d-49e8-8855-0a7698c89f99",
+    "slug": "so-armani-exchange-ax305x",
+    "name": "ARMANI EXCHANGE AX3053 8240",
+    "brand": "Armani Exchange",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "AX305X",
+        "color": "8257",
+        "parsedPrice": 1990,
+        "rawText": "FRO 1242B AX305.x 8257"
+      }
+    ]
+  },
+  {
+    "id": "9dd5d7d2-9944-4213-8a11-25508fd160ac",
+    "slug": "so-armani-exchange-ax4162su",
+    "name": "ARMANI EXCHANGE AX4162SU 839173",
+    "brand": "Armani Exchange",
+    "dbPrice": 10500,
+    "dbMrp": 11667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "AX4162SU",
+        "color": "839173",
+        "parsedPrice": 10500,
+        "rawText": "1 7B A,X4162SIJ 839173 10500"
+      }
+    ]
+  },
+  {
+    "id": "57f219e6-da87-4a76-9ffe-57ca484ed35b",
+    "slug": "so-boss-boss1424tlt",
+    "name": "HUGO BOSS  1424",
+    "brand": "Boss",
+    "dbPrice": 17600,
+    "dbMrp": 19556,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "BOSS1424TLT",
+        "color": "2M2",
+        "parsedPrice": 17600,
+        "rawText": "FR01235B BOSS1424TlT 2M2 17600 O. 00"
+      }
+    ]
+  },
+  {
+    "id": "2c6554df-eac9-4d9e-8cde-8dc48ebd92b7",
+    "slug": "so-burberry-b2172",
+    "name": "2172 3001 52",
+    "brand": "Burberry",
+    "dbPrice": 19500,
+    "dbMrp": 21667,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "B4358",
+        "color": "3001/85",
+        "parsedPrice": 19500,
+        "rawText": "SG00315B B43.S8 3001/85 19500 0.00 P 16-06-202("
+      },
+      {
+        "model": "B4216",
+        "color": "3001/8G",
+        "parsedPrice": 20600,
+        "rawText": "B4216 3001/8G 20600 o. 00"
+      },
+      {
+        "model": "B2334",
+        "color": "3001",
+        "parsedPrice": 17600,
+        "rawText": "FR01229B B2334 3001 17600"
+      },
+      {
+        "model": "B2172",
+        "color": "3001",
+        "parsedPrice": 19500,
+        "rawText": "FR01232B 132172 3001 19500"
+      },
+      {
+        "model": "B2280",
+        "color": "3001",
+        "parsedPrice": 19890,
+        "rawText": "FR01317B B2280 3001 19890 p IS-07-202("
+      }
+    ]
+  },
+  {
+    "id": "0d1e1b9c-3d87-4261-82c0-8fa376198079",
+    "slug": "so-burberry-b2431",
+    "name": "2431 4161 54",
+    "brand": "Burberry",
+    "dbPrice": 19500,
+    "dbMrp": 21667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B2431",
+        "color": "4161",
+        "parsedPrice": 19500,
+        "rawText": "FR01233B 132431 4161 19500"
+      }
+    ]
+  },
+  {
+    "id": "c7e1fefa-ae0e-45b6-b8af-2ab6c0c7927d",
+    "slug": "so-burberry-b3166",
+    "name": "3166 1109/82 60",
+    "brand": "Burberry",
+    "dbPrice": 25600,
+    "dbMrp": 28444,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "B3166",
+        "color": "1 109/82",
+        "parsedPrice": 25600,
+        "rawText": "SG00311B B3166 1 109/82 25600 0.00 P 16-("
+      },
+      {
+        "model": "B3149",
+        "color": "1109/87",
+        "parsedPrice": 1990,
+        "rawText": "SG00313B B3149 1109/87 P 16-06-202("
+      }
+    ]
+  },
+  {
+    "id": "edc6e816-c3f4-4014-9594-665f42a4244d",
+    "slug": "so-burberry-b-3167",
+    "name": "3167 1005/11 59",
+    "brand": "Burberry",
+    "dbPrice": 26500,
+    "dbMrp": 29444,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B-3167",
+        "color": "1 109/71",
+        "parsedPrice": 26500,
+        "rawText": "SCJ00310B B-3167 1 109/71 26500 o. 00 P 16-06-202("
+      }
+    ]
+  },
+  {
+    "id": "7bed2311-66eb-44dc-9c2c-ce99263dc3ae",
+    "slug": "so-burberry-b4293",
+    "name": "4293 3773/81 56",
+    "brand": "Burberry",
+    "dbPrice": 19590,
+    "dbMrp": 21767,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B4293",
+        "color": "3806/87",
+        "parsedPrice": 19590,
+        "rawText": "SCJ00346B B4293 3806/87 19590 0.00 P 15-07-202("
+      }
+    ]
+  },
+  {
+    "id": "7db18282-ee1e-4030-88d3-f8513b074dbc",
+    "slug": "so-burberry-b4216",
+    "name": "4455 4216/13 55",
+    "brand": "Burberry",
+    "dbPrice": 20600,
+    "dbMrp": 22889,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "B4216",
+        "color": "3001/8G",
+        "parsedPrice": 20600,
+        "rawText": "B4216 3001/8G 20600 o. 00"
+      },
+      {
+        "model": "RB4455",
+        "color": "6677",
+        "parsedPrice": 13590,
+        "rawText": "SCJ00412B RB4455 6677 13590 0.00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "278006f2-651a-46be-b43d-b5776a937a6c",
+    "slug": "so-burberry-b4482u",
+    "name": "4482U 3464/87 55",
+    "brand": "Burberry",
+    "dbPrice": 21500,
+    "dbMrp": 23889,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B4482U",
+        "color": "3464/87",
+        "parsedPrice": 21500,
+        "rawText": "SG00314B B4482U 3464/87 2 1 500 P 16-06-202("
+      }
+    ]
+  },
+  {
+    "id": "07628824-87c6-4914-bcec-186cb1765509",
+    "slug": "so-burberry-b4492",
+    "name": "4492 3001/87 54",
+    "brand": "Burberry",
+    "dbPrice": 25600,
+    "dbMrp": 28444,
+    "matchesCount": 6,
+    "matches": [
+      {
+        "model": "B4492",
+        "color": "3002/73",
+        "parsedPrice": 25600,
+        "rawText": "SCJ00312B B4492 3002/73 25600 o. 00"
+      },
+      {
+        "model": "B4358",
+        "color": "3001/85",
+        "parsedPrice": 19500,
+        "rawText": "SG00315B B43.S8 3001/85 19500 0.00 P 16-06-202("
+      },
+      {
+        "model": "B4216",
+        "color": "3001/8G",
+        "parsedPrice": 20600,
+        "rawText": "B4216 3001/8G 20600 o. 00"
+      },
+      {
+        "model": "B2334",
+        "color": "3001",
+        "parsedPrice": 17600,
+        "rawText": "FR01229B B2334 3001 17600"
+      },
+      {
+        "model": "B2172",
+        "color": "3001",
+        "parsedPrice": 19500,
+        "rawText": "FR01232B 132172 3001 19500"
+      },
+      {
+        "model": "B2280",
+        "color": "3001",
+        "parsedPrice": 19890,
+        "rawText": "FR01317B B2280 3001 19890 p IS-07-202("
+      }
+    ]
+  },
+  {
+    "id": "4f51614e-f49c-4b27-8dd6-22b8989fb3b0",
+    "slug": "so-burberry-b43s8",
+    "name": "BURBERRY    0BE 4388U",
+    "brand": "Burberry",
+    "dbPrice": 19500,
+    "dbMrp": 21667,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "2267262f-aa1b-4d7f-b9fc-1b805643558e",
+    "slug": "so-burberry-b1367",
+    "name": "BURBERRY   0BE 1367",
+    "brand": "Burberry",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B1367",
+        "color": "1337",
+        "parsedPrice": 1990,
+        "rawText": "FR0132.SB B1367 1337 00 p 25-07-202/"
+      }
+    ]
+  },
+  {
+    "id": "535e1077-d452-4103-8654-de65b8c48b42",
+    "slug": "so-burberry-399",
+    "name": "BURBERRY 0BE 1399",
+    "brand": "Burberry",
+    "dbPrice": 18590,
+    "dbMrp": 20656,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "3991",
+        "color": "73",
+        "parsedPrice": 18590,
+        "rawText": "SG00345B 3991/73 18590 o. 00 P 15-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "2d513a81-b01b-4234-8467-b67f15b57a05",
+    "slug": "so-burberry-b2280",
+    "name": "BURBERRY 0BE 2280",
+    "brand": "Burberry",
+    "dbPrice": 19890,
+    "dbMrp": 22100,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B2280",
+        "color": "3001",
+        "parsedPrice": 19890,
+        "rawText": "FR01317B B2280 3001 19890 p IS-07-202("
+      }
+    ]
+  },
+  {
+    "id": "78bb8268-1329-40b1-a0a2-dbe53d888fdf",
+    "slug": "so-burberry-b2334",
+    "name": "BURBERRY 0BE 2334",
+    "brand": "Burberry",
+    "dbPrice": 17600,
+    "dbMrp": 19556,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B2334",
+        "color": "3001",
+        "parsedPrice": 17600,
+        "rawText": "FR01229B B2334 3001 17600"
+      }
+    ]
+  },
+  {
+    "id": "3232bf1e-8dbd-4ebb-bfb3-4b3a134ffa50",
+    "slug": "so-burberry-b4358",
+    "name": "BURBERRY 0BE 4358",
+    "brand": "Burberry",
+    "dbPrice": 19500,
+    "dbMrp": 21667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B4358",
+        "color": "3001/85",
+        "parsedPrice": 19500,
+        "rawText": "SG00315B B43.S8 3001/85 19500 0.00 P 16-06-202("
+      }
+    ]
+  },
+  {
+    "id": "ef066a82-0d35-4706-9b12-a167008ee6ee",
+    "slug": "so-burberry-b1323",
+    "name": "Burberry 1323 Spectacle",
+    "brand": "Burberry",
+    "dbPrice": 19500,
+    "dbMrp": 21667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B1323",
+        "color": "1213",
+        "parsedPrice": 19500,
+        "rawText": "FR0122*B B1323 1213 19500 p 16-06-2021"
+      }
+    ]
+  },
+  {
+    "id": "31406132-c61d-47f8-8fd6-6f408f577e63",
+    "slug": "so-burberry-b3149",
+    "name": "BURBERRY BE3149 100587",
+    "brand": "Burberry",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B3149",
+        "color": "1109/87",
+        "parsedPrice": 1990,
+        "rawText": "SG00313B B3149 1109/87 P 16-06-202("
+      }
+    ]
+  },
+  {
+    "id": "69ed985b-8ccf-4d8e-aa84-0837bba57f54",
+    "slug": "so-burberry-b2425-d",
+    "name": "Burberry Frame B 2425D 4127",
+    "brand": "Burberry",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "B2425-D",
+        "color": "4121",
+        "parsedPrice": 1990,
+        "rawText": "FR01230B B2425-D 4121 10600 0.00"
+      }
+    ]
+  },
+  {
+    "id": "a1e6c3bd-4418-47b2-ae8a-37cdc64c52b8",
+    "slug": "so-burberry-3991",
+    "name": "GRANT 2354 3991 49",
+    "brand": "Burberry",
+    "dbPrice": 18590,
+    "dbMrp": 20656,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "3991",
+        "color": "73",
+        "parsedPrice": 18590,
+        "rawText": "SG00345B 3991/73 18590 o. 00 P 15-07-202("
+      }
+    ]
+  },
+  {
+    "id": "5924596b-9e61-4e07-891d-1dc6f25a418f",
+    "slug": "so-carrera-cassio",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 6500,
+    "dbMrp": 7222,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "af328370-7379-4840-8a79-d4422a3bc582",
+    "slug": "so-carrera-ca",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 10500,
+    "dbMrp": 11667,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "20ba0dff-ee77-4269-af51-6ebec23abcd7",
+    "slug": "so-carrera-jsg",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 10600,
+    "dbMrp": 11778,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "9e98d737-6e58-4228-92a4-f4573b802a92",
+    "slug": "so-carrera-yoo",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "120e781f-0b83-4715-a175-2c9742c20926",
+    "slug": "so-carrera-sheet",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 2700,
+    "dbMrp": 3000,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "50376f06-ccb4-41c1-9e74-cb7642d3385c",
+    "slug": "so-carrera-calexotg",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 10800,
+    "dbMrp": 12000,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "981e9aea-c752-45ea-bb8c-cebd3c263b6c",
+    "slug": "so-carrera-carnio",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 3202,
+    "dbMrp": 3558,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "2da7faff-54f1-4d57-bc6d-b8df81b6742b",
+    "slug": "so-carrera-cai",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 9500,
+    "dbMrp": 10556,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "2de96c5f-72c8-4538-a3b5-f69624477f62",
+    "slug": "so-carrera-caprwiyin",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 500,
+    "dbMrp": 556,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "094b3b76-0473-411f-8d5f-20bde93af37b",
+    "slug": "so-carrera-cacflxovg",
+    "name": "1069/S 900/Wb 58",
+    "brand": "Carrera",
+    "dbPrice": 11700,
+    "dbMrp": 13000,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA3053",
+        "color": "B3V",
+        "parsedPrice": 9900,
+        "rawText": "FR00012B CA3053 B3V 9900 ooo p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      },
+      {
+        "model": "CA37YG",
+        "color": "2M2",
+        "parsedPrice": 10690,
+        "rawText": "FR01321B CA37YG 2M2 10690 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "f2293b2a-df8a-455a-ac75-a60b5d5f172a",
+    "slug": "so-carrera-7a",
+    "name": "1070/S 003/7Q 60",
+    "brand": "Carrera",
+    "dbPrice": 3202,
+    "dbMrp": 3558,
+    "matchesCount": 7,
+    "matches": [
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "AXIOCA",
+        "color": "6003",
+        "parsedPrice": 1990,
+        "rawText": "FRO! 243B AXIOCA 6003 10600 0 00 p"
+      },
+      {
+        "model": "CA344",
+        "color": "2M2",
+        "parsedPrice": 10500,
+        "rawText": "FR00003B CA344 2M2 10500 o. 00 P I I-03-202("
+      },
+      {
+        "model": "CA8853",
+        "color": "003",
+        "parsedPrice": 1990,
+        "rawText": "FR00026B CA8853 003 12100 0. (10 P 11-03-202("
+      },
+      {
+        "model": "CACFLXOVG",
+        "color": "R80",
+        "parsedPrice": 11700,
+        "rawText": "FR00031B CACFLXO(VG R80 11700 0.00 P 11-03-202("
+      },
+      {
+        "model": "CALEXOTG",
+        "color": "807",
+        "parsedPrice": 10800,
+        "rawText": "FR00032B CALEXOTG 807 10800 o_oo P 11-03-202("
+      },
+      {
+        "model": "CA-3021",
+        "color": "DLN",
+        "parsedPrice": 9500,
+        "rawText": "FR00033B CA-3021 DLN 9500 0.00 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "12e0fbaf-3aeb-454d-99fd-aae4fb75ad39",
+    "slug": "so-carrera-ca37yg",
+    "name": "1070/S 003/7Q 60",
+    "brand": "Carrera",
+    "dbPrice": 10690,
+    "dbMrp": 11878,
+    "matchesCount": 7,
+    "matches": [
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "AXIOCA",
+        "color": "6003",
+        "parsedPrice": 1990,
+        "rawText": "FRO! 243B AXIOCA 6003 10600 0 00 p"
+      },
+      {
+        "model": "CA344",
+        "color": "2M2",
+        "parsedPrice": 10500,
+        "rawText": "FR00003B CA344 2M2 10500 o. 00 P I I-03-202("
+      },
+      {
+        "model": "CA8853",
+        "color": "003",
+        "parsedPrice": 1990,
+        "rawText": "FR00026B CA8853 003 12100 0. (10 P 11-03-202("
+      },
+      {
+        "model": "CACFLXOVG",
+        "color": "R80",
+        "parsedPrice": 11700,
+        "rawText": "FR00031B CACFLXO(VG R80 11700 0.00 P 11-03-202("
+      },
+      {
+        "model": "CALEXOTG",
+        "color": "807",
+        "parsedPrice": 10800,
+        "rawText": "FR00032B CALEXOTG 807 10800 o_oo P 11-03-202("
+      },
+      {
+        "model": "CA-3021",
+        "color": "DLN",
+        "parsedPrice": 9500,
+        "rawText": "FR00033B CA-3021 DLN 9500 0.00 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "86b15c4b-e5e4-4549-ab54-cf91c8d27a3d",
+    "slug": "so-carrera-caprw8-cs-1n",
+    "name": "1087/S 80S/08 63",
+    "brand": "Carrera",
+    "dbPrice": 11900,
+    "dbMrp": 13222,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "5bbc3b40-c97b-4d0f-b545-1072760219a8",
+    "slug": "so-carrera-caprw12-1n",
+    "name": "121/S PRA/DK 62",
+    "brand": "Carrera",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "CAPRW12/1N",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "FR00014B CAPRW12/1N I OSOO o_ 00 P 11-03 -202("
+      },
+      {
+        "model": "CA8853",
+        "color": "003",
+        "parsedPrice": 1990,
+        "rawText": "FR00026B CA8853 003 12100 0. (10 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "12e595d5-33ea-470c-abf6-a7b6018e2e32",
+    "slug": "so-carrera-ca292",
+    "name": "292 086 53",
+    "brand": "Carrera",
+    "dbPrice": 8900,
+    "dbMrp": 9889,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "CAI130",
+        "color": "086",
+        "parsedPrice": 95000,
+        "rawText": "FR00023B CAI 130 086 9500 0.00 P 1 1-03-202<"
+      },
+      {
+        "model": "CA292",
+        "color": "086",
+        "parsedPrice": 8900,
+        "rawText": "FR00027B CA292 086 8900 000 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "220c65cf-32fe-42bc-83d0-0d8e0bbcaa37",
+    "slug": "so-carrera-ca-302",
+    "name": "302/S KB7/HA 59",
+    "brand": "Carrera",
+    "dbPrice": 9500,
+    "dbMrp": 10556,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "CA3020",
+        "color": "807",
+        "parsedPrice": 95000,
+        "rawText": "FR00001B CA.3020 807 9500 0.00 P 202("
+      },
+      {
+        "model": "CA-3021",
+        "color": "DLN",
+        "parsedPrice": 9500,
+        "rawText": "FR00033B CA-3021 DLN 9500 0.00 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "294d7de3-bda5-4666-8930-0eaf30bee08a",
+    "slug": "so-carrera-caprw4-1n",
+    "name": "3041/S FT3/FQ 60",
+    "brand": "Carrera",
+    "dbPrice": 7800,
+    "dbMrp": 8667,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "638a7e6c-068f-4633-8b6f-758d135150fc",
+    "slug": "so-carrera-ggn28",
+    "name": "328/S 08A/9O 53",
+    "brand": "Carrera",
+    "dbPrice": 4900,
+    "dbMrp": 5444,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "277bf61a-c7e9-475e-9db9-40e81d2e8d25",
+    "slug": "so-carrera-ca-347",
+    "name": "347 LVL 55",
+    "brand": "Carrera",
+    "dbPrice": 95000,
+    "dbMrp": 105556,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA-347",
+        "color": "284",
+        "parsedPrice": 95000,
+        "rawText": "FR00020B CA-347 284 9500 0.00 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "e8a0b736-04cb-4ce0-8372-d7e16de8ec88",
+    "slug": "so-carrera-ca1145",
+    "name": "CADIZ 1145B 1014/13 58",
+    "brand": "Carrera",
+    "dbPrice": 12500,
+    "dbMrp": 13889,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA1145",
+        "color": "RHL",
+        "parsedPrice": 12500,
+        "rawText": "FR00989B CA 1145 RHL 12500 0.00 P 24-03-202<"
+      }
+    ]
+  },
+  {
+    "id": "0b1e53d2-fc7b-44ad-854d-7614fee59db5",
+    "slug": "so-carrera-ca317s",
+    "name": "CARRERA     317/S",
+    "brand": "Carrera",
+    "dbPrice": 10690,
+    "dbMrp": 11878,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "f2f27e55-d21f-4345-bb17-d364b83d0c96",
+    "slug": "so-carrera-ca286",
+    "name": "CARRERA   286",
+    "brand": "Carrera",
+    "dbPrice": 87000,
+    "dbMrp": 96667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA286",
+        "color": "PJP",
+        "parsedPrice": 87000,
+        "rawText": "FR00004B C A286 PJP 8700 0.00 p 1 1-03-202("
+      }
+    ]
+  },
+  {
+    "id": "40f18b9b-b167-4eb3-9bea-98029c99702f",
+    "slug": "so-carrera-ca309",
+    "name": "CARRERA   309",
+    "brand": "Carrera",
+    "dbPrice": 8900,
+    "dbMrp": 9889,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      }
+    ]
+  },
+  {
+    "id": "44e0876b-d051-411c-9aca-e3c1653d3a48",
+    "slug": "so-carrera-ca344",
+    "name": "CARRERA   344",
+    "brand": "Carrera",
+    "dbPrice": 10500,
+    "dbMrp": 11667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA344",
+        "color": "2M2",
+        "parsedPrice": 10500,
+        "rawText": "FR00003B CA344 2M2 10500 o. 00 P I I-03-202("
+      }
+    ]
+  },
+  {
+    "id": "efa5e45d-abf4-495a-84c9-e4047ff1fefb",
+    "slug": "so-carrera-ca8853",
+    "name": "CARRERA   8853",
+    "brand": "Carrera",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA8853",
+        "color": "003",
+        "parsedPrice": 1990,
+        "rawText": "FR00026B CA8853 003 12100 0. (10 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "9c1b0610-16e7-4767-9f11-b0a39b586749",
+    "slug": "so-carrera-ca897",
+    "name": "CARRERA   8897",
+    "brand": "Carrera",
+    "dbPrice": 11500,
+    "dbMrp": 12778,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA897",
+        "color": "7C5",
+        "parsedPrice": 11500,
+        "rawText": "FROD030B CA8*97 7C5 11500 0.00 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "7485e7f0-17fa-4573-b1df-da6423286f63",
+    "slug": "so-carrera-ca1134",
+    "name": "CARRERA 1134",
+    "brand": "Carrera",
+    "dbPrice": 10900,
+    "dbMrp": 12111,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA1134",
+        "color": "KB7",
+        "parsedPrice": 10900,
+        "rawText": "FR00002B CA1134 KB7 10900 P I I-03-202("
+      }
+    ]
+  },
+  {
+    "id": "6dde32bb-0033-4140-87d7-55b66e013a64",
+    "slug": "so-carrera-ca3009",
+    "name": "CARRERA 3009 HKZ 52",
+    "brand": "Carrera",
+    "dbPrice": 9500,
+    "dbMrp": 10556,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA3009",
+        "color": "3tJ5",
+        "parsedPrice": 9500,
+        "rawText": "FR00015B CA3009 3tJ5 9500 o,oo"
+      }
+    ]
+  },
+  {
+    "id": "fcd20021-90bd-41d0-812f-fd5a4d214aac",
+    "slug": "so-carrera-ca-3021",
+    "name": "CARRERA 3021 807 52",
+    "brand": "Carrera",
+    "dbPrice": 9500,
+    "dbMrp": 10556,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "CAPRW8/CS/1N",
+        "color": "80799",
+        "parsedPrice": 11900,
+        "rawText": "CAPRW'8/CS/1N 80799 11900 0.00"
+      },
+      {
+        "model": "CA3020",
+        "color": "807",
+        "parsedPrice": 95000,
+        "rawText": "FR00001B CA.3020 807 9500 0.00 P 202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      },
+      {
+        "model": "CAI130",
+        "color": "807",
+        "parsedPrice": 95000,
+        "rawText": "CAI 130 807 9.500 0.00 p I I-03-202("
+      },
+      {
+        "model": "CA309",
+        "color": "807",
+        "parsedPrice": 8900,
+        "rawText": "FROOI)18B CA309 807 8900 P 1 1-03-202("
+      },
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      },
+      {
+        "model": "CALEXOTG",
+        "color": "807",
+        "parsedPrice": 10800,
+        "rawText": "FR00032B CALEXOTG 807 10800 o_oo P 11-03-202("
+      },
+      {
+        "model": "CA-3021",
+        "color": "DLN",
+        "parsedPrice": 9500,
+        "rawText": "FR00033B CA-3021 DLN 9500 0.00 P 11-03-202("
+      },
+      {
+        "model": "CA8883",
+        "color": "807",
+        "parsedPrice": 7800,
+        "rawText": "FROD034B CA8883 807 7800 0.00"
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      }
+    ]
+  },
+  {
+    "id": "c6c9ec15-37d2-4b93-bda0-771a3ecae33c",
+    "slug": "so-carrera-ca874",
+    "name": "Carrera 8874 Spectacle",
+    "brand": "Carrera",
+    "dbPrice": 7100,
+    "dbMrp": 7889,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "CA8874",
+        "color": "8117",
+        "parsedPrice": 7100,
+        "rawText": "CA8874 8117 7100 P 11-03- 202("
+      },
+      {
+        "model": "CA874",
+        "color": "KB7",
+        "parsedPrice": 7100,
+        "rawText": "FR00025B CA8*74 KB7 7100 0.00 P 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "18335a7b-7d3b-4e3d-a742-3355c6dae6bf",
+    "slug": "so-carrera-ca8874",
+    "name": "Carrera 8874 Spectacle",
+    "brand": "Carrera",
+    "dbPrice": 7100,
+    "dbMrp": 7889,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA8874",
+        "color": "8117",
+        "parsedPrice": 7100,
+        "rawText": "CA8874 8117 7100 P 11-03- 202("
+      }
+    ]
+  },
+  {
+    "id": "1bba761e-1fe4-40f0-afb5-eda81f29846e",
+    "slug": "so-carrera-ca204ft",
+    "name": "Carrera Frame 2042T PJP",
+    "brand": "Carrera",
+    "dbPrice": 7300,
+    "dbMrp": 8111,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA204FT",
+        "color": "7ZJ",
+        "parsedPrice": 7300,
+        "rawText": "FROOOOSB CA204.fT 7ZJ 7300 p 11-03- 202("
+      }
+    ]
+  },
+  {
+    "id": "1e16415f-e888-4d37-9d74-7df9bc421922",
+    "slug": "so-carrera-ca5546fv",
+    "name": "Carrera Frame 5546",
+    "brand": "Carrera",
+    "dbPrice": 6900,
+    "dbMrp": 7667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA5546FV",
+        "color": "807",
+        "parsedPrice": 6900,
+        "rawText": "FR00028B CA5546fV 807 6900 p 11-03-202("
+      }
+    ]
+  },
+  {
+    "id": "e2f1228b-e8ef-466d-9179-97fac94c6de7",
+    "slug": "so-carrera-ca3087-s",
+    "name": "CARRERA SUNGLASS 3087/S J5GGB",
+    "brand": "Carrera",
+    "dbPrice": 10500,
+    "dbMrp": 11667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "CA3087/S",
+        "color": "J5G",
+        "parsedPrice": 10500,
+        "rawText": "SCJ00260B CA3087/S J5G 10500 0.00 P 24-03-202("
+      }
+    ]
+  },
+  {
+    "id": "fcec1197-deea-4ec5-aaa5-c43debfa51e6",
+    "slug": "so-carrera-ca3088-s",
+    "name": "CARRERA SUNGLASS 3088/S 0009O",
+    "brand": "Carrera",
+    "dbPrice": 12900,
+    "dbMrp": 14333,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "CA3088/S",
+        "color": "NOAYK",
+        "parsedPrice": 12900,
+        "rawText": "SG00343B CA3088/S NOAYK 12900 00 P 15-07-202("
+      },
+      {
+        "model": "CARNIO",
+        "color": "807",
+        "parsedPrice": 1990,
+        "rawText": "FR00009B CARNIO 807 9900 0.00 p I I-03-202("
+      }
+    ]
+  },
+  {
+    "id": "c1fc18f7-d92f-41ce-bad9-c83bfdd0ba84",
+    "slug": "so-carrera-carduc025",
+    "name": "CARTIER  0255O",
+    "brand": "Carrera",
+    "dbPrice": 10900,
+    "dbMrp": 12111,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "CA874",
+        "color": "KB7",
+        "parsedPrice": 7100,
+        "rawText": "FR00025B CA8*74 KB7 7100 0.00 P 11-03-202("
+      },
+      {
+        "model": "CARDUC025",
+        "color": "807",
+        "parsedPrice": 10900,
+        "rawText": "CARDUC025 807 10900 (YOO P 1 1-03-202("
+      }
+    ]
+  },
+  {
+    "id": "9a157eb6-cbe0-43eb-b674-3b1c913a23c0",
+    "slug": "so-carrera-crg4oc",
+    "name": "PRW 4/IN OIT 50",
+    "brand": "Carrera",
+    "dbPrice": 2503,
+    "dbMrp": 2781,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "dc05bbaf-bf96-4d18-b556-c3c6acd1b4c4",
+    "slug": "so-emporio-armani-ea4219",
+    "name": "4219 5763/80 57",
+    "brand": "Emporio Armani",
+    "dbPrice": 16190,
+    "dbMrp": 17989,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "EA4219",
+        "color": "6102/76",
+        "parsedPrice": 16190,
+        "rawText": "SG00347B EA4219 6102/76 16190 0.00"
+      }
+    ]
+  },
+  {
+    "id": "38a34cdb-f206-471f-8bb7-a02eaf7df2ae",
+    "slug": "so-french-connection-fc8278",
+    "name": "FCUK FC8278 CLIP-ON C3 53 SUNGLASSES",
+    "brand": "French Connection",
+    "dbPrice": 8200,
+    "dbMrp": 9111,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "FC8278",
+        "color": "MIX",
+        "parsedPrice": 8200,
+        "rawText": "SGOOO 16B FC8278 8200 o. 00 P 12-03-202("
+      }
+    ]
+  },
+  {
+    "id": "b65a5385-5d02-4911-ba1a-7edd077796ab",
+    "slug": "so-french-connection-fc82s9",
+    "name": "FRENCH CONNECTION FC 8299 C2 55",
+    "brand": "French Connection",
+    "dbPrice": 6000,
+    "dbMrp": 6667,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "11a6ba43-0050-4971-8e03-05244209082b",
+    "slug": "so-french-connection-fc82i2",
+    "name": "French Connection FC8223",
+    "brand": "French Connection",
+    "dbPrice": 5300,
+    "dbMrp": 5889,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "cf548b34-4e4b-44fa-98b6-2e6ddcf9ae9b",
+    "slug": "so-french-connection-fc8259",
+    "name": "French Connection FC8259 C2",
+    "brand": "French Connection",
+    "dbPrice": 6000,
+    "dbMrp": 6667,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "FC8259",
+        "color": "MIX",
+        "parsedPrice": 6000,
+        "rawText": "FROO 137B FC8259 6000 p 12-03-202("
+      }
+    ]
+  },
+  {
+    "id": "51591edd-3aa1-4386-a71d-7714e9d37ca0",
+    "slug": "so-ray-ban-sheetattach",
+    "name": "2234 901/48 53",
+    "brand": "Ray-Ban",
+    "dbPrice": 2700,
+    "dbMrp": 3000,
+    "matchesCount": 8,
+    "matches": [
+      {
+        "model": "RB2140F",
+        "color": "901",
+        "parsedPrice": 1990,
+        "rawText": "RB2140F 901"
+      },
+      {
+        "model": "RB2140F",
+        "color": "901/3F",
+        "parsedPrice": 13490,
+        "rawText": "RB2140F 901/3F 13490"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB2198",
+        "color": "901/56",
+        "parsedPrice": 13290,
+        "rawText": "RB2198 901/56 13290 000 P 24-04-202<"
+      },
+      {
+        "model": "RB3016",
+        "color": "901/58",
+        "parsedPrice": 15690,
+        "rawText": "RB3016 901/58 15690 P 25-07-202("
+      },
+      {
+        "model": "RB2132",
+        "color": "901/58",
+        "parsedPrice": 14990,
+        "rawText": "SG00392B RB2132 901/58 14990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB2224",
+        "color": "901/32",
+        "parsedPrice": 12190,
+        "rawText": "RB2224 901/32 12190 o. oo P 28-07-202("
+      },
+      {
+        "model": "RB2222",
+        "color": "901/3R",
+        "parsedPrice": 14990,
+        "rawText": "SG00410B RB2222 901/3R 14990 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "149980b6-dbdd-4750-9950-92d2551f206f",
+    "slug": "so-ray-ban-rb-3025",
+    "name": "3025 9286/48 62",
+    "brand": "Ray-Ban",
+    "dbPrice": 8390,
+    "dbMrp": 9322,
+    "matchesCount": 15,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "RB30251 W3276"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/51",
+        "parsedPrice": 9690,
+        "rawText": "RB30251 001/51 9690"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/71",
+        "parsedPrice": 9190,
+        "rawText": "SG00296B RB30251 004/71 9190"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/51",
+        "parsedPrice": 9990,
+        "rawText": "SG00303B RB3025 004/51 9990 o. 00 P 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "SG00321B RB3025 W3276 o. 00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W3277",
+        "parsedPrice": 10990,
+        "rawText": "SG00324B RB-3025 W3277 10990 0.00 P 16-()6-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W2027",
+        "parsedPrice": 8390,
+        "rawText": "SG00327B RB-3025 W2027 8390 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "004/33",
+        "parsedPrice": 13390,
+        "rawText": "SCJ00352B RB3025 004/33 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9271/GK",
+        "parsedPrice": 14290,
+        "rawText": "SG00391B RB3025 9271/GK 14290 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "1.2823",
+        "parsedPrice": 9190,
+        "rawText": "SG00393B RB302.s 1.2823 9190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9278/R6",
+        "parsedPrice": 13390,
+        "rawText": "RB3025 9278/R6 13390 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "f7e303fa-cb2f-4842-bc32-ca5a8ec894d7",
+    "slug": "so-ray-ban-rb302s",
+    "name": "3025 9286/48 62",
+    "brand": "Ray-Ban",
+    "dbPrice": 9190,
+    "dbMrp": 10211,
+    "matchesCount": 16,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "RB30251 W3276"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/51",
+        "parsedPrice": 9690,
+        "rawText": "RB30251 001/51 9690"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/71",
+        "parsedPrice": 9190,
+        "rawText": "SG00296B RB30251 004/71 9190"
+      },
+      {
+        "model": "RB3767",
+        "color": "001/13",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00302B RB3767 001/13 13190 0.00 p"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/51",
+        "parsedPrice": 9990,
+        "rawText": "SG00303B RB3025 004/51 9990 o. 00 P 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "SG00321B RB3025 W3276 o. 00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W3277",
+        "parsedPrice": 10990,
+        "rawText": "SG00324B RB-3025 W3277 10990 0.00 P 16-()6-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W2027",
+        "parsedPrice": 8390,
+        "rawText": "SG00327B RB-3025 W2027 8390 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "004/33",
+        "parsedPrice": 13390,
+        "rawText": "SCJ00352B RB3025 004/33 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9271/GK",
+        "parsedPrice": 14290,
+        "rawText": "SG00391B RB3025 9271/GK 14290 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "1.2823",
+        "parsedPrice": 9190,
+        "rawText": "SG00393B RB302.s 1.2823 9190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9278/R6",
+        "parsedPrice": 13390,
+        "rawText": "RB3025 9278/R6 13390 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "169df01e-eb99-4eb6-89aa-453453f4eac1",
+    "slug": "so-ray-ban-rb3548",
+    "name": "3548N 002/93 54",
+    "brand": "Ray-Ban",
+    "dbPrice": 14190,
+    "dbMrp": 15767,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/71",
+        "parsedPrice": 9190,
+        "rawText": "SG00296B RB30251 004/71 9190"
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SG00298B RB3755 001/51 12790"
+      },
+      {
+        "model": "RB3759",
+        "color": "MIX",
+        "parsedPrice": 10990,
+        "rawText": "SG00299B RB37591 10990 0.00 P 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3549",
+        "color": "002fT3",
+        "parsedPrice": 17290,
+        "rawText": "SCJ00340B RB3549 002fT3 17290 0.00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      },
+      {
+        "model": "RB3548",
+        "color": "004/71",
+        "parsedPrice": 14190,
+        "rawText": "SG00409B RB3548 004/71 14190"
+      }
+    ]
+  },
+  {
+    "id": "13ba5dd9-56ef-43ce-b78c-187fd4dc0d4e",
+    "slug": "so-ray-ban-rb3695",
+    "name": "3695I 002/71 55",
+    "brand": "Ray-Ban",
+    "dbPrice": 8390,
+    "dbMrp": 9322,
+    "matchesCount": 11,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/71",
+        "parsedPrice": 9190,
+        "rawText": "SG00296B RB30251 004/71 9190"
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SG00298B RB3755 001/51 12790"
+      },
+      {
+        "model": "RB3759",
+        "color": "MIX",
+        "parsedPrice": 10990,
+        "rawText": "SG00299B RB37591 10990 0.00 P 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3695",
+        "color": "90355 1",
+        "parsedPrice": 8790,
+        "rawText": "SG00328B RB36951 90355 1 8790 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3695",
+        "color": "001/58",
+        "parsedPrice": 8390,
+        "rawText": "SCJ00330B RB36951 001/58 8390 o 00 P 16-06-202("
+      },
+      {
+        "model": "RB3549",
+        "color": "002fT3",
+        "parsedPrice": 17290,
+        "rawText": "SCJ00340B RB3549 002fT3 17290 0.00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "0be5ee59-3cc2-47da-9f72-9cca2a5831c9",
+    "slug": "so-ray-ban-rb376",
+    "name": "3768 003/6R 56",
+    "brand": "Ray-Ban",
+    "dbPrice": 11490,
+    "dbMrp": 12767,
+    "matchesCount": 36,
+    "matches": [
+      {
+        "model": "RB3767",
+        "color": "001/13",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00302B RB3767 001/13 13190 0.00 p"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/51",
+        "parsedPrice": 9990,
+        "rawText": "SG00303B RB3025 004/51 9990 o. 00 P 24-04-202("
+      },
+      {
+        "model": "RB3786",
+        "color": "001/71",
+        "parsedPrice": 9190,
+        "rawText": "SCJ00304B RB37861 001/71 9190 0.00 P 24-04-202("
+      },
+      {
+        "model": "RB3761",
+        "color": "MIX",
+        "parsedPrice": 11490,
+        "rawText": "SG00305B RB37611 11490 0.00 p"
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00308B RB2140 902/51 14190 o. 00 p 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "SG00321B RB3025 W3276 o. 00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W3277",
+        "parsedPrice": 10990,
+        "rawText": "SG00324B RB-3025 W3277 10990 0.00 P 16-()6-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W2027",
+        "parsedPrice": 8390,
+        "rawText": "SG00327B RB-3025 W2027 8390 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3695",
+        "color": "90355 1",
+        "parsedPrice": 8790,
+        "rawText": "SG00328B RB36951 90355 1 8790 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "SCi00329B RB37851 001/71 8990 o. 00"
+      },
+      {
+        "model": "RB3695",
+        "color": "001/58",
+        "parsedPrice": 8390,
+        "rawText": "SCJ00330B RB36951 001/58 8390 o 00 P 16-06-202("
+      },
+      {
+        "model": "RB494",
+        "color": "601/69",
+        "parsedPrice": 14290,
+        "rawText": "SG00332B RB494() 601/69 14290 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB4940",
+        "color": "601/60",
+        "parsedPrice": 1990,
+        "rawText": "SG00333B R B4940 601/60 0.00"
+      },
+      {
+        "model": "RB3928",
+        "color": "001/71",
+        "parsedPrice": 16190,
+        "rawText": "SG00334B RB3928 001/71 16190 ooo P 16-06-202("
+      },
+      {
+        "model": "RJ9506S",
+        "color": "223/6R",
+        "parsedPrice": 5990,
+        "rawText": "SG00335B RJ9506S 223/6R 5990 0.00"
+      },
+      {
+        "model": "RJ9594S",
+        "color": "223/46",
+        "parsedPrice": 5790,
+        "rawText": "SG00337B RJ9594S 223/46 5790"
+      },
+      {
+        "model": "RJ9069S",
+        "color": "100/71",
+        "parsedPrice": 3190,
+        "rawText": "SG00338B RJ9069S 100/71 3190 o. 00"
+      },
+      {
+        "model": "RB3549",
+        "color": "002fT3",
+        "parsedPrice": 17290,
+        "rawText": "SCJ00340B RB3549 002fT3 17290 0.00"
+      },
+      {
+        "model": "RB3447",
+        "color": "001",
+        "parsedPrice": 9290,
+        "rawText": "SG00341B RB3447 001 9290 0.00 P 07-07-202<"
+      },
+      {
+        "model": "RJ9069S",
+        "color": "7060/80",
+        "parsedPrice": 5190,
+        "rawText": "SG00344B RJ9069S 7060/80 5190 0.00 P"
+      },
+      {
+        "model": "RB3016",
+        "color": "6878/53",
+        "parsedPrice": 1339,
+        "rawText": "SG00348B RB3016 6878/53 1339() 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3780",
+        "color": "001/31",
+        "parsedPrice": 14390,
+        "rawText": "SG00351B RB3780 001/31 14390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "004/33",
+        "parsedPrice": 13390,
+        "rawText": "SCJ00352B RB3025 004/33 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SCJ00356B RB3755 001/51 12790 o. 00 P 25-07-202("
+      },
+      {
+        "model": "RB4349",
+        "color": "674813",
+        "parsedPrice": 8190,
+        "rawText": "SCJ00357B RB43491 674813 8190 o. 00 P 25-07-202("
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 13390,
+        "rawText": "SG00358B RB2140 902/51 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3760",
+        "color": "003/9A",
+        "parsedPrice": 10990,
+        "rawText": "SG00390B RB3760 003/9A 10990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9271/GK",
+        "parsedPrice": 14290,
+        "rawText": "SG00391B RB3025 9271/GK 14290 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB2132",
+        "color": "901/58",
+        "parsedPrice": 14990,
+        "rawText": "SG00392B RB2132 901/58 14990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "1.2823",
+        "parsedPrice": 9190,
+        "rawText": "SG00393B RB302.s 1.2823 9190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3016",
+        "color": "6879/56",
+        "parsedPrice": 13390,
+        "rawText": "SG00394B RB3016 6879/56 13.390 o. 00"
+      },
+      {
+        "model": "RB4340V",
+        "color": "710/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00395B RB4340V 710/51 14190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3768",
+        "color": "003/80",
+        "parsedPrice": 12590,
+        "rawText": "RB.3768 003/80 12590 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      },
+      {
+        "model": "RB3767",
+        "color": "003/8H",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00411B RB3767 003/8H 13190 000 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "5fa963b0-82df-498c-a597-d0d81dfacb0b",
+    "slug": "so-ray-ban-601-85",
+    "name": "4260D 601/85 57",
+    "brand": "Ray-Ban",
+    "dbPrice": 15190,
+    "dbMrp": 16878,
+    "matchesCount": 6,
+    "matches": [
+      {
+        "model": "RB4460",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SG00007B RB44601"
+      },
+      {
+        "model": "RB4349",
+        "color": "601/9A",
+        "parsedPrice": 9390,
+        "rawText": "RB43491 601/9A 9390 P 16-06-202("
+      },
+      {
+        "model": "RB494",
+        "color": "601/69",
+        "parsedPrice": 14290,
+        "rawText": "SG00332B RB494() 601/69 14290 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB4940",
+        "color": "601/60",
+        "parsedPrice": 1990,
+        "rawText": "SG00333B R B4940 601/60 0.00"
+      },
+      {
+        "model": "RB-1125",
+        "color": "601/33",
+        "parsedPrice": 13390,
+        "rawText": "RB-1125 601/33 13390 P 25-07-202("
+      },
+      {
+        "model": "RB4105",
+        "color": "601",
+        "parsedPrice": 13490,
+        "rawText": "SG00414B RB4105 601 13490 0.00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "9663dc40-cda2-4b35-af46-1a51dd7ba9b7",
+    "slug": "so-ray-ban-rb4349",
+    "name": "4349 3946/71 51",
+    "brand": "Ray-Ban",
+    "dbPrice": 8190,
+    "dbMrp": 9100,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB4349",
+        "color": "601/9A",
+        "parsedPrice": 9390,
+        "rawText": "RB43491 601/9A 9390 P 16-06-202("
+      },
+      {
+        "model": "RB4349",
+        "color": "674813",
+        "parsedPrice": 8190,
+        "rawText": "SCJ00357B RB43491 674813 8190 o. 00 P 25-07-202("
+      },
+      {
+        "model": "RB4349",
+        "color": "674813",
+        "parsedPrice": 8190,
+        "rawText": "RB43491 674813 8190 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "aeb0a317-3863-49eb-886e-09d43fae027a",
+    "slug": "so-ray-ban-rb4460",
+    "name": "4460U 4172/69 40",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB4460",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SG00007B RB44601"
+      }
+    ]
+  },
+  {
+    "id": "80f84567-2132-466e-84af-030c56a760ec",
+    "slug": "so-ray-ban-rb5389",
+    "name": "5389I 2012 54",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "RB5364",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FR000*9B R B.S364 2012 0.00 P 12-03-202("
+      },
+      {
+        "model": "186BRBS423",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FROI 186B RBS423 2012 6690 0 00"
+      },
+      {
+        "model": "187BRB7033",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FROI 187B RB7033 2012 6090 000 P 23-04-202("
+      },
+      {
+        "model": "RB5389",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR01201B RB5389 2000 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RBS397",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FR01216B RBS397 2012 o. 00 P 23-04-202("
+      }
+    ]
+  },
+  {
+    "id": "b8d6c466-1fbe-4193-b7ef-a6b67444be29",
+    "slug": "so-ray-ban-rb5438",
+    "name": "5438I 5708 53",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB5438",
+        "color": "MIX",
+        "parsedPrice": 8327,
+        "rawText": "FR00071B RB5438 8327 6490 000"
+      },
+      {
+        "model": "RB5438",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "RB5438 2000 0.00 P 12-03-2("
+      }
+    ]
+  },
+  {
+    "id": "d81f94a1-c365-454a-a4d6-ca518a8a5f48",
+    "slug": "so-ray-ban-rb6335",
+    "name": "6335 2890 54",
+    "brand": "Ray-Ban",
+    "dbPrice": 2855,
+    "dbMrp": 3172,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB6335",
+        "color": "MIX",
+        "parsedPrice": 2890,
+        "rawText": "RB6335 2890 9290 0.00 P 12-03-202<"
+      },
+      {
+        "model": "RB6335",
+        "color": "MIX",
+        "parsedPrice": 2855,
+        "rawText": "FR00087B RB6335 2855 9290 0.00"
+      },
+      {
+        "model": "14BRB6443",
+        "color": "MIX",
+        "parsedPrice": 2890,
+        "rawText": "FROOI 14B RB64431 2890 5290 0.00 P 12-03-202("
+      }
+    ]
+  },
+  {
+    "id": "7abc13ff-4e03-469e-9e7d-b58bf3074690",
+    "slug": "so-ray-ban-rb6425l",
+    "name": "6425I 3008 53",
+    "brand": "Ray-Ban",
+    "dbPrice": 3009,
+    "dbMrp": 3343,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB6425L",
+        "color": "MIX",
+        "parsedPrice": 3009,
+        "rawText": "FR00100B RB642.Sl 3009 6090 0.00 P 12-03-202<"
+      }
+    ]
+  },
+  {
+    "id": "7d5da6ee-e55a-4283-9eda-b0bb8ff152d1",
+    "slug": "so-ray-ban-rb6483",
+    "name": "6483I 3094 53",
+    "brand": "Ray-Ban",
+    "dbPrice": 2692,
+    "dbMrp": 2991,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB6483",
+        "color": "MIX",
+        "parsedPrice": 2692,
+        "rawText": "FRO 1210B RB6483 2692 5990 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "2093ee99-cd3e-44d2-9820-bf71e293bffc",
+    "slug": "so-ray-ban-rb6488",
+    "name": "6488I 2502 53",
+    "brand": "Ray-Ban",
+    "dbPrice": 2502,
+    "dbMrp": 2780,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB6488",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR00088B RB64881 2502 7090 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB6267",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "RB62671 2502 5290"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR01223B RB6489 2502 0110 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "4f128689-4bf9-4623-ab34-8796168d68d4",
+    "slug": "so-ray-ban-2502",
+    "name": "6543 2502 52",
+    "brand": "Ray-Ban",
+    "dbPrice": 6890,
+    "dbMrp": 7656,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB6488",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR00088B RB64881 2502 7090 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB6267",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "RB62671 2502 5290"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR01223B RB6489 2502 0110 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "d10960d9-78a4-4d57-8b12-5f9a3a8b1d03",
+    "slug": "so-ray-ban-rb8780d",
+    "name": "8780D 1061 53",
+    "brand": "Ray-Ban",
+    "dbPrice": 1061,
+    "dbMrp": 1179,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB8780D",
+        "color": "MIX",
+        "parsedPrice": 1061,
+        "rawText": "FR00093B RB8780D 1061 12290 0/10 P 12-03-202("
+      }
+    ]
+  },
+  {
+    "id": "f2c199ef-fd19-483b-a858-cb58bb3ab2ee",
+    "slug": "so-ray-ban-rb3i47",
+    "name": "9084S 7187/T3 47 (KIDS SIZE)",
+    "brand": "Ray-Ban",
+    "dbPrice": 14190,
+    "dbMrp": 15767,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "8f9916ac-5f5c-49f9-bc02-f2344214f247",
+    "slug": "so-ray-ban-rb3928",
+    "name": "A$AP Rocky 3928 001/71 54",
+    "brand": "Ray-Ban",
+    "dbPrice": 16190,
+    "dbMrp": 17989,
+    "matchesCount": 23,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "001/51",
+        "parsedPrice": 9690,
+        "rawText": "RB30251 001/51 9690"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3678",
+        "color": "001/13",
+        "parsedPrice": 7790,
+        "rawText": "RB36781 001/13 7790 0.00"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SG00298B RB3755 001/51 12790"
+      },
+      {
+        "model": "RB3767",
+        "color": "001/13",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00302B RB3767 001/13 13190 0.00 p"
+      },
+      {
+        "model": "RB3786",
+        "color": "001/71",
+        "parsedPrice": 9190,
+        "rawText": "SCJ00304B RB37861 001/71 9190 0.00 P 24-04-202("
+      },
+      {
+        "model": "RB3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "SCi00329B RB37851 001/71 8990 o. 00"
+      },
+      {
+        "model": "RB3695",
+        "color": "001/58",
+        "parsedPrice": 8390,
+        "rawText": "SCJ00330B RB36951 001/58 8390 o 00 P 16-06-202("
+      },
+      {
+        "model": "RB3928",
+        "color": "001/71",
+        "parsedPrice": 16190,
+        "rawText": "SG00334B RB3928 001/71 16190 ooo P 16-06-202("
+      },
+      {
+        "model": "RB3447",
+        "color": "001",
+        "parsedPrice": 9290,
+        "rawText": "SG00341B RB3447 001 9290 0.00 P 07-07-202<"
+      },
+      {
+        "model": "RB3780",
+        "color": "001/31",
+        "parsedPrice": 14390,
+        "rawText": "SG00351B RB3780 001/31 14390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB-3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "RB-37851 001/71 8990 o, 00"
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SCJ00356B RB3755 001/51 12790 o. 00 P 25-07-202("
+      },
+      {
+        "model": "RB3774D",
+        "color": "001/87",
+        "parsedPrice": 12690,
+        "rawText": "SG00407B RB3774D 001/87 12690 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB-3928",
+        "color": "001/82",
+        "parsedPrice": 17490,
+        "rawText": "SCJ00413B RB-3928 001/82 17490 00"
+      },
+      {
+        "model": "RB6425L",
+        "color": "MIX",
+        "parsedPrice": 3009,
+        "rawText": "FR00100B RB642.Sl 3009 6090 0.00 P 12-03-202<"
+      },
+      {
+        "model": "RB6323",
+        "color": "MIX",
+        "parsedPrice": 2509,
+        "rawText": "FR00102B RB6323 2509 5290 0.00 P 12-03-202<"
+      },
+      {
+        "model": "RB2199V",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR00108B RB2199V 2000"
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01203B RB7027 2001 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01219B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01220B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01221B RB7027 2001 6090 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "8ec863a6-499c-4a63-8b1c-9d4474ff2c36",
+    "slug": "so-ray-ban-rb-3928",
+    "name": "A$AP Rocky 3928 001/71 54",
+    "brand": "Ray-Ban",
+    "dbPrice": 17490,
+    "dbMrp": 19433,
+    "matchesCount": 23,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "001/51",
+        "parsedPrice": 9690,
+        "rawText": "RB30251 001/51 9690"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3678",
+        "color": "001/13",
+        "parsedPrice": 7790,
+        "rawText": "RB36781 001/13 7790 0.00"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SG00298B RB3755 001/51 12790"
+      },
+      {
+        "model": "RB3767",
+        "color": "001/13",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00302B RB3767 001/13 13190 0.00 p"
+      },
+      {
+        "model": "RB3786",
+        "color": "001/71",
+        "parsedPrice": 9190,
+        "rawText": "SCJ00304B RB37861 001/71 9190 0.00 P 24-04-202("
+      },
+      {
+        "model": "RB3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "SCi00329B RB37851 001/71 8990 o. 00"
+      },
+      {
+        "model": "RB3695",
+        "color": "001/58",
+        "parsedPrice": 8390,
+        "rawText": "SCJ00330B RB36951 001/58 8390 o 00 P 16-06-202("
+      },
+      {
+        "model": "RB3928",
+        "color": "001/71",
+        "parsedPrice": 16190,
+        "rawText": "SG00334B RB3928 001/71 16190 ooo P 16-06-202("
+      },
+      {
+        "model": "RB3447",
+        "color": "001",
+        "parsedPrice": 9290,
+        "rawText": "SG00341B RB3447 001 9290 0.00 P 07-07-202<"
+      },
+      {
+        "model": "RB3780",
+        "color": "001/31",
+        "parsedPrice": 14390,
+        "rawText": "SG00351B RB3780 001/31 14390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB-3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "RB-37851 001/71 8990 o, 00"
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SCJ00356B RB3755 001/51 12790 o. 00 P 25-07-202("
+      },
+      {
+        "model": "RB3774D",
+        "color": "001/87",
+        "parsedPrice": 12690,
+        "rawText": "SG00407B RB3774D 001/87 12690 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB-3928",
+        "color": "001/82",
+        "parsedPrice": 17490,
+        "rawText": "SCJ00413B RB-3928 001/82 17490 00"
+      },
+      {
+        "model": "RB6425L",
+        "color": "MIX",
+        "parsedPrice": 3009,
+        "rawText": "FR00100B RB642.Sl 3009 6090 0.00 P 12-03-202<"
+      },
+      {
+        "model": "RB6323",
+        "color": "MIX",
+        "parsedPrice": 2509,
+        "rawText": "FR00102B RB6323 2509 5290 0.00 P 12-03-202<"
+      },
+      {
+        "model": "RB2199V",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR00108B RB2199V 2000"
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01203B RB7027 2001 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01219B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01220B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01221B RB7027 2001 6090 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "08338f61-93a6-4f1e-9daa-3d0d572c983d",
+    "slug": "so-ray-ban-rb2198",
+    "name": "BILL 2198 901/R6 60",
+    "brand": "Ray-Ban",
+    "dbPrice": 13290,
+    "dbMrp": 14767,
+    "matchesCount": 8,
+    "matches": [
+      {
+        "model": "RB2140F",
+        "color": "901",
+        "parsedPrice": 1990,
+        "rawText": "RB2140F 901"
+      },
+      {
+        "model": "RB2140F",
+        "color": "901/3F",
+        "parsedPrice": 13490,
+        "rawText": "RB2140F 901/3F 13490"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB2198",
+        "color": "901/56",
+        "parsedPrice": 13290,
+        "rawText": "RB2198 901/56 13290 000 P 24-04-202<"
+      },
+      {
+        "model": "RB3016",
+        "color": "901/58",
+        "parsedPrice": 15690,
+        "rawText": "RB3016 901/58 15690 P 25-07-202("
+      },
+      {
+        "model": "RB2132",
+        "color": "901/58",
+        "parsedPrice": 14990,
+        "rawText": "SG00392B RB2132 901/58 14990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB2224",
+        "color": "901/32",
+        "parsedPrice": 12190,
+        "rawText": "RB2224 901/32 12190 o. oo P 28-07-202("
+      },
+      {
+        "model": "RB2222",
+        "color": "901/3R",
+        "parsedPrice": 14990,
+        "rawText": "SG00410B RB2222 901/3R 14990 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "219f3da0-767a-498b-9e7b-6c6e5f738ce3",
+    "slug": "so-ray-ban-rj9069s",
+    "name": "HEXAGONAL 3548N 9069/A5 51",
+    "brand": "Ray-Ban",
+    "dbPrice": 3190,
+    "dbMrp": 3544,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RJ9069S",
+        "color": "100/71",
+        "parsedPrice": 3190,
+        "rawText": "SG00338B RJ9069S 100/71 3190 o. 00"
+      },
+      {
+        "model": "RJ9069S",
+        "color": "7060/80",
+        "parsedPrice": 5190,
+        "rawText": "SG00344B RJ9069S 7060/80 5190 0.00 P"
+      },
+      {
+        "model": "RB3548",
+        "color": "004/71",
+        "parsedPrice": 14190,
+        "rawText": "SG00409B RB3548 004/71 14190"
+      }
+    ]
+  },
+  {
+    "id": "dc83273c-e3cc-4ff6-aa1f-3f34d9b92bca",
+    "slug": "so-ray-ban-rb3129",
+    "name": "OUTDOORSMAN 3129 W0228 58",
+    "brand": "Ray-Ban",
+    "dbPrice": 7790,
+    "dbMrp": 8656,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3129",
+        "color": "W0226",
+        "parsedPrice": 7790,
+        "rawText": "RB3129 W0226 7790"
+      }
+    ]
+  },
+  {
+    "id": "0861ae7d-fef1-4ca3-a22b-7cca6f7f1afe",
+    "slug": "so-ray-ban-rb7216",
+    "name": "RAY  BAN   0RX 7216",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB7216",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR00073B RB7216 2000 9790 o no"
+      }
+    ]
+  },
+  {
+    "id": "fcb0cd23-6128-4994-b464-641a36972b34",
+    "slug": "so-ray-ban-rbs379",
+    "name": "RAY  BAN  0RB 3794M",
+    "brand": "Ray-Ban",
+    "dbPrice": 5290,
+    "dbMrp": 5878,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RBS379",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR01209B RBS379 2000 5290 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "cb547f42-4865-45ab-b3fc-67c3a228056a",
+    "slug": "so-ray-ban-rb6496",
+    "name": "RAY BAN    0RX 6496",
+    "brand": "Ray-Ban",
+    "dbPrice": 2500,
+    "dbMrp": 2778,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB6496",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FRO 1214B RB6496 2500 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "b96ebc22-09c8-4210-9751-1e2febfb4d50",
+    "slug": "so-ray-ban-rb653",
+    "name": "RAY BAN    0RX 6539I",
+    "brand": "Ray-Ban",
+    "dbPrice": 6690,
+    "dbMrp": 7433,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB6531",
+        "color": "MIX",
+        "parsedPrice": 2503,
+        "rawText": "FR01178B RB6531 2503 6690 P 23-04-202("
+      },
+      {
+        "model": "196BRB6531",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 196B RB6531 2500 669() 0.00 P 23-04-202("
+      }
+    ]
+  },
+  {
+    "id": "9ff2dea8-36cd-41e6-9c24-519c128301bf",
+    "slug": "so-ray-ban-rb7025",
+    "name": "RAY BAN    0RX 7025",
+    "brand": "Ray-Ban",
+    "dbPrice": 8475,
+    "dbMrp": 9417,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB702-5",
+        "color": "MIX",
+        "parsedPrice": 8282,
+        "rawText": "RB702-5 8282 9290 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB7025",
+        "color": "MIX",
+        "parsedPrice": 8475,
+        "rawText": "FR01207B RB7025 8475 999() 0.00 P 23-04-202("
+      }
+    ]
+  },
+  {
+    "id": "611b7450-c27b-49e9-9691-11c951bb76ef",
+    "slug": "so-ray-ban-rb702-5",
+    "name": "RAY BAN    0RX 7025",
+    "brand": "Ray-Ban",
+    "dbPrice": 8282,
+    "dbMrp": 9202,
+    "matchesCount": 11,
+    "matches": [
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 8417,
+        "rawText": "FR00069B RB7027 8417 6490 0 00 P 12-03-202("
+      },
+      {
+        "model": "RB702-5",
+        "color": "MIX",
+        "parsedPrice": 8282,
+        "rawText": "RB702-5 8282 9290 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 5196,
+        "rawText": "FR01181B RB7027 5 196 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "184BRB7027",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FROI 184B RB7027 2000 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01203B RB7027 2001 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB7025",
+        "color": "MIX",
+        "parsedPrice": 8475,
+        "rawText": "FR01207B RB7025 8475 999() 0.00 P 23-04-202("
+      },
+      {
+        "model": "208BRB702I",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FROI 208B RB702i 2000 9990 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR0121*B RB7027 2000 6090 0.00 P 03-05-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01219B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01220B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01221B RB7027 2001 6090 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "acf37f45-6540-4ec9-b1c1-3358fd1cb07c",
+    "slug": "so-ray-ban-rbs397",
+    "name": "RAY BAN    0RX 7397",
+    "brand": "Ray-Ban",
+    "dbPrice": 2012,
+    "dbMrp": 2236,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB4340V",
+        "color": "6397/3M",
+        "parsedPrice": 14190,
+        "rawText": "RB4340V 6397/3M 14190 P 28-07-202("
+      },
+      {
+        "model": "RB5397",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR01215B RB5397 2000 9990 o. 00"
+      },
+      {
+        "model": "RBS397",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FR01216B RBS397 2012 o. 00 P 23-04-202("
+      }
+    ]
+  },
+  {
+    "id": "ea0f1d6d-7f09-4d14-ac69-54d204cf4098",
+    "slug": "so-ray-ban-rb5397",
+    "name": "RAY BAN    5397",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB5397",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR01215B RB5397 2000 9990 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "bf84cf08-3214-414d-b19c-523248809ca6",
+    "slug": "so-ray-ban-rb3016",
+    "name": "RAY BAN   0RB 3016",
+    "brand": "Ray-Ban",
+    "dbPrice": 1339,
+    "dbMrp": 1488,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB3016",
+        "color": "6878/53",
+        "parsedPrice": 1339,
+        "rawText": "SG00348B RB3016 6878/53 1339() 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3016",
+        "color": "901/58",
+        "parsedPrice": 15690,
+        "rawText": "RB3016 901/58 15690 P 25-07-202("
+      },
+      {
+        "model": "RB3016",
+        "color": "6879/56",
+        "parsedPrice": 13390,
+        "rawText": "SG00394B RB3016 6879/56 13.390 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "5e2a06c2-1a6a-469c-b916-0fca0f72b053",
+    "slug": "so-ray-ban-rb5423",
+    "name": "RAY BAN   0RX 5423I",
+    "brand": "Ray-Ban",
+    "dbPrice": 5753,
+    "dbMrp": 6392,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB5423",
+        "color": "MIX",
+        "parsedPrice": 5753,
+        "rawText": "FR01204B RB5423 5753 6690 0.00 P 23-04-202<"
+      }
+    ]
+  },
+  {
+    "id": "50523d07-7c35-4eea-a349-f3538ef2fc1a",
+    "slug": "so-ray-ban-rb6506",
+    "name": "RAY BAN   0RX 6506I",
+    "brand": "Ray-Ban",
+    "dbPrice": 2500,
+    "dbMrp": 2778,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB6506",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR0008.SB RB6506 2500 6890 P 12-03-202("
+      }
+    ]
+  },
+  {
+    "id": "c3780937-98fd-4cad-aa5e-75eedc30d0a9",
+    "slug": "so-ray-ban-rb7027",
+    "name": "RAY BAN   0RX 7027I",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 8,
+    "matches": [
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 8417,
+        "rawText": "FR00069B RB7027 8417 6490 0 00 P 12-03-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 5196,
+        "rawText": "FR01181B RB7027 5 196 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "184BRB7027",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FROI 184B RB7027 2000 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01203B RB7027 2001 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR0121*B RB7027 2000 6090 0.00 P 03-05-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01219B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01220B RB7027 2001 6090 0.00 P -202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 2001,
+        "rawText": "FR01221B RB7027 2001 6090 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "2d9835b6-c92b-4d25-aefd-f7114a5844c4",
+    "slug": "so-ray-ban-rb4165",
+    "name": "RAY BAN  0RB  4165",
+    "brand": "Ray-Ban",
+    "dbPrice": 11990,
+    "dbMrp": 13322,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB4165",
+        "color": "710/1.3",
+        "parsedPrice": 11990,
+        "rawText": "RB4165 710/1.3 11990 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "181c6293-f56c-4bb9-9e3b-70d21b799909",
+    "slug": "so-ray-ban-rb4171",
+    "name": "RAY BAN  0RB  4171",
+    "brand": "Ray-Ban",
+    "dbPrice": 11290,
+    "dbMrp": 12544,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB4171",
+        "color": "710/71",
+        "parsedPrice": 11290,
+        "rawText": "SG00406B RB4171 710/71 11290 0.00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "7cc5f22f-e324-4635-9dcb-827a1f5d9226",
+    "slug": "so-ray-ban-rb417",
+    "name": "RAY BAN  0RB  4171",
+    "brand": "Ray-Ban",
+    "dbPrice": 11290,
+    "dbMrp": 12544,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB4171",
+        "color": "710/71",
+        "parsedPrice": 11290,
+        "rawText": "SG00406B RB4171 710/71 11290 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB7027",
+        "color": "MIX",
+        "parsedPrice": 8417,
+        "rawText": "FR00069B RB7027 8417 6490 0 00 P 12-03-202("
+      }
+    ]
+  },
+  {
+    "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+    "slug": "so-ray-ban-rb3025",
+    "name": "RAY BAN  0RB 3025I",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 15,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "RB30251 W3276"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/51",
+        "parsedPrice": 9690,
+        "rawText": "RB30251 001/51 9690"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/71",
+        "parsedPrice": 9190,
+        "rawText": "SG00296B RB30251 004/71 9190"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/51",
+        "parsedPrice": 9990,
+        "rawText": "SG00303B RB3025 004/51 9990 o. 00 P 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "SG00321B RB3025 W3276 o. 00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W3277",
+        "parsedPrice": 10990,
+        "rawText": "SG00324B RB-3025 W3277 10990 0.00 P 16-()6-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W2027",
+        "parsedPrice": 8390,
+        "rawText": "SG00327B RB-3025 W2027 8390 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "004/33",
+        "parsedPrice": 13390,
+        "rawText": "SCJ00352B RB3025 004/33 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9271/GK",
+        "parsedPrice": 14290,
+        "rawText": "SG00391B RB3025 9271/GK 14290 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "1.2823",
+        "parsedPrice": 9190,
+        "rawText": "SG00393B RB302.s 1.2823 9190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9278/R6",
+        "parsedPrice": 13390,
+        "rawText": "RB3025 9278/R6 13390 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "d233d7e2-938f-478c-b138-32e6284fc400",
+    "slug": "so-ray-ban-rb3689",
+    "name": "RAY BAN  0RB 3689",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3689",
+        "color": "9147/51",
+        "parsedPrice": 1990,
+        "rawText": "RB.3689 9147/51"
+      }
+    ]
+  },
+  {
+    "id": "31954856-99e3-414d-bbba-da101100c5b4",
+    "slug": "so-ray-ban-rb4105",
+    "name": "RAY BAN  0RB 4105",
+    "brand": "Ray-Ban",
+    "dbPrice": 13490,
+    "dbMrp": 14989,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB4105",
+        "color": "601",
+        "parsedPrice": 13490,
+        "rawText": "SG00414B RB4105 601 13490 0.00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "6e947f21-4a6e-4880-a965-adaaa3feb3ad",
+    "slug": "so-ray-ban-rb642sl",
+    "name": "RAY BAN  0RX 6421",
+    "brand": "Ray-Ban",
+    "dbPrice": 6090,
+    "dbMrp": 6767,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB6425L",
+        "color": "MIX",
+        "parsedPrice": 3009,
+        "rawText": "FR00100B RB642.Sl 3009 6090 0.00 P 12-03-202<"
+      }
+    ]
+  },
+  {
+    "id": "8e55d41c-a403-4291-ada1-6be07d56e22a",
+    "slug": "so-ray-ban-rb6489",
+    "name": "RAY BAN  0RX 6489",
+    "brand": "Ray-Ban",
+    "dbPrice": 2500,
+    "dbMrp": 2778,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01222B RB6489 2500 0.00 P 03-05-202("
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR01223B RB6489 2502 0110 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "4f7dcf8b-e245-4e02-aadc-7d8a2579ac97",
+    "slug": "so-ray-ban-rb2132",
+    "name": "RAY BAN 0RB 2132",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB2132",
+        "color": "710",
+        "parsedPrice": 1990,
+        "rawText": "RB2132 710"
+      },
+      {
+        "model": "RB2132",
+        "color": "901/58",
+        "parsedPrice": 14990,
+        "rawText": "SG00392B RB2132 901/58 14990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB2132",
+        "color": "710/51",
+        "parsedPrice": 13490,
+        "rawText": "RB2132 710/51 13490 0.00 P 28-07-202t"
+      }
+    ]
+  },
+  {
+    "id": "ac6d0280-43e6-400a-9bd0-623c54ade3c4",
+    "slug": "so-ray-ban-mix",
+    "name": "RAY BAN 0RB 2140",
+    "brand": "Ray-Ban",
+    "dbPrice": 1399,
+    "dbMrp": 1554,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "RB2140F",
+        "color": "901",
+        "parsedPrice": 1990,
+        "rawText": "RB2140F 901"
+      },
+      {
+        "model": "RB2140F",
+        "color": "901/3F",
+        "parsedPrice": 13490,
+        "rawText": "RB2140F 901/3F 13490"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00308B RB2140 902/51 14190 o. 00 p 24-04-202("
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 13390,
+        "rawText": "SG00358B RB2140 902/51 13390 0.00 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "6f5e43e6-f295-4922-91cb-ff08303e1094",
+    "slug": "so-ray-ban-sheet",
+    "name": "RAY BAN 0RB 2140",
+    "brand": "Ray-Ban",
+    "dbPrice": 2700,
+    "dbMrp": 3000,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "RB2140F",
+        "color": "901",
+        "parsedPrice": 1990,
+        "rawText": "RB2140F 901"
+      },
+      {
+        "model": "RB2140F",
+        "color": "901/3F",
+        "parsedPrice": 13490,
+        "rawText": "RB2140F 901/3F 13490"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00308B RB2140 902/51 14190 o. 00 p 24-04-202("
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 13390,
+        "rawText": "SG00358B RB2140 902/51 13390 0.00 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "ba5c5868-ace2-42f7-8d77-9727efe14afa",
+    "slug": "so-ray-ban-rb2140",
+    "name": "RAY BAN 0RB 2140",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "RB2140F",
+        "color": "901",
+        "parsedPrice": 1990,
+        "rawText": "RB2140F 901"
+      },
+      {
+        "model": "RB2140F",
+        "color": "901/3F",
+        "parsedPrice": 13490,
+        "rawText": "RB2140F 901/3F 13490"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00308B RB2140 902/51 14190 o. 00 p 24-04-202("
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 13390,
+        "rawText": "SG00358B RB2140 902/51 13390 0.00 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "1cbcad83-c1a9-4643-8d97-da14644943d4",
+    "slug": "so-ray-ban-rb2140f",
+    "name": "RAY BAN 0RB 2140F",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "RB2140F",
+        "color": "901",
+        "parsedPrice": 1990,
+        "rawText": "RB2140F 901"
+      },
+      {
+        "model": "RB2140F",
+        "color": "901/3F",
+        "parsedPrice": 13490,
+        "rawText": "RB2140F 901/3F 13490"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00308B RB2140 902/51 14190 o. 00 p 24-04-202("
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 13390,
+        "rawText": "SG00358B RB2140 902/51 13390 0.00 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "6d34ee48-af8e-4074-87cb-f8dc670eac6a",
+    "slug": "so-ray-ban-rb2222",
+    "name": "RAY BAN 0RB 2222",
+    "brand": "Ray-Ban",
+    "dbPrice": 14990,
+    "dbMrp": 16656,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB2222",
+        "color": "901/3R",
+        "parsedPrice": 14990,
+        "rawText": "SG00410B RB2222 901/3R 14990 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "725ab64d-db6d-4fd8-95e6-3e4aee2be7e9",
+    "slug": "so-ray-ban-rb3447",
+    "name": "RAY BAN 0RB 3447",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB3447",
+        "color": "004/71",
+        "parsedPrice": 1990,
+        "rawText": "12B RB34471 004/71"
+      },
+      {
+        "model": "RB3447",
+        "color": "001",
+        "parsedPrice": 9290,
+        "rawText": "SG00341B RB3447 001 9290 0.00 P 07-07-202<"
+      }
+    ]
+  },
+  {
+    "id": "05098c95-5a9c-4498-a8ce-5392facf1a3e",
+    "slug": "so-ray-ban-rb3755",
+    "name": "RAY BAN 0RB 3755",
+    "brand": "Ray-Ban",
+    "dbPrice": 12790,
+    "dbMrp": 14211,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SG00298B RB3755 001/51 12790"
+      },
+      {
+        "model": "RB3755",
+        "color": "9201/32",
+        "parsedPrice": 12790,
+        "rawText": "RB3755 9201/32 12790 o. 00 24 ( ) 2 ("
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SCJ00356B RB3755 001/51 12790 o. 00 P 25-07-202("
+      }
+    ]
+  },
+  {
+    "id": "1176b1bb-be2f-464c-a54b-8d8ab5f18ee2",
+    "slug": "so-ray-ban-rb3759",
+    "name": "RAY BAN 0RB 3759I",
+    "brand": "Ray-Ban",
+    "dbPrice": 10990,
+    "dbMrp": 12211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3759",
+        "color": "MIX",
+        "parsedPrice": 10990,
+        "rawText": "SG00299B RB37591 10990 0.00 P 24-04-202("
+      }
+    ]
+  },
+  {
+    "id": "397157f4-0ad9-4347-a539-333e9c0b7db2",
+    "slug": "so-ray-ban-rb3767",
+    "name": "RAY BAN 0RB 3767",
+    "brand": "Ray-Ban",
+    "dbPrice": 13190,
+    "dbMrp": 14656,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB3767",
+        "color": "001/13",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00302B RB3767 001/13 13190 0.00 p"
+      },
+      {
+        "model": "RB3767",
+        "color": "003/8H",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00411B RB3767 003/8H 13190 000 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "8f0db6cc-790e-42a7-a65d-18cda0a19703",
+    "slug": "so-ray-ban-rb3768",
+    "name": "RAY BAN 0RB 3768",
+    "brand": "Ray-Ban",
+    "dbPrice": 12590,
+    "dbMrp": 13989,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3768",
+        "color": "003/80",
+        "parsedPrice": 12590,
+        "rawText": "RB.3768 003/80 12590 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "83b17c53-053b-4a7f-b412-2923cf72d849",
+    "slug": "so-ray-ban-rb3774d",
+    "name": "RAY BAN 0RB 3774D",
+    "brand": "Ray-Ban",
+    "dbPrice": 12690,
+    "dbMrp": 14100,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3774D",
+        "color": "001/87",
+        "parsedPrice": 12690,
+        "rawText": "SG00407B RB3774D 001/87 12690 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "41c4c663-a524-40f5-8e1d-7f49ae659428",
+    "slug": "so-ray-ban-rb3779",
+    "name": "RAY BAN 0RB 3779",
+    "brand": "Ray-Ban",
+    "dbPrice": 13590,
+    "dbMrp": 15100,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3779",
+        "color": "MIX",
+        "parsedPrice": 13590,
+        "rawText": "RB3779 13590 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "7ca13941-e939-41ec-b9b0-e5a59cc77681",
+    "slug": "so-ray-ban-rb-3785",
+    "name": "RAY BAN 0RB 3785I",
+    "brand": "Ray-Ban",
+    "dbPrice": 8990,
+    "dbMrp": 9989,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "SCi00329B RB37851 001/71 8990 o. 00"
+      },
+      {
+        "model": "RB-3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "RB-37851 001/71 8990 o, 00"
+      }
+    ]
+  },
+  {
+    "id": "d2350349-060f-49c1-af6d-86e70627eb55",
+    "slug": "so-ray-ban-rb3785",
+    "name": "RAY BAN 0RB 3785I",
+    "brand": "Ray-Ban",
+    "dbPrice": 8990,
+    "dbMrp": 9989,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "SCi00329B RB37851 001/71 8990 o. 00"
+      },
+      {
+        "model": "RB-3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "RB-37851 001/71 8990 o, 00"
+      }
+    ]
+  },
+  {
+    "id": "6c626822-c8f8-479f-8b9a-4901185d8e7c",
+    "slug": "so-ray-ban-rb3786",
+    "name": "RAY BAN 0RB 3786I",
+    "brand": "Ray-Ban",
+    "dbPrice": 9190,
+    "dbMrp": 10211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3786",
+        "color": "001/71",
+        "parsedPrice": 9190,
+        "rawText": "SCJ00304B RB37861 001/71 9190 0.00 P 24-04-202("
+      }
+    ]
+  },
+  {
+    "id": "13e13b9d-5d3e-4abd-99c3-04f6f23a49e8",
+    "slug": "so-ray-ban-rb3787",
+    "name": "RAY BAN 0RB 3787I",
+    "brand": "Ray-Ban",
+    "dbPrice": 8990,
+    "dbMrp": 9989,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3787",
+        "color": "oo 1/71",
+        "parsedPrice": 8990,
+        "rawText": "RB3787 oo 1/71 8990 000 P"
+      }
+    ]
+  },
+  {
+    "id": "4786e465-5b87-4b1b-9e9f-d561883a8014",
+    "slug": "so-ray-ban-rb4455",
+    "name": "RAY BAN 0RB 4455",
+    "brand": "Ray-Ban",
+    "dbPrice": 13590,
+    "dbMrp": 15100,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB4455",
+        "color": "6677",
+        "parsedPrice": 13590,
+        "rawText": "SCJ00412B RB4455 6677 13590 0.00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "8b1056ad-c267-4348-a669-d0c7df4763a3",
+    "slug": "so-ray-ban-rb4465",
+    "name": "RAY BAN 0RB 4465I",
+    "brand": "Ray-Ban",
+    "dbPrice": 8990,
+    "dbMrp": 9989,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB4465",
+        "color": "644911",
+        "parsedPrice": 8990,
+        "rawText": "RB4465 644911 8990 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "1a4dd60a-c288-47d6-8ece-1ad4a2a2c9c2",
+    "slug": "so-ray-ban-rb3678",
+    "name": "Ray-Ban 3678I Sunglass",
+    "brand": "Ray-Ban",
+    "dbPrice": 7790,
+    "dbMrp": 8656,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3678",
+        "color": "001/13",
+        "parsedPrice": 7790,
+        "rawText": "RB36781 001/13 7790 0.00"
+      }
+    ]
+  },
+  {
+    "id": "586dbe08-db71-47c9-81cf-d4182d88218b",
+    "slug": "so-ray-ban-rb3761",
+    "name": "Ray-Ban 3761I Sunglass",
+    "brand": "Ray-Ban",
+    "dbPrice": 11490,
+    "dbMrp": 12767,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB3761",
+        "color": "MIX",
+        "parsedPrice": 11490,
+        "rawText": "SG00305B RB37611 11490 0.00 p"
+      }
+    ]
+  },
+  {
+    "id": "2812c018-323b-4988-9da0-4cf11deec145",
+    "slug": "so-ray-ban-rb5364",
+    "name": "Ray-Ban 5364I Spectacle",
+    "brand": "Ray-Ban",
+    "dbPrice": 2012,
+    "dbMrp": 2236,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "RB5364",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FR000*9B R B.S364 2012 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB5364",
+        "color": "MIX",
+        "parsedPrice": 5809,
+        "rawText": "RB5364 5809 5500 ooo P 12-03"
+      }
+    ]
+  },
+  {
+    "id": "8105844d-9b68-4296-becb-091f93203645",
+    "slug": "so-ray-ban-rj9506s",
+    "name": "Ray-Ban 9506S Kids Sunglass",
+    "brand": "Ray-Ban",
+    "dbPrice": 5990,
+    "dbMrp": 6656,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RJ9506S",
+        "color": "223/6R",
+        "parsedPrice": 5990,
+        "rawText": "SG00335B RJ9506S 223/6R 5990 0.00"
+      }
+    ]
+  },
+  {
+    "id": "14f504da-5504-4b65-a260-064f9f042df4",
+    "slug": "so-ray-ban-rb2199v",
+    "name": "RAY-BAN RB2199 133371 - Orion",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "RB2199V",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR00108B RB2199V 2000"
+      }
+    ]
+  },
+  {
+    "id": "02e14647-0eb4-4a50-a8e7-f9d4291a05d6",
+    "slug": "so-ray-ban-rb3780",
+    "name": "RAY-BAN RB3780 004/58",
+    "brand": "Ray-Ban",
+    "dbPrice": 14390,
+    "dbMrp": 15989,
+    "matchesCount": 13,
+    "matches": [
+      {
+        "model": "RB3447",
+        "color": "004/71",
+        "parsedPrice": 1990,
+        "rawText": "12B RB34471 004/71"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/71",
+        "parsedPrice": 9190,
+        "rawText": "SG00296B RB30251 004/71 9190"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/51",
+        "parsedPrice": 9990,
+        "rawText": "SG00303B RB3025 004/51 9990 o. 00 P 24-04-202("
+      },
+      {
+        "model": "RB3780",
+        "color": "001/31",
+        "parsedPrice": 14390,
+        "rawText": "SG00351B RB3780 001/31 14390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "004/33",
+        "parsedPrice": 13390,
+        "rawText": "SCJ00352B RB3025 004/33 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB4171",
+        "color": "710/71",
+        "parsedPrice": 11290,
+        "rawText": "SG00406B RB4171 710/71 11290 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3774D",
+        "color": "001/87",
+        "parsedPrice": 12690,
+        "rawText": "SG00407B RB3774D 001/87 12690 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3548",
+        "color": "004/71",
+        "parsedPrice": 14190,
+        "rawText": "SG00409B RB3548 004/71 14190"
+      },
+      {
+        "model": "RB2222",
+        "color": "901/3R",
+        "parsedPrice": 14990,
+        "rawText": "SG00410B RB2222 901/3R 14990 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3767",
+        "color": "003/8H",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00411B RB3767 003/8H 13190 000 P 28-07-202("
+      },
+      {
+        "model": "RB4455",
+        "color": "6677",
+        "parsedPrice": 13590,
+        "rawText": "SCJ00412B RB4455 6677 13590 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB-3928",
+        "color": "001/82",
+        "parsedPrice": 17490,
+        "rawText": "SCJ00413B RB-3928 001/82 17490 00"
+      },
+      {
+        "model": "RB4105",
+        "color": "601",
+        "parsedPrice": 13490,
+        "rawText": "SG00414B RB4105 601 13490 0.00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "039bf3d4-46fa-4e2e-aa32-cd5e0f1e8078",
+    "slug": "so-ray-ban-rb6323",
+    "name": "RAY-BAN RX6323I 2500 - Arista gold",
+    "brand": "Ray-Ban",
+    "dbPrice": 2500,
+    "dbMrp": 2778,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "RB6323",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR00083B RB6323 2500 5290 o_oo P 12-03-202("
+      },
+      {
+        "model": "RB6506",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR0008.SB RB6506 2500 6890 P 12-03-202("
+      },
+      {
+        "model": "RB6323",
+        "color": "MIX",
+        "parsedPrice": 2509,
+        "rawText": "FR00102B RB6323 2509 5290 0.00 P 12-03-202<"
+      },
+      {
+        "model": "180BRB6S44",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 180B RB6_S44 2500 6090 o. 00 P 23-04-202("
+      },
+      {
+        "model": "188BRB6267",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 188B RB62671 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "193BRB2303",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 193B RB2303 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "196BRB6531",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 196B RB6531 2500 669() 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB6463",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01205B RB6463 2500 6090 (Mjo"
+      },
+      {
+        "model": "RB6496",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FRO 1214B RB6496 2500 o. 00"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01222B RB6489 2500 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "94901706-c503-415a-ad8d-f44f5537a077",
+    "slug": "so-ray-ban-rb6531",
+    "name": "RAY-BAN RX6531I 2500 - Arista gold",
+    "brand": "Ray-Ban",
+    "dbPrice": 2503,
+    "dbMrp": 2781,
+    "matchesCount": 10,
+    "matches": [
+      {
+        "model": "RB6323",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR00083B RB6323 2500 5290 o_oo P 12-03-202("
+      },
+      {
+        "model": "RB6506",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR0008.SB RB6506 2500 6890 P 12-03-202("
+      },
+      {
+        "model": "RB6531",
+        "color": "MIX",
+        "parsedPrice": 2503,
+        "rawText": "FR01178B RB6531 2503 6690 P 23-04-202("
+      },
+      {
+        "model": "180BRB6S44",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 180B RB6_S44 2500 6090 o. 00 P 23-04-202("
+      },
+      {
+        "model": "188BRB6267",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 188B RB62671 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "193BRB2303",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 193B RB2303 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "196BRB6531",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 196B RB6531 2500 669() 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB6463",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01205B RB6463 2500 6090 (Mjo"
+      },
+      {
+        "model": "RB6496",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FRO 1214B RB6496 2500 o. 00"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01222B RB6489 2500 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "b54f0ce8-13cf-47c3-ad78-a28b2eccf879",
+    "slug": "so-ray-ban-rb6304",
+    "name": "RAYBAN 6304I 2502 52",
+    "brand": "Ray-Ban",
+    "dbPrice": 2509,
+    "dbMrp": 2788,
+    "matchesCount": 4,
+    "matches": [
+      {
+        "model": "RB6304",
+        "color": "MIX",
+        "parsedPrice": 2509,
+        "rawText": "FR00077B RB6304 2509 5290 P 12-03-202("
+      },
+      {
+        "model": "RB6488",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR00088B RB64881 2502 7090 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB6267",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "RB62671 2502 5290"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR01223B RB6489 2502 0110 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "faaf11be-a969-4816-bdcb-9845129514d9",
+    "slug": "so-ray-ban-rb6463",
+    "name": "RAYBAN 6463I 2500 53",
+    "brand": "Ray-Ban",
+    "dbPrice": 2500,
+    "dbMrp": 2778,
+    "matchesCount": 9,
+    "matches": [
+      {
+        "model": "RB6323",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR00083B RB6323 2500 5290 o_oo P 12-03-202("
+      },
+      {
+        "model": "RB6506",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR0008.SB RB6506 2500 6890 P 12-03-202("
+      },
+      {
+        "model": "180BRB6S44",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 180B RB6_S44 2500 6090 o. 00 P 23-04-202("
+      },
+      {
+        "model": "188BRB6267",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 188B RB62671 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "193BRB2303",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 193B RB2303 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "196BRB6531",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 196B RB6531 2500 669() 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB6463",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01205B RB6463 2500 6090 (Mjo"
+      },
+      {
+        "model": "RB6496",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FRO 1214B RB6496 2500 o. 00"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01222B RB6489 2500 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "928b5d23-e06c-48b7-bbf4-f7fb389a46ae",
+    "slug": "so-ray-ban-rb7033",
+    "name": "Rayban Frame RB 7033I 2012",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "RB5364",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FR000*9B R B.S364 2012 0.00 P 12-03-202("
+      },
+      {
+        "model": "186BRBS423",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FROI 186B RBS423 2012 6690 0 00"
+      },
+      {
+        "model": "187BRB7033",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FROI 187B RB7033 2012 6090 000 P 23-04-202("
+      },
+      {
+        "model": "RB7033",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR01202B RB7033 2000 6090 0.00 P 23-04-202("
+      },
+      {
+        "model": "RBS397",
+        "color": "MIX",
+        "parsedPrice": 2012,
+        "rawText": "FR01216B RBS397 2012 o. 00 P 23-04-202("
+      }
+    ]
+  },
+  {
+    "id": "c86f6db6-b5ed-4787-85db-cd2a695a67f2",
+    "slug": "so-ray-ban-rb6303",
+    "name": "RayBan Frame RB6303I 2502",
+    "brand": "Ray-Ban",
+    "dbPrice": 2500,
+    "dbMrp": 2778,
+    "matchesCount": 6,
+    "matches": [
+      {
+        "model": "RB6303",
+        "color": "MIX",
+        "parsedPrice": 2509,
+        "rawText": "RB6303 2509 5290 P 12-03-202("
+      },
+      {
+        "model": "RB6303",
+        "color": "MIX",
+        "parsedPrice": 2503,
+        "rawText": "FR00084B RB6303 2.503 5290 0Å)0"
+      },
+      {
+        "model": "RB6488",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR00088B RB64881 2502 7090 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB6303",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR00097B RB6303 2.500 5290 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB6267",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "RB62671 2502 5290"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "FR01223B RB6489 2502 0110 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "dd880f8a-7e51-4559-b8e9-dd8857e8ccec",
+    "slug": "so-ray-ban-rb3549",
+    "name": "RAYBAN RB 3549 002/T3 58",
+    "brand": "Ray-Ban",
+    "dbPrice": 17290,
+    "dbMrp": 19211,
+    "matchesCount": 9,
+    "matches": [
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00010B RB30251 002/3F"
+      },
+      {
+        "model": "RB3025",
+        "color": "001/4E",
+        "parsedPrice": 1990,
+        "rawText": "SG00294B RB3025 001/4E"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/71",
+        "parsedPrice": 9190,
+        "rawText": "SG00296B RB30251 004/71 9190"
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SG00298B RB3755 001/51 12790"
+      },
+      {
+        "model": "RB3759",
+        "color": "MIX",
+        "parsedPrice": 10990,
+        "rawText": "SG00299B RB37591 10990 0.00 P 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3549",
+        "color": "002fT3",
+        "parsedPrice": 17290,
+        "rawText": "SCJ00340B RB3549 002fT3 17290 0.00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "fd8971bc-fb06-4567-a313-fcf4784e8bdb",
+    "slug": "so-ray-ban-rb6267",
+    "name": "RAYBAN RB 6267I 2500 54",
+    "brand": "Ray-Ban",
+    "dbPrice": 2502,
+    "dbMrp": 2780,
+    "matchesCount": 11,
+    "matches": [
+      {
+        "model": "RB6323",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR00083B RB6323 2500 5290 o_oo P 12-03-202("
+      },
+      {
+        "model": "RB6506",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR0008.SB RB6506 2500 6890 P 12-03-202("
+      },
+      {
+        "model": "104BRB6267",
+        "color": "MIX",
+        "parsedPrice": 2531,
+        "rawText": "FROO 104B RB62671 2531 5290 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB6267",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "RB62671 2502 5290"
+      },
+      {
+        "model": "180BRB6S44",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 180B RB6_S44 2500 6090 o. 00 P 23-04-202("
+      },
+      {
+        "model": "188BRB6267",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 188B RB62671 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "193BRB2303",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 193B RB2303 2500 5290 P 23-04-202("
+      },
+      {
+        "model": "196BRB6531",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 196B RB6531 2500 669() 0.00 P 23-04-202("
+      },
+      {
+        "model": "RB6463",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01205B RB6463 2500 6090 (Mjo"
+      },
+      {
+        "model": "RB6496",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FRO 1214B RB6496 2500 o. 00"
+      },
+      {
+        "model": "RB6489",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FR01222B RB6489 2500 0.00 P 03-05-202("
+      }
+    ]
+  },
+  {
+    "id": "b26da1a9-b1ea-42ba-9cda-9c790f9a1d7d",
+    "slug": "so-ray-ban-rb2224",
+    "name": "RAYBAN SUNGLASS RB 2224 901/58",
+    "brand": "Ray-Ban",
+    "dbPrice": 12190,
+    "dbMrp": 13544,
+    "matchesCount": 8,
+    "matches": [
+      {
+        "model": "RB2140F",
+        "color": "901",
+        "parsedPrice": 1990,
+        "rawText": "RB2140F 901"
+      },
+      {
+        "model": "RB2140F",
+        "color": "901/3F",
+        "parsedPrice": 13490,
+        "rawText": "RB2140F 901/3F 13490"
+      },
+      {
+        "model": "RB2140",
+        "color": "901/58",
+        "parsedPrice": 1990,
+        "rawText": "SG00295B RB2140 901/58"
+      },
+      {
+        "model": "RB2198",
+        "color": "901/56",
+        "parsedPrice": 13290,
+        "rawText": "RB2198 901/56 13290 000 P 24-04-202<"
+      },
+      {
+        "model": "RB3016",
+        "color": "901/58",
+        "parsedPrice": 15690,
+        "rawText": "RB3016 901/58 15690 P 25-07-202("
+      },
+      {
+        "model": "RB2132",
+        "color": "901/58",
+        "parsedPrice": 14990,
+        "rawText": "SG00392B RB2132 901/58 14990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB2224",
+        "color": "901/32",
+        "parsedPrice": 12190,
+        "rawText": "RB2224 901/32 12190 o. oo P 28-07-202("
+      },
+      {
+        "model": "RB2222",
+        "color": "901/3R",
+        "parsedPrice": 14990,
+        "rawText": "SG00410B RB2222 901/3R 14990 o. 00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "eff283e7-ed33-4c1e-93ee-7f6a20cd711f",
+    "slug": "so-ray-ban-rb3760",
+    "name": "Rayban Sunglass RB 3760I 003/9A",
+    "brand": "Ray-Ban",
+    "dbPrice": 10990,
+    "dbMrp": 12211,
+    "matchesCount": 36,
+    "matches": [
+      {
+        "model": "RB3767",
+        "color": "001/13",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00302B RB3767 001/13 13190 0.00 p"
+      },
+      {
+        "model": "RB3025",
+        "color": "004/51",
+        "parsedPrice": 9990,
+        "rawText": "SG00303B RB3025 004/51 9990 o. 00 P 24-04-202("
+      },
+      {
+        "model": "RB3786",
+        "color": "001/71",
+        "parsedPrice": 9190,
+        "rawText": "SCJ00304B RB37861 001/71 9190 0.00 P 24-04-202("
+      },
+      {
+        "model": "RB3761",
+        "color": "MIX",
+        "parsedPrice": 11490,
+        "rawText": "SG00305B RB37611 11490 0.00 p"
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00308B RB2140 902/51 14190 o. 00 p 24-04-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "W3276",
+        "parsedPrice": 1990,
+        "rawText": "SG00321B RB3025 W3276 o. 00"
+      },
+      {
+        "model": "RB3025",
+        "color": "002/58",
+        "parsedPrice": 11500,
+        "rawText": "SCJ00322B RB3025 002/58 11500 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W3277",
+        "parsedPrice": 10990,
+        "rawText": "SG00324B RB-3025 W3277 10990 0.00 P 16-()6-202("
+      },
+      {
+        "model": "RB-3025",
+        "color": "W2027",
+        "parsedPrice": 8390,
+        "rawText": "SG00327B RB-3025 W2027 8390 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3695",
+        "color": "90355 1",
+        "parsedPrice": 8790,
+        "rawText": "SG00328B RB36951 90355 1 8790 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB3785",
+        "color": "001/71",
+        "parsedPrice": 8990,
+        "rawText": "SCi00329B RB37851 001/71 8990 o. 00"
+      },
+      {
+        "model": "RB3695",
+        "color": "001/58",
+        "parsedPrice": 8390,
+        "rawText": "SCJ00330B RB36951 001/58 8390 o 00 P 16-06-202("
+      },
+      {
+        "model": "RB494",
+        "color": "601/69",
+        "parsedPrice": 14290,
+        "rawText": "SG00332B RB494() 601/69 14290 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB4940",
+        "color": "601/60",
+        "parsedPrice": 1990,
+        "rawText": "SG00333B R B4940 601/60 0.00"
+      },
+      {
+        "model": "RB3928",
+        "color": "001/71",
+        "parsedPrice": 16190,
+        "rawText": "SG00334B RB3928 001/71 16190 ooo P 16-06-202("
+      },
+      {
+        "model": "RJ9506S",
+        "color": "223/6R",
+        "parsedPrice": 5990,
+        "rawText": "SG00335B RJ9506S 223/6R 5990 0.00"
+      },
+      {
+        "model": "RJ9594S",
+        "color": "223/46",
+        "parsedPrice": 5790,
+        "rawText": "SG00337B RJ9594S 223/46 5790"
+      },
+      {
+        "model": "RJ9069S",
+        "color": "100/71",
+        "parsedPrice": 3190,
+        "rawText": "SG00338B RJ9069S 100/71 3190 o. 00"
+      },
+      {
+        "model": "RB3549",
+        "color": "002fT3",
+        "parsedPrice": 17290,
+        "rawText": "SCJ00340B RB3549 002fT3 17290 0.00"
+      },
+      {
+        "model": "RB3447",
+        "color": "001",
+        "parsedPrice": 9290,
+        "rawText": "SG00341B RB3447 001 9290 0.00 P 07-07-202<"
+      },
+      {
+        "model": "RJ9069S",
+        "color": "7060/80",
+        "parsedPrice": 5190,
+        "rawText": "SG00344B RJ9069S 7060/80 5190 0.00 P"
+      },
+      {
+        "model": "RB3016",
+        "color": "6878/53",
+        "parsedPrice": 1339,
+        "rawText": "SG00348B RB3016 6878/53 1339() 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3780",
+        "color": "001/31",
+        "parsedPrice": 14390,
+        "rawText": "SG00351B RB3780 001/31 14390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "004/33",
+        "parsedPrice": 13390,
+        "rawText": "SCJ00352B RB3025 004/33 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3755",
+        "color": "001/51",
+        "parsedPrice": 12790,
+        "rawText": "SCJ00356B RB3755 001/51 12790 o. 00 P 25-07-202("
+      },
+      {
+        "model": "RB4349",
+        "color": "674813",
+        "parsedPrice": 8190,
+        "rawText": "SCJ00357B RB43491 674813 8190 o. 00 P 25-07-202("
+      },
+      {
+        "model": "RB2140",
+        "color": "902/51",
+        "parsedPrice": 13390,
+        "rawText": "SG00358B RB2140 902/51 13390 0.00 P 25-07-202("
+      },
+      {
+        "model": "RB3760",
+        "color": "003/9A",
+        "parsedPrice": 10990,
+        "rawText": "SG00390B RB3760 003/9A 10990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "9271/GK",
+        "parsedPrice": 14290,
+        "rawText": "SG00391B RB3025 9271/GK 14290 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB2132",
+        "color": "901/58",
+        "parsedPrice": 14990,
+        "rawText": "SG00392B RB2132 901/58 14990 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "1.2823",
+        "parsedPrice": 9190,
+        "rawText": "SG00393B RB302.s 1.2823 9190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3016",
+        "color": "6879/56",
+        "parsedPrice": 13390,
+        "rawText": "SG00394B RB3016 6879/56 13.390 o. 00"
+      },
+      {
+        "model": "RB4340V",
+        "color": "710/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00395B RB4340V 710/51 14190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3768",
+        "color": "003/80",
+        "parsedPrice": 12590,
+        "rawText": "RB.3768 003/80 12590 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB3025",
+        "color": "002/3F",
+        "parsedPrice": 10690,
+        "rawText": "SG00399B RB3025 002/3F 10690 P 28-07-202("
+      },
+      {
+        "model": "RB3767",
+        "color": "003/8H",
+        "parsedPrice": 13190,
+        "rawText": "SCJ00411B RB3767 003/8H 13190 000 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "99126f68-5d13-4eab-9570-a34dccadd486",
+    "slug": "so-ray-ban-rb4340v",
+    "name": "Wayfarer 4340 601S/B1 50",
+    "brand": "Ray-Ban",
+    "dbPrice": 2000,
+    "dbMrp": 2222,
+    "matchesCount": 9,
+    "matches": [
+      {
+        "model": "RB4460",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SG00007B RB44601"
+      },
+      {
+        "model": "RB4349",
+        "color": "601/9A",
+        "parsedPrice": 9390,
+        "rawText": "RB43491 601/9A 9390 P 16-06-202("
+      },
+      {
+        "model": "RB494",
+        "color": "601/69",
+        "parsedPrice": 14290,
+        "rawText": "SG00332B RB494() 601/69 14290 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB4940",
+        "color": "601/60",
+        "parsedPrice": 1990,
+        "rawText": "SG00333B R B4940 601/60 0.00"
+      },
+      {
+        "model": "RB-1125",
+        "color": "601/33",
+        "parsedPrice": 13390,
+        "rawText": "RB-1125 601/33 13390 P 25-07-202("
+      },
+      {
+        "model": "RB4340V",
+        "color": "710/51",
+        "parsedPrice": 14190,
+        "rawText": "SG00395B RB4340V 710/51 14190 o. 00 P 28-07-202("
+      },
+      {
+        "model": "RB4340V",
+        "color": "6397/3M",
+        "parsedPrice": 14190,
+        "rawText": "RB4340V 6397/3M 14190 P 28-07-202("
+      },
+      {
+        "model": "RB4105",
+        "color": "601",
+        "parsedPrice": 13490,
+        "rawText": "SG00414B RB4105 601 13490 0.00 P 28-07-202("
+      },
+      {
+        "model": "RB4340V",
+        "color": "MIX",
+        "parsedPrice": 2000,
+        "rawText": "FR01212B RB4340V 2000 9990 0.00"
+      }
+    ]
+  },
+  {
+    "id": "5c815d7e-52f2-4901-bc8d-297966f78f14",
+    "slug": "so-ray-ban-rb494",
+    "name": "WAYFARER PUFFER 4940 601/80 50",
+    "brand": "Ray-Ban",
+    "dbPrice": 14290,
+    "dbMrp": 15878,
+    "matchesCount": 6,
+    "matches": [
+      {
+        "model": "RB4460",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SG00007B RB44601"
+      },
+      {
+        "model": "RB4349",
+        "color": "601/9A",
+        "parsedPrice": 9390,
+        "rawText": "RB43491 601/9A 9390 P 16-06-202("
+      },
+      {
+        "model": "RB494",
+        "color": "601/69",
+        "parsedPrice": 14290,
+        "rawText": "SG00332B RB494() 601/69 14290 0.00 P 16-06-202("
+      },
+      {
+        "model": "RB4940",
+        "color": "601/60",
+        "parsedPrice": 1990,
+        "rawText": "SG00333B R B4940 601/60 0.00"
+      },
+      {
+        "model": "RB-1125",
+        "color": "601/33",
+        "parsedPrice": 13390,
+        "rawText": "RB-1125 601/33 13390 P 25-07-202("
+      },
+      {
+        "model": "RB4105",
+        "color": "601",
+        "parsedPrice": 13490,
+        "rawText": "SG00414B RB4105 601 13490 0.00 P 28-07-202("
+      }
+    ]
+  },
+  {
+    "id": "3db4dabc-77d3-4bb6-8c6f-8a04555ce4b5",
+    "slug": "so-ray-ban-rb4940",
+    "name": "WAYFARER PUFFER 4940 671/87 50",
+    "brand": "Ray-Ban",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 4,
+    "matches": [
+      {
+        "model": "RB4940",
+        "color": "601/60",
+        "parsedPrice": 1990,
+        "rawText": "SG00333B R B4940 601/60 0.00"
+      },
+      {
+        "model": "104BRB6267",
+        "color": "MIX",
+        "parsedPrice": 2531,
+        "rawText": "FROO 104B RB62671 2531 5290 0.00 P 12-03-202("
+      },
+      {
+        "model": "RB6267",
+        "color": "MIX",
+        "parsedPrice": 2502,
+        "rawText": "RB62671 2502 5290"
+      },
+      {
+        "model": "188BRB6267",
+        "color": "MIX",
+        "parsedPrice": 2500,
+        "rawText": "FROI 188B RB62671 2500 5290 P 23-04-202("
+      }
+    ]
+  },
+  {
+    "id": "20cb7e21-7065-458d-991b-201e3cee062e",
+    "slug": "so-tommy-hilfiger-th1079",
+    "name": "1079O 002 (WITH CHAIN) 54",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 9500,
+    "dbMrp": 10556,
+    "matchesCount": 15,
+    "matches": [
+      {
+        "model": "TH1079",
+        "color": "MIX",
+        "parsedPrice": 9500,
+        "rawText": "SG00018B TH1079 9500 0.00 P 12-03-202("
+      },
+      {
+        "model": "TH1079",
+        "color": "MIX",
+        "parsedPrice": 11900,
+        "rawText": "SG00241 B TH1079 1 1900 o. 00 P 24-03-202("
+      },
+      {
+        "model": "TH1090",
+        "color": "CIO",
+        "parsedPrice": 11900,
+        "rawText": "SG00242B TH1090 CIO 1 1900 o. 00 P 24-03-202("
+      },
+      {
+        "model": "TH1112PL",
+        "color": "CIO",
+        "parsedPrice": 12900,
+        "rawText": "SG00243B THI 112PL CIO 12900 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH1116",
+        "color": "MIX",
+        "parsedPrice": 14700,
+        "rawText": "SCJ0024SB THI 1 16 14700 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH1116",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00246B TH1116 o. 00"
+      },
+      {
+        "model": "TH2655",
+        "color": "MIX",
+        "parsedPrice": 15900,
+        "rawText": "SG00247B TH2655 15900 o. 00 P 24-03-202("
+      },
+      {
+        "model": "TH2655",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SG00249B TH2655 159()() 0.00 p 24-03 -202("
+      },
+      {
+        "model": "TH2677",
+        "color": "CIO",
+        "parsedPrice": 15100,
+        "rawText": "SG00250B TH2677 CIO 15100 0.00 p"
+      },
+      {
+        "model": "TH2677",
+        "color": "MIX",
+        "parsedPrice": 15100,
+        "rawText": "SG00251B TH2677 15100 p 24-03 -202("
+      },
+      {
+        "model": "TH2680",
+        "color": "CIO",
+        "parsedPrice": 1990,
+        "rawText": "SG00252B TH2680 CIO 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH7214",
+        "color": "Cl",
+        "parsedPrice": 1990,
+        "rawText": "SG00254B TH7214 Cl"
+      },
+      {
+        "model": "TH7214",
+        "color": "MIX",
+        "parsedPrice": 15300,
+        "rawText": "SG00255B TH7214 15300 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH7214",
+        "color": "MIX",
+        "parsedPrice": 15300,
+        "rawText": "SCJ00256B TH7214 15300 0.00 p 202("
+      },
+      {
+        "model": "TH2655",
+        "color": "c;",
+        "parsedPrice": 15900,
+        "rawText": "SG00286B TH2655 c; 15900 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "1bb1e67e-fd1c-4111-91cb-85d2a6e2d1ac",
+    "slug": "so-tommy-hilfiger-th1090",
+    "name": "1090SA 002 (WITH CHAIN) 59",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 11900,
+    "dbMrp": 13222,
+    "matchesCount": 15,
+    "matches": [
+      {
+        "model": "TH1079",
+        "color": "MIX",
+        "parsedPrice": 11900,
+        "rawText": "SG00241 B TH1079 1 1900 o. 00 P 24-03-202("
+      },
+      {
+        "model": "TH1090",
+        "color": "CIO",
+        "parsedPrice": 11900,
+        "rawText": "SG00242B TH1090 CIO 1 1900 o. 00 P 24-03-202("
+      },
+      {
+        "model": "TH1112PL",
+        "color": "CIO",
+        "parsedPrice": 12900,
+        "rawText": "SG00243B THI 112PL CIO 12900 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH1116",
+        "color": "MIX",
+        "parsedPrice": 14700,
+        "rawText": "SCJ0024SB THI 1 16 14700 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH1116",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00246B TH1116 o. 00"
+      },
+      {
+        "model": "TH2655",
+        "color": "MIX",
+        "parsedPrice": 15900,
+        "rawText": "SG00247B TH2655 15900 o. 00 P 24-03-202("
+      },
+      {
+        "model": "TH2655",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SG00249B TH2655 159()() 0.00 p 24-03 -202("
+      },
+      {
+        "model": "TH2677",
+        "color": "CIO",
+        "parsedPrice": 15100,
+        "rawText": "SG00250B TH2677 CIO 15100 0.00 p"
+      },
+      {
+        "model": "TH2677",
+        "color": "MIX",
+        "parsedPrice": 15100,
+        "rawText": "SG00251B TH2677 15100 p 24-03 -202("
+      },
+      {
+        "model": "TH2680",
+        "color": "CIO",
+        "parsedPrice": 1990,
+        "rawText": "SG00252B TH2680 CIO 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH7214",
+        "color": "Cl",
+        "parsedPrice": 1990,
+        "rawText": "SG00254B TH7214 Cl"
+      },
+      {
+        "model": "TH7214",
+        "color": "MIX",
+        "parsedPrice": 15300,
+        "rawText": "SG00255B TH7214 15300 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH7214",
+        "color": "MIX",
+        "parsedPrice": 15300,
+        "rawText": "SCJ00256B TH7214 15300 0.00 p 202("
+      },
+      {
+        "model": "TH2655",
+        "color": "c;",
+        "parsedPrice": 15900,
+        "rawText": "SG00286B TH2655 c; 15900 o. 00"
+      },
+      {
+        "model": "FRTH6386",
+        "color": "10900",
+        "parsedPrice": 1990,
+        "rawText": "TH6386 10900 p 24-03 -202{"
+      }
+    ]
+  },
+  {
+    "id": "ffb001f0-558b-40a0-9f77-8084dddeaeab",
+    "slug": "so-tommy-hilfiger-metal",
+    "name": "7206 C5 50",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "95526a5c-2d45-4219-9b0c-f84234239e93",
+    "slug": "so-tommy-hilfiger-vusi",
+    "name": "7206 C5 50",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 4290,
+    "dbMrp": 4767,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "0726bdd1-f581-42ad-a16e-07e298f604b5",
+    "slug": "so-tommy-hilfiger-thi",
+    "name": "7206 C5 50",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 12900,
+    "dbMrp": 14333,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "f65a5951-977f-4cef-a630-500819cf1b49",
+    "slug": "so-tommy-hilfiger-cio",
+    "name": "7206 C5 50",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "a06cd67e-989d-415f-a061-3e48e619bdb0",
+    "slug": "so-tommy-hilfiger-thio",
+    "name": "7206 C5 50",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 3202,
+    "dbMrp": 3558,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "67af33b2-9311-4dca-b905-d8babeb49287",
+    "slug": "so-tommy-hilfiger-th1116",
+    "name": "TOMMY HILFIGER CLIP-ON SUNGLASS TH 1116 C1",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "TH1116",
+        "color": "MIX",
+        "parsedPrice": 14700,
+        "rawText": "SCJ0024SB THI 1 16 14700 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH1116",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SCJ00246B TH1116 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "ed894372-2a8d-4814-97bd-cf4a22aa56cc",
+    "slug": "so-tommy-hilfiger-th7214",
+    "name": "TOMMY HILFIGER SUNGLASS TH 7214 C5",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "TH7214",
+        "color": "Cl",
+        "parsedPrice": 1990,
+        "rawText": "SG00254B TH7214 Cl"
+      },
+      {
+        "model": "TH7214",
+        "color": "MIX",
+        "parsedPrice": 15300,
+        "rawText": "SG00255B TH7214 15300 0.00 P 24-03-202("
+      },
+      {
+        "model": "TH7214",
+        "color": "MIX",
+        "parsedPrice": 15300,
+        "rawText": "SCJ00256B TH7214 15300 0.00 p 202("
+      }
+    ]
+  },
+  {
+    "id": "f5303561-54c0-41fd-bd1a-988b8cd80e00",
+    "slug": "so-tommy-hilfiger-th1112pl",
+    "name": "TOMMY HILFIGER TH1112PL-C1 Clipon",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 12900,
+    "dbMrp": 14333,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "TH1112PL",
+        "color": "CIO",
+        "parsedPrice": 12900,
+        "rawText": "SG00243B THI 112PL CIO 12900 0.00 P 24-03-202("
+      }
+    ]
+  },
+  {
+    "id": "678a290e-ef34-489d-bbd1-94c98a323832",
+    "slug": "so-tommy-hilfiger-th2655",
+    "name": "Tommy Hilfiger TH2655 Sunglass",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "TH2655",
+        "color": "MIX",
+        "parsedPrice": 15900,
+        "rawText": "SG00247B TH2655 15900 o. 00 P 24-03-202("
+      },
+      {
+        "model": "TH2655",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "SG00249B TH2655 159()() 0.00 p 24-03 -202("
+      },
+      {
+        "model": "TH2655",
+        "color": "c;",
+        "parsedPrice": 15900,
+        "rawText": "SG00286B TH2655 c; 15900 o. 00"
+      }
+    ]
+  },
+  {
+    "id": "0ca15dbb-3a1b-4b70-b3b3-237b80eaef6d",
+    "slug": "so-tommy-hilfiger-th2677",
+    "name": "TOMMY HILFIGER TH2677-C3",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 15100,
+    "dbMrp": 16778,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "TH2677",
+        "color": "CIO",
+        "parsedPrice": 15100,
+        "rawText": "SG00250B TH2677 CIO 15100 0.00 p"
+      },
+      {
+        "model": "TH2677",
+        "color": "MIX",
+        "parsedPrice": 15100,
+        "rawText": "SG00251B TH2677 15100 p 24-03 -202("
+      }
+    ]
+  },
+  {
+    "id": "fc83ea85-69ff-41a8-8eda-0a9dff3d5d1d",
+    "slug": "so-tommy-hilfiger-th2680",
+    "name": "TOMMY HILFIGER TH2680-C2",
+    "brand": "Tommy Hilfiger",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "TH2680",
+        "color": "CIO",
+        "parsedPrice": 1990,
+        "rawText": "SG00252B TH2680 CIO 0.00 P 24-03-202("
+      }
+    ]
+  },
+  {
+    "id": "9ae894be-1237-4fbe-ad22-20757d40345f",
+    "slug": "so-vogue-vo5",
+    "name": "VOGUE      5511",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "d50693dc-1c97-4be4-a507-6fef87ae9af4",
+    "slug": "so-vogue-vo570",
+    "name": "VOGUE      5701U",
+    "brand": "Vogue",
+    "dbPrice": 3289,
+    "dbMrp": 3654,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "VO57013290",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "Vos 701 3290 p 20-06-202f"
+      },
+      {
+        "model": "VO57013289",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "FR01272B vos701 3289 00 p 20-06-202("
+      }
+    ]
+  },
+  {
+    "id": "38c36628-3403-4bf2-8fe9-15518ba8f36e",
+    "slug": "so-vogue-vo70",
+    "name": "VOGUE      5703U",
+    "brand": "Vogue",
+    "dbPrice": 3289,
+    "dbMrp": 3654,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "1c8cea9e-86c5-4319-8c31-1e05f73dd419",
+    "slug": "so-vogue-vo571v",
+    "name": "VOGUE      5714I",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 5,
+    "matches": [
+      {
+        "model": "VO57192966",
+        "color": "3690",
+        "parsedPrice": 1990,
+        "rawText": "FR012S3B VOS719 2966 3690 (joo p 20.06-202("
+      },
+      {
+        "model": "VO5712WEST",
+        "color": "7190",
+        "parsedPrice": 1990,
+        "rawText": "FRO VOS712 we;st; 7190 0.00"
+      },
+      {
+        "model": "VO57182820",
+        "color": "4590",
+        "parsedPrice": 1990,
+        "rawText": "VOS718 2820 4590 0.00 p 20-06-2021"
+      },
+      {
+        "model": "VO571V",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "FR01271B vo.S71V"
+      },
+      {
+        "model": "VO5712",
+        "color": "3227",
+        "parsedPrice": 1990,
+        "rawText": "FR0131-fB VOS712 3227"
+      }
+    ]
+  },
+  {
+    "id": "a9e77e77-1c8d-4554-9934-f74be2894cb4",
+    "slug": "so-vogue-vo512i",
+    "name": "VOGUE    5512S",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 3,
+    "matches": [
+      {
+        "model": "VO51202288",
+        "color": "3890",
+        "parsedPrice": 1990,
+        "rawText": "FRO 1260B VOS 1 20 2288 3890 P 20-06-202("
+      },
+      {
+        "model": "VO512I",
+        "color": "3890",
+        "parsedPrice": 1990,
+        "rawText": "FRO 1267B VOS12(i 3890 0.00"
+      },
+      {
+        "model": "VO5120",
+        "color": "MIX",
+        "parsedPrice": 2472,
+        "rawText": "FR01313B Vos 120 2472"
+      }
+    ]
+  },
+  {
+    "id": "c78519ba-1803-4184-8357-fccc61629826",
+    "slug": "so-vogue-vo5545w",
+    "name": "Vogue 0VO5545I 2989",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "VO5545W",
+        "color": "44 3590",
+        "parsedPrice": 1990,
+        "rawText": "FR01276B VOS 545 W 44 3590 P 20-06-2021"
+      }
+    ]
+  },
+  {
+    "id": "22fcdb66-c34b-4806-a620-5e3cc6954830",
+    "slug": "so-vogue-vo5276",
+    "name": "Vogue 5276 Spectacle",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 0,
+    "matches": []
+  },
+  {
+    "id": "f2df3f3a-51ac-44f8-99cc-3fa4cb0d8334",
+    "slug": "so-vogue-vo5497w44",
+    "name": "Vogue Frame VO 5497-I W656",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "VO5497W44",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "FR01278B VOS 497 W44 P 20-06-2021"
+      }
+    ]
+  },
+  {
+    "id": "06f5bd31-0152-49e9-b2db-3f4d8ca581c3",
+    "slug": "so-vogue-vo5712west",
+    "name": "VOGUE FRAME VO 5712 3301",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "VO5712WEST",
+        "color": "7190",
+        "parsedPrice": 1990,
+        "rawText": "FRO VOS712 we;st; 7190 0.00"
+      },
+      {
+        "model": "VO5712",
+        "color": "3227",
+        "parsedPrice": 1990,
+        "rawText": "FR0131-fB VOS712 3227"
+      }
+    ]
+  },
+  {
+    "id": "08b1bdbb-4eae-45c5-af1f-f89fcf3a19ad",
+    "slug": "so-vogue-vo5712",
+    "name": "VOGUE FRAME VO 5712 3301",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "VO5712WEST",
+        "color": "7190",
+        "parsedPrice": 1990,
+        "rawText": "FRO VOS712 we;st; 7190 0.00"
+      },
+      {
+        "model": "VO5712",
+        "color": "3227",
+        "parsedPrice": 1990,
+        "rawText": "FR0131-fB VOS712 3227"
+      }
+    ]
+  },
+  {
+    "id": "8e2c7570-ef03-4f48-8800-b84b89d965a2",
+    "slug": "so-vogue-vo5719",
+    "name": "VOGUE OVO 5719I W656 52",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 1,
+    "matches": [
+      {
+        "model": "VO57192966",
+        "color": "3690",
+        "parsedPrice": 1990,
+        "rawText": "FR012S3B VOS719 2966 3690 (joo p 20.06-202("
+      }
+    ]
+  },
+  {
+    "id": "052b2ccf-c439-453a-b716-a79115be4c73",
+    "slug": "so-vogue-vo5120",
+    "name": "VOGUE VO 51201 2288 52",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "VO51202288",
+        "color": "3890",
+        "parsedPrice": 1990,
+        "rawText": "FRO 1260B VOS 1 20 2288 3890 P 20-06-202("
+      },
+      {
+        "model": "VO5120",
+        "color": "MIX",
+        "parsedPrice": 2472,
+        "rawText": "FR01313B Vos 120 2472"
+      }
+    ]
+  },
+  {
+    "id": "abe38443-81f1-4fb8-aed5-0d7fcd9f463c",
+    "slug": "so-vogue-vo5701",
+    "name": "VOGUE VO 5701U 3290 51",
+    "brand": "Vogue",
+    "dbPrice": 1990,
+    "dbMrp": 2211,
+    "matchesCount": 2,
+    "matches": [
+      {
+        "model": "VO57013290",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "Vos 701 3290 p 20-06-202f"
+      },
+      {
+        "model": "VO57013289",
+        "color": "MIX",
+        "parsedPrice": 1990,
+        "rawText": "FR01272B vos701 3289 00 p 20-06-202("
+      }
+    ]
+  }
+]

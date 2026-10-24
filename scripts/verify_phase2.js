@@ -21,7 +21,7 @@ if (fs.existsSync(envPath)) {
 
 async function verifyPhase2() {
   console.log("==================================================");
-  console.log("Shivam Optics — Phase 2 Authentication Verification");
+  console.log("Shivam Optical — Phase 2 Authentication Verification");
   console.log("==================================================");
 
   const dbUrl = process.env.DATABASE_URL;

@@ -32,7 +32,7 @@ All AI agents and developers working on this repository **must strictly adhere**
 - **NEVER** overwrite, replace, or destroy Shivam Optics' Homepage (`app/page.tsx`, `components/home/*`).
 - **NEVER** overwrite or replace Shivam Optics' Header/Navbar (`components/layout/Header.tsx`) or Footer (`components/layout/Footer.tsx`) with Precision Optics' header/footer. Shivam Optics retains its own unique header and navigation bar; you may only attach trigger handlers (e.g. `openCart`, `openWishlist`, `openLoginModal`, `openTrackingModal`, `openSearchModal`).
 - **NEVER** overwrite Shivam Optics' brand legal pages (Terms & Conditions, Privacy Policy, Brand Story).
-- **Brand Name Rule**: The brand name is strictly **Shivam Optics** across all customer-facing copy, invoices, emails, SMS alerts, and meta titles. Never use "Precision Optics" or "Precision Opticals" in user-facing content.
+- **Brand Name Rule**: The brand name is strictly **Shivam Optical** across all customer-facing copy, invoices, emails, SMS alerts, and meta titles. Never use "Shivam Optics", "Shivam Opticals", "Precision Optics", or "Precision Opticals" in user-facing content.
 - **Storage Namespace**: Client localStorage keys must strictly use the prefix `shivam_optics_*` (e.g., `shivam_optics_cart_v1`, `shivam_optics_wishlist_v1`, `shivam_optics_orders_v1`, `shivam_optics_patron_v1`).
 
 ### 2.2. Supabase & Database Inviolability (STRICTEST RULE)

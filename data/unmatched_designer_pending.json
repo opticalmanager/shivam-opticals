@@ -1,0 +1,292 @@
+[
+  {
+    "brand": "Armani Exchange",
+    "model": "AX2002",
+    "category": "sunglasses",
+    "colors": [
+      "6000/8G"
+    ],
+    "prices": [
+      11900
+    ],
+    "itemCodes": [
+      "SG00319B"
+    ]
+  },
+  {
+    "brand": "Bebe",
+    "model": "BB3053",
+    "category": "sunglasses",
+    "colors": [
+      "Cl"
+    ],
+    "prices": [
+      1990
+    ],
+    "itemCodes": [
+      "SG000031B"
+    ]
+  },
+  {
+    "brand": "Bebe",
+    "model": "BB3145",
+    "category": "sunglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      4700
+    ],
+    "itemCodes": [
+      "SG00012"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CAPRW8/CS/1N",
+    "category": "sunglasses",
+    "colors": [
+      "80799"
+    ],
+    "prices": [
+      11900
+    ],
+    "itemCodes": [
+      "SG00026"
+    ]
+  },
+  {
+    "brand": "Ray-Ban",
+    "model": "RJ9594S",
+    "category": "sunglasses",
+    "colors": [
+      "223/46"
+    ],
+    "prices": [
+      5790
+    ],
+    "itemCodes": [
+      "SG00337B"
+    ]
+  },
+  {
+    "brand": "Vogue",
+    "model": "VO57182820",
+    "category": "eyeglasses",
+    "colors": [
+      "4590",
+      "820"
+    ],
+    "prices": [
+      1990
+    ],
+    "itemCodes": [
+      "FR00031"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CA3020",
+    "category": "eyeglasses",
+    "colors": [
+      "807"
+    ],
+    "prices": [
+      95000
+    ],
+    "itemCodes": [
+      "FR00001B"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CA8X58",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      1990
+    ],
+    "itemCodes": [
+      "FR0OOOSB"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CAI130",
+    "category": "eyeglasses",
+    "colors": [
+      "807",
+      "086"
+    ],
+    "prices": [
+      95000,
+      95000
+    ],
+    "itemCodes": [
+      "FR00029",
+      "FR00023B"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CA3053",
+    "category": "eyeglasses",
+    "colors": [
+      "B3V"
+    ],
+    "prices": [
+      9900
+    ],
+    "itemCodes": [
+      "FR00012B"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CAPRW4/1N",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      78000
+    ],
+    "itemCodes": [
+      "FR00016B"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CA249",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      8500
+    ],
+    "itemCodes": [
+      "FR00017B"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CA8883",
+    "category": "eyeglasses",
+    "colors": [
+      "807"
+    ],
+    "prices": [
+      7800
+    ],
+    "itemCodes": [
+      "FR0D034B"
+    ]
+  },
+  {
+    "brand": "Carrera",
+    "model": "CA8919",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX",
+      "MIX",
+      "RHI-"
+    ],
+    "prices": [
+      7500,
+      7500,
+      7500
+    ],
+    "itemCodes": [
+      "FR0097B",
+      "FR0ONB",
+      "FR00991B"
+    ]
+  },
+  {
+    "brand": "French Connection",
+    "model": "FC8267",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      56000
+    ],
+    "itemCodes": [
+      "FR00012"
+    ]
+  },
+  {
+    "brand": "French Connection",
+    "model": "FC4331",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      7400
+    ],
+    "itemCodes": [
+      "FR18B"
+    ]
+  },
+  {
+    "brand": "French Connection",
+    "model": "FC8264",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      1990
+    ],
+    "itemCodes": [
+      "FR0OI22B"
+    ]
+  },
+  {
+    "brand": "French Connection",
+    "model": "FC297",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      1990
+    ],
+    "itemCodes": [
+      "FR00126B"
+    ]
+  },
+  {
+    "brand": "French Connection",
+    "model": "FC24C",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      1990
+    ],
+    "itemCodes": [
+      "FR00135B"
+    ]
+  },
+  {
+    "brand": "Ray-Ban",
+    "model": "RB8006",
+    "category": "eyeglasses",
+    "colors": [
+      "MIX"
+    ],
+    "prices": [
+      2000
+    ],
+    "itemCodes": [
+      "FR0OIIIB"
+    ]
+  }
+]

@@ -452,7 +452,7 @@ export async function trackShiprocketAwb(awbCode: string) {
       shipment_track: [
         {
           current_status: "PICKUP SCHEDULED",
-          activity: "Consignment booked at Shivam Opticals Atelier",
+          activity: "Consignment booked at Shivam Optical Atelier",
           date: new Date().toISOString(),
           location: "Noida / Delhi NCR",
         },

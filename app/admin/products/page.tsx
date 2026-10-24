@@ -113,7 +113,7 @@ export default function AdminProductsPage() {
     const rows = products.map((p) => ({
       ID: p.id,
       Name: p.name || "Eyewear Frame",
-      Brand: p.brand || (p as any).brand_name || "Shivam Opticals",
+      Brand: p.brand || (p as any).brand_name || "Shivam Optical",
       Category: p.category || (p as any).category_name || "Eyewear",
       Price: typeof p.price === "number" ? p.price : Number(p.price || (p as any).base_price || 0),
       Shape: p.shape || (p as any).specs?.shape || "Classic",

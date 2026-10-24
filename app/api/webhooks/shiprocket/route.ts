@@ -26,7 +26,7 @@ export async function GET() {
   return NextResponse.json(
     {
       success: true,
-      service: "Shivam Opticals Shiprocket Webhook",
+      service: "Shivam Optical Shiprocket Webhook",
       status: "active",
       supportedMethods: ["GET", "POST", "OPTIONS", "HEAD"],
       message: "Shiprocket webhook endpoint is active and accessible.",
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
           success: true,
           status: "active",
           endpoint: "/api/webhooks/shiprocket",
-          message: "Shivam Opticals Shiprocket webhook endpoint verified successfully",
+          message: "Shivam Optical Shiprocket webhook endpoint verified successfully",
         },
         { status: 200, headers: corsHeaders }
       );

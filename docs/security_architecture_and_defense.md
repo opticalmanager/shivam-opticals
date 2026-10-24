@@ -1,7 +1,7 @@
 # Enterprise E-Commerce Security Architecture & Threat Defense
 
 > **Authoritative Specification & Operational Manual**  
-> *Engineered for Shivam Opticals Atelier & Enterprise E-Commerce Systems*
+> *Engineered for Shivam Optical Atelier & Enterprise E-Commerce Systems*
 
 ---
 

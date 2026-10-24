@@ -99,7 +99,9 @@ export const WishlistDrawer: React.FC = () => {
                     <span className="text-[9px] font-bold text-[#C5A059] uppercase tracking-wider block">
                       {product.brand}
                     </span>
-                    <h4 className="text-xs font-bold text-[#0A251C] truncate">{product.name}</h4>
+                    <h4 className="font-sans text-xs sm:text-[13px] font-semibold text-[#0A251C] truncate leading-snug">
+                      {product.name}
+                    </h4>
                     <p className="text-[10px] text-stone-500 uppercase tracking-wider">
                       {product.shape} • {product.gender}
                     </p>

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { checkFast2SmsWallet } from "@/lib/smsClient";
 
 /**
- * Shivam Opticals Admin API - Fast2SMS Wallet Balance Query
+ * Shivam Optical Admin API - Fast2SMS Wallet Balance Query
  * GET /api/admin/fast2sms/wallet
  */
 export async function GET(req: Request) {

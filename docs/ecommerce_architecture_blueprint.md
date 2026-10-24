@@ -125,7 +125,7 @@ All system configurations, store operating hours, contact coordinates, shipping 
 
 ## 5. Viewport Geometry & UI Token Translation
 
-When building UI across the platform, strictly enforce Shivam Opticals' brand tokens and viewport limits:
+When building UI across the platform, strictly enforce Shivam Optical's brand tokens and viewport limits:
 
 - **Atelier Gold (`#C5A059`)**: Primary buttons, active highlights, star ratings, luxury badges.
 - **Heritage Forest Green (`#0A251C`)**: Deep luxury accents, header/footer text, card containers.

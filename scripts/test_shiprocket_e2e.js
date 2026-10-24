@@ -6,7 +6,7 @@ const pool = new Pool({
 
 async function runE2ETests() {
   console.log('===============================================================');
-  console.log('SHIVAM OPTICS — SHIPROCKET LOGISTICS END-TO-END VERIFICATION');
+  console.log('SHIVAM OPTICAL — SHIPROCKET LOGISTICS END-TO-END VERIFICATION');
   console.log('===============================================================\n');
 
   let passedTests = 0;

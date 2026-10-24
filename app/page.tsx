@@ -95,7 +95,7 @@ const FAQ_ITEMS = [
     content: (
       <>
         <p className="mb-2">
-          <strong>UV400 vs. Polarized:</strong> All Shivam Opticals sunglasses offer
+          <strong>UV400 vs. Polarized:</strong> All Shivam Optical sunglasses offer
           certified 100% UV400 protection against both UVA and UVB rays. Our
           polarized editions incorporate an acoustic multi-layer iodine filter to
           eliminate blinding glare from water, tarmac, and snow without
@@ -148,7 +148,7 @@ const FAQ_ITEMS = [
     content: (
       <>
         <p className="mb-2">
-          <strong>Shield Against Digital Eye Strain:</strong> Shivam Opticals
+          <strong>Shield Against Digital Eye Strain:</strong> Shivam Optical
           Blue-Block lenses filter out 98% of harmful 410-455nm high-energy blue
           radiation emitted by laptops, tablets, and smartphone displays.
         </p>
@@ -218,7 +218,7 @@ export default function HomePage() {
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
-        if (data.products && Array.isArray(data.products) && data.products.length > 0) {
+        if (data.products && Array.isArray(data.products)) {
           setProductsList(data.products);
         }
       })
@@ -255,21 +255,39 @@ export default function HomePage() {
 
   return (
     <div className="w-full">
-      {/* ================= HERO SECTION (EXACT BANNER IMAGE) ================= */}
-      <section className="relative w-full overflow-hidden bg-[#7EA3BA] border-b border-[#E8E2D9]/60">
-        <div className="w-full relative">
+      {/* ================= HERO SECTION (RAY-BAN META GEN2 PROMOTIONAL BANNER) ================= */}
+      <section className="relative w-full overflow-hidden bg-gradient-to-r from-[#CACCC7] via-[#A6ACA5] to-[#7E837F] border-b border-[#E8E2D9]/60">
+        <div className="w-full max-w-[1920px] mx-auto relative">
           <Link
-            href="/products?type=sunglasses"
-            className="block w-full relative cursor-pointer"
-            title="Shop Beach Club Sunglasses Collection"
+            href="/products?brand=Ray-Ban"
+            className="group block w-full relative cursor-pointer overflow-hidden"
+            title="Shop Ray-Ban Meta Smart Glasses & Eyewear Collection — 20% Off at Shivam Optical"
           >
-            <img
-              src="/images/banner.png"
-              alt="Shivam Opticals - Beach Club Eyewear Collection"
-              className="w-full h-auto object-cover object-center block select-none"
-              fetchPriority="high"
-            />
-            <span className="sr-only">Shop Beach Club Eyewear</span>
+            <picture className="block w-full">
+              <source
+                type="image/webp"
+                srcSet="/images/banner.webp 1024w, /images/banner-2x.webp 2048w"
+                sizes="(max-width: 1024px) 100vw, 1920px"
+              />
+              <source
+                type="image/png"
+                srcSet="/images/banner.png 1024w, /images/banner-2x.png 2048w"
+                sizes="(max-width: 1024px) 100vw, 1920px"
+              />
+              <img
+                src="/images/banner.png"
+                alt="Shivam Optical - 20% Off Ray-Ban Meta (Gen2) Smart Glasses"
+                className="w-full h-auto aspect-[1024/426] object-cover object-center block select-none transition-transform duration-700 ease-out group-hover:scale-[1.008]"
+                width={1024}
+                height={426}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
+            <span className="sr-only">
+              Shop 20% Off Ray-Ban Meta Gen2 Smart Glasses at Shivam Optical
+            </span>
           </Link>
         </div>
       </section>
@@ -328,11 +346,23 @@ export default function HomePage() {
         </div>
 
         {/* 5-Column Product Grid Container */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-          {filteredProducts.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {filteredProducts.length === 0 ? (
+          <div className="py-14 text-center border border-dashed border-[#E8DEC8] rounded-2xl bg-[#FCFAF7] p-8 max-w-lg mx-auto">
+            <Sparkles className="w-8 h-8 text-[#C5A059] mx-auto mb-3 opacity-75" />
+            <h4 className="font-serif text-lg text-[#1A1816] font-semibold">
+              Curating New Atelier Collection
+            </h4>
+            <p className="text-xs text-[#716B64] mt-1.5 leading-relaxed">
+              Our master opticians are currently cataloging pristine new designer frames and clinical eyewear. Check back shortly or visit our Delhi atelier.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+            {filteredProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ================= SECTION: GET THE PERFECT SHAPE - SUNGLASSES ================= */}
@@ -388,32 +418,46 @@ export default function HomePage() {
 
           {/* Right Carousel Container */}
           <div className="flex-1 relative overflow-hidden">
-            <button
-              onClick={() => scrollRecCarousel(-1)}
-              className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white shadow-md border border-[#E5E7EB] flex items-center justify-center text-[#374151] hover:text-black hover:scale-105 transition cursor-pointer"
-              aria-label="Previous"
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-            </button>
+            {recommendedProducts.length === 0 ? (
+              <div className="h-full min-h-[220px] flex flex-col items-center justify-center text-center border border-dashed border-[#E8DEC8] rounded-xl bg-[#FCFAF7] p-6">
+                <Sparkles className="w-6 h-6 text-[#C5A059] mb-2 opacity-70" />
+                <p className="font-serif text-base text-[#1A1816] font-medium">
+                  New Season Recommendations Coming Soon
+                </p>
+                <p className="text-xs text-[#716B64] mt-1 max-w-sm">
+                  Curated recommendations will automatically appear as fresh inventory is cataloged.
+                </p>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => scrollRecCarousel(-1)}
+                  className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white shadow-md border border-[#E5E7EB] flex items-center justify-center text-[#374151] hover:text-black hover:scale-105 transition cursor-pointer"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
 
-            <div
-              ref={recCarouselRef}
-              className="flex gap-3 overflow-x-auto scroll-smooth py-1 px-1 scrollbar-none items-stretch"
-            >
-              {recommendedProducts.map((p) => (
-                <div key={p.id} className="w-[200px] sm:w-[215px] shrink-0">
-                  <ProductCard product={p} />
+                <div
+                  ref={recCarouselRef}
+                  className="flex gap-3 overflow-x-auto scroll-smooth py-1 px-1 scrollbar-none items-stretch"
+                >
+                  {recommendedProducts.map((p) => (
+                    <div key={p.id} className="w-[200px] sm:w-[215px] shrink-0">
+                      <ProductCard product={p} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <button
-              onClick={() => scrollRecCarousel(1)}
-              className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white shadow-md border border-[#E5E7EB] flex items-center justify-center text-[#374151] hover:text-black hover:scale-105 transition cursor-pointer"
-              aria-label="Next"
-            >
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
+                <button
+                  onClick={() => scrollRecCarousel(1)}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white shadow-md border border-[#E5E7EB] flex items-center justify-center text-[#374151] hover:text-black hover:scale-105 transition cursor-pointer"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -454,7 +498,7 @@ export default function HomePage() {
             Words we <span className="italic font-normal text-[#8C6239]">live by</span>
           </h2>
           <p className="text-xs uppercase tracking-widest text-[#716B64] mt-2">
-            Over 45,000+ discerning patrons across India wear Shivam Opticals
+            Over 45,000+ discerning patrons across India wear Shivam Optical
           </p>
         </div>
 
@@ -470,7 +514,7 @@ export default function HomePage() {
               <p className="text-xs sm:text-sm text-[#2D2926] font-light leading-relaxed italic mb-6">
                 &ldquo;The Italian acetate frame feels extraordinarily light yet ultra
                 sturdy. Better than international luxury brands at 3x the cost!
-                Shivam Opticals delivered it with my high prescription within 3
+                Shivam Optical delivered it with my high prescription within 3
                 days.&rdquo;
               </p>
             </div>
@@ -669,7 +713,7 @@ export default function HomePage() {
                   VISIT OUR STORE
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#1A1816] leading-tight">
-                  Shivam Opticals
+                  Shivam Optical
                 </h2>
 
                 <div className="space-y-3.5 pt-2 text-sm text-[#2D2926]">

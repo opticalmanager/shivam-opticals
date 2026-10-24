@@ -62,7 +62,7 @@ console.log('================================================================\n'
 console.log('TEST 1: Environment & Credential Resolution');
 {
   assert(Boolean(process.env.DATABASE_URL), 'DATABASE_URL is defined and populated');
-  assert(Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL), 'NEXT_PUBLIC_SUPABASE_URL is configured for Shivam Optics');
+  assert(Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL), 'NEXT_PUBLIC_SUPABASE_URL is configured for Shivam Optical');
   assert(Boolean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY), 'NEXT_PUBLIC_SUPABASE_ANON_KEY is configured');
   assert(Boolean(process.env.RAZORPAY_KEY_ID), 'RAZORPAY_KEY_ID is available');
   assert(Boolean(process.env.RAZORPAY_KEY_SECRET), 'RAZORPAY_KEY_SECRET is available');

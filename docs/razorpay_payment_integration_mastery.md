@@ -1,7 +1,7 @@
 # Razorpay Payment Gateway Integration — The Complete Production Guide
 
 > **Production Architectural Blueprint & Edge-Case Reference**  
-> *Active Integration: Shivam Opticals Live Gateway (`rzp_live_Tn3v56njBS0cGX`)*
+> *Active Integration: Shivam Optical Live Gateway (`rzp_live_Tn3v56njBS0cGX`)*
 
 ---
 

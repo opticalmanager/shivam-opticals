@@ -43,7 +43,7 @@ export const AppointmentModal: React.FC = () => {
               <h3 className="text-sm font-bold tracking-[0.12em] uppercase text-[#1A1816] font-serif">
                 Reserve Eye Test Consultation
               </h3>
-              <p className="text-[11px] text-[#716B64]">Shivam Opticals • Mayur Vihar Phase 1</p>
+              <p className="text-[11px] text-[#716B64]">Shivam Optical • Mayur Vihar Phase 1</p>
             </div>
           </div>
           <button

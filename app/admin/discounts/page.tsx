@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Plus, Percent, Trash2, CheckCircle2, Loader2, X } from "lucide-react";
+import Link from "next/link";
+import { Plus, Percent, Trash2, CheckCircle2, Loader2, X, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/admin/common/StatusBadge";
 import { toast } from "sonner";
@@ -125,6 +126,34 @@ export default function AdminDiscountsPage() {
           <Plus className="w-3.5 h-3.5 mr-1" />
           <span>New Promo Code</span>
         </Button>
+      </div>
+
+      {/* Global Catalog MRP Discount Card */}
+      <div className="bg-white border border-[#E8DEC8] rounded-xl p-4 flex items-center justify-between gap-4 flex-wrap shadow-2xs">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] shrink-0">
+            <Tag className="w-4 h-4" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-[#0A251C] font-serif uppercase tracking-wider">
+                Default Catalog MRP Discount
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-[#16803E]/10 text-[#16803E] text-[10px] font-bold">
+                10% OFF Active
+              </span>
+            </div>
+            <p className="text-[11px] text-stone-500 mt-0.5">
+              Selling prices are preserved from your inventory sheets. Product MRPs are dynamically calculated as Selling Price / 0.90 to reflect your 10% discount across the storefront.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/admin/settings?tab=pricing"
+          className="px-3 py-1.5 rounded-md bg-[#FAF7F2] hover:bg-[#E8DEC8]/50 border border-[#E8DEC8] text-xs font-semibold text-[#0A251C] transition cursor-pointer shrink-0"
+        >
+          Configure Catalog Discount &rarr;
+        </Link>
       </div>
 
       {loading ? (

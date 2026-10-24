@@ -151,7 +151,7 @@ export default function StandaloneCartPage() {
                           <span className="text-[10px] font-bold uppercase tracking-wider text-[#C5A059]">
                             {it.product.brand}
                           </span>
-                          <h3 className="font-serif font-bold text-sm text-[#0A251C]">
+                          <h3 className="font-sans font-semibold text-sm text-[#0A251C]">
                             <Link href={`/product/${it.product.id}`} className="hover:text-[#C5A059] transition">
                               {it.product.name}
                             </Link>

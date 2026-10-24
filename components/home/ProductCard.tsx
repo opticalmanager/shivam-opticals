@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import Link from "next/link";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag, Star } from "lucide-react";
 import { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -117,19 +117,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* Brand Header */}
-        <div className="text-[10px] font-semibold tracking-[0.25em] text-[#6B7280] uppercase mt-1 text-center">
+        <div className="font-sans text-[10px] font-semibold tracking-[0.25em] text-[#716B64] uppercase mt-1 text-center">
           {product.brand}
         </div>
 
         {/* Product Model Name */}
-        <Link href={`/product/${product.id}`} className="block text-center w-full">
+        <Link href={`/product/${product.id}`} className="block text-center w-full px-1">
           <h4
-            className="text-xs sm:text-sm font-bold text-[#1A1816] tracking-wide mt-0.5 text-center truncate w-full hover:text-[#C5A059] transition cursor-pointer"
+            className="font-sans text-xs sm:text-[13px] md:text-sm font-semibold text-[#1A1816] tracking-[0.01em] leading-snug mt-0.5 text-center truncate w-full hover:text-[#C5A059] transition cursor-pointer"
             title={product.name}
           >
             {product.name}
           </h4>
         </Link>
+
+        {/* Minimalist Numeric Rating Badge */}
+        {product.rating && (
+          <div className="flex items-center justify-center gap-1 mt-1 text-[11px] text-[#716B64]">
+            <Star className="w-3 h-3 fill-[#C5A059] text-[#C5A059] shrink-0" />
+            <span className="font-semibold text-[#1A1816] text-[11px]">
+              {Number(product.rating).toFixed(1)}
+            </span>
+            {product.reviewCount && product.reviewCount > 0 ? (
+              <span className="text-[10px] text-[#716B64]">
+                ({product.reviewCount})
+              </span>
+            ) : null}
+          </div>
+        )}
 
         {/* Price Row: Real Selling Price and Strikethrough Original Price */}
         <div className="flex items-center justify-center gap-1.5 mt-1.5 flex-wrap">

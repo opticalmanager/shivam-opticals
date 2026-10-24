@@ -52,7 +52,7 @@ function CatalogContent() {
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
-        if (data.products && Array.isArray(data.products) && data.products.length > 0) {
+        if (data.products && Array.isArray(data.products)) {
           setProductsList(data.products);
         }
       })
@@ -252,7 +252,7 @@ function CatalogContent() {
       .sort((a, b) => {
         if (sortBy === "price-low") return a.price - b.price;
         if (sortBy === "price-high") return b.price - a.price;
-        if (sortBy === "rating") return b.rating - a.rating;
+        if (sortBy === "rating") return (Number(b.rating) || 0) - (Number(a.rating) || 0);
         return 0; // featured
       });
   }, [

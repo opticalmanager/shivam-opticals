@@ -32,7 +32,7 @@ export async function GET() {
       settingsMap[r.key] = parseSettingValue(r.value);
     }
 
-    // Default fallbacks for Shivam Opticals
+    // Default fallbacks for Shivam Optical
     const shipping = settingsMap["shipping"] || {
       freeShippingThreshold: 1999,
       standardShippingFee: 150,
@@ -76,11 +76,11 @@ export async function GET() {
     };
 
     const general = settingsMap["general"] || {
-      storeName: "Shivam Opticals",
+      storeName: "Shivam Optical",
       tagline: "Luxury Eyewear Atelier & Clinical Optometry",
       email: "info@shivamoptical.in",
       phone: "+91 98100 12345",
-      address: "Shivam Opticals Atelier, Main Market, Delhi - 110001",
+      address: "Shivam Optical Atelier, Main Market, Delhi - 110001",
       operatingHours: "Monday - Sunday: 10:00 AM - 08:30 PM",
     };
 

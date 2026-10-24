@@ -94,7 +94,7 @@ export const SearchModal: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-[#1A1816] group-hover:text-[#C5A059] transition-colors">
+                      <h4 className="font-sans text-xs sm:text-sm font-semibold text-[#1A1816] group-hover:text-[#C5A059] transition-colors leading-snug">
                         {product.name}
                       </h4>
                       <p className="text-[11px] text-[#716B64]">

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Edit3, Trash2, CheckSquare, Square } from "lucide-react";
+import { Edit3, Trash2, CheckSquare, Square, Star } from "lucide-react";
 import { StatusBadge } from "../common/StatusBadge";
 import { Product } from "@/types";
 
@@ -65,7 +65,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                 (p as any).primary_image_url ||
                 "/images/clean_frame_1.png";
 
-              const brandName = p.brand || (p as any).brand_name || "Shivam Opticals";
+              const brandName = p.brand || (p as any).brand_name || "Shivam Optical";
               const categoryName = p.category || (p as any).category_name || "Eyewear";
               const price = typeof p.price === "number" ? p.price : Number(p.price || (p as any).base_price || 0);
               const origPrice = p.originalPrice
@@ -125,6 +125,18 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                           <span>{p.shape || "Eyewear"}</span>
                           <span>&bull;</span>
                           <span>{colorwaysCount} Colorway(s)</span>
+                          {p.rating ? (
+                            <>
+                              <span>&bull;</span>
+                              <span className="inline-flex items-center gap-0.5 text-[#C5A059] font-semibold">
+                                <Star className="w-2.5 h-2.5 fill-[#C5A059] text-[#C5A059]" />
+                                {Number(p.rating).toFixed(1)}
+                                {p.reviewCount ? (
+                                  <span className="text-stone-400 font-normal">({p.reviewCount})</span>
+                                ) : null}
+                              </span>
+                            </>
+                          ) : null}
                           {Array.isArray(p.colors) && p.colors.length > 0 && (
                             <div className="inline-flex items-center gap-0.5 ml-1">
                               {p.colors.slice(0, 4).map((c, i) => (

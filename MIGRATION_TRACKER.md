@@ -1,6 +1,6 @@
-# Shivam Optics — Migration Roadmap & Verification Tracker
+# Shivam Optical — Migration Roadmap & Verification Tracker
 
-This document serves as the master execution log, scope specification, and automated/manual verification checklist for porting the complete enterprise capabilities of Precision Optics into **Shivam Optics**.
+This document serves as the master execution log, scope specification, and automated/manual verification checklist for porting the complete enterprise capabilities of Precision Optics into **Shivam Optical**.
 
 ---
 
@@ -23,7 +23,7 @@ This document serves as the master execution log, scope specification, and autom
 - **Executed Scopes**:
   - Installed missing production packages (`razorpay`, `react-hook-form`, `@hookform/resolvers`, `three`, `@types/three`, `@mediapipe/tasks-vision`, `@base-ui/react`, `tw-animate-css`).
   - Added native Node script runner [`scripts/migrate.js`](file:///c:/Users/Gaurav/Desktop/shivam-optics/scripts/migrate.js).
-  - Executed all 6 database migrations (`01_initial_schema.sql` through `06_privacy_and_enquiries.sql`) against Shivam Optics' PostgreSQL database.
+  - Executed all 6 database migrations (`01_initial_schema.sql` through `06_privacy_and_enquiries.sql`) against Shivam Optical' PostgreSQL database.
   - Ported and verified domain types in [`types/index.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/types/index.ts), [`types/db.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/types/db.ts), and [`types/tryOn.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/types/tryOn.ts).
   - Implemented connection pooling, parameterized queries, and ACID transactions in [`lib/db.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/db.ts).
   - Ported integration clients: [`lib/shippingSettings.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/shippingSettings.ts), [`lib/shiprocketClient.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/shiprocketClient.ts), [`lib/smsClient.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/smsClient.ts), [`lib/wacrmClient.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/wacrmClient.ts), [`lib/loadRazorpay.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/loadRazorpay.ts), [`lib/phoneUtils.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/phoneUtils.ts), [`lib/validations/`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/validations), and [`lib/try-on/`](file:///c:/Users/Gaurav/Desktop/shivam-optics/lib/try-on).
@@ -37,7 +37,7 @@ This document serves as the master execution log, scope specification, and autom
 ## Phase 2: Authentication & Patron Profile System
 - **Status**: **[COMPLETED & VERIFIED]**
 - **Executed Scopes**:
-  - Created database migration [`07_otp_verifications_schema.sql`](file:///c:/Users/Gaurav/Desktop/shivam-optics/supabase/migrations/07_otp_verifications_schema.sql) on Shivam Optics' PostgreSQL database.
+  - Created database migration [`07_otp_verifications_schema.sql`](file:///c:/Users/Gaurav/Desktop/shivam-optics/supabase/migrations/07_otp_verifications_schema.sql) on Shivam Optical' PostgreSQL database.
   - Implemented [`app/api/auth/send-otp/route.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/app/api/auth/send-otp/route.ts) with salted SHA-256 OTP hashing, cooldown protection, and WACRM WhatsApp/Fast2SMS fallback.
   - Implemented [`app/api/auth/verify-otp/route.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/app/api/auth/verify-otp/route.ts) with timing-safe comparison, atomic database transactions, and patron profile linking.
   - Implemented [`app/api/user/profile/route.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/app/api/user/profile/route.ts) and [`app/api/privacy-requests/route.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/app/api/privacy-requests/route.ts).
@@ -60,7 +60,7 @@ This document serves as the master execution log, scope specification, and autom
   - Implemented wishlist API route [`app/api/wishlist/route.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/app/api/wishlist/route.ts) supporting GET, POST (toggle/add/sync), and DELETE for both authenticated patrons and guest sessions.
   - Upgraded [`context/CartContext.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/context/CartContext.tsx) with custom lens configurations, anti-fog cleaning kit add-on (+₹100), real-time promo validation, and backward-compatible bridges (`addItem`, `addToCartDirect`, `addCustomLensToCart`).
   - Upgraded [`context/WishlistContext.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/context/WishlistContext.tsx) with background database sync, localStorage persistence under `shivam_optics_wishlist_v1`, and optimistic UI responsiveness.
-  - Created [`components/optical/LensCustomizerModal.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/optical/LensCustomizerModal.tsx) styled in Shivam Optics luxury palette (Deep Forest `#0A251C`, Gold `#C5A059`, Sand `#FAF7F2`) supporting 4 correction types, 4 optical lab tiers (Standard, Blue-Block, Zeiss SmartLife, Essilor Transitions), and 3 prescription submission modes.
+  - Created [`components/optical/LensCustomizerModal.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/optical/LensCustomizerModal.tsx) styled in Shivam Optical luxury palette (Deep Forest `#0A251C`, Gold `#C5A059`, Sand `#FAF7F2`) supporting 4 correction types, 4 optical lab tiers (Standard, Blue-Block, Zeiss SmartLife, Essilor Transitions), and 3 prescription submission modes.
   - Upgraded [`components/layout/CartDrawer.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/layout/CartDrawer.tsx) and [`components/layout/WishlistDrawer.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/layout/WishlistDrawer.tsx) with itemized lens breakdown, cleaning kit toggle, free delivery progress, and direct checkout navigation.
   - Upgraded [`app/cart/page.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/app/cart/page.tsx) with standalone review table, live shipping calculator, and privilege voucher redemption.
   - Mounted global customizer listener in [`components/layout/StorefrontShell.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/layout/StorefrontShell.tsx).
@@ -77,7 +77,7 @@ This document serves as the master execution log, scope specification, and autom
 - **Status**: **[COMPLETED & VERIFIED]**
 - **Executed Scopes**:
   - Implemented pincode delivery estimator API route [`app/api/shipping/estimate-delivery/route.ts`](file:///c:/Users/Gaurav/Desktop/shivam-optics/app/api/shipping/estimate-delivery/route.ts) with postal zone heuristic (Metro, Tier-1, National), input sanitization, and optical prescription buffer (+2 days).
-  - Created [`components/product/PincodeEstimator.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/product/PincodeEstimator.tsx) with live query feedback, enter key submission, and Shivam Optics luxury design tokens.
+  - Created [`components/product/PincodeEstimator.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/product/PincodeEstimator.tsx) with live query feedback, enter key submission, and Shivam Optical luxury design tokens.
   - Implemented 3D Virtual Try-On overlays in `components/try-on/`:
     - [`CameraPermissionUI.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/try-on/CameraPermissionUI.tsx)
     - [`TrackingStatusOverlay.tsx`](file:///c:/Users/Gaurav/Desktop/shivam-optics/components/try-on/TrackingStatusOverlay.tsx)
@@ -100,7 +100,7 @@ This document serves as the master execution log, scope specification, and autom
 ## Phase 5: Production Checkout, Razorpay & Shiprocket Logistics
 - **Status**: **[COMPLETED & VERIFIED]**
 - **Executed Scopes**:
-  - Implemented `/api/razorpay/create-order` and `/api/create-order` with dynamic key resolution (environment variables and `public.admin_settings` store), strict amount in paise validation (minimum 100 paise), and Shivam Optics atelier metadata notes.
+  - Implemented `/api/razorpay/create-order` and `/api/create-order` with dynamic key resolution (environment variables and `public.admin_settings` store), strict amount in paise validation (minimum 100 paise), and Shivam Optical atelier metadata notes.
   - Implemented `/api/razorpay/verify-payment` featuring cryptographic timing-safe HMAC-SHA256 signature verification (`crypto.timingSafeEqual`) and atomic order status updates in PostgreSQL.
   - Implemented `/api/razorpay/webhook` for asynchronous background capture (`payment.captured`, `order.paid`).
   - Implemented `/api/orders` supporting atomic order insertion into `public.orders` and `public.order_items`, tracking ID generation (`SO-XXXXXX`), customer profile linking, coupon usage incrementation, and variant inventory stock decrement.

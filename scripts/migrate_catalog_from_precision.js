@@ -1,5 +1,5 @@
 /**
- * Precision Optics -> Shivam Optics Product Catalog Migration
+ * Precision Optics -> Shivam Optical Product Catalog Migration
  * 
  * Migrates pure-format catalog data:
  * - 42 Brands
@@ -116,8 +116,8 @@ async function migrate() {
     const imagesRes = await precisionPool.query('SELECT * FROM product_images ORDER BY created_at ASC');
     console.log(`- Fetched ${imagesRes.rows.length} product images`);
 
-    // 2. Begin Transaction in Shivam Optics DB
-    console.log('\n2. Preparing Shivam Optics database tables...');
+    // 2. Begin Transaction in Shivam Optical DB
+    console.log('\n2. Preparing Shivam Optical database tables...');
     await shivamClient.query('BEGIN');
 
     // Clean existing dummy catalog tables in reverse topological order
@@ -129,7 +129,7 @@ async function migrate() {
     console.log('Cleaned dummy records from Shivam catalog tables.');
 
     // 3. Batch Insert into Shivam
-    console.log('\n3. Inserting pure catalog data into Shivam Optics Supabase...');
+    console.log('\n3. Inserting pure catalog data into Shivam Optical Supabase...');
 
     // A. Brands
     const brandCols = Object.keys(brandsRes.rows[0]);
@@ -158,7 +158,7 @@ async function migrate() {
     console.log(`\n=== Migration Finished in ${duration}s ===`);
 
     // 4. Verification Check
-    console.log('\n=== Verifying Record Counts in Shivam Optics ===');
+    console.log('\n=== Verifying Record Counts in Shivam Optical ===');
     for (const tbl of ['brands', 'categories', 'products', 'product_variants', 'product_images']) {
       const res = await shivamPool.query(`SELECT count(*) FROM "${tbl}"`);
       console.log(`- ${tbl}: ${res.rows[0].count}`);

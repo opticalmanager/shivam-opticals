@@ -3,7 +3,7 @@ import { PRODUCTS } from "@/data/products";
 import { Product, FilterState, ProductVariant } from "@/types";
 
 /**
- * Shivam Opticals - Product Service
+ * Shivam Optical - Product Service
  * Dual-layer product loading: fetches from Supabase / PostgreSQL if available,
  * with instantaneous in-memory caching, comprehensive filtering, and fallback to static catalog.
  */
@@ -92,7 +92,7 @@ function mapRowToProduct(row: any): Product {
 
   return {
     id: row.slug || row.id,
-    brand: row.brand?.name || localMatch?.brand || "Shivam Opticals",
+    brand: row.brand?.name || localMatch?.brand || "Shivam Optical",
     name: row.name,
     subtitle: row.subtitle || localMatch?.subtitle,
     price,
@@ -148,7 +148,7 @@ function mapRowToProduct(row: any): Product {
  * Fetch all active catalog products from Supabase with graceful fallback
  */
 export async function getCatalogProducts(forceRefresh = false): Promise<Product[]> {
-  if (!forceRefresh && cachedProducts && cachedProducts.length > 0) {
+  if (!forceRefresh && cachedProducts !== null) {
     return cachedProducts;
   }
 
@@ -185,17 +185,17 @@ export async function getCatalogProducts(forceRefresh = false): Promise<Product[
     }
 
     if (allRows.length === 0) {
-      cachedProducts = ALL_FALLBACK_PRODUCTS;
-      return ALL_FALLBACK_PRODUCTS;
+      cachedProducts = [];
+      return [];
     }
 
     const mapped: Product[] = allRows.map(mapRowToProduct);
     cachedProducts = mapped;
     return mapped;
   } catch (err) {
-    console.warn("Product loading error, falling back to static catalog:", err);
-    cachedProducts = ALL_FALLBACK_PRODUCTS;
-    return ALL_FALLBACK_PRODUCTS;
+    console.warn("Product loading error:", err);
+    cachedProducts = [];
+    return [];
   }
 }
 

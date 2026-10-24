@@ -222,7 +222,7 @@ function AdminLoginContent() {
             <span>Storefront</span>
           </Link>
           <span className="text-xs text-[#6B7280] font-medium">
-            Shivam Opticals
+            Shivam Optical
           </span>
         </div>
 

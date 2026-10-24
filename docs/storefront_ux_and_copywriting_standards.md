@@ -6,7 +6,7 @@ Customer trust in luxury and clinical e-commerce is built upon **clarity, simpli
 
 A frequent anti-pattern in developer-built stores is leaking infrastructure implementation details (such as SSL encryption ciphers, database terminology, internal tax HSN codes, or courier API service names) into customer-facing interfaces. This creates visual clutter, introduces cognitive friction, and reduces checkout conversion rates.
 
-This document outlines the **authoritative standards for customer-facing copywriting and trust signaling** across Shivam Opticals and serves as an architectural blueprint for future e-commerce projects.
+This document outlines the **authoritative standards for customer-facing copywriting and trust signaling** across Shivam Optical and serves as an architectural blueprint for future e-commerce projects.
 
 ---
 

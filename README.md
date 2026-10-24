@@ -1,6 +1,6 @@
-# Shivam Optics — Luxury Eyewear Atelier & Clinical Web App
+# Shivam Optical — Luxury Eyewear Atelier & Clinical Web App
 
-A premier luxury optical atelier and clinical eyewear e-commerce platform built for **Shivam Optics**, located at Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Phase 1 Extension, New Delhi - 110091.
+A premier luxury optical atelier and clinical eyewear e-commerce platform built for **Shivam Optical**, located at Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Phase 1 Extension, New Delhi - 110091.
 
 ---
 
