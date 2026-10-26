@@ -30,19 +30,44 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shivamoptical.in"),
-  title: "Shivam Optical | Luxury Eyewear & Haute Lunetterie",
+  title: {
+    default: "Shivam Optical | Luxury Eyewear & Haute Lunetterie",
+    template: "%s | Shivam Optical",
+  },
   description:
-    "Shivam Optical - Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Premium lenses, Free Express Shipping & 14-Day Returns.",
+    "Shivam Optical — Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Atelier boutique in Mayur Vihar, Delhi. Free Express Shipping & 14-Day Returns.",
+  keywords: [
+    "Shivam Optical",
+    "luxury eyewear Delhi",
+    "optician Mayur Vihar",
+    "computer glasses",
+    "blue cut lenses",
+    "Ray-Ban glasses",
+    "titanium frames",
+    "spectacles online India",
+  ],
+  category: "Eyewear & Optical Atelier",
   icons: {
     icon: "/favicon.ico",
   },
   alternates: {
     canonical: "https://shivamoptical.in",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Shivam Optical | Luxury Eyewear & Haute Lunetterie",
     description:
-      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Premium lenses, Free Express Shipping & 14-Day Returns.",
+      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Premium clinical lenses, Free Express Shipping & 14-Day Returns.",
     url: "https://shivamoptical.in",
     siteName: "Shivam Optical",
     locale: "en_IN",
@@ -52,7 +77,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Shivam Optical | Luxury Eyewear & Haute Lunetterie",
     description:
-      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses.",
+      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses in Mayur Vihar, Delhi.",
   },
 };
 

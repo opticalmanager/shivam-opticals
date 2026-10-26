@@ -88,6 +88,7 @@ export interface ProductSpecs {
 
 export interface Product {
   id: string;
+  sku?: string;
   brand: string;
   name: string;
   subtitle?: string;

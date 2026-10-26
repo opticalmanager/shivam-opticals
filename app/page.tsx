@@ -257,6 +257,78 @@ export default function HomePage() {
 
   return (
     <div className="w-full">
+      {/* Google LocalBusiness & Sitelinks Searchbox JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": "https://shivamoptical.in/#website",
+                url: "https://shivamoptical.in",
+                name: "Shivam Optical",
+                description:
+                  "Luxury Eyewear Atelier, Handcrafted Frames & Computerized Eye Testing in Delhi",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target:
+                    "https://shivamoptical.in/products?search={search_term_string}",
+                  "query-input": "required name=search_term_string",
+                },
+              },
+              {
+                "@type": "Optician",
+                "@id": "https://shivamoptical.in/#store",
+                name: "Shivam Optical",
+                url: "https://shivamoptical.in",
+                image: "https://shivamoptical.in/images/clean_frame_1.png",
+                telephone: "+919779990207",
+                priceRange: "₹₹",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress:
+                    "SAMACHAR market, Shop No-1, Kanishka Complex",
+                  addressLocality: "Mayur Vihar Phase I Extension",
+                  addressRegion: "Delhi",
+                  postalCode: "110091",
+                  addressCountry: "IN",
+                },
+                geo: {
+                  "@type": "GeoCoordinates",
+                  latitude: 28.6015,
+                  longitude: 77.3005,
+                },
+                openingHoursSpecification: [
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: [
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday",
+                      "Sunday",
+                    ],
+                    opens: "10:30",
+                    closes: "21:00",
+                  },
+                ],
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: 146,
+                  bestRating: "5",
+                  worstRating: "1",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* ================= HERO SECTION (OUR MOST LOVED STYLES BANNER) ================= */}
       <section className="relative w-full overflow-hidden bg-gradient-to-r from-[#EAE8E4] via-[#EAE7E2] to-[#E9E6E1] border-b border-[#E8E2D9]/60">
         <div className="w-full max-w-[1920px] mx-auto relative">
