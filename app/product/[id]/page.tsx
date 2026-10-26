@@ -5,10 +5,17 @@ import { PRODUCTS } from "@/data/products";
 import { getProductById, getCatalogProducts } from "@/lib/productsService";
 import { ProductDetailView } from "./ProductDetailView";
 
-export function generateStaticParams() {
-  return PRODUCTS.map((product) => ({
-    id: product.id,
-  }));
+export async function generateStaticParams() {
+  try {
+    const products = await getCatalogProducts();
+    return (products && products.length > 0 ? products.slice(0, 30) : PRODUCTS).map((product) => ({
+      id: product.id,
+    }));
+  } catch {
+    return PRODUCTS.map((product) => ({
+      id: product.id,
+    }));
+  }
 }
 
 export const dynamicParams = true;
