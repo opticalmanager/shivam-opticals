@@ -5,17 +5,10 @@ import { PRODUCTS } from "@/data/products";
 import { getProductById, getCatalogProducts } from "@/lib/productsService";
 import { ProductDetailView } from "./ProductDetailView";
 
-export async function generateStaticParams() {
-  try {
-    const products = await getCatalogProducts();
-    return (products && products.length > 0 ? products.slice(0, 30) : PRODUCTS).map((product) => ({
-      id: product.id,
-    }));
-  } catch {
-    return PRODUCTS.map((product) => ({
-      id: product.id,
-    }));
-  }
+export function generateStaticParams() {
+  return PRODUCTS.map((product) => ({
+    id: product.id,
+  }));
 }
 
 export const dynamicParams = true;
@@ -25,54 +18,64 @@ export async function generateMetadata({
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const product =
-    (await getProductById(resolvedParams.id)) ||
-    PRODUCTS.find((p) => p.id === resolvedParams.id);
+  try {
+    const resolvedParams = await params;
+    const allProducts = await getCatalogProducts();
+    const product =
+      (await getProductById(resolvedParams.id)) ||
+      allProducts.find((p) => p.id === resolvedParams.id) ||
+      PRODUCTS.find((p) => p.id === resolvedParams.id);
 
-  if (!product) {
+    if (!product) {
+      return {
+        title: "Eyewear Model",
+        description: "Explore handcrafted optical frames and luxury eyewear at Shivam Optical.",
+      };
+    }
+
+    const brand = product.brand || "Shivam Optical";
+    const title = `${product.name} | ${brand} Eyewear`;
+    const frameShape = product.shape ? ` in ${product.shape} silhouette` : "";
+    const priceStr = Number(product.price || 0).toLocaleString("en-IN");
+    const description = `${product.name} by ${brand}${frameShape}. Handcrafted optical frame with precision clinical power lenses starting at ₹${priceStr}. Pan-India express dispatch & 14-day returns from Shivam Optical Atelier.`;
+    const canonicalUrl = `https://shivamoptical.in/product/${product.id}`;
+    const displayImage = product.img || product.images?.[0] || "https://shivamoptical.in/images/clean_frame_1.png";
+
     return {
-      title: "Eyewear Model | Shivam Optical",
+      title,
+      description,
+      alternates: {
+        canonical: canonicalUrl,
+      },
+      openGraph: {
+        title,
+        description,
+        url: canonicalUrl,
+        siteName: "Shivam Optical",
+        images: [
+          {
+            url: displayImage,
+            width: 800,
+            height: 600,
+            alt: `${product.name} - ${brand}`,
+          },
+        ],
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [displayImage],
+      },
+    };
+  } catch (err) {
+    console.warn("Failed to generate metadata for product:", err);
+    return {
+      title: "Eyewear Collection",
       description: "Explore handcrafted optical frames and luxury eyewear at Shivam Optical.",
     };
   }
-
-  const brand = product.brand || "Shivam Optical";
-  const title = `${product.name} | ${brand} Eyewear`;
-  const frameShape = product.shape ? ` in ${product.shape} silhouette` : "";
-  const priceStr = Number(product.price).toLocaleString("en-IN");
-  const description = `${product.name} by ${brand}${frameShape}. Handcrafted optical frame with precision clinical power lenses starting at ₹${priceStr}. Pan-India express dispatch & 14-day returns from Shivam Optical Atelier.`;
-  const canonicalUrl = `https://shivamoptical.in/product/${product.id}`;
-  const displayImage = product.img || product.images?.[0] || "https://shivamoptical.in/images/clean_frame_1.png";
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      siteName: "Shivam Optical",
-      images: [
-        {
-          url: displayImage,
-          width: 800,
-          height: 600,
-          alt: `${product.name} - ${brand}`,
-        },
-      ],
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [displayImage],
-    },
-  };
 }
 
 export default async function ProductPage({

@@ -33,12 +33,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic 170+ product routes
+  // Dynamic product routes
   try {
     const products = await getCatalogProducts();
-    const productRoutes: MetadataRoute.Sitemap = products.map((p) => ({
+    const safeDate = (dateStr?: string) => {
+      if (!dateStr) return currentDate;
+      const d = new Date(dateStr);
+      return isNaN(d.getTime()) ? currentDate : d.toISOString();
+    };
+
+    const productRoutes: MetadataRoute.Sitemap = (products || []).map((p) => ({
       url: `${baseUrl}/product/${p.id}`,
-      lastModified: p.updatedAt ? new Date(p.updatedAt).toISOString() : currentDate,
+      lastModified: safeDate(p.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
