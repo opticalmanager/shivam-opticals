@@ -17,7 +17,6 @@ import {
   Minus,
   MessageCircle,
   Share2,
-  Sparkles,
 } from "lucide-react";
 import { Product, ProductVariant, SelectedLensConfig } from "@/types";
 import { useWishlist } from "@/context/WishlistContext";
@@ -326,11 +325,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
               {/* Right Column: Main Hero Eyewear Image Stage */}
               <div className="bg-white rounded-2xl border border-[#E8DEC8] flex-1 w-full h-[380px] sm:h-[440px] lg:h-[480px] relative flex items-center justify-center p-4 sm:p-6 shadow-xs group overflow-hidden select-none isolate">
-                {/* Top Left Craftsmanship Tag */}
-                <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-bold tracking-widest uppercase bg-[#0A251C] text-white shadow-2xs">
-                  <Sparkles className="w-3 h-3 text-[#C5A059]" />
-                  <span>HAUTE LUNETTERIE</span>
-                </div>
+                {/* Floating Wishlist Heart Button */}
 
                 {/* Floating Wishlist Heart Button */}
                 <button

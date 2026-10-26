@@ -1,33 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 
 export const Footer: React.FC = () => {
   const pathname = usePathname();
   const { openAppointmentModal } = useAuth();
-  const [email, setEmail] = useState("");
 
   if (pathname?.startsWith("/admin")) return null;
-
-  const handleNewsletter = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    toast.success("Subscribed to Exclusive Privileges!", {
-      description: `Updates will be sent to ${email}`,
-    });
-    setEmail("");
-  };
 
   return (
     <footer className="bg-[#EAE4DC] text-[#1A1816] border-t border-[#E8E2D9] pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#E8E2D9]/70">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 pb-12 border-b border-[#E8E2D9]/70">
           {/* Col 1: Eyewear Categories */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="space-y-3">
             <h5 className="text-xs font-bold tracking-[0.2em] uppercase text-[#1A1816]">Eyewear</h5>
             <ul className="space-y-2 text-xs text-[#716B64]">
               <li>
@@ -64,7 +53,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 2: Customer Care */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="space-y-3">
             <h5 className="text-xs font-bold tracking-[0.2em] uppercase text-[#1A1816]">Assistance</h5>
             <ul className="space-y-2 text-xs text-[#716B64]">
               <li>
@@ -74,7 +63,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/contact" className="hover:text-[#1A1816] transition">
-                  Atelier Store & Contact
+                  Atelier Store &amp; Contact
                 </Link>
               </li>
               <li>
@@ -88,7 +77,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/about" className="hover:text-[#1A1816] transition">
-                  Atelier Heritage & Optical Lab
+                  Atelier Heritage &amp; Optical Lab
                 </Link>
               </li>
               <li>
@@ -100,44 +89,25 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 3: Store Address & Contact */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="space-y-3 sm:col-span-2 lg:col-span-1">
             <h5 className="text-xs font-bold tracking-[0.2em] uppercase text-[#1A1816]">Shivam Optical</h5>
             <p className="text-xs text-[#716B64] leading-relaxed">
               SAMACHAR market, Shop No-1, Kanishka Complex, Mayur Vihar Phase I, extention, Mayur Vihar, Delhi, 110091.
               <br />
               Computerized eye testing, branded frames, and precision power lenses.
             </p>
-            <div className="pt-2 flex items-center gap-4 text-[#2D2926]">
-              <span className="text-[11px] font-semibold tracking-wider uppercase text-[#1A1816]">Call / WhatsApp:</span>
-              <a href="tel:09779990207" className="text-xs text-[#716B64] hover:text-[#C5A059] font-bold">
-                097799 90207
-              </a>
+            <div className="pt-2 flex flex-col gap-2 text-[#2D2926]">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-semibold tracking-wider uppercase text-[#1A1816]">Call / WhatsApp:</span>
+                <a href="tel:09779990207" className="text-xs text-[#716B64] hover:text-[#C5A059] font-bold">
+                  097799 90207
+                </a>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-[#716B64]">
+                <span className="text-[11px] font-semibold tracking-wider uppercase text-[#1A1816]">Hours:</span>
+                <span>Mon – Sun: 10:30 AM – 9:00 PM</span>
+              </div>
             </div>
-          </div>
-
-          {/* Col 4: Newsletter Subscription */}
-          <div className="lg:col-span-4 space-y-3">
-            <h5 className="text-xs font-bold tracking-[0.2em] uppercase text-[#1A1816]">Exclusive Privileges</h5>
-            <p className="text-xs text-[#716B64] leading-relaxed">
-              Receive private vernissage invites, seasonal capsule access, and optical styling journals.
-            </p>
-            <form onSubmit={handleNewsletter} className="mt-4 flex flex-col sm:flex-row gap-2">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                className="w-full px-4 py-2.5 bg-white border border-[#E8E2D9] text-xs rounded-xs focus:outline-none focus:border-[#C5A059]"
-              />
-              <button
-                type="submit"
-                className="px-6 py-2.5 bg-[#1A1816] hover:bg-[#C5A059] text-white text-xs font-bold tracking-[0.2em] uppercase rounded-xs transition whitespace-nowrap cursor-pointer"
-              >
-                SUBSCRIBE
-              </button>
-            </form>
-            <p className="text-[10px] text-[#716B64]/80">By subscribing, you agree to our Terms and Privacy Policy.</p>
           </div>
         </div>
 
