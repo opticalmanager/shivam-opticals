@@ -220,83 +220,85 @@ export default function AdminBrandsPage() {
         </div>
       ) : (
         <div className="bg-white border border-[#E8DCCF] rounded-xl overflow-hidden shadow-2xs">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-stone-200 bg-[#FAF7F2] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
-                <th className="py-3 px-4">Brand Name</th>
-                <th className="py-3 px-3">Origin / Atelier</th>
-                <th className="py-3 px-3">Tagline</th>
-                <th className="py-3 px-3">Products</th>
-                <th className="py-3 px-3">Featured</th>
-                <th className="py-3 px-3">Status</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-stone-100">
-              {brands.map((b) => (
-                <tr key={b.id} className="hover:bg-[#FAF7F2]/80 transition-colors">
-                  <td className="py-3 px-4 font-bold text-[#0A251C]">{b.name}</td>
-                  <td className="py-3 px-3 text-stone-600">{b.origin || "International"}</td>
-                  <td className="py-3 px-3 text-stone-500 max-w-xs truncate">
-                    {b.tagline || "—"}
-                  </td>
-                  <td className="py-3 px-3">
-                    <span className="font-semibold text-stone-800 bg-stone-100 px-2 py-0.5 rounded-full">
-                      {b.product_count || 0}
-                    </span>
-                  </td>
-                  <td className="py-3 px-3">
-                    <button
-                      type="button"
-                      onClick={() => handleToggleFeatured(b)}
-                      title="Click to toggle featured state"
-                      className="cursor-pointer"
-                    >
-                      {b.is_featured ? (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-semibold hover:bg-amber-100 transition-colors">
-                          Featured
-                        </span>
-                      ) : (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200 transition-colors">
-                          Standard
-                        </span>
-                      )}
-                    </button>
-                  </td>
-                  <td className="py-3 px-3">
-                    <button
-                      type="button"
-                      onClick={() => handleToggleActive(b)}
-                      title="Click to toggle active status"
-                      className="cursor-pointer"
-                    >
-                      <StatusBadge status={b.is_active ? "active" : "inactive"} size="sm" />
-                    </button>
-                  </td>
-                  <td className="py-3 px-4 text-right">
-                    <div className="flex items-center justify-end gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => openEditModal(b)}
-                        title="Edit Brand"
-                        className="p-1 rounded text-stone-500 hover:text-[#0A251C] hover:bg-stone-100 transition-colors cursor-pointer"
-                      >
-                        <Edit3 className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setBrandToDelete(b)}
-                        title="Delete Brand"
-                        className="p-1 rounded text-stone-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse min-w-[640px]">
+              <thead>
+                <tr className="border-b border-stone-200 bg-[#FAF7F2] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
+                  <th className="py-3 px-4">Brand Name</th>
+                  <th className="py-3 px-3">Origin / Atelier</th>
+                  <th className="py-3 px-3">Tagline</th>
+                  <th className="py-3 px-3">Products</th>
+                  <th className="py-3 px-3">Featured</th>
+                  <th className="py-3 px-3">Status</th>
+                  <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-stone-100">
+                {brands.map((b) => (
+                  <tr key={b.id} className="hover:bg-[#FAF7F2]/80 transition-colors">
+                    <td className="py-3 px-4 font-bold text-[#0A251C]">{b.name}</td>
+                    <td className="py-3 px-3 text-stone-600">{b.origin || "International"}</td>
+                    <td className="py-3 px-3 text-stone-500 max-w-xs truncate">
+                      {b.tagline || "—"}
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="font-semibold text-stone-800 bg-stone-100 px-2 py-0.5 rounded-full">
+                        {b.product_count || 0}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <button
+                        type="button"
+                        onClick={() => handleToggleFeatured(b)}
+                        title="Click to toggle featured state"
+                        className="cursor-pointer"
+                      >
+                        {b.is_featured ? (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-semibold hover:bg-amber-100 transition-colors">
+                            Featured
+                          </span>
+                        ) : (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200 transition-colors">
+                            Standard
+                          </span>
+                        )}
+                      </button>
+                    </td>
+                    <td className="py-3 px-3">
+                      <button
+                        type="button"
+                        onClick={() => handleToggleActive(b)}
+                        title="Click to toggle active status"
+                        className="cursor-pointer"
+                      >
+                        <StatusBadge status={b.is_active ? "active" : "inactive"} size="sm" />
+                      </button>
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      <div className="flex items-center justify-end gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => openEditModal(b)}
+                          title="Edit Brand"
+                          className="p-1 rounded text-stone-500 hover:text-[#0A251C] hover:bg-stone-100 transition-colors cursor-pointer"
+                        >
+                          <Edit3 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setBrandToDelete(b)}
+                          title="Delete Brand"
+                          className="p-1 rounded text-stone-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

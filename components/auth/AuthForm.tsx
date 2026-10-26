@@ -555,7 +555,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         </div>
 
         {/* 6 Discrete Digit Boxes */}
-        <div className="flex items-center justify-center gap-2 sm:gap-2.5 my-3">
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 my-3">
           {otp.map((digit, idx) => (
             <input
               key={idx}
@@ -568,7 +568,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               value={digit}
               onChange={(e) => handleDigitChange(idx, e.target.value)}
               onKeyDown={(e) => handleKeyDown(idx, e)}
-              className="w-11 h-12 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold font-mono rounded-xl bg-white border border-[#E8DCCF] text-[#0A251C] shadow-2xs focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/20 outline-none transition-all"
+              className="w-9 h-11 sm:w-12 sm:h-14 text-center text-base sm:text-xl font-bold font-mono rounded-lg sm:rounded-xl bg-white border border-[#E8DCCF] text-[#0A251C] shadow-2xs focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/20 outline-none transition-all"
             />
           ))}
         </div>

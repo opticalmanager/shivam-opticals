@@ -80,7 +80,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="relative w-full h-28 sm:h-32 flex items-center justify-center mb-1">
           {/* Dynamic Discount Badge (Overlaid Top-Left) */}
           {discountPct > 0 && (
-            <span className="absolute top-0 left-0 z-10 px-2 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase shadow-xs pointer-events-none">
+            <span className="absolute top-1.5 left-1.5 z-10 px-2 py-0.5 rounded-full bg-[#512D2B] text-white text-[10px] font-bold tracking-wider uppercase shadow-xs pointer-events-none">
               SAVE {discountPct}%
             </span>
           )}
@@ -88,7 +88,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {/* Wishlist Heart Icon (Overlaid Top-Right) */}
           <button
             onClick={handleToggleWishlist}
-            className="absolute top-0 right-0 z-10 w-7 h-7 rounded-full border border-[#E8DEC8] bg-white/95 hover:bg-white flex items-center justify-center text-neutral-400 hover:text-red-500 transition shadow-xs cursor-pointer hover:scale-105"
+            className="absolute top-1.5 right-1.5 z-10 w-7 h-7 rounded-full border border-[#E8DEC8] bg-white/95 hover:bg-white flex items-center justify-center text-neutral-400 hover:text-red-500 transition shadow-xs cursor-pointer hover:scale-105"
             title={isSaved ? "Remove from Wishlist" : "Save to Wishlist"}
             aria-label="Wishlist toggle"
           >
@@ -117,7 +117,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* Brand Header */}
-        <div className="font-sans text-[10px] font-semibold tracking-[0.25em] text-[#716B64] uppercase mt-1 text-center">
+        <div className="font-sans text-[10px] font-semibold tracking-[0.16em] sm:tracking-[0.25em] text-[#716B64] uppercase mt-1 text-center">
           {product.brand}
         </div>
 

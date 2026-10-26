@@ -151,13 +151,13 @@ function AccountDashboard() {
       {/* 2. Main Account Dashboard Grid */}
       <section className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Navigation Rails */}
-          <div className="lg:col-span-3 space-y-2 sticky top-24">
-            <div className="bg-white rounded-2xl border border-[#E8DEC8] p-3 shadow-xs space-y-1">
+          {/* Left Navigation Rails: Horizontal snap rail on mobile, sticky sidebar on lg+ */}
+          <div className="lg:col-span-3 lg:sticky lg:top-24 w-full">
+            <div className="bg-white rounded-2xl border border-[#E8DEC8] p-2 sm:p-3 shadow-xs flex flex-row overflow-x-auto lg:flex-col gap-1.5 lg:space-y-1 scrollbar-none snap-x snap-mandatory">
               <button
                 type="button"
                 onClick={() => setActiveTab("orders")}
-                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
+                className={`shrink-0 snap-start px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2.5 transition cursor-pointer whitespace-nowrap ${
                   activeTab === "orders"
                     ? "bg-[#0A251C] text-[#C5A059]"
                     : "text-stone-600 hover:bg-[#FAF7F2]"
@@ -165,15 +165,15 @@ function AccountDashboard() {
               >
                 <div className="flex items-center gap-2">
                   <ShoppingBag className="w-4 h-4" />
-                  <span>Orders & Lab Stepper</span>
+                  <span>Orders &amp; Tracking</span>
                 </div>
-                <span className="text-[11px] font-mono">{orders.length}</span>
+                <span className="text-[11px] font-mono px-1.5 py-0.5 rounded-full bg-white/20 text-current">{orders.length}</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab("prescriptions")}
-                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
+                className={`shrink-0 snap-start px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2.5 transition cursor-pointer whitespace-nowrap ${
                   activeTab === "prescriptions"
                     ? "bg-[#0A251C] text-[#C5A059]"
                     : "text-stone-600 hover:bg-[#FAF7F2]"
@@ -181,14 +181,14 @@ function AccountDashboard() {
               >
                 <div className="flex items-center gap-2">
                   <Glasses className="w-4 h-4" />
-                  <span>Optical Prescriptions</span>
+                  <span>Prescriptions</span>
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab("consultations")}
-                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
+                className={`shrink-0 snap-start px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2.5 transition cursor-pointer whitespace-nowrap ${
                   activeTab === "consultations"
                     ? "bg-[#0A251C] text-[#C5A059]"
                     : "text-stone-600 hover:bg-[#FAF7F2]"
@@ -196,14 +196,14 @@ function AccountDashboard() {
               >
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  <span>Atelier Consultations</span>
+                  <span>Consultations</span>
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab("addresses")}
-                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
+                className={`shrink-0 snap-start px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2.5 transition cursor-pointer whitespace-nowrap ${
                   activeTab === "addresses"
                     ? "bg-[#0A251C] text-[#C5A059]"
                     : "text-stone-600 hover:bg-[#FAF7F2]"
@@ -211,14 +211,14 @@ function AccountDashboard() {
               >
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  <span>Delivery Addresses</span>
+                  <span>Addresses</span>
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab("loyalty")}
-                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
+                className={`shrink-0 snap-start px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between gap-2.5 transition cursor-pointer whitespace-nowrap ${
                   activeTab === "loyalty"
                     ? "bg-[#0A251C] text-[#C5A059]"
                     : "text-stone-600 hover:bg-[#FAF7F2]"
@@ -226,7 +226,7 @@ function AccountDashboard() {
               >
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4" />
-                  <span>Privilege & Rewards</span>
+                  <span>Privilege &amp; Rewards</span>
                 </div>
               </button>
             </div>

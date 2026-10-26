@@ -27,11 +27,12 @@ function CatalogContent() {
   const initialType = searchParams.get("type") || searchParams.get("category") || "";
   const initialShape = searchParams.get("shape") || "";
   const initialBrand = searchParams.get("brand") || "";
+  const initialGender = searchParams.get("gender") || "";
   const initialSale = searchParams.get("sale") === "true";
 
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState<string>(initialType || "all");
-  const [selectedGender, setSelectedGender] = useState<string>("all");
+  const [selectedGender, setSelectedGender] = useState<string>(initialGender || "all");
   const [selectedShapes, setSelectedShapes] = useState<string[]>(
     initialShape ? [initialShape] : []
   );
@@ -357,29 +358,323 @@ function CatalogContent() {
       </section>
 
       {/* ================= MAIN CATALOG WORKSPACE (SIDEBAR + 4-COL GRID) ================= */}
-      <main className="max-w-[1340px] mx-auto px-4 sm:px-6 py-8">
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
-          {/* ================= LEFT FILTER SIDEBAR ================= */}
-          <aside className="w-full lg:w-60 xl:w-64 shrink-0 bg-transparent lg:sticky lg:top-28">
-            {/* Mobile Filter Toggle Header */}
-            <div className="lg:hidden flex items-center justify-between pb-4 border-b border-[#E8DEC8] mb-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#1A1816]">
-                Filters {activeChips.length > 0 && `(${activeChips.length})`}
-              </span>
-              <button
-                onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-                className="px-3 py-1.5 rounded-full border border-[#1A1816] text-xs uppercase font-semibold flex items-center gap-1.5 cursor-pointer"
-              >
-                <SlidersHorizontal className="w-3.5 h-3.5" />
-                <span>Filter Catalog</span>
-              </button>
-            </div>
-
-            <div
-              className={`space-y-6 ${
-                mobileFilterOpen ? "block" : "hidden lg:block"
-              }`}
+      <main className="max-w-[1340px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        {/* Mobile Filter & Sort Bar */}
+        <div className="lg:hidden flex items-center justify-between gap-2.5 pb-4 mb-4 border-b border-[#E8DEC8]">
+          <button
+            onClick={() => setMobileFilterOpen(true)}
+            className="flex-1 py-2.5 px-3.5 rounded-xl border border-[#0A251C] bg-white text-xs uppercase font-bold tracking-wider text-[#0A251C] flex items-center justify-center gap-2 cursor-pointer shadow-2xs hover:bg-[#FAF3EB] active:scale-[0.99] transition"
+          >
+            <SlidersHorizontal className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span>Filters {activeChips.length > 0 && `(${activeChips.length})`}</span>
+          </button>
+          <div className="flex-1">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-full bg-white border border-[#E8DEC8] rounded-xl px-3 py-2.5 text-xs font-semibold text-[#1A1816] outline-none cursor-pointer"
             >
+              <option value="featured">Featured Frames</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Mobile Filter Slide-Over Drawer */}
+        {mobileFilterOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden flex">
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+              onClick={() => setMobileFilterOpen(false)}
+              aria-hidden="true"
+            />
+            
+            {/* Drawer Container */}
+            <div className="relative ml-auto w-full max-w-xs sm:max-w-sm h-full bg-[#FCFAF7] border-l border-[#E8DEC8] shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-200">
+              {/* Header */}
+              <div className="p-4 border-b border-[#E8DEC8] bg-[#FAF3EB] flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-2">
+                  <SlidersHorizontal className="w-4 h-4 text-[#C5A059]" />
+                  <h3 className="font-serif text-sm font-bold uppercase tracking-wider text-[#0A251C]">
+                    Filter Eyewear {activeChips.length > 0 && `(${activeChips.length})`}
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setMobileFilterOpen(false)}
+                  className="p-1.5 rounded-full hover:bg-stone-200 text-stone-600 hover:text-black transition cursor-pointer"
+                  aria-label="Close filters"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Scrollable Filter Options */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                {/* 1. CATEGORY */}
+                <div className="border-b border-neutral-200/80 pb-5">
+                  <button
+                    className="w-full flex items-center justify-between text-left group cursor-pointer"
+                    onClick={() => toggleSection("category")}
+                  >
+                    <span className="text-[12px] font-bold uppercase tracking-widest text-[#1A1816]">
+                      CATEGORY
+                    </span>
+                    {openSections.category ? (
+                      <ChevronUp className="w-4 h-4 text-[#1A1816]" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-[#1A1816]" />
+                    )}
+                  </button>
+                  {openSections.category && (
+                    <div className="mt-3 space-y-2">
+                      {[
+                        { key: "all", label: "All Silhouettes" },
+                        { key: "sunglasses", label: "Sunglasses" },
+                        { key: "eyeglasses", label: "Eyeglasses" },
+                        { key: "meta-smart", label: "Smart Glasses" },
+                        { key: "kids", label: "Kids & Teens" },
+                        { key: "contact-lenses", label: "Contact Lenses" },
+                      ].map((cat) => (
+                        <label
+                          key={cat.key}
+                          onClick={() => setSelectedCategory(cat.key)}
+                          className="flex items-center justify-between text-xs text-neutral-600 hover:text-neutral-900 cursor-pointer select-none py-1"
+                        >
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="cat_radio_mobile"
+                              checked={selectedCategory === cat.key}
+                              onChange={() => setSelectedCategory(cat.key)}
+                              className="w-4 h-4 text-[#0A251C] focus:ring-0 cursor-pointer"
+                            />
+                            <span className={selectedCategory === cat.key ? "font-semibold text-neutral-900" : ""}>
+                              {cat.label}
+                            </span>
+                          </div>
+                          {categoryCounts[cat.key] !== undefined && (
+                            <span className="text-[10px] text-neutral-400 font-mono">
+                              {categoryCounts[cat.key]}
+                            </span>
+                          )}
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* 2. GENDER */}
+                <div className="border-b border-neutral-200/80 pb-5">
+                  <button
+                    className="w-full flex items-center justify-between text-left group cursor-pointer"
+                    onClick={() => toggleSection("gender")}
+                  >
+                    <span className="text-[12px] font-bold uppercase tracking-widest text-[#1A1816]">
+                      GENDER
+                    </span>
+                    {openSections.gender ? (
+                      <ChevronUp className="w-4 h-4 text-[#1A1816]" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-[#1A1816]" />
+                    )}
+                  </button>
+                  {openSections.gender && (
+                    <div className="mt-3 space-y-2.5">
+                      {[
+                        { val: "all", label: "All Silhouettes" },
+                        { val: "men", label: "Men's Collection" },
+                        { val: "women", label: "Women's Collection" },
+                        { val: "kids", label: "Kids & Teens" },
+                      ].map((g) => (
+                        <label
+                          key={g.val}
+                          className="flex items-center gap-2.5 text-xs text-neutral-600 hover:text-neutral-900 cursor-pointer select-none py-0.5"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedGender === g.val}
+                            onChange={() => handleGenderChange(g.val)}
+                            className="w-4 h-4 rounded border-neutral-300 text-[#0A251C] focus:ring-0 cursor-pointer"
+                          />
+                          <span>{g.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* 3. FRAME SHAPE */}
+                <div className="border-b border-neutral-200/80 pb-5">
+                  <button
+                    className="w-full flex items-center justify-between text-left group cursor-pointer"
+                    onClick={() => toggleSection("shape")}
+                  >
+                    <span className="text-[12px] font-bold uppercase tracking-widest text-[#1A1816]">
+                      FRAME SHAPE
+                    </span>
+                    {openSections.shape ? (
+                      <ChevronUp className="w-4 h-4 text-[#1A1816]" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-[#1A1816]" />
+                    )}
+                  </button>
+                  {openSections.shape && (
+                    <div className="mt-3 space-y-2 max-h-52 overflow-y-auto pr-1">
+                      {sortedShapes.map((shape) => (
+                        <label
+                          key={shape}
+                          className="flex items-center justify-between text-xs text-neutral-600 hover:text-neutral-900 cursor-pointer select-none py-1"
+                        >
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              checked={selectedShapes.includes(shape)}
+                              onChange={() => toggleShape(shape)}
+                              className="w-4 h-4 rounded border-neutral-300 text-[#0A251C] focus:ring-0 cursor-pointer"
+                            />
+                            <span>{shape}</span>
+                          </div>
+                          <span className="text-[10px] text-neutral-400 font-mono">
+                            {shapeCounts[shape] || 0}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* 4. LUXURY BRAND */}
+                <div className="border-b border-neutral-200/80 pb-5">
+                  <button
+                    className="w-full flex items-center justify-between text-left group cursor-pointer"
+                    onClick={() => toggleSection("brand")}
+                  >
+                    <span className="text-[12px] font-bold uppercase tracking-widest text-[#1A1816]">
+                      LUXURY BRAND ({sortedBrands.length})
+                    </span>
+                    {openSections.brand ? (
+                      <ChevronUp className="w-4 h-4 text-[#1A1816]" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-[#1A1816]" />
+                    )}
+                  </button>
+                  {openSections.brand && (
+                    <div className="mt-3">
+                      <div className="relative mb-2.5">
+                        <input
+                          type="text"
+                          placeholder="Search 40+ brands..."
+                          value={brandSearchQuery}
+                          onChange={(e) => setBrandSearchQuery(e.target.value)}
+                          className="w-full pl-7 pr-2 py-2 text-[11px] bg-white border border-neutral-200 rounded-lg text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:border-[#0A251C]"
+                        />
+                        <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-2 top-2.5" />
+                      </div>
+                      <div className="max-h-56 overflow-y-auto space-y-1.5 pr-1">
+                        {filteredDisplayBrands.length === 0 ? (
+                          <p className="text-[11px] text-neutral-400 italic py-2">
+                            No brands matching &quot;{brandSearchQuery}&quot;
+                          </p>
+                        ) : (
+                          filteredDisplayBrands.map((brand) => (
+                            <label
+                              key={brand}
+                              className="flex items-center justify-between text-xs text-neutral-600 hover:text-neutral-900 cursor-pointer select-none py-1"
+                            >
+                              <div className="flex items-center gap-2">
+                                <input
+                                  type="checkbox"
+                                  checked={selectedBrands.includes(brand)}
+                                  onChange={() => toggleBrand(brand)}
+                                  className="w-4 h-4 rounded border-neutral-300 text-[#0A251C] focus:ring-0 cursor-pointer"
+                                />
+                                <span className="truncate max-w-[140px]">{brand}</span>
+                              </div>
+                              <span className="text-[10px] text-neutral-400 font-mono">
+                                {brandCounts[brand] || 0}
+                              </span>
+                            </label>
+                          ))
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 5. OFFERS & DEALS */}
+                <div className="border-b border-neutral-200/80 pb-5">
+                  <button
+                    className="w-full flex items-center justify-between text-left group cursor-pointer"
+                    onClick={() => toggleSection("offers")}
+                  >
+                    <span className="text-[12px] font-bold uppercase tracking-widest text-[#1A1816]">
+                      OFFERS &amp; DEALS
+                    </span>
+                    {openSections.offers ? (
+                      <ChevronUp className="w-4 h-4 text-[#1A1816]" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-[#1A1816]" />
+                    )}
+                  </button>
+                  {openSections.offers && (
+                    <div className="mt-3 space-y-2.5">
+                      <label className="flex items-center gap-2.5 text-xs text-neutral-600 hover:text-neutral-900 cursor-pointer select-none py-0.5">
+                        <input
+                          type="checkbox"
+                          checked={selectedOffers.includes("sale")}
+                          onChange={() => toggleOffer("sale")}
+                          className="w-4 h-4 rounded border-neutral-300 text-[#0A251C] focus:ring-0 cursor-pointer"
+                        />
+                        <span className="flex items-center gap-1 text-[#BB4D00] font-semibold">
+                          <Zap className="w-3.5 h-3.5 fill-current" />
+                          On Sale Price Applied
+                        </span>
+                      </label>
+                      <label className="flex items-center gap-2.5 text-xs text-neutral-600 hover:text-neutral-900 cursor-pointer select-none py-0.5">
+                        <input
+                          type="checkbox"
+                          checked={selectedOffers.includes("bundle")}
+                          onChange={() => toggleOffer("bundle")}
+                          className="w-4 h-4 rounded border-neutral-300 text-[#0A251C] focus:ring-0 cursor-pointer"
+                        />
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5" />
+                          Multiple Offers Available
+                        </span>
+                      </label>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Sticky Bottom Actions */}
+              <div className="p-4 border-t border-[#E8DEC8] bg-[#FAF3EB] flex items-center gap-2.5 shrink-0">
+                {activeChips.length > 0 && (
+                  <button
+                    onClick={resetAllFilters}
+                    className="flex-1 py-3 text-xs font-bold uppercase tracking-wider border border-[#E8DEC8] rounded-xl hover:bg-white text-stone-700 transition cursor-pointer"
+                  >
+                    Reset All
+                  </button>
+                )}
+                <button
+                  onClick={() => setMobileFilterOpen(false)}
+                  className="flex-1 py-3 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-widest rounded-xl transition shadow-sm text-center cursor-pointer"
+                >
+                  Show {filteredProducts.length} Frames
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          {/* ================= DESKTOP PERSISTENT FILTER SIDEBAR ================= */}
+          <aside className="hidden lg:block w-60 xl:w-64 shrink-0 bg-transparent lg:sticky lg:top-28">
+            <div className="space-y-6">
               {/* 1. CATEGORY ACCORDION */}
               <div className="border-b border-neutral-200/80 pb-5">
                 <button

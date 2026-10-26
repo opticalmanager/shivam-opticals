@@ -440,13 +440,13 @@ export default function AdminOrderDetailPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => window.print()}
-              className="text-xs bg-white border-[#E8DCCF] text-[#0A251C] hover:bg-[#FAF7F2] cursor-pointer"
+              className="text-xs bg-white border-[#E8DCCF] text-[#0A251C] hover:bg-[#FAF7F2] cursor-pointer flex-1 sm:flex-initial"
             >
               <Printer className="w-3.5 h-3.5 mr-1 text-[#C5A059]" />
               <span>Print Tax Invoice</span>
@@ -457,7 +457,7 @@ export default function AdminOrderDetailPage() {
               size="sm"
               onClick={handleUpdateOrder}
               disabled={updating}
-              className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white shadow-xs cursor-pointer"
+              className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white shadow-xs cursor-pointer flex-1 sm:flex-initial"
             >
               {updating ? (
                 <Loader2 className="w-3.5 h-3.5 mr-1 animate-spin" />
@@ -470,7 +470,7 @@ export default function AdminOrderDetailPage() {
         </div>
 
         {/* Optical Lab Workflow Stepper */}
-        <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs">
+        <div className="bg-white border border-[#E8DCCF] rounded-xl p-4 sm:p-5 shadow-2xs">
           <div className="text-xs font-bold uppercase tracking-wider text-stone-600 mb-4 flex items-center justify-between">
             <span>Optical Laboratory Workflow Progress</span>
             <span className="text-stone-400 font-normal">
@@ -478,7 +478,7 @@ export default function AdminOrderDetailPage() {
             </span>
           </div>
 
-          <div className="grid grid-cols-5 gap-2 relative">
+          <div className="flex overflow-x-auto sm:grid sm:grid-cols-5 gap-2 relative pb-2 sm:pb-0 scrollbar-none snap-x snap-mandatory">
             {labSteps.map((step, idx) => {
               const Icon = step.icon;
               const isCompleted = currentStepIndex >= idx;
@@ -488,7 +488,7 @@ export default function AdminOrderDetailPage() {
                 <div
                   key={step.id}
                   onClick={() => setNewStatus(step.id)}
-                  className={`flex flex-col items-center text-center p-2 rounded-lg cursor-pointer transition-all ${
+                  className={`flex flex-col items-center text-center p-2 rounded-lg cursor-pointer transition-all shrink-0 snap-start w-28 sm:w-auto ${
                     isCurrent
                       ? "bg-[#FAF3EB] border border-[#C5A059] font-bold text-[#0A251C]"
                       : isCompleted

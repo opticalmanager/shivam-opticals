@@ -122,7 +122,7 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
   return (
     <div className="w-full space-y-6">
       {/* 1. Identification / Account Header */}
-      <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs">
+      <div className="bg-white border border-[#E8DEC8] rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xs">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#FAF7F2] border border-[#C5A059]/40 flex items-center justify-center text-[#0A251C]">
@@ -160,7 +160,7 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
       </div>
 
       {/* 2. Delivery Address */}
-      <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs space-y-5">
+      <div className="bg-white border border-[#E8DEC8] rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xs space-y-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-[#C5A059]" />
@@ -349,7 +349,7 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
       </div>
 
       {/* 3. Shipping Method */}
-      <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs space-y-4">
+      <div className="bg-white border border-[#E8DEC8] rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Truck className="w-4 h-4 text-[#C5A059]" />
@@ -411,7 +411,7 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
       </div>
 
       {/* 4. Payment Method */}
-      <div className="bg-white border border-[#E8DEC8] rounded-2xl p-6 shadow-2xs space-y-4">
+      <div className="bg-white border border-[#E8DEC8] rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <CreditCard className="w-4 h-4 text-[#C5A059]" />

@@ -29,8 +29,8 @@ export const ShapeFilterBar: React.FC<ShapeFilterBarProps> = ({
           {title}
         </h2>
 
-        {/* 7 Shapes Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 sm:gap-6 md:gap-8 items-center text-center">
+        {/* 7 Shapes Rail / Grid */}
+        <div className="flex overflow-x-auto sm:grid sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-6 md:gap-8 items-center text-center pb-2 sm:pb-0 scrollbar-none snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0">
           {shapes.map((s) => {
             const href = `/products?type=${type}&shape=${encodeURIComponent(
               s.queryParam
@@ -41,9 +41,9 @@ export const ShapeFilterBar: React.FC<ShapeFilterBarProps> = ({
                 key={s.name}
                 href={href}
                 onClick={() => onSelectShape?.(s.queryParam)}
-                className="shape-card group flex flex-col items-center cursor-pointer transition duration-300"
+                className="shape-card group flex flex-col items-center flex-shrink-0 snap-start w-[88px] sm:w-auto cursor-pointer transition duration-300"
               >
-                <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden flex items-center justify-center p-1 transition-transform duration-300 group-hover:scale-105">
+                <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-[#FCFAF7] border border-[#E8DEC8]/60 flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-105 group-hover:border-[#C5A059] group-hover:shadow-md">
                   <img
                     src={s.img}
                     alt={`${s.name} ${type === "sunglasses" ? "Sunglasses" : "Eyeglasses"}`}
@@ -51,7 +51,7 @@ export const ShapeFilterBar: React.FC<ShapeFilterBarProps> = ({
                     loading="lazy"
                   />
                 </div>
-                <span className="mt-2.5 text-xs sm:text-sm md:text-[15px] font-bold text-[#1E2250] group-hover:text-[#C5A059] transition-colors">
+                <span className="mt-2 text-xs sm:text-sm md:text-[15px] font-bold text-[#1E2250] group-hover:text-[#C5A059] transition-colors whitespace-nowrap">
                   {s.name}
                 </span>
               </Link>

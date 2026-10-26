@@ -162,60 +162,62 @@ export default function AdminDiscountsPage() {
         </div>
       ) : (
         <div className="bg-white border border-[#E8DCCF] rounded-xl overflow-hidden shadow-2xs">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-stone-200 bg-[#FAF7F2] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
-                <th className="py-3 px-4">Coupon Code</th>
-                <th className="py-3 px-3">Discount Type & Value</th>
-                <th className="py-3 px-3">Min Order / Cap</th>
-                <th className="py-3 px-3">Usage</th>
-                <th className="py-3 px-3">Status</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-stone-100">
-              {coupons.map((c) => (
-                <tr key={c.id} className="hover:bg-[#FAF7F2]/80 transition-colors">
-                  <td className="py-3 px-4 font-mono font-bold text-sm text-[#0A251C]">
-                    {c.code}
-                  </td>
-                  <td className="py-3 px-3 font-semibold text-stone-800">
-                    {c.discount_type === "percentage"
-                      ? `${c.discount_value}% Off`
-                      : `₹${c.discount_value} Flat Off`}
-                  </td>
-                  <td className="py-3 px-3 text-stone-600">
-                    Min ₹{c.min_order_value.toLocaleString("en-IN")}
-                    {c.max_discount && ` (Max ₹${c.max_discount})`}
-                  </td>
-                  <td className="py-3 px-3 text-stone-500 font-mono text-[11px]">
-                    {c.times_used} / {c.usage_limit} used
-                  </td>
-                  <td className="py-3 px-3">
-                    <button
-                      type="button"
-                      onClick={() => handleToggleStatus(c.id, c.is_active)}
-                      className="cursor-pointer"
-                    >
-                      <StatusBadge
-                        status={c.is_active ? "active" : "inactive"}
-                        size="sm"
-                      />
-                    </button>
-                  </td>
-                  <td className="py-3 px-4 text-right">
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(c.id)}
-                      className="p-1 text-stone-400 hover:text-rose-600 transition-colors cursor-pointer"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse min-w-[640px]">
+              <thead>
+                <tr className="border-b border-stone-200 bg-[#FAF7F2] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
+                  <th className="py-3 px-4">Coupon Code</th>
+                  <th className="py-3 px-3">Discount Type & Value</th>
+                  <th className="py-3 px-3">Min Order / Cap</th>
+                  <th className="py-3 px-3">Usage</th>
+                  <th className="py-3 px-3">Status</th>
+                  <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-stone-100">
+                {coupons.map((c) => (
+                  <tr key={c.id} className="hover:bg-[#FAF7F2]/80 transition-colors">
+                    <td className="py-3 px-4 font-mono font-bold text-sm text-[#0A251C]">
+                      {c.code}
+                    </td>
+                    <td className="py-3 px-3 font-semibold text-stone-800">
+                      {c.discount_type === "percentage"
+                        ? `${c.discount_value}% Off`
+                        : `₹${c.discount_value} Flat Off`}
+                    </td>
+                    <td className="py-3 px-3 text-stone-600">
+                      Min ₹{c.min_order_value.toLocaleString("en-IN")}
+                      {c.max_discount && ` (Max ₹${c.max_discount})`}
+                    </td>
+                    <td className="py-3 px-3 text-stone-500 font-mono text-[11px]">
+                      {c.times_used} / {c.usage_limit} used
+                    </td>
+                    <td className="py-3 px-3">
+                      <button
+                        type="button"
+                        onClick={() => handleToggleStatus(c.id, c.is_active)}
+                        className="cursor-pointer"
+                      >
+                        <StatusBadge
+                          status={c.is_active ? "active" : "inactive"}
+                          size="sm"
+                        />
+                      </button>
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(c.id)}
+                        className="p-1 text-stone-400 hover:text-rose-600 transition-colors cursor-pointer"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

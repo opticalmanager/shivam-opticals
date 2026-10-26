@@ -188,68 +188,70 @@ export default function AdminCategoriesPage() {
         </div>
       ) : (
         <div className="bg-white border border-[#E8DCCF] rounded-xl overflow-hidden shadow-2xs">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-stone-200 bg-[#FAF7F2] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
-                <th className="py-3 px-4">Order</th>
-                <th className="py-3 px-3">Category Name</th>
-                <th className="py-3 px-3">Slug</th>
-                <th className="py-3 px-3">Description</th>
-                <th className="py-3 px-3">Products</th>
-                <th className="py-3 px-3">Status</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-stone-100">
-              {categories.map((c) => (
-                <tr key={c.id} className="hover:bg-[#FAF7F2]/80 transition-colors">
-                  <td className="py-3 px-4 font-mono font-semibold text-stone-500">
-                    {c.display_order}
-                  </td>
-                  <td className="py-3 px-3 font-bold text-[#0A251C]">{c.name}</td>
-                  <td className="py-3 px-3 font-mono text-[11px] text-stone-500">{c.slug}</td>
-                  <td className="py-3 px-3 text-stone-600 max-w-xs truncate">
-                    {c.description || "—"}
-                  </td>
-                  <td className="py-3 px-3">
-                    <span className="font-semibold text-stone-800 bg-stone-100 px-2 py-0.5 rounded-full">
-                      {c.product_count || 0}
-                    </span>
-                  </td>
-                  <td className="py-3 px-3">
-                    <button
-                      type="button"
-                      onClick={() => handleToggleActive(c)}
-                      title="Click to toggle status"
-                      className="cursor-pointer"
-                    >
-                      <StatusBadge status={c.is_active ? "active" : "inactive"} size="sm" />
-                    </button>
-                  </td>
-                  <td className="py-3 px-4 text-right">
-                    <div className="flex items-center justify-end gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => openEditModal(c)}
-                        title="Edit Category"
-                        className="p-1 rounded text-stone-500 hover:text-[#0A251C] hover:bg-stone-100 transition-colors cursor-pointer"
-                      >
-                        <Edit3 className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setCategoryToDelete(c)}
-                        title="Delete Category"
-                        className="p-1 rounded text-stone-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse min-w-[640px]">
+              <thead>
+                <tr className="border-b border-stone-200 bg-[#FAF7F2] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
+                  <th className="py-3 px-4">Order</th>
+                  <th className="py-3 px-3">Category Name</th>
+                  <th className="py-3 px-3">Slug</th>
+                  <th className="py-3 px-3">Description</th>
+                  <th className="py-3 px-3">Products</th>
+                  <th className="py-3 px-3">Status</th>
+                  <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-stone-100">
+                {categories.map((c) => (
+                  <tr key={c.id} className="hover:bg-[#FAF7F2]/80 transition-colors">
+                    <td className="py-3 px-4 font-mono font-semibold text-stone-500">
+                      {c.display_order}
+                    </td>
+                    <td className="py-3 px-3 font-bold text-[#0A251C]">{c.name}</td>
+                    <td className="py-3 px-3 font-mono text-[11px] text-stone-500">{c.slug}</td>
+                    <td className="py-3 px-3 text-stone-600 max-w-xs truncate">
+                      {c.description || "—"}
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="font-semibold text-stone-800 bg-stone-100 px-2 py-0.5 rounded-full">
+                        {c.product_count || 0}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <button
+                        type="button"
+                        onClick={() => handleToggleActive(c)}
+                        title="Click to toggle status"
+                        className="cursor-pointer"
+                      >
+                        <StatusBadge status={c.is_active ? "active" : "inactive"} size="sm" />
+                      </button>
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      <div className="flex items-center justify-end gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => openEditModal(c)}
+                          title="Edit Category"
+                          className="p-1 rounded text-stone-500 hover:text-[#0A251C] hover:bg-stone-100 transition-colors cursor-pointer"
+                        >
+                          <Edit3 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setCategoryToDelete(c)}
+                          title="Delete Category"
+                          className="p-1 rounded text-stone-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

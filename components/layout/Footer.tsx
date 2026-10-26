@@ -142,13 +142,13 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#716B64] gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#716B64] gap-4 text-center sm:text-left">
           <p>© 2026 SHIVAM OPTICAL. ALL RIGHTS RESERVED. MAYUR VIHAR PHASE I, DELHI - 110091.</p>
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-medium">
             <span>100% SECURE CHECKOUT</span>
-            <span>•</span>
+            <span className="hidden sm:inline">•</span>
             <span>UPI / CARDS / NETBANKING</span>
-            <span>•</span>
+            <span className="hidden sm:inline">•</span>
             <span>PAN-INDIA DISPATCH</span>
           </div>
         </div>

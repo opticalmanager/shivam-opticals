@@ -258,7 +258,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   }, [allProducts, product.id]);
 
   return (
-    <div className="bg-[#FAF7F2] min-h-screen text-[#1A1816] font-sans antialiased selection:bg-[#C5A059] selection:text-white">
+    <div className="bg-[#FAF7F2] min-h-screen text-[#1A1816] font-sans antialiased selection:bg-[#C5A059] selection:text-white pb-20 lg:pb-0">
       {/* 1. Breadcrumb Trail */}
       <nav
         aria-label="Breadcrumb"
@@ -300,13 +300,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               {imagesToDisplay.length > 1 && (
                 <div
                   ref={thumbnailContainerRef}
-                  className="w-full sm:w-20 shrink-0 flex flex-row sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto max-h-[440px] lg:max-h-[480px] scrollbar-none py-1 sm:py-0 select-none"
+                  className="w-full sm:w-20 shrink-0 flex flex-row sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto max-h-[440px] lg:max-h-[480px] scrollbar-none py-1 sm:py-0 select-none snap-x snap-mandatory"
                 >
                   {imagesToDisplay.map((imgUrl, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActiveImgIdx(idx)}
-                      className={`relative w-14 h-14 sm:w-20 sm:h-20 shrink-0 rounded-xl bg-white border p-1 transition-all cursor-pointer flex items-center justify-center overflow-hidden ${
+                      className={`relative w-14 h-14 sm:w-20 sm:h-20 shrink-0 snap-start rounded-xl bg-white border p-1 transition-all cursor-pointer flex items-center justify-center overflow-hidden ${
                         activeImgIdx === idx
                           ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 shadow-xs"
                           : "border-[#E8DEC8] hover:border-neutral-400 opacity-80 hover:opacity-100"
@@ -786,6 +786,55 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           onConfirmLensConfig={handleConfirmLensConfig}
         />
       )}
+
+      {/* 5. Mobile Sticky Bottom Buy Dock */}
+      <aside aria-label="Mobile purchase bar" className="fixed bottom-0 inset-x-0 z-40 lg:hidden bg-white/95 backdrop-blur-md border-t border-[#E8DEC8] px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] flex items-center justify-between gap-3 safe-area-pb">
+        <div className="flex items-center gap-2.5 min-w-0 flex-1">
+          <div className="w-11 h-11 rounded-lg bg-[#FCFAF7] border border-[#E8DEC8] shrink-0 p-1 flex items-center justify-center overflow-hidden">
+            <img
+              src={getHdImageUrl(currentImage)}
+              alt={product.name}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold text-[#1A1816] truncate leading-tight uppercase">
+              {product.name}
+            </p>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <span className="text-xs sm:text-sm font-bold text-[#0A251C]">
+                {formatCurrency(product.price)}
+              </span>
+              {product.originalPrice && product.originalPrice > product.price && (
+                <span className="text-[10px] text-neutral-400 line-through">
+                  {formatCurrency(product.originalPrice)}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          {product.category !== "contact-lenses" && (
+            <button
+              onClick={() => setIsCustomizerOpen(true)}
+              className="px-2.5 py-2.5 rounded-xl border border-[#C5A059] bg-[#FAF3EB] text-[#0A251C] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer active:scale-95 shadow-2xs"
+              title="Add Prescription Lenses"
+              aria-label="Add prescription lenses"
+            >
+              <Glasses className="w-3.5 h-3.5 text-[#C5A059]" />
+              <span>+Rx</span>
+            </button>
+          )}
+          <button
+            onClick={handleAddToCart}
+            className="bg-[#0A251C] hover:bg-[#C5A059] text-white py-2.5 px-4 rounded-xl text-[11px] font-bold uppercase tracking-wider shadow-sm cursor-pointer active:scale-95"
+            aria-label="Add to cart"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </aside>
     </div>
   );
 };

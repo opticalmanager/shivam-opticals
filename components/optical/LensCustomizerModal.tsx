@@ -95,36 +95,36 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
   const grandTotal = product.price + calculateTotalLensPrice();
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-150">
-      <div className="bg-white border border-[#E8DEC8] max-w-3xl w-full my-8 shadow-2xl relative flex flex-col max-h-[90vh] rounded-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto animate-in fade-in duration-150">
+      <div className="bg-white border border-[#E8DEC8] max-w-3xl w-full my-0 sm:my-8 shadow-2xl relative flex flex-col max-h-[92vh] sm:max-h-[90vh] rounded-t-2xl sm:rounded-2xl overflow-hidden">
         {/* Header */}
-        <div className="bg-[#0A251C] text-white px-6 py-4 flex items-center justify-between border-b border-[#C5A059]/30 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full border border-[#C5A059] flex items-center justify-center font-serif text-xs font-bold text-[#C5A059]">
+        <div className="bg-[#0A251C] text-white px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between border-b border-[#C5A059]/30 shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[#C5A059] flex items-center justify-center font-serif text-[11px] sm:text-xs font-bold text-[#C5A059] shrink-0">
               SO
             </div>
-            <div>
-              <h3 className="font-serif text-sm tracking-widest uppercase font-bold text-[#C5A059]">
-                SELECT & CUSTOMIZE OPTICAL LENSES
+            <div className="min-w-0">
+              <h3 className="font-serif text-xs sm:text-sm tracking-wider uppercase font-bold text-[#C5A059] truncate">
+                CUSTOMIZE OPTICAL LENSES
               </h3>
-              <p className="text-[10px] text-stone-300 font-sans tracking-wider uppercase">
+              <p className="text-[9px] sm:text-[10px] text-stone-300 font-sans tracking-wider uppercase truncate">
                 {product.brand} • {product.name}
               </p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1 hover:text-[#C5A059] text-white transition cursor-pointer">
-            <X className="w-6 h-6" />
+          <button onClick={onClose} className="p-1 hover:text-[#C5A059] text-white transition cursor-pointer shrink-0" aria-label="Close modal">
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </div>
 
         {/* Step Indicator */}
-        <div className="bg-[#FAF7F2] border-b border-[#E8DEC8] px-6 py-3 flex items-center justify-between shrink-0 text-xs font-serif font-bold uppercase tracking-wider">
+        <div className="bg-[#FAF7F2] border-b border-[#E8DEC8] px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between shrink-0 text-[11px] sm:text-xs font-serif font-bold uppercase tracking-wider">
           <button
             onClick={() => setStep(1)}
-            className={`flex items-center gap-1.5 cursor-pointer ${step === 1 ? "text-[#C5A059]" : "text-stone-500"}`}
+            className={`flex items-center gap-1 sm:gap-1.5 cursor-pointer ${step === 1 ? "text-[#C5A059]" : "text-stone-500"}`}
           >
             <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 1 ? "bg-[#0A251C] text-[#C5A059]" : "bg-stone-200 text-stone-700"}`}>1</span>
-            <span>Lens Type</span>
+            <span><span className="hidden sm:inline">Lens </span>Type</span>
           </button>
 
           <span className="text-stone-300">→</span>
@@ -132,10 +132,10 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
           <button
             onClick={() => setStep(2)}
             disabled={lensType === "frame-only"}
-            className={`flex items-center gap-1.5 cursor-pointer ${step === 2 ? "text-[#C5A059]" : "text-stone-500"} disabled:opacity-40`}
+            className={`flex items-center gap-1 sm:gap-1.5 cursor-pointer ${step === 2 ? "text-[#C5A059]" : "text-stone-500"} disabled:opacity-40`}
           >
             <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 2 ? "bg-[#0A251C] text-[#C5A059]" : "bg-stone-200 text-stone-700"}`}>2</span>
-            <span>Lens Coating & Lab</span>
+            <span><span className="hidden sm:inline">Coating &amp; </span>Lab</span>
           </button>
 
           <span className="text-stone-300">→</span>
@@ -143,15 +143,15 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
           <button
             onClick={() => setStep(3)}
             disabled={lensType === "frame-only"}
-            className={`flex items-center gap-1.5 cursor-pointer ${step === 3 ? "text-[#C5A059]" : "text-stone-500"} disabled:opacity-40`}
+            className={`flex items-center gap-1 sm:gap-1.5 cursor-pointer ${step === 3 ? "text-[#C5A059]" : "text-stone-500"} disabled:opacity-40`}
           >
             <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 3 ? "bg-[#0A251C] text-[#C5A059]" : "bg-stone-200 text-stone-700"}`}>3</span>
-            <span>Prescription</span>
+            <span>Rx<span className="hidden sm:inline"> Prescription</span></span>
           </button>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6 text-xs font-sans text-stone-800">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 sm:space-y-6 text-xs font-sans text-stone-800">
           {/* STEP 1: Lens Type */}
           {step === 1 && (
             <div className="space-y-4">
@@ -259,7 +259,7 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
                 3. Submit Your Optical Prescription
               </h4>
 
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {[
                   { id: "enter", label: "Enter Power Values" },
                   { id: "upload", label: "Upload Doctor Slip" },
@@ -269,7 +269,7 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
                     key={m.id}
                     type="button"
                     onClick={() => setPrescriptionMethod(m.id as any)}
-                    className={`py-2 px-3 text-xs font-bold uppercase rounded-lg border transition-all cursor-pointer ${
+                    className={`py-2 px-3 text-xs font-bold uppercase rounded-lg border transition-all cursor-pointer text-center ${
                       prescriptionMethod === m.id
                         ? "bg-[#0A251C] text-white border-[#0A251C]"
                         : "bg-white text-stone-700 border-stone-200 hover:bg-stone-50"
@@ -281,41 +281,41 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
               </div>
 
               {prescriptionMethod === "enter" && (
-                <div className="bg-[#FAF7F2] p-4 border border-[#E8DEC8] space-y-4 rounded-xl">
+                <div className="bg-[#FAF7F2] p-3 sm:p-4 border border-[#E8DEC8] space-y-4 rounded-xl">
                   {/* OD Right Eye */}
                   <div>
                     <span className="font-bold text-xs uppercase text-[#C5A059] block mb-2">Right Eye (OD)</span>
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">SPH</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">SPH</label>
                         <Input
                           value={rxRight.sph}
                           onChange={(e) => setRxRight({ ...rxRight, sph: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">CYL</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">CYL</label>
                         <Input
                           value={rxRight.cyl}
                           onChange={(e) => setRxRight({ ...rxRight, cyl: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">AXIS</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">AXIS</label>
                         <Input
                           value={rxRight.axis}
                           onChange={(e) => setRxRight({ ...rxRight, axis: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">ADD</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">ADD</label>
                         <Input
                           value={rxRight.add}
                           onChange={(e) => setRxRight({ ...rxRight, add: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                     </div>
@@ -324,49 +324,49 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
                   {/* OS Left Eye */}
                   <div>
                     <span className="font-bold text-xs uppercase text-[#C5A059] block mb-2">Left Eye (OS)</span>
-                    <div className="grid grid-cols-4 gap-2">
+                    <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">SPH</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">SPH</label>
                         <Input
                           value={rxLeft.sph}
                           onChange={(e) => setRxLeft({ ...rxLeft, sph: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">CYL</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">CYL</label>
                         <Input
                           value={rxLeft.cyl}
                           onChange={(e) => setRxLeft({ ...rxLeft, cyl: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">AXIS</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">AXIS</label>
                         <Input
                           value={rxLeft.axis}
                           onChange={(e) => setRxLeft({ ...rxLeft, axis: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-stone-500 uppercase font-semibold">ADD</label>
+                        <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">ADD</label>
                         <Input
                           value={rxLeft.add}
                           onChange={(e) => setRxLeft({ ...rxLeft, add: e.target.value })}
-                          className="bg-white text-center font-mono"
+                          className="bg-white text-center font-mono text-xs sm:text-sm px-1 py-1 h-9 sm:h-10"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* PD */}
-                  <div className="w-1/3">
-                    <label className="text-[10px] text-stone-500 uppercase font-semibold">Pupillary Distance (PD mm)</label>
+                  <div className="w-full sm:w-1/2">
+                    <label className="text-[9px] sm:text-[10px] text-stone-500 uppercase font-semibold">Pupillary Distance (PD mm)</label>
                     <Input
                       value={pdValue}
                       onChange={(e) => setPdValue(e.target.value)}
-                      className="bg-white text-center font-mono"
+                      className="bg-white text-center font-mono text-xs sm:text-sm h-9 sm:h-10"
                     />
                   </div>
                 </div>
@@ -408,19 +408,19 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
         </div>
 
         {/* Footer Navigation */}
-        <div className="bg-[#FAF7F2] border-t border-[#E8DEC8] p-4 sm:p-5 flex items-center justify-between shrink-0">
-          <div>
+        <div className="bg-[#FAF7F2] border-t border-[#E8DEC8] p-3.5 sm:p-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
+          <div className="flex items-center justify-between sm:block">
             <span className="text-[10px] text-stone-500 uppercase font-bold block">Total Customized Price</span>
-            <span className="font-serif font-bold text-base text-[#0A251C]">{formatCurrency(grandTotal)}</span>
+            <span className="font-serif font-bold text-sm sm:text-base text-[#0A251C]">{formatCurrency(grandTotal)}</span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 justify-end">
             {step > 1 && (
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => setStep((prev) => (prev - 1) as any)}
-                className="h-10"
+                className="h-10 px-3 sm:px-4 text-xs"
               >
                 Back
               </Button>
@@ -431,7 +431,7 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
                 type="button"
                 variant="default"
                 onClick={() => setStep((prev) => (prev + 1) as any)}
-                className="h-10"
+                className="h-10 px-4 sm:px-5 text-xs flex-1 sm:flex-initial"
               >
                 <span>Next Step</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -441,7 +441,7 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
                 type="button"
                 variant="primary"
                 onClick={handleFinish}
-                className="h-10 shadow-md font-bold"
+                className="h-10 px-4 sm:px-6 shadow-md font-bold text-xs flex-1 sm:flex-initial"
               >
                 <Check className="w-4 h-4" />
                 <span>CONFIRM & ADD TO BAG</span>

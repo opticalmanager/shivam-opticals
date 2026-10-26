@@ -78,7 +78,7 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-1 bg-[#FAF3EB] p-1 rounded-lg border border-[#E8DCCF] text-xs">
+        <div className="flex items-center gap-1 bg-[#FAF3EB] p-1 rounded-lg border border-[#E8DCCF] text-xs overflow-x-auto scrollbar-none snap-x snap-mandatory">
           {[
             { id: "all", label: "All time" },
             { id: "today", label: "Today" },
@@ -90,7 +90,7 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
               key={t.id}
               type="button"
               onClick={() => onTimeRangeChange(t.id)}
-              className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer text-xs ${
+              className={`shrink-0 snap-start whitespace-nowrap px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer text-xs ${
                 timeRange === t.id
                   ? "bg-white text-[#0A251C] shadow-2xs font-semibold"
                   : "text-stone-500 hover:text-[#0A251C]"

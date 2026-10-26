@@ -404,7 +404,7 @@ function AdminLoginContent() {
                   </div>
 
                   {/* 6 Digit Input Boxes */}
-                  <div className="flex items-center justify-center gap-2 my-2">
+                  <div className="flex items-center justify-center gap-1.5 sm:gap-2 my-2">
                     {otpDigits.map((digit, idx) => (
                       <input
                         key={idx}
@@ -417,7 +417,7 @@ function AdminLoginContent() {
                         value={digit}
                         onChange={(e) => handleOtpDigitChange(idx, e.target.value)}
                         onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                        className="w-11 h-12 text-center text-lg font-bold rounded-xl bg-white border border-[#E8DEC8] text-[#0A251C] focus:border-[#0A251C] focus:ring-2 focus:ring-[#0A251C]/20 outline-none transition"
+                        className="w-9 h-11 sm:w-11 sm:h-12 text-center text-base sm:text-lg font-bold font-mono rounded-lg sm:rounded-xl bg-white border border-[#E8DEC8] text-[#0A251C] focus:border-[#0A251C] focus:ring-2 focus:ring-[#0A251C]/20 outline-none transition"
                       />
                     ))}
                   </div>

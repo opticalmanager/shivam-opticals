@@ -253,7 +253,7 @@ export default function AdminCustomersPage() {
 
             <div className="p-5 space-y-5 flex-1">
               {/* Financial & Order Highlights Strip */}
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 <div className="bg-white p-3 rounded-xl border border-[#E8DCCF] shadow-2xs text-center">
                   <div className="text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-0.5">
                     Lifetime Spend

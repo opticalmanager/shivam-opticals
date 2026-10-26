@@ -391,9 +391,9 @@ function AdminSettingsContent() {
 
       {/* Two-Level Settings Layout */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Left Subnav */}
+        {/* Left Subnav: Horizontal snap rail on mobile, vertical sidebar on desktop */}
         <div className="md:col-span-1 space-y-1">
-          <div className="bg-white border border-[#E8DCCF] rounded-xl p-2 shadow-2xs space-y-0.5">
+          <div className="bg-white border border-[#E8DCCF] rounded-xl p-2 shadow-2xs flex overflow-x-auto md:flex-col gap-1.5 md:space-y-0.5 scrollbar-none snap-x snap-mandatory">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -403,9 +403,9 @@ function AdminSettingsContent() {
                   <Link
                     key={item.id}
                     href={item.externalHref}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-stone-600 hover:text-[#0A251C] hover:bg-stone-50 transition-colors"
+                    className="shrink-0 snap-start whitespace-nowrap flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-stone-600 hover:text-[#0A251C] hover:bg-stone-50 transition-colors"
                   >
-                    <Icon className="w-4 h-4 text-stone-400" />
+                    <Icon className="w-4 h-4 text-stone-400 shrink-0" />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -416,14 +416,14 @@ function AdminSettingsContent() {
                   key={item.id}
                   type="button"
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors text-left cursor-pointer ${
+                  className={`shrink-0 snap-start whitespace-nowrap md:w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors text-left cursor-pointer ${
                     isActive
                       ? "bg-[#FAF3EB] text-[#0A251C] font-bold border border-[#E8DCCF]"
                       : "text-stone-600 hover:text-[#0A251C] hover:bg-stone-50"
                   }`}
                 >
                   <Icon
-                    className={`w-4 h-4 ${
+                    className={`w-4 h-4 shrink-0 ${
                       isActive ? "text-[#C5A059]" : "text-stone-400"
                     }`}
                   />

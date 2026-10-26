@@ -16,6 +16,7 @@ import {
   Calendar,
   ChevronLeft,
   ChevronRight,
+  ArrowRight,
   Plus,
   Minus,
   CheckCircle2,
@@ -23,6 +24,7 @@ import {
 import { PRODUCTS } from "@/data/products";
 import { ProductCard } from "@/components/home/ProductCard";
 import { ShapeFilterBar } from "@/components/home/ShapeFilterBar";
+import { GoogleReviewsSection } from "@/components/home/GoogleReviewsSection";
 import { useAuth } from "@/context/AuthContext";
 
 const SUNGLASSES_SHAPES = [
@@ -323,25 +325,27 @@ export default function HomePage() {
           </div>
 
           {/* Quick Shape Sub-filters */}
-          <div className="flex flex-wrap items-center justify-center gap-2 text-xs uppercase tracking-wider text-[#716B64] font-medium">
-            {["all", "Aviator", "Round", "Rectangle", "Cat-Eye", "Geometric"].map(
-              (shape) => {
-                const isActive = selectedShape === shape;
-                return (
-                  <button
-                    key={shape}
-                    onClick={() => setSelectedShape(shape)}
-                    className={`px-3.5 py-1.5 rounded-full border transition cursor-pointer ${
-                      isActive
-                        ? "border-[#1A1816] bg-[#1A1816] text-white"
-                        : "border-[#E8E2D9] bg-white text-[#1A1816] hover:border-[#C5A059]"
-                    }`}
-                  >
-                    {shape === "all" ? "All" : shape}
-                  </button>
-                );
-              }
-            )}
+          <div className="w-full max-w-full overflow-hidden">
+            <div className="flex items-center overflow-x-auto sm:flex-wrap sm:justify-center gap-2 text-xs uppercase tracking-wider text-[#716B64] font-medium pb-2 sm:pb-0 scrollbar-none snap-x -mx-4 px-4 sm:mx-0 sm:px-0">
+              {["all", "Aviator", "Round", "Rectangle", "Cat-Eye", "Geometric"].map(
+                (shape) => {
+                  const isActive = selectedShape === shape;
+                  return (
+                    <button
+                      key={shape}
+                      onClick={() => setSelectedShape(shape)}
+                      className={`shrink-0 snap-start px-3.5 py-1.5 rounded-full border transition cursor-pointer text-xs ${
+                        isActive
+                          ? "border-[#1A1816] bg-[#1A1816] text-white"
+                          : "border-[#E8E2D9] bg-white text-[#1A1816] hover:border-[#C5A059]"
+                      }`}
+                    >
+                      {shape === "all" ? "All" : shape}
+                    </button>
+                  );
+                }
+              )}
+            </div>
           </div>
         </div>
 
@@ -387,9 +391,9 @@ export default function HomePage() {
               <button
                 key={cat}
                 onClick={() => setRecCategory(cat)}
-                className={`pb-1 transition uppercase ${
+                className={`pb-1 transition uppercase cursor-pointer ${
                   recCategory === cat
-                    ? "text-[#00A896] border-b-2 border-[#00A896] font-bold"
+                    ? "text-[#C5A059] border-b-2 border-[#C5A059] font-bold"
                     : "text-[#9CA3AF] hover:text-[#111827]"
                 }`}
               >
@@ -402,19 +406,33 @@ export default function HomePage() {
         {/* Main Showcase Row: Left Editorial Card + Right Product Carousel */}
         <div className="flex flex-col lg:flex-row items-stretch gap-3 relative">
           {/* Left Editorial Card */}
-          <div className="w-full lg:w-[220px] shrink-0 rounded-lg overflow-hidden relative shadow-sm group">
-            <img
-              src="/images/rec_editorial_man.png"
-              alt="Modern Essentials - Built for everyday wear"
-              className="w-full h-full object-cover object-center block"
-            />
-            <Link
-              href="/products?shape=Rectangle"
-              className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[82%] h-8 bg-white hover:bg-neutral-100 text-[#1A1816] text-[10px] font-bold uppercase tracking-wider rounded shadow transition flex items-center justify-center cursor-pointer"
-            >
-              SHOP NOW
-            </Link>
-          </div>
+          <Link
+            href={`/products?shape=Rectangle${recCategory ? `&gender=${recCategory}` : ""}`}
+            className="w-full max-w-[280px] mx-auto lg:mx-0 lg:max-w-none lg:w-[220px] shrink-0 rounded-2xl overflow-hidden relative shadow-xs hover:shadow-md border border-[#E8DEC8] hover:border-[#C5A059]/60 group transition-all duration-300 bg-[#1A1816] block cursor-pointer select-none aspect-[695/1024] lg:aspect-auto"
+            aria-label={`Shop Modern Essentials - ${recCategory ? recCategory : "all"} collection`}
+          >
+            <picture>
+              <source srcSet="/images/rec_editorial_man.webp" type="image/webp" />
+              <img
+                src="/images/rec_editorial_man.jpg"
+                alt="Modern Essentials - Built for everyday wear"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-center block group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+            </picture>
+
+            {/* Subtle luxury vignette scrim for contrast & depth */}
+            <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+
+            {/* Interactive Layered Luxury CTA Button */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[84%] z-10 pointer-events-none">
+              <span className="w-full py-2.5 px-3 bg-white/95 backdrop-blur-xs group-hover:bg-[#C5A059] text-[#1A1816] group-hover:text-white text-[11px] font-bold uppercase tracking-[0.16em] rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5 border border-white/60">
+                <span>SHOP NOW</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </span>
+            </div>
+          </Link>
 
           {/* Right Carousel Container */}
           <div className="flex-1 relative overflow-hidden">
@@ -491,101 +509,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ================= TESTIMONIALS: "WORDS WE LIVE BY" ================= */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold tracking-[0.1em] text-[#1A1816] uppercase">
-            Words we <span className="italic font-normal text-[#8C6239]">live by</span>
-          </h2>
-          <p className="text-xs uppercase tracking-widest text-[#716B64] mt-2">
-            Over 45,000+ discerning patrons across India wear Shivam Optical
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {/* Review 1 */}
-          <div className="bg-white p-8 rounded-xl border border-[#E8E2D9]/70 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-            <div>
-              <div className="flex text-amber-500 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current text-amber-500" />
-                ))}
-              </div>
-              <p className="text-xs sm:text-sm text-[#2D2926] font-light leading-relaxed italic mb-6">
-                &ldquo;The Italian acetate frame feels extraordinarily light yet ultra
-                sturdy. Better than international luxury brands at 3x the cost!
-                Shivam Optical delivered it with my high prescription within 3
-                days.&rdquo;
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E8E2D9]/50 flex items-center justify-between">
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816]">
-                  Aishwarya Mukherjee
-                </h4>
-                <span className="text-[10px] text-[#716B64] tracking-wider uppercase">
-                  Verified Patron • Mumbai
-                </span>
-              </div>
-              <span className="w-2 h-2 rounded-full bg-emerald-500" title="Verified Buyer"></span>
-            </div>
-          </div>
-
-          {/* Review 2 */}
-          <div className="bg-white p-8 rounded-xl border border-[#E8E2D9]/70 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-            <div>
-              <div className="flex text-amber-500 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current text-amber-500" />
-                ))}
-              </div>
-              <p className="text-xs sm:text-sm text-[#2D2926] font-light leading-relaxed italic mb-6">
-                &ldquo;Ordered the Beach Club polarized sunglasses for my driving
-                trips. Glare reduction is top tier and the gold titanium temple
-                finish doesn&apos;t tarnish in humid weather.&rdquo;
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E8E2D9]/50 flex items-center justify-between">
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816]">
-                  Rahul Verma
-                </h4>
-                <span className="text-[10px] text-[#716B64] tracking-wider uppercase">
-                  Verified Patron • New Delhi
-                </span>
-              </div>
-              <span className="w-2 h-2 rounded-full bg-emerald-500" title="Verified Buyer"></span>
-            </div>
-          </div>
-
-          {/* Review 3 */}
-          <div className="bg-white p-8 rounded-xl border border-[#E8E2D9]/70 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-            <div>
-              <div className="flex text-amber-500 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current text-amber-500" />
-                ))}
-              </div>
-              <p className="text-xs sm:text-sm text-[#2D2926] font-light leading-relaxed italic mb-6">
-                &ldquo;The precision shape guide gave me exact clarity on how the
-                cat-eye silhouette would fit my jawline. Highly recommend their
-                blue-block computer screen lenses for long screen hours!&rdquo;
-              </p>
-            </div>
-            <div className="pt-4 border-t border-[#E8E2D9]/50 flex items-center justify-between">
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816]">
-                  Sonali Kulkarni
-                </h4>
-                <span className="text-[10px] text-[#716B64] tracking-wider uppercase">
-                  Verified Patron • Bengaluru
-                </span>
-              </div>
-              <span className="w-2 h-2 rounded-full bg-emerald-500" title="Verified Buyer"></span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ================= VERIFIED GOOGLE CUSTOMER REVIEWS ================= */}
+      <GoogleReviewsSection />
 
       {/* ================= NEED TO KNOW: ACCORDION SECTION ================= */}
       <section id="faq" className="py-16 bg-[#F4EFEA]/30 border-y border-[#E8E2D9]">
