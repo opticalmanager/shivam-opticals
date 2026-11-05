@@ -1225,7 +1225,7 @@ export default function AdminOrderDetailPage() {
               Luxury Eyewear &amp; Clinical Optometry • Estd. 1995
             </p>
             <p className="text-[11px] text-stone-600 mt-1 max-w-md">
-              Regd. Office: Pocket 1, Mayur Vihar Phase 1, New Delhi - 110091
+              Regd. Office: Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I Extension, New Delhi - 110091
               <br />
               GSTIN: 07AAACS1234F1Z9 | CIN: U33201DL1995PTC091240 | concierge@shivamoptical.in
             </p>

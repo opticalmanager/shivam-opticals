@@ -42,10 +42,16 @@ interface UserOrder {
   status: string;
   payment_status: string;
   payment_method?: string;
+  payment_id?: string;
+  payment_details?: any;
+  guest_name?: string;
+  guest_email?: string;
+  guest_phone?: string;
   total_amount: number;
   subtotal?: number;
   shipping_fee?: number;
   discount_amount?: number;
+  coupon_code?: string;
   tracking_number?: string;
   courier_partner?: string;
   estimated_delivery?: string;
@@ -58,6 +64,7 @@ interface UserOrder {
     lens_package?: string;
     quantity?: number;
     unit_price?: number;
+    lens_price?: number;
     total_price?: number;
     prescription?: any;
     images?: string[];
@@ -163,6 +170,7 @@ function AccountDashboard() {
   // -------------------------------------------------------------
   const [orders, setOrders] = useState<UserOrder[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(false);
+  const [selectedInvoiceOrder, setSelectedInvoiceOrder] = useState<UserOrder | null>(null);
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -926,13 +934,14 @@ function AccountDashboard() {
                             )}
                           </div>
                           <div className="flex items-center gap-3">
-                            <Link
-                              href={`/admin/orders/${ord.id}`}
-                              className="text-[11px] font-bold text-[#0A251C] hover:text-[#C5A059] uppercase tracking-wider flex items-center gap-1 transition"
+                            <button
+                              type="button"
+                              onClick={() => setSelectedInvoiceOrder(ord)}
+                              className="text-[11px] font-bold text-[#0A251C] hover:text-[#C5A059] uppercase tracking-wider flex items-center gap-1.5 transition cursor-pointer px-3 py-1.5 rounded-lg border border-[#E8DEC8] hover:border-[#C5A059] bg-[#FAF7F2] shadow-2xs"
                             >
-                              <Printer className="w-3.5 h-3.5" />
-                              <span>View Invoice</span>
-                            </Link>
+                              <Printer className="w-3.5 h-3.5 text-[#C5A059]" />
+                              <span>View Tax Invoice</span>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -1729,6 +1738,291 @@ function AccountDashboard() {
           </div>
         </div>
       </section>
+
+      {/* 3. Luxury Patron Tax Invoice Modal */}
+      {selectedInvoiceOrder && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 sm:p-6 backdrop-blur-xs overflow-y-auto print:p-0 print:bg-white print:static print:inset-auto">
+          <div className="bg-white rounded-2xl border border-[#E8DEC8] max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 print:border-none print:shadow-none print:max-w-none print:p-0 print:my-0 animate-in zoom-in-95 duration-150">
+            {/* Top Toolbar (Hidden on print) */}
+            <div className="flex items-center justify-between pb-4 border-b border-[#E8DEC8] mb-6 print:hidden">
+              <div className="flex items-center gap-2">
+                <Printer className="w-4 h-4 text-[#C5A059]" />
+                <h3 className="font-serif font-bold text-base text-[#0A251C]">
+                  Certified Optical Tax Invoice
+                </h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="px-3.5 py-1.5 rounded-xl bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-wider transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>Print Invoice</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedInvoiceOrder(null)}
+                  className="p-1.5 text-stone-400 hover:text-stone-700 transition cursor-pointer rounded-lg hover:bg-stone-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Printable Invoice Container */}
+            <div className="space-y-6 text-[#1A1816]">
+              {/* Store & Invoice Header */}
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b-2 border-[#0A251C] pb-4">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-serif font-bold tracking-tight text-[#0A251C] uppercase">
+                    Shivam Optical
+                  </h2>
+                  <p className="text-[11px] font-semibold tracking-wider text-[#C5A059] uppercase">
+                    Luxury Eyewear &amp; Clinical Optometry Clinic
+                  </p>
+                  <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                    Shop No-1, Kanishka Complex, SAMACHAR market,
+                    <br />
+                    Mayur Vihar Phase I Extension, New Delhi - 110091
+                    <br />
+                    Ph: +91 98100 12345 • care@shivamoptical.in
+                    <br />
+                    <span className="font-mono text-[11px] text-stone-700 font-semibold">
+                      GSTIN: 07AAACS1234F1Z9
+                    </span>
+                  </p>
+                </div>
+
+                <div className="sm:text-right space-y-1">
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#0A251C] text-[#C5A059]">
+                    TAX INVOICE
+                  </span>
+                  <div className="font-mono font-bold text-sm text-[#0A251C]">
+                    INV-{selectedInvoiceOrder.order_number}
+                  </div>
+                  <div className="text-xs text-stone-500">
+                    Date:{" "}
+                    {new Date(selectedInvoiceOrder.created_at).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </div>
+                  <div className="text-xs text-stone-500">
+                    AWB Tracking:{" "}
+                    <span className="font-mono font-semibold text-stone-800">
+                      {selectedInvoiceOrder.tracking_number || selectedInvoiceOrder.order_number}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Patron & Payment Information Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DEC8]">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C5A059] block">
+                    Billed / Delivered To
+                  </span>
+                  <div className="font-bold text-sm text-[#0A251C]">
+                    {selectedInvoiceOrder.guest_name ||
+                      (typeof selectedInvoiceOrder.shipping_address === "object"
+                        ? selectedInvoiceOrder.shipping_address?.fullName
+                        : "") ||
+                      user?.name ||
+                      "Valued Patron"}
+                  </div>
+                  <div className="text-stone-600">
+                    Phone:{" "}
+                    <span className="font-mono">
+                      {selectedInvoiceOrder.guest_phone ||
+                        (typeof selectedInvoiceOrder.shipping_address === "object"
+                          ? selectedInvoiceOrder.shipping_address?.phone
+                          : "") ||
+                        user?.phone ||
+                        "—"}
+                    </span>
+                  </div>
+                  <p className="text-stone-600 leading-relaxed pt-1">
+                    {(() => {
+                      const addr =
+                        typeof selectedInvoiceOrder.shipping_address === "string"
+                          ? (() => {
+                              try {
+                                return JSON.parse(selectedInvoiceOrder.shipping_address);
+                              } catch {
+                                return {};
+                              }
+                            })()
+                          : selectedInvoiceOrder.shipping_address || {};
+                      return [addr.streetAddress, addr.apartment, addr.city, addr.state, addr.pincode]
+                        .filter(Boolean)
+                        .join(", ");
+                    })()}
+                  </p>
+                </div>
+
+                <div className="space-y-1 sm:text-right">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C5A059] block">
+                    Payment &amp; Logistics
+                  </span>
+                  <div>
+                    Payment Method:{" "}
+                    <strong className="uppercase">
+                      {selectedInvoiceOrder.payment_method || "Razorpay Online"}
+                    </strong>
+                  </div>
+                  <div>
+                    Payment Status:{" "}
+                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800 uppercase">
+                      PAID
+                    </span>
+                  </div>
+                  {selectedInvoiceOrder.payment_id && (
+                    <div className="font-mono text-[11px] text-stone-600">
+                      Txn Ref: {selectedInvoiceOrder.payment_id}
+                    </div>
+                  )}
+                  <div className="text-stone-600 pt-1">
+                    Carrier Partner:{" "}
+                    <strong>{selectedInvoiceOrder.courier_partner || "Blue Dart Air Priority"}</strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* Prescription Detail (if clinical lens ordered) */}
+              {(() => {
+                const itemWithRx = selectedInvoiceOrder.items?.find(
+                  (i) => i.prescription && (i.prescription.rightEye || i.prescription.pd)
+                );
+                if (!itemWithRx?.prescription) return null;
+                const rx = itemWithRx.prescription;
+                return (
+                  <div className="bg-[#FAF3EB] p-3 rounded-xl border border-[#C5A059]/40 text-xs space-y-2">
+                    <div className="flex items-center justify-between font-bold text-[#0A251C] text-[11px] uppercase tracking-wider">
+                      <span>Clinical Optical Prescription (OD/OS)</span>
+                      <span>PD: {rx.pd || "63"} mm</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-center text-[11px] font-mono">
+                      <div className="bg-white p-2 rounded border border-[#E8DEC8]">
+                        <span className="font-bold text-[#0A251C] block text-[10px] uppercase font-sans mb-1">
+                          Right Eye (OD)
+                        </span>
+                        SPH: {rx.rightEye?.sph || "0.00"} | CYL: {rx.rightEye?.cyl || "0.00"} | AXIS: {rx.rightEye?.axis || "0"}°
+                      </div>
+                      <div className="bg-white p-2 rounded border border-[#E8DEC8]">
+                        <span className="font-bold text-[#0A251C] block text-[10px] uppercase font-sans mb-1">
+                          Left Eye (OS)
+                        </span>
+                        SPH: {rx.leftEye?.sph || "0.00"} | CYL: {rx.leftEye?.cyl || "0.00"} | AXIS: {rx.leftEye?.axis || "0"}°
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Itemized Invoice Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b-2 border-stone-300 text-[10px] font-bold uppercase tracking-wider text-stone-600">
+                      <th className="py-2 pr-3">Item Description</th>
+                      <th className="py-2 px-2 text-center">HSN</th>
+                      <th className="py-2 px-2 text-center">Qty</th>
+                      <th className="py-2 px-2 text-right">Unit Rate</th>
+                      <th className="py-2 pl-3 text-right">Amount (₹)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-stone-200">
+                    {selectedInvoiceOrder.items && selectedInvoiceOrder.items.length > 0 ? (
+                      selectedInvoiceOrder.items.map((it, idx) => (
+                        <tr key={idx} className="py-2">
+                          <td className="py-2.5 pr-3">
+                            <div className="font-bold text-[#0A251C]">
+                              {it.product_name || "Optical Frame"}
+                            </div>
+                            <div className="text-[11px] text-stone-500">
+                              {it.brand || "Shivam Optical"} {it.color ? `• Color: ${it.color}` : ""}
+                            </div>
+                            {it.lens_package && it.lens_package !== "Frame Only" && (
+                              <div className="text-[11px] text-[#C5A059] font-medium">
+                                Lens: {it.lens_package} (HSN 9001 - 12% GST)
+                              </div>
+                            )}
+                          </td>
+                          <td className="py-2.5 px-2 text-center font-mono text-stone-500">
+                            {it.lens_package && it.lens_package !== "Frame Only" ? "9003/9001" : "9003"}
+                          </td>
+                          <td className="py-2.5 px-2 text-center font-mono">{it.quantity || 1}</td>
+                          <td className="py-2.5 px-2 text-right font-mono">
+                            {formatCurrency(Number(it.unit_price || 0) + Number(it.lens_price || 0))}
+                          </td>
+                          <td className="py-2.5 pl-3 text-right font-mono font-bold text-[#0A251C]">
+                            {formatCurrency(
+                              Number(it.total_price || (Number(it.unit_price || 0) + Number(it.lens_price || 0)) * (it.quantity || 1))
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={5} className="py-3 text-center text-stone-400">
+                          Eyewear Frame &amp; Custom Clinical Lenses
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Financial Calculation Breakdown */}
+              <div className="border-t-2 border-stone-300 pt-3 flex justify-end">
+                <div className="w-full sm:w-64 space-y-1.5 text-xs text-stone-600">
+                  <div className="flex justify-between">
+                    <span>Subtotal (Inclusive of GST)</span>
+                    <span className="font-mono font-semibold text-[#0A251C]">
+                      {formatCurrency(Number(selectedInvoiceOrder.subtotal || selectedInvoiceOrder.total_amount))}
+                    </span>
+                  </div>
+                  {Number(selectedInvoiceOrder.discount_amount) > 0 && (
+                    <div className="flex justify-between text-emerald-700">
+                      <span>Discount ({selectedInvoiceOrder.coupon_code || "Coupon"})</span>
+                      <span className="font-mono">
+                        -{formatCurrency(Number(selectedInvoiceOrder.discount_amount))}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span>Insured Shipping Fee</span>
+                    <span className="font-mono">
+                      {Number(selectedInvoiceOrder.shipping_fee) > 0
+                        ? formatCurrency(Number(selectedInvoiceOrder.shipping_fee))
+                        : "FREE"}
+                    </span>
+                  </div>
+                  <div className="pt-2 border-t border-stone-300 flex justify-between text-sm font-bold text-[#0A251C]">
+                    <span>Total Paid</span>
+                    <span className="font-mono text-[#0A251C]">
+                      {formatCurrency(Number(selectedInvoiceOrder.total_amount))}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tax Invoice Legal Footer */}
+              <div className="pt-4 border-t border-stone-200 text-[10px] text-stone-500 space-y-1">
+                <p>
+                  * Spectacle frames classified under HSN Code 9003 (GST @ 12%). Corrective ophthalmic lenses classified under HSN Code 9001 (GST @ 12%). This computer-generated invoice is authenticated under Indian GST Act, 2017.
+                </p>
+                <div className="flex items-center justify-between pt-2">
+                  <span>Thank you for choosing Shivam Optical.</span>
+                  <span className="font-semibold text-stone-700">Authorised Optical Dispenser</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

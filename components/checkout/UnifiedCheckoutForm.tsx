@@ -116,14 +116,21 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
   }, [isLoggedIn, savedAddresses.length, activeAddressIdx, useCustomAddress]);
 
   const handleFieldChange = (field: keyof ShippingAddress, val: string) => {
+    let sanitizedVal = val;
+    if (field === "phone") {
+      sanitizedVal = val.replace(/\D/g, "").slice(0, 10);
+    } else if (field === "pincode") {
+      sanitizedVal = val.replace(/\D/g, "").slice(0, 6);
+    }
+
     onAddressChange({
       ...shippingAddress,
-      [field]: val,
+      [field]: sanitizedVal,
       fullName:
         field === "firstName"
-          ? `${val} ${shippingAddress.lastName || ""}`.trim()
+          ? `${sanitizedVal} ${shippingAddress.lastName || ""}`.trim()
           : field === "lastName"
-          ? `${shippingAddress.firstName || ""} ${val}`.trim()
+          ? `${shippingAddress.firstName || ""} ${sanitizedVal}`.trim()
           : shippingAddress.fullName,
     });
   };
