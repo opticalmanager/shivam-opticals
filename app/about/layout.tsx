@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Atelier Heritage & Clinical Laboratory",
+  title: "Our Heritage & Clinical Optical Lab",
   description:
     "Learn about Shivam Optical's legacy of precision ophthalmic dispensing, computerized eye testing, and clinical optical lab assembly in Mayur Vihar Phase I, Delhi.",
   alternates: {
     canonical: "https://shivamoptical.in/about",
   },
   openGraph: {
-    title: "Atelier Heritage & Clinical Laboratory | Shivam Optical",
+    title: "Our Heritage & Clinical Optical Lab | Shivam Optical",
     description:
       "Legacy of precision ophthalmic dispensing, computerized eye testing, and clinical optical lab assembly in Mayur Vihar, Delhi.",
     url: "https://shivamoptical.in/about",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Atelier Heritage & Clinical Laboratory | Shivam Optical",
+    title: "Our Heritage & Clinical Optical Lab | Shivam Optical",
     description:
       "Learn about Shivam Optical's legacy of precision ophthalmic dispensing in Delhi.",
   },

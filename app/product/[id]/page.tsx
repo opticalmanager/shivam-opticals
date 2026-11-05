@@ -37,7 +37,7 @@ export async function generateMetadata({
     const title = `${product.name} | ${brand} Eyewear`;
     const frameShape = product.shape ? ` in ${product.shape} silhouette` : "";
     const priceStr = Number(product.price || 0).toLocaleString("en-IN");
-    const description = `${product.name} by ${brand}${frameShape}. Handcrafted optical frame with precision clinical power lenses starting at ₹${priceStr}. Pan-India express dispatch & 14-day returns from Shivam Optical Atelier.`;
+    const description = `${product.name} by ${brand}${frameShape}. Handcrafted optical frame with precision clinical power lenses starting at ₹${priceStr}. Pan-India express dispatch & 14-day returns from Shivam Optical.`;
     const canonicalUrl = `https://shivamoptical.in/product/${product.id}`;
     const displayImage = product.img || product.images?.[0] || "https://shivamoptical.in/images/clean_frame_1.png";
 

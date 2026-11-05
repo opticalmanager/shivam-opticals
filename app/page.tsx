@@ -267,7 +267,7 @@ export default function HomePage() {
                 url: "https://shivamoptical.in",
                 name: "Shivam Optical",
                 description:
-                  "Luxury Eyewear Atelier, Handcrafted Frames & Computerized Eye Testing in Delhi",
+                  "Luxury Eyewear Store, Handcrafted Frames & Computerized Eye Testing in Delhi",
                 potentialAction: {
                   "@type": "SearchAction",
                   target:
@@ -423,10 +423,10 @@ export default function HomePage() {
           <div className="py-14 text-center border border-dashed border-[#E8DEC8] rounded-2xl bg-[#FCFAF7] p-8 max-w-lg mx-auto">
             <Glasses className="w-8 h-8 text-[#C5A059] mx-auto mb-3 opacity-75" />
             <h4 className="font-serif text-lg text-[#1A1816] font-semibold">
-              Curating New Atelier Collection
+              Curating New Eyewear Collection
             </h4>
             <p className="text-xs text-[#716B64] mt-1.5 leading-relaxed">
-              Our master opticians are currently cataloging pristine new designer frames and clinical eyewear. Check back shortly or visit our Delhi atelier.
+              Our master opticians are currently cataloging pristine new designer frames and clinical eyewear. Check back shortly or visit our Delhi store.
             </p>
           </div>
         ) : (

@@ -31,7 +31,7 @@ interface CampaignItem {
 export default function AdminMarketingPage() {
   // Storefront Announcement Bar State
   const [announcementText, setAnnouncementText] = useState(
-    "Complimentary Zeiss Lens Cleaning Kit with every luxury eyewear order | Atelier Mayur Vihar"
+    "Complimentary Zeiss Lens Cleaning Kit with every luxury eyewear order | Shivam Optical Mayur Vihar"
   );
   const [announcementLink, setAnnouncementLink] = useState("/products");
   const [announcementEnabled, setAnnouncementEnabled] = useState(true);
@@ -408,7 +408,7 @@ export default function AdminMarketingPage() {
                   required
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="e.g. Mayur Vihar Atelier Autumn Eyewear Showcase"
+                  placeholder="e.g. Mayur Vihar Store Autumn Eyewear Showcase"
                   className="w-full px-3 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
                 />
               </div>
@@ -449,7 +449,7 @@ export default function AdminMarketingPage() {
                   rows={4}
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
-                  placeholder="Greetings from Shivam Optical Atelier. Discover our newly curated luxury titanium and bio-acetate arrivals in Mayur Vihar Phase 1..."
+                  placeholder="Greetings from Shivam Optical. Discover our newly curated luxury titanium and bio-acetate arrivals in Mayur Vihar Phase 1..."
                   className="w-full px-3 py-1.5 bg-[#FAF7F2] border border-[#E8DCCF] rounded-md text-xs text-[#0A251C]"
                 />
               </div>

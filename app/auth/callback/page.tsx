@@ -72,7 +72,7 @@ function CallbackContent() {
 
             setStatus("success");
             toast.success("Email Verified Successfully", {
-              description: "Welcome to Shivam Optical Atelier.",
+              description: "Welcome to Shivam Optical.",
             });
 
             setTimeout(() => {
@@ -98,7 +98,7 @@ function CallbackContent() {
 
           setStatus("success");
           toast.success("Patron Session Verified", {
-            description: "Redirecting to your atelier destination...",
+            description: "Redirecting to your account...",
           });
 
           setTimeout(() => {

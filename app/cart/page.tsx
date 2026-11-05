@@ -75,7 +75,7 @@ export default function StandaloneCartPage() {
             <span className="text-[#C5A059] font-bold">Shopping Bag</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
-            Your Eyewear Atelier Bag
+            Your Eyewear Shopping Bag
           </h1>
           <p className="text-xs text-stone-500">
             Review your selected frames and lenses before checkout.

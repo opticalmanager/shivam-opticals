@@ -7,6 +7,7 @@ export interface PackageDimensions {
 }
 
 export interface ShippingConfig {
+  isFreeShippingEnabled: boolean;
   freeShippingThreshold: number;
   standardShippingFee: number;
   expressShippingFee: number;
@@ -36,6 +37,7 @@ export interface ShippingConfig {
 }
 
 export const DEFAULT_SHIPPING_CONFIG: ShippingConfig = {
+  isFreeShippingEnabled: true,
   freeShippingThreshold: 1999,
   standardShippingFee: 150,
   expressShippingFee: 350,
@@ -46,7 +48,7 @@ export const DEFAULT_SHIPPING_CONFIG: ShippingConfig = {
 
   shiprocketEmail: process.env.SHIPROCKET_EMAIL || "service.viralnest@gmail.com",
   shiprocketPassword: process.env.SHIPROCKET_PASSWORD || "ou6wb4ob*JiuAl6zW5^KM7DWX*Ln#wpx",
-  shiprocketPickupLocation: process.env.SHIPROCKET_PICKUP_LOCATION || "Mayur Vihar Atelier",
+  shiprocketPickupLocation: process.env.SHIPROCKET_PICKUP_LOCATION || "Mayur Vihar Store",
   shiprocketPickupAddress:
     process.env.SHIPROCKET_PICKUP_ADDRESS ||
     "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
@@ -88,6 +90,10 @@ export async function getShippingConfig(): Promise<ShippingConfig> {
       const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
 
       cachedConfig = {
+        isFreeShippingEnabled:
+          parsed.isFreeShippingEnabled !== undefined
+            ? Boolean(parsed.isFreeShippingEnabled)
+            : Number(parsed.freeShippingThreshold ?? DEFAULT_SHIPPING_CONFIG.freeShippingThreshold) > 0,
         freeShippingThreshold: Number(parsed.freeShippingThreshold ?? DEFAULT_SHIPPING_CONFIG.freeShippingThreshold),
         standardShippingFee: Number(parsed.standardShippingFee ?? DEFAULT_SHIPPING_CONFIG.standardShippingFee),
         expressShippingFee: Number(parsed.expressShippingFee ?? DEFAULT_SHIPPING_CONFIG.expressShippingFee),

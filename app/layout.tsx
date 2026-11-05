@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: "%s | Shivam Optical",
   },
   description:
-    "Shivam Optical — Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Atelier boutique in Mayur Vihar, Delhi. Free Express Shipping & 14-Day Returns.",
+    "Shivam Optical — Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Optical store in Mayur Vihar, Delhi. Free Express Shipping & 14-Day Returns.",
   keywords: [
     "Shivam Optical",
     "luxury eyewear Delhi",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "titanium frames",
     "spectacles online India",
   ],
-  category: "Eyewear & Optical Atelier",
+  category: "Eyewear & Optical Store",
   icons: {
     icon: "/favicon.ico",
   },

@@ -378,7 +378,7 @@ function getInitialStore(): DataStoreSchema {
   const initialSettings = {
     general: {
       storeName: "Shivam Optical",
-      tagline: "Haute Lunetterie & Optometric Atelier",
+      tagline: "Luxury Eyewear & Clinical Optometry",
       email: "contact@shivamoptical.in",
       storeUrl: "https://shivamoptical.in",
       phone: "097799 90207",
@@ -445,7 +445,7 @@ function getInitialStore(): DataStoreSchema {
     roles: [
       { id: "r-1", name: "Sunil Sharma", email: "sunil@shivamoptical.in", role: "Chief Optometrist", status: "Active" },
       { id: "r-2", name: "Anand Verma", email: "anand@shivamoptical.in", role: "Optical Lab Technician", status: "Active" },
-      { id: "r-3", name: "Pooja Malhotra", email: "pooja@shivamoptical.in", role: "Atelier Concierge", status: "Active" },
+      { id: "r-3", name: "Pooja Malhotra", email: "pooja@shivamoptical.in", role: "Optical Consultant", status: "Active" },
     ],
   };
 
@@ -837,7 +837,7 @@ export function createProduct(productData: Partial<Product>): Product {
     img: productData.img || (productData.images?.[0] || "/images/clean_frame_1.png"),
     images: productData.images || [productData.img || "/images/clean_frame_1.png"],
     colors: productData.colors || ["#1A1816", "#C5A059"],
-    description: productData.description || "Precision engineered eyewear from Shivam Optical Mayur Vihar atelier.",
+    description: productData.description || "Precision engineered eyewear from Shivam Optical Mayur Vihar store.",
     material: productData.material || "Beta Titanium & Italian Acetate",
     measurements: productData.measurements || { lensWidth: 54, bridgeWidth: 17, templeLength: 142 },
     colorVariants: productData.colorVariants || [],

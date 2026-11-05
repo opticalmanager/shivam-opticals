@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
         ? "Successfully authenticated with Shiprocket Logistics API"
         : error || "API credentials stored. Verify API User in Shiprocket dashboard.",
       email: config.shiprocketEmail,
-      pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Atelier",
+      pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Store",
       pickupAddress:
         config.shiprocketPickupAddress ||
         "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
         success: true,
         registeredLocations,
         currentDefault: {
-          pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Atelier",
+          pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Store",
           pickupAddress: config.shiprocketPickupAddress,
           pickupCity: config.shiprocketPickupCity,
           pickupState: config.shiprocketPickupState,
@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
       const { pickupLocation, pickupAddress, pickupCity, pickupState, pickupPincode } = body;
       const updated = {
         ...config,
-        shiprocketPickupLocation: pickupLocation || config.shiprocketPickupLocation || "Mayur Vihar Atelier",
+        shiprocketPickupLocation: pickupLocation || config.shiprocketPickupLocation || "Mayur Vihar Store",
         shiprocketPickupAddress: pickupAddress || config.shiprocketPickupAddress,
         shiprocketPickupCity: pickupCity || config.shiprocketPickupCity || "Delhi",
         shiprocketPickupState: pickupState || config.shiprocketPickupState || "Delhi",
@@ -172,7 +172,7 @@ export async function POST(req: NextRequest) {
 
       return NextResponse.json({
         ...result,
-        pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Atelier",
+        pickupLocation: config.shiprocketPickupLocation || "Mayur Vihar Store",
         pickupAddress: config.shiprocketPickupAddress,
         pickupCity: config.shiprocketPickupCity,
         pickupState: config.shiprocketPickupState,
@@ -236,7 +236,7 @@ export async function POST(req: NextRequest) {
       }));
 
       const chosenPickupLocation =
-        pickupLocation || config.shiprocketPickupLocation || "Mayur Vihar Atelier";
+        pickupLocation || config.shiprocketPickupLocation || "Mayur Vihar Store";
       const chosenCourierId = courierCompanyId || courierId ? Number(courierCompanyId || courierId) : undefined;
       const chosenWeight = weightKg || weight ? Number(weightKg || weight) : config.defaultWeightKg || 0.35;
       const chosenDimensions = dimensions || config.packageDimensions || { length: 18, breadth: 12, height: 8 };

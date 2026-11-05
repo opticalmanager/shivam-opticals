@@ -63,13 +63,13 @@ export default function PrivacyPolicyPage() {
             <span className="text-[#C5A059] font-bold">Privacy & Medical Data Protection</span>
           </div>
           <span className="text-[11px] font-bold tracking-[0.25em] text-[#C5A059] uppercase block">
-            CLINICAL ATELIER STANDARDS • IT ACT 2000 & DPDP COMPLIANCE
+            CLINICAL OPTICAL STANDARDS • IT ACT 2000 &amp; DPDP COMPLIANCE
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0A251C] tracking-tight">
-            Privacy Policy & Optical Data Charter
+            Privacy Policy &amp; Optical Data Charter
           </h1>
           <p className="text-xs sm:text-sm text-stone-600 max-w-3xl leading-relaxed">
-            At Shivam Optical Atelier, we hold the privacy of your optical diagnostic records, pupil distance measurements, and transaction history to the highest standards of confidentiality and medical integrity.
+            At Shivam Optical, we hold the privacy of your optical diagnostic records, pupil distance measurements, and transaction history to the highest standards of confidentiality and medical integrity.
           </p>
           <p className="text-[11px] text-stone-400">
             Last Updated & Certified: October 2026 • Effective for all storefront purchases and in-store consultations.
@@ -153,7 +153,7 @@ export default function PrivacyPolicyPage() {
               <h4 className="font-bold text-[#0A251C] uppercase tracking-wider text-[11px]">
                 Data Protection Officer
               </h4>
-              <p>Shivam Optical Atelier Grievance Redressal</p>
+              <p>Shivam Optical Grievance Redressal</p>
               <p className="text-[#0A251C] font-medium">dpo@shivamoptical.in</p>
               <p>Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Ph 1 Ext, Delhi</p>
             </div>

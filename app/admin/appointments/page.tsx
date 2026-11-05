@@ -120,7 +120,7 @@ export default function AdminAppointmentsPage() {
             Eye Examinations &amp; In-Store Consultations
           </h1>
           <p className="text-xs text-stone-500">
-            Real-time appointment schedule for Mayur Vihar atelier optometrist consultations, eye tests, and bespoke frame fittings
+            Real-time appointment schedule for Mayur Vihar store optometrist consultations, eye tests, and bespoke frame fittings
           </p>
         </div>
         <div className="flex items-center gap-2">

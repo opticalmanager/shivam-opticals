@@ -82,7 +82,7 @@ export const PincodeEstimator: React.FC<PincodeEstimatorProps> = ({ isRx = false
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5 font-semibold text-xs text-[#0A251C]">
           <Truck className="w-3.5 h-3.5 text-[#C5A059]" />
-          <span>Estimated Atelier Delivery</span>
+          <span>Estimated Delivery</span>
         </div>
         <span className="text-[10px] text-stone-500 uppercase tracking-wider">
           Courier Delivery
@@ -155,7 +155,7 @@ export const PincodeEstimator: React.FC<PincodeEstimatorProps> = ({ isRx = false
           <Truck className="w-3 h-3 text-[#C5A059]" />
           <span>Complimentary Delivery Available</span>
         </div>
-        <span>Dispatched from Mayur Vihar Atelier (110091)</span>
+        <span>Dispatched from Mayur Vihar Store (110091)</span>
       </div>
     </div>
   );

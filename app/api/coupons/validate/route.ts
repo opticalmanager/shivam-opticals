@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
         },
         message:
           discountType === "percentage"
-            ? `${discountValue}% atelier discount applied!`
+            ? `${discountValue}% discount applied!`
             : `₹${discountValue.toLocaleString("en-IN")} voucher applied!`,
       });
     }
@@ -174,7 +174,7 @@ export async function POST(req: NextRequest) {
         },
         message:
           fb.discountType === "percentage"
-            ? `${fb.discountValue}% atelier privilege discount applied!`
+            ? `${fb.discountValue}% special discount applied!`
             : `₹${fb.discountValue.toLocaleString("en-IN")} voucher applied!`,
       });
     }

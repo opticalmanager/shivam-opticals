@@ -570,7 +570,7 @@ function AccountDashboard() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1A1816]">
-      {/* 1. Atelier Patron Header Banner */}
+      {/* 1. Patron Header Banner */}
       <section className="bg-[#FAF3EB] border-b border-[#E8DEC8] py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1240px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
@@ -1319,7 +1319,7 @@ function AccountDashboard() {
                       No Consultations Scheduled
                     </h3>
                     <p className="text-xs text-stone-500 max-w-sm mx-auto">
-                      You don&apos;t have any upcoming eye test consultations or styling appointments at our Mayur Vihar atelier.
+                      You don&apos;t have any upcoming eye test consultations or styling appointments at our Mayur Vihar store.
                     </p>
                     <button
                       onClick={openAppointmentModal}
@@ -1345,7 +1345,7 @@ function AccountDashboard() {
                             </h3>
                             <p className="text-xs text-stone-600 flex items-center gap-1.5">
                               <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>{apt.store_location || "Mayur Vihar Phase 1 Atelier"}</span>
+                              <span>{apt.store_location || "Mayur Vihar Phase 1 Store"}</span>
                             </p>
                           </div>
                           <div className="flex items-center gap-2">

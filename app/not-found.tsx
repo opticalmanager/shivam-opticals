@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className="min-h-[70vh] bg-[#FCFAF7] flex items-center justify-center px-4 py-20">
       <div className="max-w-md w-full text-center">
-        {/* Atelier Icon */}
+        {/* Eyewear Icon */}
         <div className="w-16 h-16 rounded-full bg-[#FAF3EB] border border-[#E8DEC8] flex items-center justify-center mx-auto mb-6 shadow-xs">
           <Glasses className="w-8 h-8 text-[#C5A059]" />
         </div>
@@ -16,10 +16,10 @@ export default function NotFound() {
           Frame Not Found
         </p>
         <h1 className="font-serif text-3xl sm:text-4xl text-[#1A1816] font-normal mb-3">
-          Atelier Archive Unavailable
+          Eyewear Not Found
         </h1>
         <p className="text-xs sm:text-sm text-[#716B64] leading-relaxed mb-8">
-          The requested designer frame or bespoke edition is currently unavailable in our active atelier catalog. Explore our collection or return home.
+          The requested designer frame or page is currently unavailable in our active catalog. Explore our collection or return home.
         </p>
 
         {/* Action CTAs */}

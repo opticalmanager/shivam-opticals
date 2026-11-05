@@ -388,16 +388,42 @@ export function filterAndSortProducts(
     result = result.filter((p) => p.material && filterState.materials.includes(p.material));
   }
 
-  // 7. Search Query Filter
+  // 7. Search Query Filter (Smart Multi-Token Logic)
   if (filterState.searchQuery && filterState.searchQuery.trim() !== "") {
-    const q = filterState.searchQuery.toLowerCase().trim();
-    result = result.filter(
-      (p) =>
-        p.name.toLowerCase().includes(q) ||
-        p.brand?.toLowerCase().includes(q) ||
-        p.subtitle?.toLowerCase().includes(q) ||
-        p.description?.toLowerCase().includes(q)
-    );
+    const rawTokens = filterState.searchQuery
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, " ")
+      .split(/\s+/)
+      .filter(Boolean);
+
+    if (rawTokens.length > 0) {
+      result = result.filter((p) => {
+        const searchable = [
+          p.name,
+          p.brand,
+          p.shape,
+          p.category,
+          p.type,
+          p.color,
+          p.colorHex,
+          ...(p.colors || []),
+          p.material,
+          p.subtitle,
+          p.description,
+          p.sku,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+        return rawTokens.every((token) => {
+          const cleanToken = token.replace(/[-_]/g, "");
+          const cleanSearchable = searchable.replace(/[-_]/g, "");
+          return searchable.includes(token) || cleanSearchable.includes(cleanToken);
+        });
+      });
+    }
   }
 
   // 8. Sorting

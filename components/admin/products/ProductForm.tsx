@@ -509,7 +509,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
             <div className="sm:col-span-2">
               <label className="block text-xs font-semibold text-stone-700 mb-1">
-                Atelier Narrative &amp; Detailed Description
+                Product Narrative &amp; Detailed Description
               </label>
               <textarea
                 rows={4}
@@ -1086,7 +1086,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               </div>
 
               <div>
-                <label className="block font-semibold text-stone-700 mb-1">Origin / Atelier</label>
+                <label className="block font-semibold text-stone-700 mb-1">Origin / Workshop</label>
                 <input
                   type="text"
                   value={newBrand.origin}

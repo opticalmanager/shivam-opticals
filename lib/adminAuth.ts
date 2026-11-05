@@ -13,7 +13,7 @@ export const ADMIN_COOKIE_NAME = "shivam_admin_session";
 const SESSION_SECRET =
   process.env.ADMIN_SESSION_SECRET ||
   process.env.NEXTAUTH_SECRET ||
-  "shivam_optics_super_secret_admin_atelier_jwt_hmac_2026_key";
+  "shivam_optics_super_secret_admin_jwt_hmac_2026_key";
 
 /**
  * Creates an HMAC-SHA256 signature using universal Web Crypto API.

@@ -71,14 +71,14 @@ export default function AdminOrderDetailPage() {
 
   // Consignment Origin / Pickup Point details
   const [pickupDetails, setPickupDetails] = useState({
-    location: "Mayur Vihar Atelier",
+    location: "Mayur Vihar Store",
     address: "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
     city: "Delhi",
     state: "Delhi",
     pincode: "110091",
   });
   const [isEditingPickup, setIsEditingPickup] = useState(false);
-  const [editLocationName, setEditLocationName] = useState("Mayur Vihar Atelier");
+  const [editLocationName, setEditLocationName] = useState("Mayur Vihar Store");
   const [editAddress, setEditAddress] = useState(
     "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar"
   );
@@ -144,7 +144,7 @@ export default function AdminOrderDetailPage() {
 
   const handleUpdatePickupPoint = async () => {
     const updated = {
-      location: editLocationName.trim() || "Mayur Vihar Atelier",
+      location: editLocationName.trim() || "Mayur Vihar Store",
       address: editAddress.trim(),
       city: editCity.trim() || "Delhi",
       state: editState.trim() || "Delhi",
@@ -791,7 +791,7 @@ export default function AdminOrderDetailPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          setEditLocationName("Mayur Vihar Atelier");
+                          setEditLocationName("Mayur Vihar Store");
                           setEditAddress(
                             "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar"
                           );
@@ -801,7 +801,7 @@ export default function AdminOrderDetailPage() {
                         }}
                         className="text-[10px] font-bold text-[#C5A059] hover:underline cursor-pointer"
                       >
-                        Reset to Mayur Vihar Atelier Primary
+                        Reset to Mayur Vihar Store Primary
                       </button>
                     </div>
 
@@ -914,7 +914,7 @@ export default function AdminOrderDetailPage() {
                           onChange={(e) => setSaveAsDefaultPickup(e.target.checked)}
                           className="rounded text-[#C5A059] w-4 h-4 cursor-pointer accent-[#C5A059]"
                         />
-                        <span>Save as default primary atelier in store settings</span>
+                        <span>Save as default primary store location in settings</span>
                       </label>
 
                       <div className="flex items-center gap-2">
@@ -1215,14 +1215,14 @@ export default function AdminOrderDetailPage() {
 
       {/* Printable Luxury Optical Tax Invoice & Lab Dispatch Slip */}
       <div className="hidden print:block p-8 bg-white text-black font-sans max-w-4xl mx-auto">
-        {/* Atelier Letterhead */}
+        {/* Store Letterhead */}
         <div className="border-b-2 border-black pb-4 mb-6 flex justify-between items-start">
           <div>
             <h1 className="text-2xl font-bold tracking-tight uppercase font-serif">
               Shivam Optical
             </h1>
             <p className="text-xs tracking-widest uppercase font-semibold text-stone-700">
-              Luxury Eyewear Atelier &amp; Clinical Optometry • Estd. 1995
+              Luxury Eyewear &amp; Clinical Optometry • Estd. 1995
             </p>
             <p className="text-[11px] text-stone-600 mt-1 max-w-md">
               Regd. Office: Pocket 1, Mayur Vihar Phase 1, New Delhi - 110091
@@ -1413,7 +1413,7 @@ export default function AdminOrderDetailPage() {
               <br />
               2. Titanium frames carry a 24-month comprehensive manufacturing warranty.
               <br />
-              3. This is a computer-generated luxury atelier tax invoice.
+              3. This is a computer-generated tax invoice.
             </p>
           </div>
           <div className="text-right flex flex-col items-end justify-end">
@@ -1564,7 +1564,7 @@ export default function AdminOrderDetailPage() {
                   </div>
                   <div>
                     <label className="block text-[11px] font-semibold text-stone-600 mb-1">
-                      Street Address / Atelier Unit
+                      Street Address / Store Unit
                     </label>
                     <input
                       type="text"
@@ -1599,7 +1599,7 @@ export default function AdminOrderDetailPage() {
                       size="sm"
                       onClick={() => {
                         const updated = {
-                          location: editLocationName.trim() || "Mayur Vihar Atelier",
+                          location: editLocationName.trim() || "Mayur Vihar Store",
                           address: editAddress.trim(),
                           city: editCity.trim() || "Delhi",
                           state: editState.trim() || "Delhi",

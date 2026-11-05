@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     const bookingRef = body.booking_reference || `APT-${Date.now().toString().slice(-6)}`;
     const patientEmail = body.email?.trim() || body.patient_email?.trim() || null;
     const service = body.service || "Comprehensive Eye Test & Lens Fitting";
-    const storeLocation = body.store_location || "Mayur Vihar Phase 1 Atelier";
+    const storeLocation = body.store_location || "Mayur Vihar Phase 1 Store";
     const appointmentDate = body.date || body.appointment_date || new Date().toISOString().split("T")[0];
     const timeSlot = body.time || body.time_slot || "11:30 AM";
     const status = body.status || "confirmed";

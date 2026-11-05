@@ -220,7 +220,7 @@ export const CartDrawer: React.FC = () => {
                     Anti-Fog Optical Cleaning Kit (+₹100)
                   </span>
                   <span className="text-[11px] text-stone-500 block leading-tight">
-                    Includes 60ml antimicrobial spray and lint-free microfiber atelier cloth.
+                    Includes 60ml antimicrobial spray and lint-free microfiber cleaning cloth.
                   </span>
                 </div>
                 <input

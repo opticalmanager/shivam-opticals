@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, Suspense } from "react";
+import React, { useState, useMemo, useEffect, Suspense, useRef } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   Search,
   SlidersHorizontal,
@@ -12,6 +12,7 @@ import {
   Zap,
   RotateCcw,
   Clock,
+  Sparkles,
 } from "lucide-react";
 import { PRODUCTS } from "@/data/products";
 import { Product } from "@/types";
@@ -20,6 +21,7 @@ import { ProductCard } from "@/components/home/ProductCard";
 const ITEMS_PER_PAGE = 24;
 
 function CatalogContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   // Initial params from URL
@@ -32,6 +34,7 @@ function CatalogContent() {
   const initialGender = searchParams.get("gender") || "";
   const initialSale = searchParams.get("sale") === "true";
   const initialFilter = searchParams.get("filter") || "";
+  const initialSearch = searchParams.get("search") || searchParams.get("q") || "";
 
   // Filter States
   const [selectedCategory, setSelectedCategory] = useState<string>(initialType || "all");
@@ -49,7 +52,21 @@ function CatalogContent() {
     if (initialFilter === "new") list.push("new");
     return list;
   });
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
+  const [showSearchSuggestions, setShowSearchSuggestions] = useState<boolean>(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
+        setShowSearchSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   const [brandSearchQuery, setBrandSearchQuery] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("featured");
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
@@ -95,6 +112,8 @@ function CatalogContent() {
     if (searchParams.get("sale") === "true") {
       setSelectedOffers((prev) => (prev.includes("sale") ? prev : [...prev, "sale"]));
     }
+    const currentSearch = searchParams.get("search") || searchParams.get("q") || "";
+    setSearchQuery(currentSearch);
   }, [searchParams]);
 
   // Reset pagination whenever filters change
@@ -156,8 +175,10 @@ function CatalogContent() {
     setSelectedOffers([]);
     setSearchQuery("");
     setBrandSearchQuery("");
+    setShowSearchSuggestions(false);
     setSortBy("featured");
     setVisibleCount(ITEMS_PER_PAGE);
+    router.replace("/products");
   };
 
   // Dynamic Category Counts
@@ -316,13 +337,44 @@ function CatalogContent() {
           return false;
         }
 
-        // Search query
+        // Search query (Smart Multi-Token Matching Logic)
         if (searchQuery.trim()) {
-          const q = searchQuery.toLowerCase();
-          const matchesName = (p.name || "").toLowerCase().includes(q);
-          const matchesBrand = (p.brand || "").toLowerCase().includes(q);
-          const matchesShape = (p.shape || "").toLowerCase().includes(q);
-          if (!matchesName && !matchesBrand && !matchesShape) return false;
+          const rawTokens = searchQuery
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s-]/g, " ")
+            .split(/\s+/)
+            .filter(Boolean);
+
+          if (rawTokens.length > 0) {
+            const searchable = [
+              p.name,
+              p.brand,
+              p.shape,
+              p.category,
+              p.type,
+              p.color,
+              p.colorHex,
+              ...(p.colors || []),
+              p.rimType,
+              p.material,
+              p.subtitle,
+              p.description,
+              p.sku,
+              p.gender,
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+            const matchesAll = rawTokens.every((token) => {
+              const cleanToken = token.replace(/[-_]/g, "");
+              const cleanSearchable = searchable.replace(/[-_]/g, "");
+              return searchable.includes(token) || cleanSearchable.includes(cleanToken);
+            });
+
+            if (!matchesAll) return false;
+          }
         }
 
         return true;
@@ -405,7 +457,14 @@ function CatalogContent() {
     if (searchQuery.trim()) {
       chips.push({
         label: `Search: "${searchQuery}"`,
-        onRemove: () => setSearchQuery(""),
+        onRemove: () => {
+          setSearchQuery("");
+          setShowSearchSuggestions(false);
+          const params = new URLSearchParams(searchParams.toString());
+          params.delete("search");
+          params.delete("q");
+          router.replace(`/products?${params.toString()}`);
+        },
       });
     }
     return chips;
@@ -417,7 +476,140 @@ function CatalogContent() {
     selectedBrands,
     selectedOffers,
     searchQuery,
+    searchParams,
+    router,
   ]);
+
+  // Intelligent Fallback: Similar & Recommended Products when filteredProducts is empty
+  const similarProducts = useMemo(() => {
+    if (filteredProducts.length > 0 || productsList.length === 0) return [];
+
+    // 1. Partial query match: products matching AT LEAST ONE token
+    if (searchQuery.trim()) {
+      const queryTokens = searchQuery
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean);
+
+      if (queryTokens.length > 0) {
+        const scored = productsList
+          .map((p) => {
+            const searchable = [
+              p.name,
+              p.brand,
+              p.shape,
+              p.category,
+              p.type,
+              p.color,
+              p.material,
+              p.subtitle,
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+            let score = 0;
+            queryTokens.forEach((t) => {
+              if (searchable.includes(t)) score += 1;
+              if (p.brand?.toLowerCase().includes(t)) score += 3;
+              if (p.name?.toLowerCase().includes(t)) score += 3;
+              if (p.shape?.toLowerCase().includes(t)) score += 2;
+            });
+            return { product: p, score };
+          })
+          .filter((item) => item.score > 0)
+          .sort((a, b) => b.score - a.score || (Number(b.product.rating) || 0) - (Number(a.product.rating) || 0))
+          .map((item) => item.product);
+
+        if (scored.length > 0) {
+          return scored.slice(0, 8);
+        }
+      }
+    }
+
+    // 2. Category match
+    if (selectedCategory && selectedCategory !== "all") {
+      const catMatches = productsList.filter((p) => {
+        const cat = (p.category || "").toLowerCase();
+        const typ = (p.type || "").toLowerCase();
+        return cat === selectedCategory || typ === selectedCategory;
+      });
+      if (catMatches.length > 0) {
+        return catMatches.slice(0, 8);
+      }
+    }
+
+    // 3. Brand or Shape match
+    if (selectedBrands.length > 0 || selectedShapes.length > 0) {
+      const brandOrShape = productsList.filter((p) => {
+        const matchBrand = selectedBrands.some(
+          (b) => b.toLowerCase() === (p.brand || "").toLowerCase()
+        );
+        const matchShape = selectedShapes.some(
+          (s) => s.toLowerCase() === (p.shape || "").toLowerCase()
+        );
+        return matchBrand || matchShape;
+      });
+      if (brandOrShape.length > 0) {
+        return brandOrShape.slice(0, 8);
+      }
+    }
+
+    // 4. Default Curated Luxury Best-Sellers & High-Rated Frames
+    return productsList
+      .slice()
+      .sort((a, b) => {
+        if (a.isBestSeller && !b.isBestSeller) return -1;
+        if (!a.isBestSeller && b.isBestSeller) return 1;
+        return (Number(b.rating) || 5) - (Number(a.rating) || 5);
+      })
+      .slice(0, 8);
+  }, [
+    filteredProducts.length,
+    searchQuery,
+    selectedCategory,
+    selectedBrands,
+    selectedShapes,
+    productsList,
+  ]);
+
+  // Catalog live search suggestions (Brands, Shapes)
+  const catalogSuggestions = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q || q.length < 1) return [];
+
+    const suggestions: { label: string; value: string; type: string }[] = [];
+
+    // Matching brands
+    sortedBrands.forEach((b) => {
+      if (b.toLowerCase().includes(q)) {
+        suggestions.push({ label: b, value: b, type: "Brand" });
+      }
+    });
+
+    // Matching shapes
+    sortedShapes.forEach((s) => {
+      if (s.toLowerCase().includes(q)) {
+        suggestions.push({ label: `${s} Frames`, value: s, type: "Shape" });
+      }
+    });
+
+    return suggestions.slice(0, 6);
+  }, [searchQuery, sortedBrands, sortedShapes]);
+
+  const handleCatalogSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowSearchSuggestions(false);
+    const params = new URLSearchParams(searchParams.toString());
+    if (searchQuery.trim()) {
+      params.set("search", searchQuery.trim());
+    } else {
+      params.delete("search");
+      params.delete("q");
+    }
+    router.replace(`/products?${params.toString()}`);
+  };
 
   return (
     <div className="w-full">
@@ -668,7 +860,7 @@ function CatalogContent() {
                         { val: "under-5k", label: "Under ₹5,000" },
                         { val: "5k-15k", label: "₹5,000 - ₹15,000" },
                         { val: "15k-25k", label: "₹15,000 - ₹25,000" },
-                        { val: "above-25k", label: "Luxury Atelier (₹25,000+)" },
+                        { val: "above-25k", label: "Luxury Collection (₹25,000+)" },
                       ].map((pTier) => (
                         <label
                           key={pTier.val}
@@ -903,7 +1095,7 @@ function CatalogContent() {
         )}
 
         <div className="flex flex-col lg:flex-row gap-8 items-start">
-          {/* ================= DESKTOP PERSISTENT ATELIER FILTER SIDEBAR ================= */}
+          {/* ================= DESKTOP PERSISTENT FILTER SIDEBAR ================= */}
           <aside className="hidden lg:block w-64 xl:w-72 shrink-0 lg:sticky lg:top-24">
             <div className="bg-white/95 backdrop-blur-md border border-[#E8DEC8] rounded-2xl p-4 sm:p-5 shadow-xs max-h-[calc(100vh-115px)] flex flex-col overflow-hidden">
               {/* Header with Total Count & Reset Pill */}
@@ -1098,7 +1290,7 @@ function CatalogContent() {
                         { val: "under-5k", label: "Under ₹5,000" },
                         { val: "5k-15k", label: "₹5,000 - ₹15,000" },
                         { val: "15k-25k", label: "₹15,000 - ₹25,000" },
-                        { val: "above-25k", label: "Luxury Atelier (₹25,000+)" },
+                        { val: "above-25k", label: "Luxury Collection (₹25,000+)" },
                       ].map((pTier) => (
                         <label
                           key={pTier.val}
@@ -1362,18 +1554,69 @@ function CatalogContent() {
               </div>
             )}
 
-            {/* Controls Bar: Search & Sort */}
-            <div className="bg-white rounded-xl border border-[#E8DEC8] p-3 sm:p-4 mb-6 shadow-xs flex flex-col md:flex-row items-center justify-between gap-3">
-              {/* Search in Catalog */}
-              <div className="relative w-full md:w-64">
-                <input
-                  type="text"
-                  placeholder="Search by brand, shape, title..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 bg-[#FCFAF7] border border-[#E8DEC8] rounded-lg text-xs placeholder:text-neutral-400 focus:outline-none focus:border-[#0A251C] transition"
-                />
-                <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-2.5" />
+            {/* Controls Bar: Search & Sort with Live Autocomplete */}
+            <div className="bg-white rounded-xl border border-[#E8DEC8] p-3 sm:p-4 mb-6 shadow-xs flex flex-col md:flex-row items-center justify-between gap-3 relative">
+              {/* Search in Catalog with Autocomplete Suggestions */}
+              <div ref={searchContainerRef} className="relative w-full md:w-80">
+                <form onSubmit={handleCatalogSearchSubmit} className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder="Search brand, shape, model..."
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setShowSearchSuggestions(true);
+                    }}
+                    onFocus={() => setShowSearchSuggestions(true)}
+                    className="w-full pl-9 pr-8 py-2 bg-[#FCFAF7] border border-[#E8DEC8] rounded-lg text-xs placeholder:text-neutral-400 focus:outline-none focus:border-[#C5A059] transition text-[#1A1816]"
+                  />
+                  <Search className="w-4 h-4 text-[#C5A059] absolute left-3 top-2.5 pointer-events-none" />
+                  {searchQuery.trim() && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSearchQuery("");
+                        setShowSearchSuggestions(false);
+                        const params = new URLSearchParams(searchParams.toString());
+                        params.delete("search");
+                        params.delete("q");
+                        router.replace(`/products?${params.toString()}`);
+                      }}
+                      className="absolute right-2.5 top-2.5 text-stone-400 hover:text-stone-700 cursor-pointer"
+                      title="Clear search"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </form>
+
+                {/* Suggestions Dropdown below catalog search */}
+                {showSearchSuggestions && searchQuery.trim().length > 0 && catalogSuggestions.length > 0 && (
+                  <div className="absolute left-0 right-0 top-full mt-1.5 bg-white rounded-xl border border-[#E8DEC8] shadow-xl z-30 p-2 text-xs divide-y divide-stone-100 max-h-60 overflow-y-auto animate-in fade-in duration-150">
+                    <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#716B64]">
+                      Matching Brands &amp; Shapes
+                    </div>
+                    {catalogSuggestions.map((item, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          setSearchQuery(item.value);
+                          setShowSearchSuggestions(false);
+                          const params = new URLSearchParams(searchParams.toString());
+                          params.set("search", item.value);
+                          router.replace(`/products?${params.toString()}`);
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-[#FAF3EB] text-[#1A1816] flex items-center justify-between text-xs cursor-pointer"
+                      >
+                        <span className="font-medium">{item.label}</span>
+                        <span className="text-[10px] text-[#716B64] bg-[#FAF7F2] px-1.5 py-0.5 rounded border border-[#E8DEC8]">
+                          {item.type}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Sort Dropdown */}
@@ -1417,22 +1660,109 @@ function CatalogContent() {
               </div>
             )}
 
-            {/* Product Grid */}
+            {/* Product Grid: Never shows a blank screen */}
             {filteredProducts.length === 0 ? (
-              <div className="py-16 text-center text-neutral-400 bg-white rounded-2xl border border-[#E8DEC8] p-8">
-                <Glasses className="w-12 h-12 mx-auto text-[#C5A059]/60 mb-3" />
-                <h4 className="text-sm font-bold uppercase tracking-wider text-[#1A1816] mb-1">
-                  No Matching Designer Frames
-                </h4>
-                <p className="text-xs text-neutral-500 mb-4">
-                  Try clearing some filters or searching for alternative shapes or brands.
-                </p>
-                <button
-                  onClick={resetAllFilters}
-                  className="px-5 py-2.5 bg-[#0A251C] text-[#C5A059] text-xs uppercase tracking-widest font-bold rounded-lg hover:bg-black transition cursor-pointer"
-                >
-                  Reset All Filters
-                </button>
+              <div className="space-y-8 animate-in fade-in duration-200">
+                {/* UPPER: Clear No-Matches Notice with helpful quick actions */}
+                <div className="bg-[#FAF3EB]/70 rounded-2xl border border-[#E8DEC8] p-6 sm:p-8 text-center max-w-3xl mx-auto shadow-2xs">
+                  <div className="w-12 h-12 rounded-full bg-[#FAF7F2] border border-[#E8DEC8] flex items-center justify-center mx-auto mb-3 text-[#C5A059]">
+                    <Search className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#0A251C] mb-1.5">
+                    {searchQuery.trim()
+                      ? `No exact matches found for "${searchQuery}"`
+                      : "No matching frames found for selected filters"}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#716B64] max-w-md mx-auto mb-5 leading-relaxed">
+                    {searchQuery.trim()
+                      ? "We couldn't find an exact match for your search term. Check for typos, try broader keywords, or browse our recommended atelier frames below."
+                      : "No eyewear matches all currently active filters. Try clearing some filters or exploring our curated designer styles."}
+                  </p>
+
+                  {/* Recovery Action Buttons */}
+                  <div className="flex flex-wrap items-center justify-center gap-2.5 mb-5">
+                    {searchQuery.trim() && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchQuery("");
+                          setShowSearchSuggestions(false);
+                          const params = new URLSearchParams(searchParams.toString());
+                          params.delete("search");
+                          params.delete("q");
+                          router.replace(`/products?${params.toString()}`);
+                        }}
+                        className="px-4 py-2 rounded-lg bg-white border border-[#E8DEC8] hover:border-[#C5A059] text-xs font-semibold text-[#0A251C] transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                      >
+                        <X className="w-3.5 h-3.5 text-stone-400" />
+                        <span>Clear Search Query</span>
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={resetAllFilters}
+                      className="px-5 py-2 rounded-lg bg-[#0A251C] text-[#C5A059] hover:bg-black text-xs font-bold uppercase tracking-wider transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      <span>Reset All Filters</span>
+                    </button>
+                  </div>
+
+                  {/* Suggested Search Terms */}
+                  <div className="pt-4 border-t border-[#E8DEC8]/60 flex flex-wrap items-center justify-center gap-2 text-xs text-[#716B64]">
+                    <span className="font-semibold text-[#0A251C] text-[11px] uppercase tracking-wider">
+                      Suggested Searches:
+                    </span>
+                    {["Aviator", "Square", "Round", "Ray-Ban", "Cartier", "Polarized", "Titanium", "Sunglasses"].map(
+                      (tag) => (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() => {
+                            setSearchQuery(tag);
+                            setShowSearchSuggestions(false);
+                            const params = new URLSearchParams(searchParams.toString());
+                            params.set("search", tag);
+                            router.replace(`/products?${params.toString()}`);
+                          }}
+                          className="px-2.5 py-1 rounded-full bg-white border border-[#E8DEC8] hover:border-[#C5A059] hover:text-[#C5A059] text-[11px] font-medium text-[#1A1816] transition cursor-pointer shadow-2xs"
+                        >
+                          {tag}
+                        </button>
+                      )
+                    )}
+                  </div>
+                </div>
+
+                {/* LOWER: Similar & Recommended Designer Frames Grid */}
+                {similarProducts.length > 0 && (
+                  <div className="pt-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8DEC8] pb-3 mb-6">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-serif text-lg sm:text-xl font-bold text-[#0A251C]">
+                            Similar &amp; Recommended Designer Frames
+                          </h3>
+                          <span className="text-[10px] bg-[#FAF3EB] text-[#C5A059] border border-[#E8DEC8] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            Atelier Picks
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#716B64] mt-0.5">
+                          Hand-selected luxury styles from Shivam Optical tailored for you
+                        </p>
+                      </div>
+                      <span className="text-xs text-[#716B64] font-medium">
+                        Showing {similarProducts.length} Recommendations
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                      {similarProducts.map((p) => (
+                        <ProductCard key={`sim-${p.id}`} product={p} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div>

@@ -17,15 +17,16 @@ import { toast } from "sonner";
 
 export default function AdminShippingPage() {
   const [shippingConfig, setShippingConfig] = useState<any>({
-    freeShippingThreshold: 5000,
-    standardShippingFee: 250,
-    expressShippingFee: 490,
+    isFreeShippingEnabled: true,
+    freeShippingThreshold: 1999,
+    standardShippingFee: 150,
+    expressShippingFee: 350,
     defaultCarrier: "BlueDart Express",
     supportedCarriers: ["BlueDart Express", "Delhivery Air", "DTDC Priority Air"],
     enableWhiteGloveHomeTrial: true,
     trialDepositAmount: 3000,
     shiprocketEmail: "service.viralnest@gmail.com",
-    shiprocketPickupLocation: "Mayur Vihar Atelier",
+    shiprocketPickupLocation: "Mayur Vihar Store",
     shiprocketPickupCity: "Delhi",
     shiprocketPickupPincode: "110091",
     fulfillmentMode: "manual_1click",
@@ -96,9 +97,15 @@ export default function AdminShippingPage() {
   }
 
   // Calculate incentive delta for preview
-  const threshold = Number(shippingConfig.freeShippingThreshold || 5000);
-  const remainingForFreeShipping = Math.max(0, threshold - previewCartValue);
-  const incentivePercentage = Math.min(100, Math.round((previewCartValue / threshold) * 100));
+  const isFreeEnabled =
+    shippingConfig.isFreeShippingEnabled !== false &&
+    Number(shippingConfig.freeShippingThreshold) > 0;
+  const threshold = Number(shippingConfig.freeShippingThreshold || 0);
+  const remainingForFreeShipping = isFreeEnabled ? Math.max(0, threshold - previewCartValue) : 0;
+  const incentivePercentage =
+    isFreeEnabled && threshold > 0
+      ? Math.min(100, Math.round((previewCartValue / threshold) * 100))
+      : 0;
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200 max-w-[1400px] mx-auto">
@@ -109,7 +116,7 @@ export default function AdminShippingPage() {
             Shipping &amp; Logistics Operating Center
           </h1>
           <p className="text-xs text-stone-500">
-            Manage storefront delivery incentives, customer shipping rates, and white-glove atelier trials
+            Manage storefront delivery incentives, customer shipping rates, and white-glove home trials
           </p>
         </div>
 
@@ -188,91 +195,117 @@ export default function AdminShippingPage() {
         </div>
       </div>
 
-      {/* 2. Storewide Incentive Policy (Free Shipping & Threshold) */}
+      {/* 2. Storewide Delivery & Free Shipping Threshold Policy */}
       <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-100 pb-3">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-lg bg-[#FAF3EB] border border-[#E8DCCF] flex items-center justify-center text-[#C5A059]">
-              <Zap className="w-4 h-4" />
+              <Truck className="w-4 h-4" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-sm font-bold text-[#0A251C]">
-                  Storewide Complimentary Insured Delivery Policy
+                  Delivery Charges &amp; Free Delivery Policy
                 </h2>
-                <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full uppercase">
-                  Cart &amp; Checkout Incentive
+                <span
+                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
+                    isFreeEnabled
+                      ? "bg-emerald-100 text-emerald-800"
+                      : "bg-stone-100 text-stone-600"
+                  }`}
+                >
+                  {isFreeEnabled
+                    ? `Free Delivery Above ₹${threshold.toLocaleString("en-IN")}`
+                    : "Real Delivery Charges Applied"}
                 </span>
               </div>
               <p className="text-xs text-stone-500">
-                Encourages higher cart values by unlocking free insured air transit when orders exceed the threshold
+                Set minimum purchase value for free delivery. If disabled or not set, standard delivery charges apply to all orders.
               </p>
             </div>
           </div>
+
+          <label className="flex items-center gap-2 cursor-pointer self-start sm:self-center bg-[#FAF7F2] border border-[#E8DCCF] hover:border-[#C5A059] px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#0A251C] transition select-none">
+            <input
+              type="checkbox"
+              checked={shippingConfig.isFreeShippingEnabled !== false}
+              onChange={(e) =>
+                setShippingConfig({
+                  ...shippingConfig,
+                  isFreeShippingEnabled: e.target.checked,
+                })
+              }
+              className="w-4 h-4 rounded text-[#C5A059] focus:ring-[#C5A059] border-stone-300 cursor-pointer"
+            />
+            <span>Offer Free Delivery</span>
+          </label>
         </div>
 
         {/* Incentive Settings Inputs */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
           <div>
             <label className="block text-stone-700 font-semibold mb-1">
-              Free Shipping Threshold (INR ₹)
+              Free Delivery Minimum Purchase (INR ₹)
             </label>
             <input
               type="number"
-              value={shippingConfig.freeShippingThreshold}
+              disabled={shippingConfig.isFreeShippingEnabled === false}
+              value={shippingConfig.freeShippingThreshold ?? ""}
               onChange={(e) =>
                 setShippingConfig({
                   ...shippingConfig,
-                  freeShippingThreshold: Number(e.target.value),
+                  freeShippingThreshold: e.target.value === "" ? "" : Number(e.target.value),
                 })
               }
-              placeholder="5000"
-              className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-xs text-[#0A251C] font-semibold focus:outline-none focus:border-[#C5A059]"
+              placeholder="e.g. 1999 (Leave 0 to disable)"
+              className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-xs text-[#0A251C] font-semibold focus:outline-none focus:border-[#C5A059] disabled:opacity-50"
             />
             <p className="text-[10px] text-stone-400 mt-1">
-              Orders reaching this subtotal receive complimentary insured delivery
+              {shippingConfig.isFreeShippingEnabled === false || !shippingConfig.freeShippingThreshold
+                ? "Not set: Real delivery charges will be charged on all orders"
+                : `Orders reaching ₹${Number(shippingConfig.freeShippingThreshold).toLocaleString("en-IN")} qualify for free standard delivery`}
             </p>
           </div>
 
           <div>
             <label className="block text-stone-700 font-semibold mb-1">
-              Standard Courier Rate (Sub-Threshold) (INR ₹)
+              Standard Delivery Charge (INR ₹)
             </label>
             <input
               type="number"
-              value={shippingConfig.standardShippingFee}
+              value={shippingConfig.standardShippingFee ?? 150}
               onChange={(e) =>
                 setShippingConfig({
                   ...shippingConfig,
                   standardShippingFee: Number(e.target.value),
                 })
               }
-              placeholder="250"
+              placeholder="150"
               className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-xs text-[#0A251C] focus:outline-none focus:border-[#C5A059]"
             />
             <p className="text-[10px] text-stone-400 mt-1">
-              Charged to the customer when the order subtotal is below the threshold
+              Real delivery charge applied when order is below threshold or when free delivery is not set
             </p>
           </div>
 
           <div>
             <label className="block text-stone-700 font-semibold mb-1">
-              Express Priority Air Add-On (INR ₹)
+              Express Delivery Surcharge (INR ₹)
             </label>
             <input
               type="number"
-              value={shippingConfig.expressShippingFee || 490}
+              value={shippingConfig.expressShippingFee ?? 350}
               onChange={(e) =>
                 setShippingConfig({
                   ...shippingConfig,
                   expressShippingFee: Number(e.target.value),
                 })
               }
-              placeholder="490"
+              placeholder="350"
               className="w-full px-3 py-2 bg-[#FAF7F2] border border-[#E8DCCF] rounded-lg text-xs text-[#0A251C] focus:outline-none focus:border-[#C5A059]"
             />
             <p className="text-[10px] text-stone-400 mt-1">
-              Client upgrade fee for next-day priority air transit
+              Client upgrade fee for priority 1–2 day express courier transit
             </p>
           </div>
         </div>
@@ -315,15 +348,15 @@ export default function AdminShippingPage() {
           </div>
         </div>
 
-        {/* Live Storefront Incentive Simulator */}
+        {/* Live Storefront Delivery Calculator Simulator */}
         <div className="pt-3 border-t border-stone-100 bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DCCF] space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
             <div className="flex items-center gap-1.5 text-xs font-bold text-[#0A251C]">
               <Truck className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>Live Storefront Incentive Simulator (Client View in Cart &amp; Checkout)</span>
+              <span>Live Storefront Delivery Simulator (Customer View)</span>
             </div>
             <span className="text-[10px] text-stone-500 uppercase tracking-wider font-semibold">
-              Real-time customer preview
+              Real-time calculation preview
             </span>
           </div>
 
@@ -331,9 +364,9 @@ export default function AdminShippingPage() {
             <span className="text-xs text-stone-600 whitespace-nowrap">Simulate Cart Subtotal:</span>
             <input
               type="range"
-              min={1000}
-              max={10000}
-              step={200}
+              min={500}
+              max={15000}
+              step={250}
               value={previewCartValue}
               onChange={(e) => setPreviewCartValue(Number(e.target.value))}
               className="flex-1 accent-[#C5A059] cursor-pointer"
@@ -343,42 +376,50 @@ export default function AdminShippingPage() {
             </span>
           </div>
 
-          {/* Client-Facing Progress Bar Simulation */}
+          {/* Client-Facing Calculation Result Simulation */}
           <div className="p-3.5 bg-white border border-[#E8DCCF] rounded-xl space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-[#0A251C]">
-                {remainingForFreeShipping > 0 ? (
+                {!isFreeEnabled ? (
+                  <span className="text-stone-700 font-bold">
+                    Free Delivery Disabled: All orders charged standard delivery fee (₹{shippingConfig.standardShippingFee || 150})
+                  </span>
+                ) : remainingForFreeShipping > 0 ? (
                   <>
-                    Add <strong className="text-[#C5A059]">₹{remainingForFreeShipping.toLocaleString("en-IN")}</strong> more to unlock Complimentary Insured Air Transit
+                    Add <strong className="text-[#C5A059]">₹{remainingForFreeShipping.toLocaleString("en-IN")}</strong> more to qualify for Free Standard Delivery
                   </>
                 ) : (
                   <span className="text-emerald-700 font-bold flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    Complimentary Insured Air Transit Unlocked
+                    Cart qualifies for Free Standard Delivery (₹0)
                   </span>
                 )}
               </span>
-              <span className="text-[11px] font-mono text-stone-500">{incentivePercentage}%</span>
+              {isFreeEnabled && (
+                <span className="text-[11px] font-mono text-stone-500">{incentivePercentage}%</span>
+              )}
             </div>
 
-            <div className="w-full bg-[#FAF7F2] border border-[#E8DCCF] rounded-full h-2 overflow-hidden">
-              <div
-                className={`h-full transition-all duration-300 ${
-                  remainingForFreeShipping === 0 ? "bg-emerald-600" : "bg-[#C5A059]"
-                }`}
-                style={{ width: `${incentivePercentage}%` }}
-              />
-            </div>
+            {isFreeEnabled && (
+              <div className="w-full bg-[#FAF7F2] border border-[#E8DCCF] rounded-full h-2 overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-300 ${
+                    remainingForFreeShipping === 0 ? "bg-emerald-600" : "bg-[#C5A059]"
+                  }`}
+                  style={{ width: `${incentivePercentage}%` }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* 3. Luxury Atelier Service (White-Glove Home Trial) */}
+      {/* 3. Luxury White-Glove Service (Home Trial) */}
       <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
         <div className="flex items-start justify-between">
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
-              Luxury Atelier Service
+              White-Glove In-Home Service
             </div>
             <h2 className="text-base font-bold text-[#0A251C]">
               White-Glove In-Home Frame Trial

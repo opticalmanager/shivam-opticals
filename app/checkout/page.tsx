@@ -67,7 +67,13 @@ function CheckoutContent() {
   }, [isLoggedIn, user]);
 
   // Shipping policy state
-  const [shippingPolicy, setShippingPolicy] = useState({
+  const [shippingPolicy, setShippingPolicy] = useState<{
+    isFreeShippingEnabled: boolean;
+    freeShippingThreshold: number | null;
+    standardShippingFee: number;
+    expressShippingFee: number;
+  }>({
+    isFreeShippingEnabled: true,
     freeShippingThreshold: 1999,
     standardShippingFee: 150,
     expressShippingFee: 350,
@@ -77,9 +83,11 @@ function CheckoutContent() {
     fetch("/api/shipping/config")
       .then((r) => r.json())
       .then((data) => {
-        if (data && data.freeShippingThreshold) {
+        if (data) {
           setShippingPolicy({
-            freeShippingThreshold: data.freeShippingThreshold,
+            isFreeShippingEnabled: data.isFreeShippingEnabled !== false,
+            freeShippingThreshold:
+              typeof data.freeShippingThreshold === "number" ? data.freeShippingThreshold : null,
             standardShippingFee: data.standardShippingFee ?? 150,
             expressShippingFee: data.expressShippingFee ?? 350,
           });
@@ -89,7 +97,12 @@ function CheckoutContent() {
   }, []);
 
   const effectiveSubtotal = rawSubtotal || subtotal || 0;
-  const isEligibleForFreeShipping = effectiveSubtotal >= shippingPolicy.freeShippingThreshold;
+  const isEligibleForFreeShipping = Boolean(
+    shippingPolicy.isFreeShippingEnabled &&
+      shippingPolicy.freeShippingThreshold &&
+      shippingPolicy.freeShippingThreshold > 0 &&
+      effectiveSubtotal >= shippingPolicy.freeShippingThreshold
+  );
 
   const shippingRates = {
     standard: isEligibleForFreeShipping ? 0 : shippingPolicy.standardShippingFee,

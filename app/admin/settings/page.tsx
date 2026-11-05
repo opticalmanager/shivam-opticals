@@ -54,7 +54,7 @@ function AdminSettingsContent() {
   // General store settings state
   const [generalConfig, setGeneralConfig] = useState({
     storeName: "Shivam Optical",
-    tagline: "Haute Lunetterie Atelier & Optometry",
+    tagline: "Luxury Eyewear & Optometry Clinic",
     email: "concierge@shivamoptical.in",
     phone: "097799 90207",
     currency: "INR (₹)",
@@ -62,7 +62,7 @@ function AdminSettingsContent() {
     address: "Pocket 1, Mayur Vihar Phase 1, New Delhi - 110091",
   });
 
-  // Store & Atelier Policies state
+  // Store Policies state
   const [storePolicies, setStorePolicies] = useState({
     mandatoryVerification: true,
     titaniumWarranty: true,
@@ -342,7 +342,7 @@ function AdminSettingsContent() {
   };
 
   const handleSaveStorePolicies = () => {
-    saveSetting("store", storePolicies, "Store & atelier policies saved");
+    saveSetting("store", storePolicies, "Store policies saved successfully");
   };
 
   const handleSaveNotifications = () => {
@@ -411,7 +411,7 @@ function AdminSettingsContent() {
     { id: "pricing", label: "Catalog Pricing & MRP", icon: Tag },
     { id: "loyalty", label: "Rewards & Privilege Club", icon: Award },
     { id: "whatsapp_auth", label: "WhatsApp & Auth OTP", icon: Smartphone },
-    { id: "store", label: "Store & Atelier Policy", icon: Store },
+    { id: "store", label: "Store Policies", icon: Store },
     { id: "payments", label: "Payment Methods", icon: CreditCard, externalHref: "/admin/payments" },
     { id: "shipping", label: "Shipping & Transit", icon: Truck, externalHref: "/admin/shipping" },
     { id: "notifications", label: "Notification Channels", icon: Bell },
@@ -512,7 +512,7 @@ function AdminSettingsContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div>
                   <label className="block text-stone-700 font-semibold mb-1">
-                    Store / Atelier Legal Name
+                    Store Legal Name
                   </label>
                   <input
                     type="text"
@@ -568,7 +568,7 @@ function AdminSettingsContent() {
 
                 <div className="sm:col-span-2">
                   <label className="block text-stone-700 font-semibold mb-1">
-                    Tagline & Atelier Mission
+                    Tagline & Store Mission
                   </label>
                   <input
                     type="text"
@@ -582,7 +582,7 @@ function AdminSettingsContent() {
 
                 <div className="sm:col-span-2">
                   <label className="block text-stone-700 font-semibold mb-1">
-                    Flagship Atelier Physical Address
+                    Flagship Store Physical Address
                   </label>
                   <input
                     type="text"
@@ -1936,7 +1936,7 @@ function AdminSettingsContent() {
 
                       <div>
                         <label className="block text-stone-700 font-semibold mb-1">
-                          Atelier Email Address *
+                          Staff Email Address *
                         </label>
                         <input
                           type="email"

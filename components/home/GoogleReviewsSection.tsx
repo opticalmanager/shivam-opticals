@@ -208,7 +208,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       rating: 5,
       timeAgo: "2 months ago",
       review:
-        "Have been a patron of Shivam Optical for over 8 years. Their after-sales service and precision fitting have always been faultless. Got my father's bifocal lenses replaced seamlessly. Highly recommended optical atelier in Delhi NCR.",
+        "Have been a patron of Shivam Optical for over 8 years. Their after-sales service and precision fitting have always been faultless. Got my father's bifocal lenses replaced seamlessly. Highly recommended optical store in Delhi NCR.",
       service: "Bifocal Lens Replacement",
       category: "Bifocal & Eye Care",
     },
@@ -221,7 +221,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       rating: 5,
       timeAgo: "3 weeks ago",
       review:
-        "Ordered online and got them fitted at the Mayur Vihar atelier. The acetate finish is flawless and the comfort fit is superb. Loved the personalized care and authentic 5-star reputation they uphold on Google.",
+        "Ordered online and got them fitted at the Mayur Vihar store. The acetate finish is flawless and the comfort fit is superb. Loved the personalized care and authentic 5-star reputation they uphold on Google.",
       service: "Acetate Frame Custom Fitting",
       category: "Acetate Frames",
     },
@@ -424,7 +424,7 @@ export const GoogleReviewsSection: React.FC = () => {
                 </span>
               </div>
               <span className="font-sans text-[11px] text-stone-500">
-                Mayur Vihar Atelier, Delhi
+                Mayur Vihar Store, Delhi
               </span>
             </div>
 

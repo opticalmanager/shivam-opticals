@@ -311,7 +311,7 @@ export const Header: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center min-h-[44px] py-2.5 hover:text-[#C5A059] transition-colors"
               >
-                ABOUT OUR ATELIER
+                ABOUT SHIVAM OPTICAL
               </Link>
               <Link
                 href="/contact"

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Shivam Optical | Luxury Eyewear & Haute Lunetterie",
     short_name: "Shivam Optical",
     description:
-      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Atelier boutique in Mayur Vihar, Delhi.",
+      "Handcrafted Italian Acetate, Titanium Eyeglasses & Polarized Sunglasses. Optical store in Mayur Vihar, Delhi.",
     start_url: "/",
     display: "standalone",
     background_color: "#FAF7F2",

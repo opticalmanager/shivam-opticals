@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Designer Eyewear & Optical Frames Catalog | Shivam Optical",
     description:
-      "Handcrafted optical frames, polarized sunglasses, and precision computer lenses. Available at Shivam Optical Atelier.",
+      "Handcrafted optical frames, polarized sunglasses, and precision computer lenses. Available at Shivam Optical.",
     url: "https://shivamoptical.in/products",
     siteName: "Shivam Optical",
     images: [

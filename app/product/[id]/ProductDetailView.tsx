@@ -32,6 +32,14 @@ interface ProductDetailViewProps {
   allProducts?: Product[];
 }
 
+function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.884 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  );
+}
+
 export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   product,
   allProducts = [],
@@ -421,7 +429,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   onClick={() => toggleAccordion("about")}
                   className="w-full flex items-center justify-between text-left text-xs sm:text-sm font-bold uppercase tracking-[0.15em] text-[#1A1816] hover:text-[#C5A059] transition-colors cursor-pointer"
                 >
-                  <span>ABOUT SHIVAM OPTICAL ATELIER</span>
+                  <span>ABOUT SHIVAM OPTICAL</span>
                   {openAccordions.about ? (
                     <Minus className="w-4 h-4 text-neutral-500" />
                   ) : (
@@ -430,7 +438,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                 </button>
                 {openAccordions.about && (
                   <div className="pt-3.5 pb-1 text-xs sm:text-sm leading-relaxed text-neutral-600 font-normal animate-in fade-in duration-200">
-                    Shivam Optical is India&apos;s premier luxury optical atelier and clinical vision center.
+                    Shivam Optical is India&apos;s premier optical store and clinical vision center.
                     For over decades, we have curated the world&apos;s most prestigious eyewear houses,
                     delivering master craftsmanship, digital wavefront prescription lenses, and bespoke optical
                     solutions engineered with certified European laboratory precision.
@@ -563,17 +571,33 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               ADD TO CART
             </button>
 
-            {/* Secondary Action: ADD PRESCRIPTION LENSES (FORWARD TO WHATSAPP CONCIERGE) */}
+            {/* Secondary Action: ADD PRECISION LENSES? CONTACT US (WHATSAPP CONCIERGE) */}
             {product.category !== "contact-lenses" && (
               <button
                 type="button"
                 onClick={handlePrescriptionWhatsApp}
-                className="w-full bg-[#FAF3EB] hover:bg-[#F4E9DD] border border-[#E8DEC8] hover:border-[#C5A059] text-[#1A1816] py-3.5 px-4 font-sans font-medium text-[11px] sm:text-[12px] uppercase tracking-[0.08em] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer text-center rounded-xl shadow-2xs hover:shadow-xs active:scale-[0.99] group"
+                className="w-full bg-[#FAF3EB] hover:bg-[#F4E9DD] border border-[#E8DEC8] hover:border-[#25D366]/60 text-[#1A1816] p-3 sm:p-3.5 rounded-xl transition-all duration-200 flex items-center justify-between gap-3 cursor-pointer shadow-2xs hover:shadow-xs active:scale-[0.99] group text-left"
                 title="Send prescription details directly to our master optician on WhatsApp"
               >
-                <Glasses className="w-4 h-4 text-[#C5A059] group-hover:scale-105 transition-transform" />
-                <span>ADD PRESCRIPTION LENSES (NIKON · ZEISS · ESSILOR)</span>
-                <MessageCircle className="w-3.5 h-3.5 text-[#25D366] shrink-0 ml-1" />
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-lg bg-white border border-[#E8DEC8] flex items-center justify-center text-[#C5A059] shrink-0 group-hover:border-[#C5A059] transition-colors shadow-2xs">
+                    <Glasses className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A059]" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="font-serif font-bold text-[13px] sm:text-[14px] text-[#0A251C] tracking-wide group-hover:text-[#C5A059] transition-colors">
+                        Add Precision Lenses? Contact Us
+                      </span>
+                    </div>
+                    <p className="text-[10px] sm:text-[11px] text-stone-500 font-sans truncate">
+                      Zeiss · Essilor · Nikon · Single Vision &amp; Progressive Fitting
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                  <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
+                  <span className="hidden sm:inline">WhatsApp</span>
+                </div>
               </button>
             )}
 
@@ -642,7 +666,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               onClick={handleWhatsAppChat}
               className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-sans font-medium text-[12px] sm:text-[13px] transition-colors cursor-pointer shadow-xs active:scale-[0.99]"
             >
-              <MessageCircle className="w-4 h-4 text-white" />
+              <WhatsAppIcon className="w-4 h-4 text-white" />
               <span>Have questions or need live pictures? Chat with us.</span>
             </button>
 
@@ -792,7 +816,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           <section className="mt-16 pt-12 border-t border-[#E8DEC8]">
             <div className="text-center mb-8">
               <span className="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-bold block mb-1">
-                CURATED ATELIER COMPLEMENTS
+                CURATED EYEWEAR COMPLEMENTS
               </span>
               <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1A1816] uppercase">
                 YOU MAY ALSO ADMIRE
@@ -847,13 +871,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           {product.category !== "contact-lenses" && (
             <button
               onClick={handlePrescriptionWhatsApp}
-              className="px-2.5 py-2.5 rounded-xl border border-[#C5A059] bg-[#FAF3EB] text-[#0A251C] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-2xs"
-              title="Send prescription details on WhatsApp"
-              aria-label="Send prescription details on WhatsApp"
+              className="px-2.5 sm:px-3 py-2 rounded-xl border border-[#25D366]/40 bg-[#FAF3EB] hover:bg-[#F4E9DD] text-[#0A251C] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-2xs"
+              title="Add Precision Lenses on WhatsApp"
+              aria-label="Add Precision Lenses on WhatsApp"
             >
               <Glasses className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>+Rx</span>
-              <MessageCircle className="w-3 h-3 text-[#25D366]" />
+              <span className="hidden min-[380px]:inline">Precision Lenses</span>
+              <span className="min-[380px]:hidden">+Rx</span>
+              <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
             </button>
           )}
           <button

@@ -191,7 +191,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ onToggleMobileMenu }) 
               <div className="absolute right-0 mt-2 w-80 bg-white border border-[#E8DCCF] rounded-xl shadow-xl overflow-hidden z-40 animate-in fade-in duration-150">
                 <div className="px-4 py-3 border-b border-stone-100 flex items-center justify-between bg-[#FAF7F2]">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-[#0A251C]">Live Atelier Alerts</span>
+                    <span className="text-xs font-bold text-[#0A251C]">Live Store Alerts</span>
                     {unreadCount > 0 && (
                       <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#C5A059] text-white font-mono font-semibold">
                         {unreadCount}

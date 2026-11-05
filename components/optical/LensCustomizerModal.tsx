@@ -179,7 +179,7 @@ export const LensCustomizerModal: React.FC<LensCustomizerModalProps> = ({
                   {
                     id: "frame-only",
                     title: "Frame Only (Demo Lenses)",
-                    desc: "Receive the genuine frame with demo protective lenses to fit custom prescriptions at your local atelier.",
+                    desc: "Receive the genuine frame with demo protective lenses to fit custom prescriptions at your local optical store.",
                   },
                 ].map((typeOption) => {
                   const isSelected = lensType === typeOption.id;

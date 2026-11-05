@@ -8,7 +8,7 @@ export async function POST(req: Request) {
       body.trackingNumber || `SO-${Math.floor(100000 + Math.random() * 900000)}`;
     const orderNumber = body.id || trackingNumber;
 
-    // Estimate delivery date (default 4 days for luxury atelier assembly)
+    // Estimate delivery date (default 4 days for lab assembly)
     const estimatedDate = new Date();
     estimatedDate.setDate(estimatedDate.getDate() + 4);
 
@@ -165,7 +165,7 @@ export async function GET(req: Request) {
               'lens_price', oi.lens_price,
               'total_price', oi.total_price,
               'product_name', COALESCE(oi.product_snapshot->>'name', p.name, 'Optical Frame'),
-              'brand', COALESCE(oi.product_snapshot->>'brand', b.name, 'Luxury Atelier'),
+              'brand', COALESCE(oi.product_snapshot->>'brand', b.name, 'Shivam Optical'),
               'color', COALESCE(oi.product_snapshot->>'color', pv.color_name, 'Standard'),
               'lens_package', oi.product_snapshot->>'lensPackage',
               'prescription', oi.product_snapshot->'prescription',
@@ -222,7 +222,7 @@ export async function GET(req: Request) {
               'lens_price', oi.lens_price,
               'total_price', oi.total_price,
               'product_name', COALESCE(oi.product_snapshot->>'name', p.name, 'Optical Frame'),
-              'brand', COALESCE(oi.product_snapshot->>'brand', b.name, 'Luxury Atelier'),
+              'brand', COALESCE(oi.product_snapshot->>'brand', b.name, 'Shivam Optical'),
               'color', COALESCE(oi.product_snapshot->>'color', pv.color_name, 'Standard'),
               'lens_package', oi.product_snapshot->>'lensPackage',
               'prescription', oi.product_snapshot->'prescription',

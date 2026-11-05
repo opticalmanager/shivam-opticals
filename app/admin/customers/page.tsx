@@ -292,7 +292,7 @@ export default function AdminCustomersPage() {
               <div className="bg-white p-4 rounded-xl border border-[#E8DCCF] shadow-2xs space-y-2">
                 <div className="text-xs font-bold text-[#0A251C] flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>Primary Atelier Delivery Address</span>
+                  <span>Primary Delivery Address</span>
                 </div>
                 <div className="text-xs text-stone-600 leading-relaxed pl-5">
                   {selectedCustomer.city ? (

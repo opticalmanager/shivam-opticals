@@ -225,7 +225,7 @@ export default function AdminBrandsPage() {
               <thead>
                 <tr className="border-b border-stone-200 bg-[#FAF7F2] text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
                   <th className="py-3 px-4">Brand Name</th>
-                  <th className="py-3 px-3">Origin / Atelier</th>
+                  <th className="py-3 px-3">Origin / Workshop</th>
                   <th className="py-3 px-3">Tagline</th>
                   <th className="py-3 px-3">Products</th>
                   <th className="py-3 px-3">Featured</th>
@@ -333,7 +333,7 @@ export default function AdminBrandsPage() {
               </div>
 
               <div>
-                <label className="block text-stone-700 font-semibold mb-1">Origin / Atelier</label>
+                <label className="block text-stone-700 font-semibold mb-1">Origin / Workshop</label>
                 <input
                   type="text"
                   value={origin}

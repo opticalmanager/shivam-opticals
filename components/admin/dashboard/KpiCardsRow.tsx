@@ -71,7 +71,7 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <h2 className="text-lg font-bold tracking-tight text-[#0A251C] font-serif">
-            Operations & Atelier Command
+            Operations & Store Command
           </h2>
           <p className="text-xs text-stone-500">
             Real-time optical retail performance and laboratory assembly metrics

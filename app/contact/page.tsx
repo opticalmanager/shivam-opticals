@@ -9,15 +9,20 @@ import {
   Clock,
   Calendar,
   Send,
-  MessageCircle,
-  ExternalLink,
+  Navigation,
   ShieldCheck,
   CheckCircle2,
-  Glasses,
-  Navigation,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
+
+function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.884 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  );
+}
 
 export default function ContactPage() {
   const { openAppointmentModal } = useAuth();
@@ -26,7 +31,7 @@ export default function ContactPage() {
     name: "",
     phone: "",
     email: "",
-    service: "Comprehensive Computerized Eye Test",
+    service: "General Question or Inquiry",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,14 +48,14 @@ export default function ContactPage() {
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      toast.success("Consultation Request Received", {
-        description: "Our Mayur Vihar master optician concierge will contact you within 2 to 4 hours.",
+      toast.success("Message Received", {
+        description: "Our Mayur Vihar store team will get back to you within 2 to 4 hours.",
       });
       setFormData({
         name: "",
         phone: "",
         email: "",
-        service: "Comprehensive Computerized Eye Test",
+        service: "General Question or Inquiry",
         message: "",
       });
     }, 600);
@@ -58,39 +63,39 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1A1816]">
-      {/* 1. Atelier Breadcrumb & Header Banner */}
-      <section className="bg-[#FAF3EB] border-b border-[#E8DEC8] py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1240px] mx-auto space-y-3">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-stone-500 font-semibold">
+      {/* 1. Breadcrumb & Clean Header */}
+      <section className="bg-white border-b border-[#E8DEC8] py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto space-y-2">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-stone-400 font-semibold">
             <Link href="/" className="hover:text-[#0A251C] transition">Home</Link>
             <span>/</span>
-            <span className="text-[#C5A059] font-bold">Contact & Atelier Store</span>
+            <span className="text-[#C5A059] font-bold">Contact Us</span>
           </div>
-          <span className="text-[11px] font-bold tracking-[0.25em] text-[#C5A059] uppercase block">
-            SHIVAM OPTICAL ATELIER • MAYUR VIHAR PHASE 1
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0A251C] tracking-tight">
-            Consult With Our Optical Masters
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#0A251C] tracking-tight">
+            Contact Us
           </h1>
-          <p className="text-xs sm:text-sm text-stone-600 max-w-2xl leading-relaxed">
-            Experience clinical optometry precision, certified Zeiss lens diagnostics, and bespoke frame fittings at our flagship optical store in Mayur Vihar, New Delhi.
+          <p className="text-xs sm:text-sm text-stone-500 max-w-xl leading-relaxed">
+            Have a question or need help with your frames or lenses? Visit our Mayur Vihar store or send us a message below.
           </p>
         </div>
       </section>
 
       {/* 2. Main Content Grid */}
-      <section className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: Direct Atelier Coordinates */}
-          <div className="lg:col-span-5 space-y-8">
+      <section className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          {/* Left Column: Direct Store Coordinates */}
+          <div className="lg:col-span-5 space-y-6">
             <div className="bg-white rounded-2xl border border-[#E8DEC8] p-6 sm:p-8 shadow-xs space-y-6">
-              <div className="space-y-2">
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A059] block">
-                  PHYSICAL FLAGSHIP
+              <div className="space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C5A059] block">
+                  STORE LOCATION
                 </span>
                 <h2 className="text-xl font-serif font-bold text-[#0A251C]">
-                  Shivam Optical Flagship Atelier
+                  Our Store in Mayur Vihar
                 </h2>
+                <p className="text-xs text-stone-500">
+                  Visit us for frame fittings, adjustments, and computerized eye testing.
+                </p>
               </div>
 
               {/* Address */}
@@ -100,7 +105,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold uppercase text-[#0A251C] text-[11px] tracking-wider mb-0.5">
-                    Store Location
+                    Address
                   </h3>
                   <p className="leading-relaxed">
                     Shop No-1, Kanishka Complex, Samachar Market, Mayur Vihar Phase 1 Extension, New Delhi - 110091
@@ -118,11 +123,11 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold uppercase text-[#0A251C] text-[11px] tracking-wider mb-0.5">
-                    Visiting Hours
+                    Opening Hours
                   </h3>
                   <p className="font-medium text-[#0A251C]">Monday – Sunday: 10:30 AM – 09:00 PM</p>
                   <p className="text-[11px] text-stone-400 mt-0.5">
-                    Optometrist available daily for computerized eye tests
+                    Open all 7 days for computerized eye tests
                   </p>
                 </div>
               </div>
@@ -134,16 +139,16 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold uppercase text-[#0A251C] text-[11px] tracking-wider mb-0.5">
-                    Direct Phone Line
+                    Phone
                   </h3>
                   <a
                     href="tel:09779990207"
                     className="font-medium text-[#0A251C] hover:text-[#C5A059] transition"
                   >
-                    097799 90207
+                    +91 97799 90207
                   </a>
                   <p className="text-[11px] text-stone-400 mt-0.5">
-                    Direct optician assistance & order queries
+                    Call for orders, frame availability &amp; assistance
                   </p>
                 </div>
               </div>
@@ -155,7 +160,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold uppercase text-[#0A251C] text-[11px] tracking-wider mb-0.5">
-                    Concierge Inquiries
+                    Email
                   </h3>
                   <a
                     href="mailto:info@shivamoptical.in"
@@ -164,7 +169,7 @@ export default function ContactPage() {
                     info@shivamoptical.in
                   </a>
                   <p className="text-[11px] text-stone-400 mt-0.5">
-                    Response within 2-4 business hours
+                    We respond within 2 to 4 business hours
                   </p>
                 </div>
               </div>
@@ -172,12 +177,12 @@ export default function ContactPage() {
               {/* Action Buttons */}
               <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a
-                  href="https://wa.me/919779990207?text=Hello%20Shivam%20Optics,%20I%20would%20like%20to%20inquire%20about%20eyewear%20styling%20and%20consultations."
+                  href="https://wa.me/919779990207?text=Hello%20Shivam%20Optical,%20I%20have%20an%20inquiry%20regarding%20eyewear."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-2.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition"
+                  className="py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition shadow-xs"
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <WhatsAppIcon className="w-4 h-4 fill-white" />
                   <span>WhatsApp</span>
                 </a>
                 <a
@@ -192,39 +197,39 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Quick Consultation Callout */}
-            <div className="bg-[#FAF3EB] rounded-2xl border border-[#E8DEC8] p-6 space-y-3">
+            {/* Quick Eye Test Appointment Callout */}
+            <div className="bg-[#FAF3EB] rounded-2xl border border-[#E8DEC8] p-5 sm:p-6 space-y-2.5">
               <div className="flex items-center gap-2 text-[#0A251C]">
                 <Calendar className="w-4 h-4 text-[#C5A059]" />
                 <h3 className="text-xs font-bold uppercase tracking-wider">
-                  Book Clinical Eye Test Online
+                  Book an Eye Test Online
                 </h3>
               </div>
               <p className="text-xs text-stone-600 leading-relaxed">
-                Prefer a guaranteed consultation slot without waiting? Reserve your computerized eye test or frame styling session in under 30 seconds.
+                Reserve your computerized eye test slot or frame styling session at our Mayur Vihar store in under 30 seconds.
               </p>
               <button
                 type="button"
                 onClick={openAppointmentModal}
-                className="w-full py-3 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-[0.16em] rounded-xl transition cursor-pointer flex items-center justify-center gap-2 shadow-xs"
+                className="w-full py-2.5 sm:py-3 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-[0.14em] rounded-xl transition cursor-pointer flex items-center justify-center gap-2 shadow-xs"
               >
-                <Calendar className="w-4 h-4" />
-                <span>Reserve Consultation Slot</span>
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Reserve Eye Test Slot</span>
               </button>
             </div>
           </div>
 
-          {/* Right Column: Interactive Consultation & Concierge Form */}
+          {/* Right Column: Clean Interactive Contact Form */}
           <div className="lg:col-span-7 bg-white rounded-2xl border border-[#E8DEC8] p-6 sm:p-10 shadow-xs space-y-6">
-            <div className="space-y-2 border-b border-[#E8DEC8] pb-4">
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A059] block">
-                CONCIERGE INQUIRY
+            <div className="space-y-1.5 border-b border-[#E8DEC8] pb-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C5A059] block">
+                SEND A MESSAGE
               </span>
               <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0A251C]">
-                Transmit an Optical Inquiry
+                Send Us a Message
               </h2>
               <p className="text-xs text-stone-500">
-                Have a question regarding progressive lens packages, prescription accuracy, or designer frame sizing? Leave a message below.
+                Have a question about frames, lenses, or need assistance? Fill out the form below and our team will get back to you shortly.
               </p>
             </div>
 
@@ -234,17 +239,17 @@ export default function ContactPage() {
                   <CheckCircle2 className="w-7 h-7" />
                 </div>
                 <h3 className="text-lg font-serif font-bold text-[#0A251C]">
-                  Inquiry Received
+                  Message Sent Successfully
                 </h3>
                 <p className="text-xs text-stone-600 max-w-md mx-auto leading-relaxed">
-                  Thank you for reaching out to Shivam Optical. A senior optometrist concierge has been notified and will contact you via phone or email shortly.
+                  Thank you for reaching out to Shivam Optical. Our team has received your message and will get in touch with you shortly.
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
                   className="px-6 py-2.5 rounded-xl border border-[#0A251C] text-[#0A251C] hover:bg-[#0A251C] hover:text-white text-xs font-bold uppercase tracking-wider transition"
                 >
-                  Send Another Inquiry
+                  Send Another Message
                 </button>
               </div>
             ) : (
@@ -285,7 +290,7 @@ export default function ContactPage() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="patron@example.com"
+                      placeholder="you@example.com"
                       className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm outline-none focus:border-[#C5A059]"
                     />
                   </div>
@@ -293,43 +298,40 @@ export default function ContactPage() {
 
                 <div>
                   <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1">
-                    Service of Interest
+                    What can we help you with?
                   </label>
                   <select
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm outline-none focus:border-[#C5A059] bg-white cursor-pointer"
                   >
-                    <option value="Comprehensive Computerized Eye Test">
-                      Comprehensive Computerized Eye Test
+                    <option value="General Question or Inquiry">
+                      General Question or Inquiry
                     </option>
-                    <option value="Bespoke Luxury Frame Styling">
-                      Bespoke Luxury Frame Styling & Fitting
+                    <option value="Book Computerized Eye Test">
+                      Book Computerized Eye Test Appointment
                     </option>
-                    <option value="Zeiss / Essilor Lens Recommendation">
-                      Zeiss / Essilor Lens Thickness & Package Recommendation
+                    <option value="Prescription Lenses (Zeiss, Essilor, Single Vision, Progressive)">
+                      Prescription Lenses (Zeiss, Essilor, Single Vision, Progressive)
                     </option>
-                    <option value="Contact Lens Fitting & Consultation">
-                      Contact Lens Fitting & Consultation
+                    <option value="Frame Sizing & Styling Advice">
+                      Frame Sizing &amp; Styling Advice
                     </option>
-                    <option value="Ultrasonic Cleaning & Frame Tuning">
-                      Ultrasonic Cleaning & Frame Tuning (Complimentary)
-                    </option>
-                    <option value="Corporate / Institutional Vision Inquiry">
-                      Corporate / Institutional Vision Inquiry
+                    <option value="Order Status & Tracking">
+                      Order Status &amp; Tracking
                     </option>
                   </select>
                 </div>
 
                 <div>
                   <label className="text-[11px] font-bold uppercase tracking-wider text-stone-600 block mb-1">
-                    Message or Prescription Details (Optional)
+                    Your Message (Optional)
                   </label>
                   <textarea
                     rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Please specify any particular frame models, eye power concerns, or questions for our optometrist..."
+                    placeholder="Type your message, questions, or frame requirements here..."
                     className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-xs sm:text-sm outline-none focus:border-[#C5A059]"
                   />
                 </div>
@@ -338,16 +340,16 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-[0.18em] rounded-xl transition cursor-pointer flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
+                    className="w-full py-3.5 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-[0.16em] rounded-xl transition cursor-pointer flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
                   >
                     <Send className="w-4 h-4" />
-                    <span>{isSubmitting ? "TRANSMITTING..." : "SUBMIT INQUIRY"}</span>
+                    <span>{isSubmitting ? "SENDING..." : "SEND MESSAGE"}</span>
                   </button>
                 </div>
 
                 <div className="flex items-center justify-center gap-1.5 text-[11px] text-stone-400 pt-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>Your contact details are strictly confidential under our clinical privacy policy.</span>
+                  <span>Your contact details are kept strictly private and secure with us.</span>
                 </div>
               </form>
             )}

@@ -3,7 +3,7 @@ import { AdminLayoutShell } from "@/components/admin/layout/AdminLayoutShell";
 
 export const metadata: Metadata = {
   title: "Admin Operating System | Shivam Optical",
-  description: "Enterprise administration and optical atelier management system for Shivam Optical.",
+  description: "Enterprise administration and optical store management system for Shivam Optical.",
 };
 
 export default function AdminLayout({

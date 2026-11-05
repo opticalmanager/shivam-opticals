@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/contact" className="hover:text-[#1A1816] transition">
-                  Atelier Store &amp; Contact
+                  Store &amp; Contact
                 </Link>
               </li>
               <li>
@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/about" className="hover:text-[#1A1816] transition">
-                  Atelier Heritage &amp; Optical Lab
+                  Store Heritage &amp; Optical Lab
                 </Link>
               </li>
               <li>

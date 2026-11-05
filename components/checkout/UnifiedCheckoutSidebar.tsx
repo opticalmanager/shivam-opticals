@@ -58,9 +58,6 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
     0
   );
 
-  const amountNeededForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
-  const freeShippingProgress = Math.min(100, (subtotal / freeShippingThreshold) * 100);
-
   return (
     <div className="w-full bg-[#FAF7F2] lg:bg-transparent rounded-2xl p-6 sm:p-7 space-y-6">
       {/* 1. Header with items count */}
@@ -190,28 +187,7 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
         })}
       </div>
 
-      {/* 3. Delivery Incentive Bar */}
-      <div className="p-3 rounded-xl bg-white border border-[#E8DEC8] text-xs space-y-1.5">
-        <div className="flex items-center justify-between text-[11px] font-semibold">
-          <span className="flex items-center gap-1.5 text-[#0A251C]">
-            <Truck className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>Delivery</span>
-          </span>
-          <span className={amountNeededForFreeShipping === 0 ? "text-[#16803E] font-bold" : "text-[#716B64]"}>
-            {amountNeededForFreeShipping === 0
-              ? "FREE DELIVERY UNLOCKED"
-              : `Add ${formatCurrency(amountNeededForFreeShipping)} for FREE`}
-          </span>
-        </div>
-        <div className="w-full h-1.5 bg-[#FAF7F2] rounded-full overflow-hidden border border-[#E8DEC8]">
-          <div
-            className="h-full bg-gradient-to-r from-[#C5A059] to-[#0A251C] transition-all duration-300"
-            style={{ width: `${freeShippingProgress}%` }}
-          />
-        </div>
-      </div>
-
-      {/* 4. Promo Code Form */}
+      {/* 3. Promo Code Form */}
       <div>
         {appliedCoupon ? (
           <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-[#16803E]/30 text-xs">
@@ -306,8 +282,8 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
       {/* 6. Security & Assurance Strip */}
       <div className="pt-2 border-t border-[#E8DEC8]/60 space-y-2 text-[11px] text-[#716B64]">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-[#C5A059] shrink-0" />
-          <span>Free &amp; Insured Doorstep Delivery</span>
+          <Truck className="w-4 h-4 text-[#C5A059] shrink-0" />
+          <span>Reliable Doorstep Delivery</span>
         </div>
         <div className="flex items-center gap-2">
           <Lock className="w-4 h-4 text-[#C5A059] shrink-0" />

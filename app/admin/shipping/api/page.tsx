@@ -300,7 +300,7 @@ export default function AdminShippingApiSettingsPage() {
         </div>
       </div>
 
-      {/* 2. Primary Atelier Pickup Location Card */}
+      {/* 2. Primary Store Pickup Location Card */}
       <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
           <div className="flex items-center gap-2.5">
@@ -309,7 +309,7 @@ export default function AdminShippingApiSettingsPage() {
             </div>
             <div>
               <h2 className="text-sm font-bold text-[#0A251C]">
-                Primary Atelier Pickup Location (Consignment Origin)
+                Primary Store Pickup Location (Consignment Origin)
               </h2>
               <p className="text-xs text-stone-500">
                 Couriers will arrive at this address to collect boxed eyewear orders
@@ -322,7 +322,7 @@ export default function AdminShippingApiSettingsPage() {
             onClick={() =>
               setShippingConfig({
                 ...shippingConfig,
-                shiprocketPickupLocation: "Mayur Vihar Atelier",
+                shiprocketPickupLocation: "Mayur Vihar Store",
                 shiprocketPickupAddress: "Shop No-1, Kanishka Complex, SAMACHAR market, Mayur Vihar Phase I, extention, Mayur Vihar",
                 shiprocketPickupCity: "Delhi",
                 shiprocketPickupState: "Delhi",
