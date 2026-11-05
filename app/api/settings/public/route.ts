@@ -84,20 +84,22 @@ export async function GET() {
       operatingHours: "Monday - Sunday: 10:00 AM - 08:30 PM",
     };
 
-    const loyalty = settingsMap["loyalty"] || {
-      enabled: true,
-      earnRatePercent: 1,
-      minOrderAmountToEarn: 500,
-      pointsToRupeeRatio: 1,
-      allowRedemption: true,
-      maxRedemptionPercent: 50,
-      minOrderAmountToRedeem: 1000,
-      tiers: [
+    const rawLoyalty = settingsMap["loyalty"] || {};
+    const loyalty = {
+      enabled: rawLoyalty.enabled ?? true,
+      enablePointsEarning: rawLoyalty.enablePointsEarning ?? true,
+      earnRatePercent: rawLoyalty.earnRatePercent ?? 1,
+      minOrderAmountToEarn: rawLoyalty.minOrderAmountToEarn ?? 500,
+      pointsToRupeeRatio: rawLoyalty.pointsToRupeeRatio ?? 1,
+      allowRedemption: rawLoyalty.allowRedemption ?? true,
+      maxRedemptionPercent: rawLoyalty.maxRedemptionPercent ?? 50,
+      minOrderAmountToRedeem: rawLoyalty.minOrderAmountToRedeem ?? 1000,
+      tiers: rawLoyalty.tiers || [
         { name: "Privilege Member", minSpend: 0 },
         { name: "Gold Member", minSpend: 5000 },
         { name: "Platinum Member", minSpend: 15000 },
       ],
-      privileges: [],
+      privileges: rawLoyalty.privileges || [],
     };
 
     return NextResponse.json(

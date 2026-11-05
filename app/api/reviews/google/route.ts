@@ -46,7 +46,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Pooja Malhotra",
       initials: "PM",
       avatarColor: "#1E3A8A",
-      location: "Mayur Vihar Extension, Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "3 weeks ago",
       review:
@@ -59,7 +59,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Dr. Vikramaditya Sen",
       initials: "VS",
       avatarColor: "#065F46",
-      location: "Samachar Apartments, Mayur Vihar",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "1 month ago",
       review:
@@ -72,7 +72,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Neha Sharma",
       initials: "NS",
       avatarColor: "#8C6239",
-      location: "Pocket 1, Mayur Vihar, Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "1 month ago",
       review:
@@ -85,7 +85,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Rajesh Goel",
       initials: "RG",
       avatarColor: "#312E81",
-      location: "Noida Sector 15 / Delhi NCR",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "2 months ago",
       review:
@@ -98,7 +98,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Ananya Deshmukh",
       initials: "AD",
       avatarColor: "#831843",
-      location: "New Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "3 weeks ago",
       review:
@@ -124,7 +124,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Meenakshi Sundaram",
       initials: "MS",
       avatarColor: "#047857",
-      location: "East Delhi / Mayur Vihar",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "1 week ago",
       review:
@@ -137,7 +137,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Kunal Kashyap",
       initials: "KK",
       avatarColor: "#3730A3",
-      location: "Mayur Vihar Phase 1 Extension",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "2 weeks ago",
       review:
@@ -150,7 +150,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Ritu Bhardwaj",
       initials: "RB",
       avatarColor: "#9D174D",
-      location: "Delhi 110091",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "3 weeks ago",
       review:
@@ -176,7 +176,7 @@ const FALLBACK_GOOGLE_REVIEWS = {
       name: "Sunita Aggarwal",
       initials: "SA",
       avatarColor: "#065F46",
-      location: "Samachar Market, Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "2 months ago",
       review:
@@ -222,6 +222,7 @@ export async function GET() {
           return {
             ...fallback,
             ...r,
+            location: "Mayur Vihar Phase 1, Delhi",
             avatarUrl: cleanPhoto,
             profilePhoto: cleanPhoto,
             avatarColor: r.avatarColor || fallback.avatarColor,

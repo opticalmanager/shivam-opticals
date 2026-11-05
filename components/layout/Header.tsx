@@ -129,27 +129,25 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Bottom Row: Centered Navigation Row */}
-        <nav className="hidden lg:flex items-center justify-center pt-1 pb-2.5 text-[10px] md:text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#1A1816]/90 space-x-6">
-          {/* NEW ARRIVALS with Clickable Meta Smart Glasses Pill */}
-          <div className="flex items-center gap-1.5">
-            <Link
-              href="/products?filter=new"
-              className="flex items-center gap-1 hover:text-[#C5A059] transition nav-link"
-            >
-              <span>NEW ARRIVALS</span>
-            </Link>
-            <Link
-              href="/products?category=meta-smart"
-              className="group inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[8.5px] font-bold tracking-wider uppercase border border-[#76A9EA] bg-[#E8F2FD] text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 cursor-pointer select-none"
-              title="Explore Ray-Ban | Meta Smart Glasses"
-              aria-label="Ray-Ban Meta Smart Glasses"
-            >
-              <svg className="w-3 h-2 text-[#0A66C2] group-hover:text-white transition-colors" viewBox="0 0 24 14" fill="none" stroke="currentColor" strokeWidth="2.2">
-                <path d="M6 1C3.238 1 1 3.238 1 6s2.238 5 5 5c3.2 0 4.5-5 6-5s2.8 5 6 5c2.762 0 5-2.238 5-5s-2.238-5-5-5c-3.2 0-4.5 5-6 5s-2.8-5-6-5z" />
-              </svg>
-              <span>META</span>
-            </Link>
-          </div>
+        <nav className="hidden lg:flex items-center justify-center pt-1 pb-2.5 text-[10px] md:text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#1A1816]/90 gap-5 xl:gap-6">
+          <Link
+            href="/products?filter=new"
+            className="flex items-center gap-1 hover:text-[#C5A059] transition nav-link"
+          >
+            <span>NEW ARRIVALS</span>
+          </Link>
+
+          <Link
+            href="/products?category=meta-smart"
+            className="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[8.5px] font-bold tracking-wider uppercase border border-[#76A9EA] bg-[#E8F2FD] text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 cursor-pointer select-none"
+            title="Explore Ray-Ban | Meta Smart Glasses"
+            aria-label="Ray-Ban Meta Smart Glasses"
+          >
+            <svg className="w-3 h-2 text-[#0A66C2] group-hover:text-white transition-colors" viewBox="0 0 24 14" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M6 1C3.238 1 1 3.238 1 6s2.238 5 5 5c3.2 0 4.5-5 6-5s2.8 5 6 5c2.762 0 5-2.238 5-5s-2.238-5-5-5c-3.2 0-4.5 5-6 5s-2.8-5-6-5z" />
+            </svg>
+            <span>META</span>
+          </Link>
 
           <Link href="/products?type=eyeglasses" className="flex items-center gap-1 hover:text-[#C5A059] transition nav-link">
             <span>EYEGLASSES</span>
@@ -157,10 +155,6 @@ export const Header: React.FC = () => {
 
           <Link href="/products?type=sunglasses" className="flex items-center gap-1 hover:text-[#C5A059] transition nav-link">
             <span>SUNGLASSES</span>
-          </Link>
-
-          <Link href="/products?shape=Round" className="flex items-center gap-1 hover:text-[#C5A059] transition nav-link">
-            <span>SHAPES GUIDE</span>
           </Link>
 
           <Link href="/products?brand=Cartier" className="flex items-center gap-1 hover:text-[#C5A059] transition whitespace-nowrap nav-link">

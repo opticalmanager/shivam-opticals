@@ -115,6 +115,7 @@ function AdminSettingsContent() {
   // Loyalty & Rewards Club Configuration State
   const [loyaltyConfig, setLoyaltyConfig] = useState({
     enabled: true,
+    enablePointsEarning: true,
     earnRatePercent: 1,
     minOrderAmountToEarn: 500,
     pointsToRupeeRatio: 1,
@@ -865,97 +866,117 @@ function AdminSettingsContent() {
                 </div>
 
                 {/* 2. Earning Rules Card */}
-                <div className="space-y-3 pt-2">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0A251C]">
-                    Purchase Earning Logic
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
-                        Reward Credit Earn Rate (%)
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          min="0"
-                          max="50"
-                          step="0.5"
-                          value={loyaltyConfig.earnRatePercent}
-                          onChange={(e) =>
-                            setLoyaltyConfig({
-                              ...loyaltyConfig,
-                              earnRatePercent: Math.max(0, parseFloat(e.target.value) || 0),
-                            })
-                          }
-                          className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono font-bold pr-8"
-                        />
-                        <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-stone-400 font-bold">%</span>
+                <div className="space-y-4 pt-2">
+                  <div className="flex items-center justify-between p-3.5 bg-stone-50 rounded-xl border border-stone-200">
+                    <div className="space-y-0.5">
+                      <span className="text-xs font-bold text-[#0A251C]">
+                        Award Reward Points on Orders
+                      </span>
+                      <p className="text-[11px] text-stone-500">
+                        When enabled, registered customers accrue store credits based on order totals. When disabled, orders do not grant points.
+                      </p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      checked={loyaltyConfig.enablePointsEarning}
+                      onChange={(e) =>
+                        setLoyaltyConfig({ ...loyaltyConfig, enablePointsEarning: e.target.checked })
+                      }
+                      className="w-4 h-4 accent-[#0A251C] cursor-pointer"
+                    />
+                  </div>
+
+                  {loyaltyConfig.enablePointsEarning && (
+                    <>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                            Reward Credit Earn Rate (%)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="number"
+                              min="0"
+                              max="50"
+                              step="0.5"
+                              value={loyaltyConfig.earnRatePercent}
+                              onChange={(e) =>
+                                setLoyaltyConfig({
+                                  ...loyaltyConfig,
+                                  earnRatePercent: Math.max(0, parseFloat(e.target.value) || 0),
+                                })
+                              }
+                              className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono font-bold pr-8"
+                            />
+                            <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-stone-400 font-bold">%</span>
+                          </div>
+                          <span className="text-[10px] text-stone-400 mt-1 block">
+                            Percentage of purchase credited as reward points.
+                          </span>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                            Minimum Order to Earn (₹)
+                          </label>
+                          <input
+                            type="number"
+                            min="0"
+                            step="100"
+                            value={loyaltyConfig.minOrderAmountToEarn}
+                            onChange={(e) =>
+                              setLoyaltyConfig({
+                                ...loyaltyConfig,
+                                minOrderAmountToEarn: Math.max(0, parseInt(e.target.value, 10) || 0),
+                              })
+                            }
+                            className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono"
+                          />
+                          <span className="text-[10px] text-stone-400 mt-1 block">
+                            Orders below this amount will not accrue credits.
+                          </span>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                            Point Value (1 Point = ₹)
+                          </label>
+                          <input
+                            type="number"
+                            min="0.1"
+                            max="100"
+                            step="0.5"
+                            value={loyaltyConfig.pointsToRupeeRatio}
+                            onChange={(e) =>
+                              setLoyaltyConfig({
+                                ...loyaltyConfig,
+                                pointsToRupeeRatio: Math.max(0.1, parseFloat(e.target.value) || 1),
+                              })
+                            }
+                            className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono"
+                          />
+                          <span className="text-[10px] text-stone-400 mt-1 block">
+                            Rupee value of 1 point during checkout redemption.
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-[10px] text-stone-400 mt-1 block">
-                        Percentage of purchase credited as reward points.
-                      </span>
-                    </div>
 
-                    <div>
-                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
-                        Minimum Order to Earn (₹)
-                      </label>
-                      <input
-                        type="number"
-                        min="0"
-                        step="100"
-                        value={loyaltyConfig.minOrderAmountToEarn}
-                        onChange={(e) =>
-                          setLoyaltyConfig({
-                            ...loyaltyConfig,
-                            minOrderAmountToEarn: Math.max(0, parseInt(e.target.value, 10) || 0),
-                          })
-                        }
-                        className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono"
-                      />
-                      <span className="text-[10px] text-stone-400 mt-1 block">
-                        Orders below this amount will not accrue credits.
-                      </span>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
-                        Point Value (1 Point = ₹)
-                      </label>
-                      <input
-                        type="number"
-                        min="0.1"
-                        max="100"
-                        step="0.5"
-                        value={loyaltyConfig.pointsToRupeeRatio}
-                        onChange={(e) =>
-                          setLoyaltyConfig({
-                            ...loyaltyConfig,
-                            pointsToRupeeRatio: Math.max(0.1, parseFloat(e.target.value) || 1),
-                          })
-                        }
-                        className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono"
-                      />
-                      <span className="text-[10px] text-stone-400 mt-1 block">
-                        Rupee value of 1 point during checkout redemption.
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Live Simulation Preview */}
-                  <div className="p-3 bg-[#FAF3EB] rounded-xl border border-[#E8DEC8] flex items-center justify-between text-xs">
-                    <span className="text-stone-700">
-                      <strong>Live Calculation:</strong> On a purchase of <strong>₹3,000</strong>, customer earns{" "}
-                      <strong className="text-[#0A251C]">
-                        {Math.round((3000 * loyaltyConfig.earnRatePercent) / 100)} points
-                      </strong>{" "}
-                      (worth{" "}
-                      <strong className="text-[#C5A059]">
-                        ₹{(Math.round((3000 * loyaltyConfig.earnRatePercent) / 100) * loyaltyConfig.pointsToRupeeRatio).toFixed(0)} store credit
-                      </strong>
-                      ).
-                    </span>
-                  </div>
+                      {/* Live Simulation Preview */}
+                      <div className="p-3 bg-[#FAF3EB] rounded-xl border border-[#E8DEC8] flex items-center justify-between text-xs">
+                        <span className="text-stone-700">
+                          <strong>Admin Preview:</strong> On a purchase of <strong>₹3,000</strong>, customer earns{" "}
+                          <strong className="text-[#0A251C]">
+                            {Math.round((3000 * loyaltyConfig.earnRatePercent) / 100)} points
+                          </strong>{" "}
+                          (worth{" "}
+                          <strong className="text-[#C5A059]">
+                            ₹{(Math.round((3000 * loyaltyConfig.earnRatePercent) / 100) * loyaltyConfig.pointsToRupeeRatio).toFixed(0)} store credit
+                          </strong>
+                          ).
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 {/* 3. Checkout Redemption Rules */}

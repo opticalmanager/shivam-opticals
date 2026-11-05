@@ -477,6 +477,7 @@ function AccountDashboard() {
   // -------------------------------------------------------------
   const [adminLoyaltyConfig, setAdminLoyaltyConfig] = useState<{
     enabled: boolean;
+    enablePointsEarning?: boolean;
     earnRatePercent: number;
     minOrderAmountToEarn: number;
     pointsToRupeeRatio: number;
@@ -503,10 +504,14 @@ function AccountDashboard() {
     const earnRate = adminLoyaltyConfig?.earnRatePercent ?? 1;
     const ratio = adminLoyaltyConfig?.pointsToRupeeRatio ?? 1;
     const isProgramActive = adminLoyaltyConfig?.enabled !== false;
+    const isEarningActive =
+      isProgramActive &&
+      adminLoyaltyConfig?.enablePointsEarning !== false &&
+      earnRate > 0;
 
-    const points = isProgramActive
-      ? user?.gemPoints || Math.round((totalSpend * earnRate) / 100)
-      : 0;
+    const points = isEarningActive
+      ? (user?.gemPoints !== undefined ? user.gemPoints : Math.round((totalSpend * earnRate) / 100))
+      : (user?.gemPoints || 0);
     const creditValue = points * ratio;
 
     const tiers = adminLoyaltyConfig?.tiers || [
@@ -1665,7 +1670,11 @@ function AccountDashboard() {
                           {formatCurrency(loyaltyMetrics.creditValue)}
                         </span>
                         <span className="block text-[10px] text-stone-400 mt-0.5">
-                          {loyaltyMetrics.points} Gem Points ({adminLoyaltyConfig?.pointsToRupeeRatio || 1} pt = ₹1)
+                          {loyaltyMetrics.creditValue > 0
+                            ? `${loyaltyMetrics.points} Points`
+                            : adminLoyaltyConfig?.enablePointsEarning !== false
+                            ? "Accrues on verified orders"
+                            : "Points earning inactive"}
                         </span>
                       </div>
                       <div>

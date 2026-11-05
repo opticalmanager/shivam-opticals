@@ -8,6 +8,7 @@ import {
   ExternalLink,
   ShieldCheck,
   MessageSquarePlus,
+  MapPin,
 } from "lucide-react";
 
 // Robust Golden Star with 100% Guaranteed SVG Fill
@@ -164,7 +165,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Pooja Malhotra",
       initials: "PM",
       avatarColor: "#1E3A8A",
-      location: "Mayur Vihar Extension, Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "3 weeks ago",
       review:
@@ -177,7 +178,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Dr. Vikramaditya Sen",
       initials: "VS",
       avatarColor: "#065F46",
-      location: "Samachar Apartments, Mayur Vihar",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "1 month ago",
       review:
@@ -190,7 +191,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Neha Sharma",
       initials: "NS",
       avatarColor: "#8C6239",
-      location: "Pocket 1, Mayur Vihar, Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "1 month ago",
       review:
@@ -203,7 +204,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Rajesh Goel",
       initials: "RG",
       avatarColor: "#312E81",
-      location: "Noida Sector 15 / Delhi NCR",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "2 months ago",
       review:
@@ -216,7 +217,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Ananya Deshmukh",
       initials: "AD",
       avatarColor: "#831843",
-      location: "New Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "3 weeks ago",
       review:
@@ -242,7 +243,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Meenakshi Sundaram",
       initials: "MS",
       avatarColor: "#047857",
-      location: "East Delhi / Mayur Vihar",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "1 week ago",
       review:
@@ -255,7 +256,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Kunal Kashyap",
       initials: "KK",
       avatarColor: "#3730A3",
-      location: "Mayur Vihar Phase 1 Extension",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "2 weeks ago",
       review:
@@ -268,7 +269,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Ritu Bhardwaj",
       initials: "RB",
       avatarColor: "#9D174D",
-      location: "Delhi 110091",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "3 weeks ago",
       review:
@@ -294,7 +295,7 @@ const DEFAULT_DATA: GoogleReviewsData = {
       name: "Sunita Aggarwal",
       initials: "SA",
       avatarColor: "#065F46",
-      location: "Samachar Market, Delhi",
+      location: "Mayur Vihar Phase 1, Delhi",
       rating: 5,
       timeAgo: "2 months ago",
       review:
@@ -321,7 +322,14 @@ export const GoogleReviewsSection: React.FC = () => {
         if (res.ok) {
           const json = await res.json();
           if (json.success && json.data && isMounted) {
-            setData(json.data);
+            const sanitizedReviews = (json.data.reviews || []).map((r: any) => ({
+              ...r,
+              location: "Mayur Vihar Phase 1, Delhi",
+            }));
+            setData({
+              ...json.data,
+              reviews: sanitizedReviews,
+            });
           }
         }
       } catch (err) {
@@ -563,7 +571,10 @@ export const GoogleReviewsSection: React.FC = () => {
 
               {/* Bottom: Reviewer Location & Google Verification Link */}
               <div className="pt-3 border-t border-[#E8DEC8]/60 flex items-center justify-between text-[11px] text-[#716B64]">
-                <span className="truncate max-w-[190px]">{rev.location}</span>
+                <span className="truncate max-w-[210px] flex items-center gap-1.5 font-medium text-[#716B64]">
+                  <MapPin className="w-3 h-3 text-[#C5A059] shrink-0" />
+                  <span>{rev.location || "Mayur Vihar Phase 1, Delhi"}</span>
+                </span>
                 <span className="font-medium text-[#0A251C] group-hover:text-[#C5A059] flex items-center gap-1 transition-colors">
                   <span>Google</span>
                   <ExternalLink className="w-3 h-3 text-stone-400 group-hover:text-[#C5A059]" />
