@@ -9,6 +9,7 @@ export interface PackageDimensions {
 export interface ShippingConfig {
   isFreeShippingEnabled: boolean;
   freeShippingThreshold: number;
+  useDynamicLiveRates: boolean; // Smart dynamic calculation from Shiprocket API
   standardShippingFee: number;
   expressShippingFee: number;
   defaultCarrier: string;
@@ -39,8 +40,9 @@ export interface ShippingConfig {
 export const DEFAULT_SHIPPING_CONFIG: ShippingConfig = {
   isFreeShippingEnabled: true,
   freeShippingThreshold: 1999,
-  standardShippingFee: 150,
-  expressShippingFee: 350,
+  useDynamicLiveRates: true,
+  standardShippingFee: 75,
+  expressShippingFee: 135,
   defaultCarrier: "BlueDart Express",
   supportedCarriers: ["BlueDart Express", "Delhivery Air", "DTDC Air", "Shadowfax"],
   enableWhiteGloveHomeTrial: true,
@@ -95,6 +97,7 @@ export async function getShippingConfig(): Promise<ShippingConfig> {
             ? Boolean(parsed.isFreeShippingEnabled)
             : Number(parsed.freeShippingThreshold ?? DEFAULT_SHIPPING_CONFIG.freeShippingThreshold) > 0,
         freeShippingThreshold: Number(parsed.freeShippingThreshold ?? DEFAULT_SHIPPING_CONFIG.freeShippingThreshold),
+        useDynamicLiveRates: parsed.useDynamicLiveRates !== undefined ? Boolean(parsed.useDynamicLiveRates) : true,
         standardShippingFee: Number(parsed.standardShippingFee ?? DEFAULT_SHIPPING_CONFIG.standardShippingFee),
         expressShippingFee: Number(parsed.expressShippingFee ?? DEFAULT_SHIPPING_CONFIG.expressShippingFee),
         defaultCarrier: parsed.defaultCarrier || DEFAULT_SHIPPING_CONFIG.defaultCarrier,

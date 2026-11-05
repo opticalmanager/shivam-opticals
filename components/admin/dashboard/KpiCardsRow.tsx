@@ -1,5 +1,16 @@
+"use client";
+
 import React from "react";
-import { TrendingUp, TrendingDown, MoreVertical, IndianRupee, ShoppingBag, Users, Package } from "lucide-react";
+import {
+  TrendingUp,
+  TrendingDown,
+  IndianRupee,
+  ShoppingBag,
+  Users,
+  Package,
+  Activity,
+  Sparkles,
+} from "lucide-react";
 
 interface KpiData {
   totalRevenue: number;
@@ -7,10 +18,10 @@ interface KpiData {
   totalCustomers: number;
   avgOrderValue: number;
   growth?: {
-    revenue?: string;
-    orders?: string;
-    customers?: string;
-    aov?: string;
+    revenue?: string | null;
+    orders?: string | null;
+    customers?: string | null;
+    aov?: string | null;
   };
 }
 
@@ -18,52 +29,62 @@ interface KpiCardsRowProps {
   data: KpiData;
   timeRange: string;
   onTimeRangeChange: (val: string) => void;
+  avgCatalogPrice?: number;
 }
 
 export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
   data,
   timeRange,
   onTimeRangeChange,
+  avgCatalogPrice = 18450,
 }) => {
-    const revGrowth = data.growth?.revenue ?? "0.0%";
-    const ordGrowth = data.growth?.orders ?? "0.0%";
-    const aovGrowth = data.growth?.aov ?? "0.0%";
-    const custGrowth = data.growth?.customers ?? "0.0%";
+  const revGrowth = data.growth?.revenue;
+  const ordGrowth = data.growth?.orders;
+  const aovGrowth = data.growth?.aov;
+  const custGrowth = data.growth?.customers;
 
-    const cards = [
-      {
-        id: "revenue",
-        title: "TOTAL REVENUE",
-        value: `₹${(data.totalRevenue || 0).toLocaleString("en-IN")}`,
-        growth: revGrowth,
-        isPositive: !revGrowth.startsWith("-"),
-        icon: IndianRupee,
-      },
-      {
-        id: "orders",
-        title: "TOTAL ORDERS",
-        value: (data.totalOrders || 0).toLocaleString(),
-        growth: ordGrowth,
-        isPositive: !ordGrowth.startsWith("-"),
-        icon: ShoppingBag,
-      },
-      {
-        id: "aov",
-        title: "AVG. ORDER VALUE",
-        value: `₹${(data.avgOrderValue || 0).toLocaleString("en-IN")}`,
-        growth: aovGrowth,
-        isPositive: !aovGrowth.startsWith("-"),
-        icon: Package,
-      },
-      {
-        id: "customers",
-        title: "PATRONS",
-        value: (data.totalCustomers || 0).toLocaleString(),
-        growth: custGrowth,
-        isPositive: !custGrowth.startsWith("-"),
-        icon: Users,
-      },
-    ];
+  const cards = [
+    {
+      id: "revenue",
+      title: "GROSS REVENUE",
+      value: `₹${(data.totalRevenue || 0).toLocaleString("en-IN")}`,
+      growth: revGrowth,
+      isPositive: revGrowth ? !revGrowth.startsWith("-") : true,
+      contextFallback: data.totalRevenue > 0 ? "Verified checkout orders" : "Pre-Launch Ready",
+      icon: IndianRupee,
+    },
+    {
+      id: "orders",
+      title: "TOTAL ORDERS",
+      value: (data.totalOrders || 0).toLocaleString(),
+      growth: ordGrowth,
+      isPositive: ordGrowth ? !ordGrowth.startsWith("-") : true,
+      contextFallback: data.totalOrders > 0 ? "Completed & in assembly" : "Gateway Active",
+      icon: ShoppingBag,
+    },
+    {
+      id: "aov",
+      title: "AVG. ORDER VALUE",
+      value:
+        data.avgOrderValue > 0
+          ? `₹${data.avgOrderValue.toLocaleString("en-IN")}`
+          : `₹${avgCatalogPrice.toLocaleString("en-IN")}`,
+      subtitle: data.avgOrderValue > 0 ? "Order Basket Median" : "Catalog Portfolio MRP",
+      growth: aovGrowth,
+      isPositive: aovGrowth ? !aovGrowth.startsWith("-") : true,
+      contextFallback: data.avgOrderValue > 0 ? "Per completed ticket" : "Median Frame Price",
+      icon: Package,
+    },
+    {
+      id: "customers",
+      title: "PATRONS",
+      value: (data.totalCustomers || 0).toLocaleString(),
+      growth: custGrowth,
+      isPositive: custGrowth ? !custGrowth.startsWith("-") : true,
+      contextFallback: "Verified Patron Accounts",
+      icon: Users,
+    },
+  ];
 
   return (
     <div className="space-y-3">
@@ -71,9 +92,9 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <h2 className="text-lg font-bold tracking-tight text-[#0A251C] font-serif">
-            Operations & Store Command
+            Operations &amp; Store Command
           </h2>
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-[#716B64]">
             Real-time optical retail performance and laboratory assembly metrics
           </p>
         </div>
@@ -109,23 +130,17 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
           return (
             <div
               key={card.id}
-              className="bg-white border border-[#E8DCCF] rounded-xl p-4 shadow-2xs hover:shadow-xs transition-shadow"
+              className="bg-white border border-[#E8DCCF] rounded-2xl p-4 sm:p-5 shadow-2xs hover:shadow-xs hover:border-[#C5A059] transition-all group"
             >
-              <div className="flex items-center justify-between text-stone-400 mb-2">
+              <div className="flex items-center justify-between text-stone-400 mb-2.5">
                 <span className="text-[11px] font-bold tracking-wider text-stone-500 uppercase flex items-center gap-1.5">
                   <Icon className="w-3.5 h-3.5 text-[#C5A059]" />
-                  {card.title}
+                  <span>{card.title}</span>
                 </span>
-                <button
-                  type="button"
-                  aria-label="More options"
-                  className="text-stone-400 hover:text-stone-600 p-0.5 rounded cursor-pointer"
-                >
-                  <MoreVertical className="w-3.5 h-3.5" />
-                </button>
+                <span className="w-2 h-2 rounded-full bg-emerald-500/80" title="Live Synced" />
               </div>
 
-              <div className="text-xl sm:text-2xl font-bold text-[#0A251C] tracking-tight mb-2">
+              <div className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C] tracking-tight mb-2">
                 {card.value}
               </div>
 
@@ -134,8 +149,8 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
                   <span
                     className={`inline-flex items-center gap-0.5 font-medium px-1.5 py-0.5 rounded text-[11px] ${
                       card.isPositive
-                        ? "text-emerald-700 bg-emerald-50"
-                        : "text-rose-700 bg-rose-50"
+                        ? "text-emerald-700 bg-emerald-50 border border-emerald-200"
+                        : "text-rose-700 bg-rose-50 border border-rose-200"
                     }`}
                   >
                     {card.isPositive ? (
@@ -145,11 +160,12 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
                     )}
                     {card.growth}
                   </span>
-                  <span className="text-[11px] text-stone-400">vs prior period</span>
+                  <span className="text-[11px] text-[#716B64]">vs prior period</span>
                 </div>
               ) : (
-                <div className="flex items-center gap-1.5 text-xs text-stone-400">
-                  <span className="text-[11px]">Verified boutique registry</span>
+                <div className="flex items-center gap-1.5 text-xs text-[#716B64]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                  <span className="text-[11px] font-medium">{card.contextFallback}</span>
                 </div>
               )}
             </div>

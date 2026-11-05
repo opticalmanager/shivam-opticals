@@ -11,6 +11,7 @@ export interface CourierOption {
   etd: string; // Estimated Delivery Date string
   rating: number;
   isRecommended?: boolean;
+  isSurface?: boolean;
 }
 
 export interface ServiceabilityResult {
@@ -18,9 +19,23 @@ export interface ServiceabilityResult {
   serviceable: boolean;
   couriers: CourierOption[];
   recommendedCourier?: CourierOption;
+  standardCourier?: CourierOption;
+  expressCourier?: CourierOption;
   estimatedDeliveryDate?: string;
   isSimulation?: boolean;
   message?: string;
+}
+
+export interface BenchmarkRatesResult {
+  success: boolean;
+  pickupPincode: string;
+  localDelhi: { standardRate: number; expressRate: number; standardCarrier: string; expressCarrier: string };
+  metroMumbai: { standardRate: number; expressRate: number; standardCarrier: string; expressCarrier: string };
+  metroBangalore: { standardRate: number; expressRate: number; standardCarrier: string; expressCarrier: string };
+  restOfIndia: { standardRate: number; expressRate: number; standardCarrier: string; expressCarrier: string };
+  averageStandardRate: number;
+  averageExpressRate: number;
+  isLive: boolean;
 }
 
 export interface ShiprocketOrderResult {
@@ -138,30 +153,62 @@ export async function checkCourierServiceability(params: {
         if (availableList.length > 0) {
           const couriers: CourierOption[] = availableList.map((c: any) => ({
             courierId: c.courier_company_id,
-            courierName: c.courier_name || c.courier_name,
+            courierName: c.courier_name || "Express Courier",
             rate: Math.round(Number(c.rate || 0)),
             estimatedDays: Math.max(1, Number(c.estimated_delivery_days || 3)),
             etd: c.etd || "",
             rating: Number(c.rating || 4.5),
+            isSurface: Boolean(
+              c.is_surface === 1 ||
+              c.is_surface === true ||
+              (c.courier_name && c.courier_name.toLowerCase().includes("surface"))
+            ),
           }));
 
-          // Sort by fastest, then cheapest
-          couriers.sort((a, b) => a.estimatedDays - b.estimatedDays || a.rate - b.rate);
-          couriers[0].isRecommended = true;
+          // Sort by rate to identify the most economical standard courier
+          const sortedByRate = [...couriers].sort((a, b) => a.rate - b.rate);
+          const standardCourier = sortedByRate[0];
+
+          // Express courier: Air / Priority / Fastest transit
+          const expressCandidates = couriers.filter(
+            (c) =>
+              !c.isSurface ||
+              c.courierName.toLowerCase().includes("air") ||
+              c.courierName.toLowerCase().includes("express") ||
+              c.estimatedDays <= 2
+          );
+          expressCandidates.sort((a, b) => a.estimatedDays - b.estimatedDays || a.rate - b.rate);
+
+          let expressCourier = expressCandidates[0] || couriers[0];
+          if (expressCourier.courierId === standardCourier.courierId && couriers.length > 1) {
+            const alternative = couriers.find(
+              (c) =>
+                c.courierId !== standardCourier.courierId &&
+                (c.courierName.toLowerCase().includes("air") ||
+                 c.courierName.toLowerCase().includes("bluedart") ||
+                 c.estimatedDays <= standardCourier.estimatedDays)
+            );
+            if (alternative) {
+              expressCourier = alternative;
+            }
+          }
 
           const eddDate = new Date();
-          eddDate.setDate(eddDate.getDate() + couriers[0].estimatedDays);
+          eddDate.setDate(eddDate.getDate() + standardCourier.estimatedDays);
 
           return {
             success: true,
             serviceable: true,
             couriers,
-            recommendedCourier: couriers[0],
+            recommendedCourier: standardCourier,
+            standardCourier,
+            expressCourier,
             estimatedDeliveryDate: eddDate.toLocaleDateString("en-IN", {
               weekday: "short",
               month: "short",
               day: "numeric",
             }),
+            isSimulation: false,
           };
         }
       }
@@ -184,28 +231,27 @@ function getSimulatedServiceability(pickup: string, delivery: string): Serviceab
     delivery.startsWith(prefix)
   );
 
-  let bluedartDays = 2;
-  let delhiveryDays = 3;
-  let dtdcDays = 3;
-
-  let bluedartRate = 145;
-  let delhiveryRate = 110;
-  let dtdcRate = 95;
+  let standardDays = 3;
+  let expressDays = 2;
+  let standardRate = 99;
+  let expressRate = 137;
+  let standardName = "Delhivery Surface";
+  let expressName = "BlueDart Air Express";
 
   if (isDelhiNcr) {
-    bluedartDays = 1;
-    delhiveryDays = 2;
-    dtdcDays = 2;
-    bluedartRate = 95;
-    delhiveryRate = 75;
-    dtdcRate = 65;
+    standardDays = 2;
+    expressDays = 1;
+    standardRate = 74;
+    expressRate = 95;
+    standardName = "Xpressbees Surface";
+    expressName = "BlueDart Air Priority";
   } else if (!isMetro) {
-    bluedartDays = 3;
-    delhiveryDays = 4;
-    dtdcDays = 4;
-    bluedartRate = 180;
-    delhiveryRate = 135;
-    dtdcRate = 120;
+    standardDays = 4;
+    expressDays = 2;
+    standardRate = 99;
+    expressRate = 145;
+    standardName = "Delhivery Surface";
+    expressName = "BlueDart Air Priority";
   }
 
   const today = new Date();
@@ -215,48 +261,92 @@ function getSimulatedServiceability(pickup: string, delivery: string): Serviceab
     return d.toISOString().split("T")[0];
   };
 
-  const couriers: CourierOption[] = [
-    {
-      courierId: 1,
-      courierName: "BlueDart Express Air",
-      rate: bluedartRate,
-      estimatedDays: bluedartDays,
-      etd: formatEtd(bluedartDays),
-      rating: 4.8,
-      isRecommended: true,
-    },
-    {
-      courierId: 2,
-      courierName: "Delhivery Air Express",
-      rate: delhiveryRate,
-      estimatedDays: delhiveryDays,
-      etd: formatEtd(delhiveryDays),
-      rating: 4.5,
-    },
-    {
-      courierId: 3,
-      courierName: "DTDC Priority Air",
-      rate: dtdcRate,
-      estimatedDays: dtdcDays,
-      etd: formatEtd(dtdcDays),
-      rating: 4.2,
-    },
-  ];
+  const standardCourier: CourierOption = {
+    courierId: 101,
+    courierName: standardName,
+    rate: standardRate,
+    estimatedDays: standardDays,
+    etd: formatEtd(standardDays),
+    rating: 4.6,
+    isSurface: true,
+  };
+
+  const expressCourier: CourierOption = {
+    courierId: 102,
+    courierName: expressName,
+    rate: expressRate,
+    estimatedDays: expressDays,
+    etd: formatEtd(expressDays),
+    rating: 4.8,
+    isSurface: false,
+  };
+
+  const couriers: CourierOption[] = [standardCourier, expressCourier];
 
   const primaryEtdDate = new Date();
-  primaryEtdDate.setDate(primaryEtdDate.getDate() + bluedartDays);
+  primaryEtdDate.setDate(primaryEtdDate.getDate() + standardDays);
 
   return {
     success: true,
     serviceable: true,
     couriers,
-    recommendedCourier: couriers[0],
+    recommendedCourier: standardCourier,
+    standardCourier,
+    expressCourier,
     estimatedDeliveryDate: primaryEtdDate.toLocaleDateString("en-IN", {
       weekday: "short",
       month: "short",
       day: "numeric",
     }),
     isSimulation: true,
+  };
+}
+
+/**
+ * Fetch Real Shiprocket Benchmark Rates across Indian postal zones.
+ */
+export async function fetchBenchmarkShiprocketRates(pickupPincode = "110091"): Promise<BenchmarkRatesResult> {
+  const zones = [
+    { key: "localDelhi", pin: "110091" },
+    { key: "metroMumbai", pin: "400001" },
+    { key: "metroBangalore", pin: "560001" },
+    { key: "restOfIndia", pin: "800001" },
+  ];
+
+  const results: Record<string, { standardRate: number; expressRate: number; standardCarrier: string; expressCarrier: string }> = {};
+  let isLive = false;
+
+  for (const z of zones) {
+    const res = await checkCourierServiceability({
+      deliveryPincode: z.pin,
+      pickupPincode,
+      weightKg: 0.35,
+    });
+    if (!res.isSimulation) isLive = true;
+
+    results[z.key] = {
+      standardRate: res.standardCourier?.rate || (z.key === "localDelhi" ? 74 : 99),
+      expressRate: res.expressCourier?.rate || (z.key === "localDelhi" ? 95 : 137),
+      standardCarrier: res.standardCourier?.courierName || "Delhivery Surface",
+      expressCarrier: res.expressCourier?.courierName || "BlueDart Air Priority",
+    };
+  }
+
+  const standardRates = Object.values(results).map((r) => r.standardRate);
+  const expressRates = Object.values(results).map((r) => r.expressRate);
+  const avgStandard = Math.round(standardRates.reduce((a, b) => a + b, 0) / standardRates.length);
+  const avgExpress = Math.round(expressRates.reduce((a, b) => a + b, 0) / expressRates.length);
+
+  return {
+    success: true,
+    pickupPincode,
+    localDelhi: results.localDelhi,
+    metroMumbai: results.metroMumbai,
+    metroBangalore: results.metroBangalore,
+    restOfIndia: results.restOfIndia,
+    averageStandardRate: avgStandard,
+    averageExpressRate: avgExpress,
+    isLive,
   };
 }
 

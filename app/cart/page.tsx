@@ -45,7 +45,7 @@ export default function StandaloneCartPage() {
 
   const currentTotal = rawSubtotal + cleaningKitPrice;
   const isDeliveryFree = currentTotal >= freeDeliveryThreshold || currentTotal === 0;
-  const deliveryCharge = isDeliveryFree ? 0 : 150;
+  const deliveryCharge = isDeliveryFree ? 0 : 75;
   const progressPct = Math.min(100, Math.round((currentTotal / freeDeliveryThreshold) * 100));
   const amountLeft = Math.max(0, freeDeliveryThreshold - currentTotal);
   const finalPayable = grandTotal + deliveryCharge;

@@ -49,7 +49,7 @@ export const CartDrawer: React.FC = () => {
   const progressPct = Math.min(100, Math.round((currentTotal / freeDeliveryThreshold) * 100));
   const amountLeft = Math.max(0, freeDeliveryThreshold - currentTotal);
   const isDeliveryFree = amountLeft === 0 || currentTotal === 0;
-  const deliveryCharge = isDeliveryFree ? 0 : 150;
+  const deliveryCharge = isDeliveryFree ? 0 : 75;
   const finalPayable = grandTotal + deliveryCharge;
 
   const handleApplyPromo = async (e: React.FormEvent) => {

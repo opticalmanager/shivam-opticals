@@ -38,3 +38,23 @@ export function getAppUrl(): string {
   }
   return "https://www.shivamoptical.in";
 }
+
+/**
+ * Resolves the actual customer storefront URL cleanly.
+ * When accessed from the admin panel on admin.shivamoptical.in or an admin subdomain,
+ * it returns the actual customer storefront URL (e.g., https://shivamoptical.in/ or https://www.shivamoptical.in/).
+ * When accessed on localhost or standard domain, it returns the standard root "/".
+ */
+export function getStorefrontUrl(): string {
+  if (typeof window !== "undefined") {
+    const { hostname, protocol, port } = window.location;
+    if (hostname === "admin.shivamoptical.in" || hostname.startsWith("admin.")) {
+      const storeHost = hostname.replace(/^admin\./, "");
+      return `${protocol}//${storeHost}${port ? `:${port}` : ""}/`;
+    }
+  }
+  if (process.env.NEXT_PUBLIC_SITE_URL) {
+    return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "") + "/";
+  }
+  return "/";
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -27,7 +27,7 @@ import {
   Bell,
   LogOut,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getStorefrontUrl } from "@/lib/utils";
 
 interface AdminSidebarProps {
   isOpenMobile: boolean;
@@ -54,6 +54,11 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   const [settingsExpanded, setSettingsExpanded] = useState(
     pathname.startsWith("/admin/settings")
   );
+  const [storeUrl, setStoreUrl] = useState<string>("/");
+
+  useEffect(() => {
+    setStoreUrl(getStorefrontUrl());
+  }, []);
 
   const sections: NavSection[] = [
     {
@@ -238,16 +243,17 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             Live / Synced
           </span>
         </div>
-        <Link
-          href="/"
+        <a
+          href={storeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-1.5 w-full py-1.5 px-2.5 rounded-md bg-white border border-[#E8DCCF] text-stone-700 hover:text-[#0A251C] hover:border-stone-400 text-xs font-medium transition-colors"
+          title="Open Customer Storefront (New Tab)"
+          className="flex items-center justify-center gap-1.5 w-full py-1.5 px-2.5 rounded-md bg-white border border-[#E8DCCF] text-stone-700 hover:text-[#0A251C] hover:border-stone-400 text-xs font-medium transition-colors cursor-pointer"
         >
           <Store className="w-3.5 h-3.5 text-[#C5A059]" />
-          <span>Customer Storefront</span>
+          <span>Visit Store</span>
           <ExternalLink className="w-3 h-3 text-stone-400 ml-auto" />
-        </Link>
+        </a>
         <button
           type="button"
           onClick={async () => {

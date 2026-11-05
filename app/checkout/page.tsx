@@ -75,8 +75,29 @@ function CheckoutContent() {
   }>({
     isFreeShippingEnabled: true,
     freeShippingThreshold: 1999,
-    standardShippingFee: 150,
-    expressShippingFee: 350,
+    standardShippingFee: 75,
+    expressShippingFee: 135,
+  });
+
+  // Dynamic Shiprocket live rates state
+  const [liveShippingRates, setLiveShippingRates] = useState<{
+    loading: boolean;
+    standard: number;
+    express: number;
+    standardCarrier: string;
+    expressCarrier: string;
+    standardEtd?: string;
+    expressEtd?: string;
+    isLive: boolean;
+    serviceable: boolean;
+  }>({
+    loading: false,
+    standard: 75,
+    express: 135,
+    standardCarrier: "Xpressbees / Delhivery Surface",
+    expressCarrier: "Blue Dart Air Priority",
+    isLive: false,
+    serviceable: true,
   });
 
   useEffect(() => {
@@ -84,19 +105,56 @@ function CheckoutContent() {
       .then((r) => r.json())
       .then((data) => {
         if (data) {
+          const stdFee = data.standardShippingFee ?? 75;
+          const expFee = data.expressShippingFee ?? 135;
           setShippingPolicy({
             isFreeShippingEnabled: data.isFreeShippingEnabled !== false,
             freeShippingThreshold:
               typeof data.freeShippingThreshold === "number" ? data.freeShippingThreshold : null,
-            standardShippingFee: data.standardShippingFee ?? 150,
-            expressShippingFee: data.expressShippingFee ?? 350,
+            standardShippingFee: stdFee,
+            expressShippingFee: expFee,
           });
+          setLiveShippingRates((prev) => ({
+            ...prev,
+            standard: prev.isLive ? prev.standard : stdFee,
+            express: prev.isLive ? prev.express : expFee,
+          }));
         }
       })
       .catch((e) => console.warn("Failed to load shipping policy in checkout:", e));
   }, []);
 
   const effectiveSubtotal = rawSubtotal || subtotal || 0;
+
+  // Real-time Shiprocket freight calculation as soon as customer types their 6-digit PIN
+  useEffect(() => {
+    const rawPin = shippingAddress.pincode?.trim() || "";
+    if (rawPin.length === 6 && /^\d{6}$/.test(rawPin)) {
+      setLiveShippingRates((prev) => ({ ...prev, loading: true }));
+      const hasRx = items.some((it) => it.lensConfig && it.lensConfig.lensPackage);
+      fetch(`/api/shipping/estimate-delivery?pincode=${rawPin}&amount=${effectiveSubtotal}&isRx=${hasRx}`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data && data.success && data.standard && data.express) {
+            setLiveShippingRates({
+              loading: false,
+              standard: Number(data.standard.rate) || 75,
+              express: Number(data.express.rate) || 135,
+              standardCarrier: data.standard.carrier || "Standard Surface",
+              expressCarrier: data.express.carrier || "Blue Dart Air Priority",
+              standardEtd: data.standard.etd,
+              expressEtd: data.express.etd,
+              isLive: Boolean(data.isLiveRate),
+              serviceable: data.serviceable !== false,
+            });
+          } else {
+            setLiveShippingRates((prev) => ({ ...prev, loading: false }));
+          }
+        })
+        .catch(() => setLiveShippingRates((prev) => ({ ...prev, loading: false })));
+    }
+  }, [shippingAddress.pincode, effectiveSubtotal, items]);
+
   const isEligibleForFreeShipping = Boolean(
     shippingPolicy.isFreeShippingEnabled &&
       shippingPolicy.freeShippingThreshold &&
@@ -105,8 +163,8 @@ function CheckoutContent() {
   );
 
   const shippingRates = {
-    standard: isEligibleForFreeShipping ? 0 : shippingPolicy.standardShippingFee,
-    express: shippingPolicy.expressShippingFee,
+    standard: isEligibleForFreeShipping ? 0 : liveShippingRates.standard,
+    express: liveShippingRates.express,
   };
 
   const currentShippingFee =
@@ -133,9 +191,10 @@ function CheckoutContent() {
       cleaningKitAdded: includeCleaningKit,
       totalAmount: totalPayable,
       status: "confirmed",
-      estimatedDeliveryDate: getEstimatedDeliveryDate(
-        shippingMethod === "express" ? 2 : 4
-      ),
+      estimatedDeliveryDate:
+        shippingMethod === "express"
+          ? (liveShippingRates.expressEtd || getEstimatedDeliveryDate(2))
+          : (liveShippingRates.standardEtd || getEstimatedDeliveryDate(4)),
     };
 
     try {
@@ -147,6 +206,10 @@ function CheckoutContent() {
           customerId: user?.id || null,
           shippingFee: currentShippingFee,
           totalAmount: totalPayable,
+          courier_partner:
+            shippingMethod === "express"
+              ? liveShippingRates.expressCarrier
+              : liveShippingRates.standardCarrier,
         }),
       });
 
@@ -436,6 +499,14 @@ function CheckoutContent() {
               shippingMethod={shippingMethod}
               onShippingMethodChange={setShippingMethod}
               shippingRates={shippingRates}
+              shippingDetails={{
+                loading: liveShippingRates.loading,
+                standardCarrier: liveShippingRates.standardCarrier,
+                expressCarrier: liveShippingRates.expressCarrier,
+                standardEtd: liveShippingRates.standardEtd,
+                expressEtd: liveShippingRates.expressEtd,
+                isLiveRate: liveShippingRates.isLive,
+              }}
               paymentMethod={selectedPaymentMethod}
               onPaymentMethodChange={setSelectedPaymentMethod}
               onSubmitPay={handlePayNow}

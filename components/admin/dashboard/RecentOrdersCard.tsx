@@ -100,8 +100,13 @@ export const RecentOrdersCard: React.FC<RecentOrdersCardProps> = ({ orders }) =>
               ))
             ) : (
               <tr>
-                <td colSpan={6} className="py-6 text-center text-xs text-stone-400">
-                  No recent orders available.
+                <td colSpan={6} className="py-10 text-center text-xs text-[#716B64]">
+                  <div className="max-w-xs mx-auto space-y-1">
+                    <div className="font-semibold text-[#0A251C]">Awaiting Customer Orders</div>
+                    <p className="text-[11px] text-stone-500">
+                      When patrons complete checkout on the storefront, orders will stream here with real-time lab tracking.
+                    </p>
+                  </div>
                 </td>
               </tr>
             )}

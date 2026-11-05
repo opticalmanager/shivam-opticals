@@ -7,19 +7,23 @@ export async function GET() {
     return NextResponse.json({
       isFreeShippingEnabled: config.isFreeShippingEnabled !== false,
       freeShippingThreshold: config.freeShippingThreshold ?? 1999,
-      standardShippingFee: config.standardShippingFee ?? 150,
-      expressShippingFee: config.expressShippingFee ?? 350,
+      useDynamicLiveRates: config.useDynamicLiveRates !== false,
+      standardShippingFee: config.standardShippingFee ?? 75,
+      expressShippingFee: config.expressShippingFee ?? 135,
       defaultCarrier: config.defaultCarrier || "BlueDart Express",
-      supportedCarriers: config.supportedCarriers || ["BlueDart Express", "Delhivery Air"],
+      supportedCarriers: config.supportedCarriers || ["BlueDart Express", "Delhivery Air", "Xpressbees Surface", "DTDC Air"],
+      pickupPincode: config.shiprocketPickupPincode || "110091",
     });
   } catch (err: any) {
     return NextResponse.json({
       isFreeShippingEnabled: true,
       freeShippingThreshold: 1999,
-      standardShippingFee: 150,
-      expressShippingFee: 350,
+      useDynamicLiveRates: true,
+      standardShippingFee: 75,
+      expressShippingFee: 135,
       defaultCarrier: "BlueDart Express",
       supportedCarriers: ["BlueDart Express"],
+      pickupPincode: "110091",
     });
   }
 }

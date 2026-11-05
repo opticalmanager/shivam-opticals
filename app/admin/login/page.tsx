@@ -16,6 +16,7 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { toast } from "sonner";
+import { getStorefrontUrl } from "@/lib/utils";
 
 function AdminLoginContent() {
   const router = useRouter();
@@ -23,6 +24,11 @@ function AdminLoginContent() {
   const returnUrl = searchParams.get("returnUrl") || "/admin";
 
   const [authMode, setAuthMode] = useState<"password" | "otp">("password");
+  const [storeUrl, setStoreUrl] = useState<string>("/");
+
+  useEffect(() => {
+    setStoreUrl(getStorefrontUrl());
+  }, []);
   const [email, setEmail] = useState("shivamoptical999@gmail.com");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -214,13 +220,13 @@ function AdminLoginContent() {
       <div className="max-w-md w-full space-y-6">
         {/* Simple Header Back Link */}
         <div className="flex items-center justify-between px-1">
-          <Link
-            href="/"
+          <a
+            href={storeUrl}
             className="inline-flex items-center gap-1 text-xs text-[#6B7280] hover:text-[#0A251C] transition cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Storefront</span>
-          </Link>
+          </a>
           <span className="text-xs text-[#6B7280] font-medium">
             Shivam Optical
           </span>

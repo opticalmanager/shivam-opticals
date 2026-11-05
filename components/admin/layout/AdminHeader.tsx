@@ -14,9 +14,11 @@ import {
   X,
   Clock,
   LogOut,
+  Store,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AdminGlobalSearchModal } from "../common/AdminGlobalSearchModal";
+import { getStorefrontUrl } from "@/lib/utils";
 
 interface AdminHeaderProps {
   onToggleMobileMenu: () => void;
@@ -59,6 +61,11 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ onToggleMobileMenu }) 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [loadingNotifications, setLoadingNotifications] = useState(false);
+  const [storeUrl, setStoreUrl] = useState<string>("/");
+
+  useEffect(() => {
+    setStoreUrl(getStorefrontUrl());
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -162,16 +169,18 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ onToggleMobileMenu }) 
             </Button>
           </Link>
 
-          {/* View Storefront Link */}
-          <Link
-            href="/"
+          {/* Visit Store Button */}
+          <a
+            href={storeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-1.5 text-xs text-stone-600 hover:text-[#0A251C] px-2.5 py-1.5 rounded-md hover:bg-black/5 transition-colors font-medium"
+            title="Open Customer Storefront (New Tab)"
+            className="inline-flex items-center gap-1.5 text-xs text-stone-700 hover:text-[#0A251C] px-2.5 py-1.5 rounded-lg border border-[#E8DEC8] hover:border-[#C5A059] bg-[#FAF7F2] hover:bg-[#FAF3EB] transition font-medium cursor-pointer shadow-2xs"
           >
-            <span>View Store</span>
+            <Store className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span className="hidden sm:inline">Visit Store</span>
             <ExternalLink className="w-3 h-3 text-stone-400" />
-          </Link>
+          </a>
 
           {/* Notifications Dropdown */}
           <div className="relative">

@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
       ${dateFilter};
     `);
 
-    // Also get registered profiles count from public.profiles
+    // Get total registered patrons count from public.profiles
     const profilesCountRes = await query(`SELECT COUNT(id) as total_patrons FROM public.profiles;`);
     const totalRegisteredPatrons = parseInt(profilesCountRes.rows[0]?.total_patrons || "0", 10);
 
@@ -75,7 +75,7 @@ export async function GET(req: NextRequest) {
 
       const calcGrowth = (curr: number, prev: number) => {
         if (prev === 0 && curr > 0) return "+100%";
-        if (prev === 0 && curr === 0) return null;
+        if (prev === 0 && curr === 0) return null; // No meaningless +0.0%
         const diff = ((curr - prev) / prev) * 100;
         return `${diff >= 0 ? "+" : ""}${diff.toFixed(1)}%`;
       };
@@ -86,7 +86,7 @@ export async function GET(req: NextRequest) {
       aovGrowth = calcGrowth(Number(statsRow.avg_order_value || 0), Number(prevStats.avg_order_value || 0));
     }
 
-    // 2. Status counts (optical lab queue)
+    // 2. Optical lab queue status counts
     const statusRes = await query(`
       SELECT status, COUNT(*) as count
       FROM public.orders
@@ -150,7 +150,7 @@ export async function GET(req: NextRequest) {
       ORDER BY date_trunc('day', created_at) ASC;
     `);
 
-    // Build timeline dates so chart renders even with 0 orders
+    // Build timeline dates
     const historyMap: Record<string, { label: string; revenue: number; orders: number }> = {};
     for (const row of salesHistoryRes.rows) {
       historyMap[row.date_str] = {
@@ -175,7 +175,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // 5. Top Eyewear Models by revenue or popularity
+    // 5. Top Eyewear Models or Flagship Atelier Showcase
     const topProductsRes = await query(`
       SELECT 
         COALESCE(oi.product_snapshot->>'name', p.name, 'Optical Frame') as name,
@@ -187,19 +187,43 @@ export async function GET(req: NextRequest) {
       LEFT JOIN public.products p ON p.id = oi.product_id
       LEFT JOIN public.brands b ON b.id = p.brand_id
       GROUP BY oi.product_snapshot->>'name', p.name, b.name, p.base_price
+      HAVING SUM(oi.quantity) > 0
       ORDER BY revenue DESC
       LIMIT 5;
     `);
 
     let topProducts = topProductsRes.rows;
+    let isCatalogShowcase = false;
+
     if (topProducts.length === 0) {
-      // If store is newly opened without sales yet, showcase top catalog frames
+      // Flagship catalog showcase
+      isCatalogShowcase = true;
       const catalogTop = await query(`
         SELECT 
+          p.id,
           p.name,
           COALESCE(b.name, 'Shivam Optical') as brand,
-          0 as "unitsSold",
           p.base_price as price,
+          p.original_price as "originalPrice",
+          p.is_best_seller as "isBestSeller",
+          COALESCE((
+            SELECT pi.url FROM public.product_images pi 
+            WHERE pi.product_id = p.id AND pi.is_primary = true 
+            LIMIT 1
+          ), (
+            SELECT pi.url FROM public.product_images pi 
+            WHERE pi.product_id = p.id 
+            LIMIT 1
+          ), '/images/placeholder.jpg') as img,
+          COALESCE((
+            SELECT SUM(pv.stock_quantity) FROM public.product_variants pv 
+            WHERE pv.product_id = p.id
+          ), 0)::int as stock,
+          COALESCE((
+            SELECT COUNT(pv.id) FROM public.product_variants pv 
+            WHERE pv.product_id = p.id
+          ), 0)::int as "variantCount",
+          0 as "unitsSold",
           0 as revenue
         FROM public.products p
         LEFT JOIN public.brands b ON b.id = p.brand_id
@@ -217,12 +241,66 @@ export async function GET(req: NextRequest) {
         pv.sku,
         pv.color_name,
         pv.stock_quantity,
-        p.name as product_name
+        p.name as product_name,
+        COALESCE(b.name, 'Shivam Optical') as brand
       FROM public.product_variants pv
       JOIN public.products p ON p.id = pv.product_id
+      LEFT JOIN public.brands b ON b.id = p.brand_id
       WHERE pv.stock_quantity <= 5
       ORDER BY pv.stock_quantity ASC
-      LIMIT 5;
+      LIMIT 6;
+    `);
+
+    // 7. REAL CATALOG HEALTH & INVENTORY METRICS
+    const catalogHealthRes = await query(`
+      SELECT 
+        (SELECT COUNT(*) FROM public.products) as total_products,
+        (SELECT COUNT(*) FROM public.products WHERE is_active = true) as active_products,
+        (SELECT COUNT(*) FROM public.product_variants) as total_variants,
+        (SELECT COALESCE(SUM(stock_quantity), 0) FROM public.product_variants) as total_stock_units,
+        (SELECT COUNT(*) FROM public.brands) as total_brands,
+        (SELECT COALESCE(ROUND(AVG(base_price)), 0) FROM public.products WHERE is_active = true AND base_price > 0) as avg_catalog_price;
+    `);
+    const chRow = catalogHealthRes.rows[0] || {};
+
+    // Category breakdown
+    const categoryDistRes = await query(`
+      SELECT 
+        COALESCE(c.slug, 'other') as slug,
+        COALESCE(c.name, 'Other Eyewear') as name,
+        COUNT(p.id)::int as count
+      FROM public.products p
+      LEFT JOIN public.categories c ON c.id = p.category_id
+      WHERE p.is_active = true
+      GROUP BY c.slug, c.name
+      ORDER BY count DESC;
+    `);
+
+    // Top brands by frame count
+    const topBrandsRes = await query(`
+      SELECT 
+        b.name,
+        COUNT(p.id)::int as count
+      FROM public.brands b
+      JOIN public.products p ON p.brand_id = b.id
+      WHERE p.is_active = true
+      GROUP BY b.name
+      ORDER BY count DESC
+      LIMIT 6;
+    `);
+
+    // 8. RECENT REGISTERED PATRONS
+    const recentPatronsRes = await query(`
+      SELECT 
+        id,
+        phone,
+        email,
+        full_name,
+        role,
+        created_at
+      FROM public.profiles
+      ORDER BY created_at DESC
+      LIMIT 6;
     `);
 
     const statsPayload = {
@@ -238,6 +316,17 @@ export async function GET(req: NextRequest) {
       },
     };
 
+    const catalogHealth = {
+      totalProducts: parseInt(chRow.total_products || "0", 10),
+      activeProducts: parseInt(chRow.active_products || "0", 10),
+      totalVariants: parseInt(chRow.total_variants || "0", 10),
+      totalStockUnits: parseInt(chRow.total_stock_units || "0", 10),
+      totalBrands: parseInt(chRow.total_brands || "0", 10),
+      avgCatalogPrice: parseInt(chRow.avg_catalog_price || "0", 10),
+      categoryDistribution: categoryDistRes.rows,
+      topBrands: topBrandsRes.rows,
+    };
+
     return NextResponse.json({
       success: true,
       stats: statsPayload,
@@ -251,7 +340,10 @@ export async function GET(req: NextRequest) {
       recentOrders: recentOrdersRes.rows,
       salesHistory,
       topProducts,
+      isCatalogShowcase,
       lowStock: lowStockRes.rows,
+      catalogHealth,
+      recentPatrons: recentPatronsRes.rows,
     });
   } catch (error: any) {
     console.error("Admin dashboard error:", error);

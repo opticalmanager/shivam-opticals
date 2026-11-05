@@ -30,6 +30,14 @@ interface UnifiedCheckoutFormProps {
     standard: number;
     express: number;
   };
+  shippingDetails?: {
+    loading?: boolean;
+    standardCarrier?: string;
+    expressCarrier?: string;
+    standardEtd?: string;
+    expressEtd?: string;
+    isLiveRate?: boolean;
+  };
   paymentMethod: PaymentMethod;
   onPaymentMethodChange: (method: PaymentMethod) => void;
   onSubmitPay: () => void;
@@ -78,6 +86,7 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
   shippingMethod,
   onShippingMethodChange,
   shippingRates,
+  shippingDetails,
   paymentMethod,
   onPaymentMethodChange,
   onSubmitPay,
@@ -373,16 +382,27 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
             }`}
           >
             <div>
-              <div className="flex items-center gap-1.5 mb-1">
+              <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                 <span className="font-bold text-[#0A251C]">Standard Delivery</span>
+                {shippingDetails?.isLiveRate && (
+                  <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 uppercase tracking-wider">
+                    Shiprocket Real Rate
+                  </span>
+                )}
               </div>
-              <p className="text-[#716B64]">3–5 Business Days • Doorstep Delivery</p>
+              <p className="text-[#716B64]">
+                {shippingDetails?.standardCarrier || "Surface Courier"} • Doorstep Delivery
+              </p>
               <p className="text-[11px] text-[#C5A059] font-medium mt-1">
-                Estimated Delivery: {getEstimatedDeliveryDate(4)}
+                Estimated Delivery: {shippingDetails?.standardEtd || getEstimatedDeliveryDate(4)}
               </p>
             </div>
-            <div className="font-mono font-bold text-xs text-[#0A251C]">
-              {shippingRates.standard === 0 ? "FREE" : formatCurrency(shippingRates.standard)}
+            <div className="font-mono font-bold text-xs text-[#0A251C] text-right shrink-0 ml-2">
+              {shippingRates.standard === 0 ? (
+                <span className="text-[#16803E] uppercase font-bold">FREE</span>
+              ) : (
+                formatCurrency(shippingRates.standard)
+              )}
             </div>
           </div>
 
@@ -395,15 +415,22 @@ export const UnifiedCheckoutForm: React.FC<UnifiedCheckoutFormProps> = ({
             }`}
           >
             <div>
-              <div className="flex items-center gap-1.5 mb-1">
+              <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                 <span className="font-bold text-[#0A251C]">Express Delivery</span>
+                {shippingDetails?.isLiveRate && (
+                  <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-blue-100 text-blue-800 uppercase tracking-wider">
+                    Shiprocket Air Priority
+                  </span>
+                )}
               </div>
-              <p className="text-[#716B64]">1–2 Business Days • Priority Dispatch</p>
+              <p className="text-[#716B64]">
+                {shippingDetails?.expressCarrier || "Air Priority Courier"} • Priority Dispatch
+              </p>
               <p className="text-[11px] text-[#C5A059] font-medium mt-1">
-                Estimated Delivery: {getEstimatedDeliveryDate(2)}
+                Estimated Delivery: {shippingDetails?.expressEtd || getEstimatedDeliveryDate(2)}
               </p>
             </div>
-            <div className="font-mono font-bold text-xs text-[#0A251C]">
+            <div className="font-mono font-bold text-xs text-[#0A251C] text-right shrink-0 ml-2">
               {formatCurrency(shippingRates.express)}
             </div>
           </div>
