@@ -11,7 +11,6 @@ import {
   Phone,
   Plus,
   X,
-  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/admin/common/StatusBadge";

@@ -218,9 +218,40 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
   const handleWhatsAppChat = () => {
     const text = encodeURIComponent(
-      `Hi Shivam Optical Atelier, I am inquiring about ${product.brand} - ${product.name} (Price: ${formatCurrency(product.price)}). Could you provide live photos and concierge styling guidance?`
+      `Hi Shivam Optical, I am inquiring about ${product.brand} - ${product.name} (Price: ${formatCurrency(product.price)}). Could you provide live photos and concierge styling guidance?`
     );
     window.open(`https://wa.me/919779990207?text=${text}`, "_blank");
+  };
+
+  const handlePrescriptionWhatsApp = () => {
+    const brandName = product.brand?.trim() || "Eyewear";
+    const productName = product.name?.replace(/\s+/g, " ").trim();
+    const activeVariant = product.variants?.[selectedVariantIdx];
+    const colorName =
+      activeVariant?.colorName?.replace(/\s+/g, " ").trim() ||
+      product.color ||
+      "Standard";
+    const framePrice = formatCurrency(product.price);
+    const productUrl =
+      typeof window !== "undefined"
+        ? window.location.href
+        : `https://www.shivamoptical.in/product/${product.id}`;
+
+    const message = [
+      `*Prescription Lens Order & Optician Consultation*`,
+      ``,
+      `Hello Shivam Optical, I would like to order prescription lenses for this frame:`,
+      `• *Frame:* ${brandName} - ${productName}`,
+      `• *Selected Color:* ${colorName}`,
+      `• *Frame Price:* ${framePrice}`,
+      `• *Product Link:* ${productUrl}`,
+      ``,
+      `I am sharing my eye prescription details / doctor Rx photo here. Please guide me on suitable lenses (Nikon / Zeiss / Essilor / Blue-cut) and customized laboratory fitting.`,
+    ].join("\n");
+
+    const encoded = encodeURIComponent(message);
+    toast.success("Connecting with Shivam Optical master optician on WhatsApp...");
+    window.open(`https://wa.me/919779990207?text=${encoded}`, "_blank", "noopener,noreferrer");
   };
 
   const formattedMaterial = product.material
@@ -532,14 +563,17 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               ADD TO CART
             </button>
 
-            {/* Secondary Action: ADD PRESCRIPTION LENSES */}
+            {/* Secondary Action: ADD PRESCRIPTION LENSES (FORWARD TO WHATSAPP CONCIERGE) */}
             {product.category !== "contact-lenses" && (
               <button
-                onClick={() => setIsCustomizerOpen(true)}
-                className="w-full bg-[#FAF3EB] hover:bg-[#F4E9DD] border border-[#E8DEC8] text-[#1A1816] py-3 px-4 font-sans font-normal text-[11px] sm:text-[12px] uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2 cursor-pointer text-center rounded-xl"
+                type="button"
+                onClick={handlePrescriptionWhatsApp}
+                className="w-full bg-[#FAF3EB] hover:bg-[#F4E9DD] border border-[#E8DEC8] hover:border-[#C5A059] text-[#1A1816] py-3.5 px-4 font-sans font-medium text-[11px] sm:text-[12px] uppercase tracking-[0.08em] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer text-center rounded-xl shadow-2xs hover:shadow-xs active:scale-[0.99] group"
+                title="Send prescription details directly to our master optician on WhatsApp"
               >
-                <Glasses className="w-4 h-4 text-[#C5A059]" />
-                <span>ADD PRESCRIPTION LENSES (NIKON • ZEISS • ESSILOR)</span>
+                <Glasses className="w-4 h-4 text-[#C5A059] group-hover:scale-105 transition-transform" />
+                <span>ADD PRESCRIPTION LENSES (NIKON · ZEISS · ESSILOR)</span>
+                <MessageCircle className="w-3.5 h-3.5 text-[#25D366] shrink-0 ml-1" />
               </button>
             )}
 
@@ -812,13 +846,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         <div className="flex items-center gap-2 shrink-0">
           {product.category !== "contact-lenses" && (
             <button
-              onClick={() => setIsCustomizerOpen(true)}
-              className="px-2.5 py-2.5 rounded-xl border border-[#C5A059] bg-[#FAF3EB] text-[#0A251C] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer active:scale-95 shadow-2xs"
-              title="Add Prescription Lenses"
-              aria-label="Add prescription lenses"
+              onClick={handlePrescriptionWhatsApp}
+              className="px-2.5 py-2.5 rounded-xl border border-[#C5A059] bg-[#FAF3EB] text-[#0A251C] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-2xs"
+              title="Send prescription details on WhatsApp"
+              aria-label="Send prescription details on WhatsApp"
             >
               <Glasses className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>+Rx</span>
+              <MessageCircle className="w-3 h-3 text-[#25D366]" />
             </button>
           )}
           <button

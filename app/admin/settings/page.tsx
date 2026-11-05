@@ -28,6 +28,10 @@ import {
   Tag,
   Percent,
   Calculator,
+  Award,
+  Gift,
+  Coins,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -108,6 +112,24 @@ function AdminSettingsContent() {
   const [recalculatingMrp, setRecalculatingMrp] = useState(false);
   const [previewSellingPrice, setPreviewSellingPrice] = useState(2500);
 
+  // Loyalty & Rewards Club Configuration State
+  const [loyaltyConfig, setLoyaltyConfig] = useState({
+    enabled: true,
+    earnRatePercent: 1,
+    minOrderAmountToEarn: 500,
+    pointsToRupeeRatio: 1,
+    allowRedemption: true,
+    maxRedemptionPercent: 50,
+    minOrderAmountToRedeem: 1000,
+    tiers: [
+      { name: "Privilege Member", minSpend: 0 },
+      { name: "Gold Member", minSpend: 5000 },
+      { name: "Platinum Member", minSpend: 15000 },
+    ],
+    privileges: [] as string[],
+  });
+  const [newPrivilegeInput, setNewPrivilegeInput] = useState("");
+
   const fetchFast2SmsWallet = async (keyOverride?: string) => {
     setWalletLoading(true);
     try {
@@ -180,12 +202,16 @@ function AdminSettingsContent() {
       fetch("/api/admin/settings?key=notifications").then((r) => r.json()),
       fetch("/api/admin/settings?key=roles").then((r) => r.json()),
       fetch("/api/admin/settings?key=whatsapp_auth").then((r) => r.json()),
+      fetch("/api/admin/settings?key=loyalty").then((r) => r.json()),
       fetch("/api/admin/pricing").then((r) => r.json()),
     ])
-      .then(([genData, storeData, notifData, rolesData, waData, pricingData]) => {
+      .then(([genData, storeData, notifData, rolesData, waData, loyaltyData, pricingData]) => {
         if (pricingData && pricingData.success) {
           if (pricingData.pricing) setPricingConfig((prev) => ({ ...prev, ...pricingData.pricing }));
           if (pricingData.stats) setPricingStats(pricingData.stats);
+        }
+        if (loyaltyData && loyaltyData.success && loyaltyData.value) {
+          setLoyaltyConfig((prev) => ({ ...prev, ...loyaltyData.value }));
         }
         if (genData.success && genData.value) {
           setGeneralConfig((prev) => ({ ...prev, ...genData.value }));
@@ -359,9 +385,30 @@ function AdminSettingsContent() {
     handleSaveRoles(updated);
   };
 
+  const handleSaveLoyalty = () => {
+    saveSetting("loyalty", loyaltyConfig, "Rewards & Privilege Club settings saved successfully");
+  };
+
+  const handleAddPrivilege = () => {
+    if (!newPrivilegeInput.trim()) return;
+    setLoyaltyConfig((prev) => ({
+      ...prev,
+      privileges: [...(prev.privileges || []), newPrivilegeInput.trim()],
+    }));
+    setNewPrivilegeInput("");
+  };
+
+  const handleRemovePrivilege = (index: number) => {
+    setLoyaltyConfig((prev) => ({
+      ...prev,
+      privileges: (prev.privileges || []).filter((_, i) => i !== index),
+    }));
+  };
+
   const navItems = [
     { id: "general", label: "General Settings", icon: Sliders },
     { id: "pricing", label: "Catalog Pricing & MRP", icon: Tag },
+    { id: "loyalty", label: "Rewards & Privilege Club", icon: Award },
     { id: "whatsapp_auth", label: "WhatsApp & Auth OTP", icon: Smartphone },
     { id: "store", label: "Store & Atelier Policy", icon: Store },
     { id: "payments", label: "Payment Methods", icon: CreditCard, externalHref: "/admin/payments" },
@@ -758,6 +805,360 @@ function AdminSettingsContent() {
                       </>
                     )}
                   </Button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === "loyalty" && (
+            <div className="space-y-6">
+              {/* Header Card */}
+              <div className="bg-white border border-[#E8DCCF] rounded-xl p-5 shadow-2xs space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-stone-100">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#FAF3EB] border border-[#E8DCCF] flex items-center justify-center text-[#C5A059]">
+                      <Award className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h2 className="text-sm font-bold text-[#0A251C] font-serif">
+                        Customer Rewards &amp; Privilege Club
+                      </h2>
+                      <p className="text-xs text-stone-500">
+                        Configure reward credit rules, purchase earning percentages, redemption limits, and member tiers
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={handleSaveLoyalty}
+                    disabled={savingKey === "loyalty"}
+                    className="text-xs bg-[#C5A059] hover:bg-[#b59049] text-white"
+                  >
+                    {savingKey === "loyalty" ? (
+                      <Loader2 className="w-3.5 h-3.5 mr-1 animate-spin" />
+                    ) : (
+                      <Save className="w-3.5 h-3.5 mr-1" />
+                    )}
+                    <span>Save Rewards Config</span>
+                  </Button>
+                </div>
+
+                {/* 1. Program Master Toggle */}
+                <div className="flex items-center justify-between p-4 bg-[#FAF7F2] rounded-xl border border-[#E8DCCF]">
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-[#0A251C]">
+                      Enable Customer Rewards &amp; Privilege Club
+                    </span>
+                    <p className="text-[11px] text-stone-500">
+                      When enabled, registered customers accrue reward credits on eligible purchases and view their tier in their account dashboard.
+                    </p>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={loyaltyConfig.enabled}
+                    onChange={(e) =>
+                      setLoyaltyConfig({ ...loyaltyConfig, enabled: e.target.checked })
+                    }
+                    className="w-4 h-4 accent-[#0A251C] cursor-pointer"
+                  />
+                </div>
+
+                {/* 2. Earning Rules Card */}
+                <div className="space-y-3 pt-2">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0A251C]">
+                    Purchase Earning Logic
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                        Reward Credit Earn Rate (%)
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min="0"
+                          max="50"
+                          step="0.5"
+                          value={loyaltyConfig.earnRatePercent}
+                          onChange={(e) =>
+                            setLoyaltyConfig({
+                              ...loyaltyConfig,
+                              earnRatePercent: Math.max(0, parseFloat(e.target.value) || 0),
+                            })
+                          }
+                          className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono font-bold pr-8"
+                        />
+                        <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-stone-400 font-bold">%</span>
+                      </div>
+                      <span className="text-[10px] text-stone-400 mt-1 block">
+                        Percentage of purchase credited as reward points.
+                      </span>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                        Minimum Order to Earn (₹)
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="100"
+                        value={loyaltyConfig.minOrderAmountToEarn}
+                        onChange={(e) =>
+                          setLoyaltyConfig({
+                            ...loyaltyConfig,
+                            minOrderAmountToEarn: Math.max(0, parseInt(e.target.value, 10) || 0),
+                          })
+                        }
+                        className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono"
+                      />
+                      <span className="text-[10px] text-stone-400 mt-1 block">
+                        Orders below this amount will not accrue credits.
+                      </span>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                        Point Value (1 Point = ₹)
+                      </label>
+                      <input
+                        type="number"
+                        min="0.1"
+                        max="100"
+                        step="0.5"
+                        value={loyaltyConfig.pointsToRupeeRatio}
+                        onChange={(e) =>
+                          setLoyaltyConfig({
+                            ...loyaltyConfig,
+                            pointsToRupeeRatio: Math.max(0.1, parseFloat(e.target.value) || 1),
+                          })
+                        }
+                        className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono"
+                      />
+                      <span className="text-[10px] text-stone-400 mt-1 block">
+                        Rupee value of 1 point during checkout redemption.
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Live Simulation Preview */}
+                  <div className="p-3 bg-[#FAF3EB] rounded-xl border border-[#E8DEC8] flex items-center justify-between text-xs">
+                    <span className="text-stone-700">
+                      <strong>Live Calculation:</strong> On a purchase of <strong>₹3,000</strong>, customer earns{" "}
+                      <strong className="text-[#0A251C]">
+                        {Math.round((3000 * loyaltyConfig.earnRatePercent) / 100)} points
+                      </strong>{" "}
+                      (worth{" "}
+                      <strong className="text-[#C5A059]">
+                        ₹{(Math.round((3000 * loyaltyConfig.earnRatePercent) / 100) * loyaltyConfig.pointsToRupeeRatio).toFixed(0)} store credit
+                      </strong>
+                      ).
+                    </span>
+                  </div>
+                </div>
+
+                {/* 3. Checkout Redemption Rules */}
+                <div className="space-y-3 pt-3 border-t border-stone-100">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0A251C]">
+                    Checkout Redemption Rules
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="flex items-center justify-between p-3 rounded-lg border border-stone-200 bg-stone-50/50">
+                      <div className="space-y-0.5">
+                        <span className="text-xs font-bold text-[#0A251C]">Allow Redemption</span>
+                        <p className="text-[10px] text-stone-500">Allow customers to redeem credit</p>
+                      </div>
+                      <input
+                        type="checkbox"
+                        checked={loyaltyConfig.allowRedemption}
+                        onChange={(e) =>
+                          setLoyaltyConfig({ ...loyaltyConfig, allowRedemption: e.target.checked })
+                        }
+                        className="w-4 h-4 accent-[#0A251C] cursor-pointer"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                        Max % of Order Redeemable
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min="1"
+                          max="100"
+                          value={loyaltyConfig.maxRedemptionPercent}
+                          onChange={(e) =>
+                            setLoyaltyConfig({
+                              ...loyaltyConfig,
+                              maxRedemptionPercent: Math.min(100, Math.max(1, parseInt(e.target.value, 10) || 50)),
+                            })
+                          }
+                          className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono font-bold pr-8"
+                        />
+                        <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-stone-400 font-bold">%</span>
+                      </div>
+                      <span className="text-[10px] text-stone-400 mt-1 block">
+                        Maximum % of cart payable with credit.
+                      </span>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase text-stone-600 mb-1">
+                        Min Order Total to Redeem (₹)
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="100"
+                        value={loyaltyConfig.minOrderAmountToRedeem}
+                        onChange={(e) =>
+                          setLoyaltyConfig({
+                            ...loyaltyConfig,
+                            minOrderAmountToRedeem: Math.max(0, parseInt(e.target.value, 10) || 0),
+                          })
+                        }
+                        className="w-full px-3 py-2 rounded-lg border border-stone-300 text-xs font-mono"
+                      />
+                      <span className="text-[10px] text-stone-400 mt-1 block">
+                        Cart total required before applying points.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. Tier Levels & Spend Thresholds */}
+                <div className="space-y-3 pt-3 border-t border-stone-100">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0A251C]">
+                    Customer Tier Levels &amp; Lifetime Spend Thresholds
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {loyaltyConfig.tiers.map((tier, idx) => (
+                      <div key={idx} className="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8DCCF] space-y-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#C5A059] block">
+                          Tier {idx + 1} ({idx === 0 ? "Base" : idx === 1 ? "Mid" : "VIP"})
+                        </span>
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-stone-500 mb-0.5">
+                            Tier Title
+                          </label>
+                          <input
+                            type="text"
+                            value={tier.name}
+                            onChange={(e) => {
+                              const updated = [...loyaltyConfig.tiers];
+                              updated[idx].name = e.target.value;
+                              setLoyaltyConfig({ ...loyaltyConfig, tiers: updated });
+                            }}
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 text-xs bg-white font-semibold"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold text-stone-500 mb-0.5">
+                            Minimum Spend Threshold (₹)
+                          </label>
+                          <input
+                            type="number"
+                            min="0"
+                            step="1000"
+                            value={tier.minSpend}
+                            onChange={(e) => {
+                              const updated = [...loyaltyConfig.tiers];
+                              updated[idx].minSpend = Math.max(0, parseInt(e.target.value, 10) || 0);
+                              setLoyaltyConfig({ ...loyaltyConfig, tiers: updated });
+                            }}
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 text-xs bg-white font-mono"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 5. Custom Privileges & Benefits List (Admin Controlled, Zero Fake Claims) */}
+                <div className="space-y-3 pt-3 border-t border-stone-100">
+                  <div>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#0A251C]">
+                      Customer-Facing Privileges &amp; Benefits (Optional)
+                    </h3>
+                    <p className="text-[11px] text-stone-500">
+                      Only benefits explicitly added here will appear in the customer&apos;s account dashboard. Leave empty to display zero claims.
+                    </p>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={newPrivilegeInput}
+                      onChange={(e) => setNewPrivilegeInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleAddPrivilege();
+                        }
+                      }}
+                      placeholder="e.g. Free insured shipping on orders above ₹1,999"
+                      className="flex-1 px-3 py-2 rounded-xl border border-stone-300 text-xs focus:border-[#C5A059] outline-none"
+                    />
+                    <Button
+                      type="button"
+                      size="sm"
+                      onClick={handleAddPrivilege}
+                      className="bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold gap-1 cursor-pointer"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Add Benefit</span>
+                    </Button>
+                  </div>
+
+                  {loyaltyConfig.privileges && loyaltyConfig.privileges.length > 0 ? (
+                    <div className="space-y-1.5 pt-1">
+                      {loyaltyConfig.privileges.map((priv, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center justify-between p-2.5 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-700"
+                        >
+                          <span className="flex items-center gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                            <span>{priv}</span>
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleRemovePrivilege(idx)}
+                            className="text-stone-400 hover:text-red-500 transition p-1 cursor-pointer"
+                            title="Remove Benefit"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-[11px] text-stone-400 italic">
+                      No custom privileges configured. Customers will only see their verified order count, spend, and points balance with zero dummy promises.
+                    </p>
+                  )}
+                </div>
+
+                {/* 6. Promotional Discount Coupons Quick Link */}
+                <div className="p-4 bg-[#FAF7F2] rounded-xl border border-[#E8DCCF] flex items-center justify-between flex-wrap gap-3 pt-3">
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-[#0A251C] flex items-center gap-1.5">
+                      <Tag className="w-3.5 h-3.5 text-[#C5A059]" />
+                      <span>Promotional Discount Coupons &amp; Voucher Codes</span>
+                    </span>
+                    <p className="text-[11px] text-stone-500">
+                      Configure coupon promo codes (e.g. WELCOME10, FESTIVE500), minimum order requirements, and usage limits.
+                    </p>
+                  </div>
+                  <Link
+                    href="/admin/discounts"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white border border-stone-300 text-[#0A251C] hover:border-[#C5A059] text-xs font-bold transition shadow-2xs"
+                  >
+                    <span>Manage Discount Coupons</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
               </div>
             </div>

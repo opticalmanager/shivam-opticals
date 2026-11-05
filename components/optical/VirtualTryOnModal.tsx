@@ -8,7 +8,6 @@ import {
   Glasses,
   Maximize2,
   RefreshCw,
-  Sparkles,
   ShieldCheck,
 } from "lucide-react";
 import { Product } from "@/types";

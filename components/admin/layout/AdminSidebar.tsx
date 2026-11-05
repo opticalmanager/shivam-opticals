@@ -9,7 +9,7 @@ import {
   Users,
   Glasses,
   Layers,
-  Sparkles,
+  Award,
   Archive,
   Percent,
   Calendar,
@@ -74,7 +74,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       items: [
         { label: "Products", href: "/admin/products", icon: Glasses },
         { label: "Categories", href: "/admin/categories", icon: Layers },
-        { label: "Brands", href: "/admin/brands", icon: Sparkles },
+        { label: "Brands", href: "/admin/brands", icon: Award },
         { label: "Inventory Stock", href: "/admin/inventory", icon: Archive },
       ],
     },

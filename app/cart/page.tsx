@@ -11,7 +11,6 @@ import {
   ArrowRight,
   ShieldCheck,
   Truck,
-  Sparkles,
   Tag,
   Lock,
   ArrowLeft,
@@ -95,7 +94,7 @@ export default function StandaloneCartPage() {
               Your Bag is Currently Empty
             </h2>
             <p className="text-xs text-stone-500 leading-relaxed">
-              Explore our handcrafted Italian acetate, titanium frames, and German Zeiss lenses calibrated for zero-distortion optical precision.
+              Explore our curated optical collection to select designer frames and lenses.
             </p>
             <Link
               href="/products"
@@ -109,24 +108,6 @@ export default function StandaloneCartPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left: Items List */}
             <div className="lg:col-span-8 space-y-4">
-              {/* Delivery meter alert */}
-              <div className="bg-[#FAF3EB] border border-[#E8DEC8] p-4 rounded-2xl space-y-2">
-                <div className="flex justify-between items-center text-xs font-bold">
-                  <span className="text-[#0A251C] uppercase tracking-wide">
-                    {isDeliveryFree
-                      ? "Complimentary Insured Delivery Active"
-                      : `Add ${formatCurrency(amountLeft)} more for Free Express Delivery`}
-                  </span>
-                  <span className="text-[#C5A059] font-mono">{progressPct}%</span>
-                </div>
-                <div className="w-full bg-[#E8DEC8] h-2 rounded-full overflow-hidden">
-                  <div
-                    className="bg-[#C5A059] h-full transition-all duration-500 rounded-full"
-                    style={{ width: `${progressPct}%` }}
-                  />
-                </div>
-              </div>
-
               {/* Items Table Card */}
               <div className="bg-white rounded-2xl border border-[#E8DEC8] p-6 shadow-xs divide-y divide-[#E8DEC8]">
                 {items.map((it) => {
@@ -333,18 +314,6 @@ export default function StandaloneCartPage() {
                   <span>PROCEED TO CHECKOUT</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
-
-                {/* Trust Badges */}
-                <div className="pt-2 border-t border-[#E8DEC8] grid grid-cols-2 gap-2 text-[10px] text-stone-500">
-                  <div className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>1-Year Warranty</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Truck className="w-3.5 h-3.5 text-[#C5A059]" />
-                    <span>Free Delivery</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

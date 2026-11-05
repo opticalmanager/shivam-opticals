@@ -12,7 +12,6 @@ import {
   Lock,
   ArrowRight,
   Tag,
-  Sparkles,
   Plus,
   Minus,
   Check,
@@ -96,24 +95,6 @@ export const CartDrawer: React.FC = () => {
           </button>
         </div>
 
-        {/* Complimentary Shipping Progress */}
-        <div className="bg-[#FAF3EB] px-5 py-3 border-b border-[#E8DEC8]">
-          <div className="flex justify-between text-[11px] font-semibold uppercase tracking-wider mb-1.5">
-            <span className="text-[#0A251C]">
-              {isDeliveryFree
-                ? "Complimentary Insured Delivery Unlocked"
-                : `Add ${formatCurrency(amountLeft)} for Free Delivery`}
-            </span>
-            <span className="text-[#C5A059] font-bold">Pan-India Express</span>
-          </div>
-          <div className="w-full bg-[#E8DEC8] h-1.5 rounded-full overflow-hidden">
-            <div
-              className="bg-[#C5A059] h-full transition-all duration-500 rounded-full"
-              style={{ width: `${progressPct}%` }}
-            />
-          </div>
-        </div>
-
         {/* Cart Items List */}
         <div className="flex-1 overflow-y-auto p-5 space-y-4">
           {items.length === 0 ? (
@@ -123,7 +104,7 @@ export const CartDrawer: React.FC = () => {
               </div>
               <p className="text-base font-serif font-bold text-[#0A251C]">Your Bag is Currently Empty</p>
               <p className="text-xs max-w-xs text-stone-500 leading-relaxed">
-                Explore our handcrafted optical catalog to select designer frames and precision laboratory lenses.
+                Explore our optical catalog to select designer frames and lenses.
               </p>
               <button
                 onClick={closeCart}
@@ -134,17 +115,6 @@ export const CartDrawer: React.FC = () => {
             </div>
           ) : (
             <>
-              {/* Atelier Assurance Note */}
-              <div className="bg-white rounded-xl p-3.5 border border-[#E8DEC8] shadow-2xs space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#C5A059] uppercase tracking-wide">
-                  <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-                  <span>Clinical Optical Assembly</span>
-                </div>
-                <p className="text-[11px] text-stone-600 leading-relaxed">
-                  Every customized frame undergoes robotic laser lens calibration, ultrasonic sanitization, and 1-year atelier warranty.
-                </p>
-              </div>
-
               {/* Items Card List */}
               <div className="space-y-3.5">
                 {items.map((item) => {
@@ -332,7 +302,7 @@ export const CartDrawer: React.FC = () => {
               )}
 
               <div className="flex justify-between text-stone-600">
-                <span>Insured Courier Shipping</span>
+                <span>Delivery</span>
                 <span className="font-mono font-bold text-[#0A251C]">
                   {isDeliveryFree ? "FREE" : formatCurrency(deliveryCharge)}
                 </span>
@@ -358,7 +328,7 @@ export const CartDrawer: React.FC = () => {
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
 
-            <div className="flex items-center justify-between text-[11px] pt-1">
+            <div className="text-center text-[11px] pt-1">
               <Link
                 href="/cart"
                 onClick={closeCart}
@@ -366,9 +336,6 @@ export const CartDrawer: React.FC = () => {
               >
                 View Full Bag Page →
               </Link>
-              <span className="text-[10px] text-stone-400 uppercase tracking-wider">
-                1-Year Precision Warranty
-              </span>
             </div>
           </div>
         )}

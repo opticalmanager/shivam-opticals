@@ -88,6 +88,7 @@ export interface ProductSpecs {
 
 export interface Product {
   id: string;
+  slug?: string;
   sku?: string;
   inStock?: boolean;
   stock?: number;
@@ -182,6 +183,8 @@ export interface PrescriptionData {
   leftEye: EyePrescription;
   pd: string; // Pupillary Distance
   fileName?: string;
+  doctor?: string;
+  date?: string;
 }
 
 export interface Prescription {
@@ -215,14 +218,16 @@ export interface CartItem {
 }
 
 export interface ShippingAddress {
+  id?: string;
   fullName: string;
   phone: string;
-  email: string;
+  email?: string;
   streetAddress: string;
   city: string;
   state: string;
   pincode: string;
   country: string;
+  isDefault?: boolean;
   firstName?: string;
   lastName?: string;
   company?: string;

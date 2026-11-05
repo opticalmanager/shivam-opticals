@@ -104,6 +104,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const savedUser = localStorage.getItem(USER_STORAGE_KEY);
       if (savedUser) {
         const parsed = JSON.parse(savedUser);
+        if (parsed.savedAddresses && Array.isArray(parsed.savedAddresses)) {
+          parsed.savedAddresses = parsed.savedAddresses.filter(
+            (a: any) =>
+              !a.streetAddress?.toLowerCase().includes("kanishka") &&
+              !a.phone?.includes("097799 90207")
+          );
+        }
         setUser(parsed);
       }
 
@@ -295,22 +302,47 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser((prev) => {
       const filtered = prev.savedAddresses.filter(
         (a) =>
-          a.streetAddress.toLowerCase() !== address.streetAddress.toLowerCase() ||
-          a.pincode !== address.pincode
+          !a.streetAddress?.toLowerCase().includes("kanishka") &&
+          (a.streetAddress?.toLowerCase() !== address.streetAddress?.toLowerCase() ||
+            a.pincode !== address.pincode)
       );
       return {
         ...prev,
         savedAddresses: [address, ...filtered],
       };
     });
-  }, []);
+
+    try {
+      if (user?.id || user?.phone || user?.email) {
+        fetch("/api/user/addresses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: user.id,
+            phone: user.phone,
+            email: user.email,
+            address,
+          }),
+        }).catch((e) => console.warn("Address sync warning:", e));
+      }
+    } catch {}
+  }, [user?.id, user?.phone, user?.email]);
 
   const deleteSavedAddress = useCallback((index: number) => {
+    const target = user.savedAddresses[index];
     setUser((prev) => ({
       ...prev,
       savedAddresses: prev.savedAddresses.filter((_, i) => i !== index),
     }));
-  }, []);
+
+    if (target?.id) {
+      try {
+        fetch(`/api/user/addresses?id=${target.id}&userId=${user?.id || ""}`, {
+          method: "DELETE",
+        }).catch(() => {});
+      } catch {}
+    }
+  }, [user.savedAddresses, user?.id]);
 
   const addPoints = useCallback((amount: number) => {
     setUser((prev) => ({ ...prev, gemPoints: prev.gemPoints + amount }));
@@ -335,21 +367,44 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const savePrescription = useCallback(
     (title: string, data: PrescriptionData, doctorName?: string) => {
+      const newRx = {
+        id: `rx-${Date.now()}`,
+        title,
+        date: new Date().toISOString().split("T")[0],
+        doctorName: doctorName || "Shivam Optical Certified Optometrist",
+        data,
+      };
+
       setUser((prev) => ({
         ...prev,
         savedPrescriptions: [
-          ...prev.savedPrescriptions,
-          {
-            id: `rx-${Date.now()}`,
-            title,
-            date: new Date().toISOString().split("T")[0],
-            doctorName: doctorName || "Shivam Optical Certified Optometrist",
-            data,
-          },
+          newRx,
+          ...prev.savedPrescriptions.filter((p) => p.title !== title),
         ],
       }));
+
+      try {
+        if (user?.id || user?.phone || user?.email) {
+          fetch("/api/user/prescriptions", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userId: user.id,
+              phone: user.phone,
+              email: user.email,
+              prescription: {
+                title,
+                doctor: doctorName,
+                rightEye: data.rightEye,
+                leftEye: data.leftEye,
+                pd: data.pd,
+              },
+            }),
+          }).catch(() => {});
+        }
+      } catch {}
     },
-    []
+    [user?.id, user?.phone, user?.email]
   );
 
   const removePrescription = useCallback((id: string) => {
@@ -357,6 +412,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       ...prev,
       savedPrescriptions: prev.savedPrescriptions.filter((p) => p.id !== id),
     }));
+
+    try {
+      fetch(`/api/user/prescriptions?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      }).catch(() => {});
+    } catch {}
   }, []);
 
   const openTrackingModal = useCallback(

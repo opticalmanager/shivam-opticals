@@ -14,7 +14,6 @@ import {
   Send,
   Eye,
   Glasses,
-  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 

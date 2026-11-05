@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tag, ShieldCheck, X, Lock, CheckCircle2, Truck, Sparkles, Glasses, Eye } from "lucide-react";
+import { Tag, ShieldCheck, X, Lock, CheckCircle2, Truck, Glasses, Eye } from "lucide-react";
 import { CartItem } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
@@ -270,7 +270,7 @@ export const UnifiedCheckoutSidebar: React.FC<UnifiedCheckoutSidebarProps> = ({
         {discountAmount > 0 && (
           <div className="flex justify-between text-[#16803E]">
             <span className="flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Tag className="w-3.5 h-3.5" />
               <span>Coupon Discount</span>
             </span>
             <span className="font-semibold font-mono">- {formatCurrency(discountAmount)}</span>

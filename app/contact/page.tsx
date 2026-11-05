@@ -14,7 +14,6 @@ import {
   ShieldCheck,
   CheckCircle2,
   Glasses,
-  Sparkles,
   Navigation,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -209,7 +208,7 @@ export default function ContactPage() {
                 onClick={openAppointmentModal}
                 className="w-full py-3 bg-[#0A251C] hover:bg-black text-[#C5A059] text-xs font-bold uppercase tracking-[0.16em] rounded-xl transition cursor-pointer flex items-center justify-center gap-2 shadow-xs"
               >
-                <Sparkles className="w-4 h-4" />
+                <Calendar className="w-4 h-4" />
                 <span>Reserve Consultation Slot</span>
               </button>
             </div>

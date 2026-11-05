@@ -27,7 +27,7 @@ function CheckoutContent() {
     includeCleaningKit,
     clearCart,
   } = useCart();
-  const { user, isLoggedIn, saveOrder, openAuthModal } = useAuth();
+  const { user, isLoggedIn, saveOrder, saveShippingAddress, openAuthModal } = useAuth();
 
   // Initial Address
   const initialAddress: ShippingAddress = user.savedAddresses?.[0] || {
@@ -138,6 +138,14 @@ function CheckoutContent() {
       });
 
       saveOrder(finalOrder);
+      if (isLoggedIn && shippingAddress.streetAddress) {
+        saveShippingAddress({
+          ...shippingAddress,
+          fullName:
+            shippingAddress.fullName ||
+            `${shippingAddress.firstName || ""} ${shippingAddress.lastName || ""}`.trim(),
+        });
+      }
       setConfirmedOrder(finalOrder);
       setCurrentStep("summary");
       clearCart();
@@ -150,6 +158,14 @@ function CheckoutContent() {
     } catch (e) {
       console.warn("Order save fallback:", e);
       saveOrder(finalOrder);
+      if (isLoggedIn && shippingAddress.streetAddress) {
+        saveShippingAddress({
+          ...shippingAddress,
+          fullName:
+            shippingAddress.fullName ||
+            `${shippingAddress.firstName || ""} ${shippingAddress.lastName || ""}`.trim(),
+        });
+      }
       setConfirmedOrder(finalOrder);
       setCurrentStep("summary");
       clearCart();

@@ -8,7 +8,6 @@ import {
   Loader2,
   KeyRound,
   CheckCircle2,
-  Sparkles,
   Zap,
   ArrowRight,
   Info,
@@ -320,7 +319,7 @@ export default function AdminShippingPage() {
         <div className="pt-3 border-t border-stone-100 bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DCCF] space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
             <div className="flex items-center gap-1.5 text-xs font-bold text-[#0A251C]">
-              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+              <Truck className="w-3.5 h-3.5 text-[#C5A059]" />
               <span>Live Storefront Incentive Simulator (Client View in Cart &amp; Checkout)</span>
             </div>
             <span className="text-[10px] text-stone-500 uppercase tracking-wider font-semibold">

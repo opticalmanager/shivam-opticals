@@ -24,7 +24,7 @@ function parseSettingValue(rawVal: any) {
 export async function GET() {
   try {
     const res = await query(
-      `SELECT key, value FROM public.admin_settings WHERE key IN ('shipping', 'payments', 'general');`
+      `SELECT key, value FROM public.admin_settings WHERE key IN ('shipping', 'payments', 'general', 'loyalty');`
     );
 
     const settingsMap: Record<string, any> = {};
@@ -84,12 +84,29 @@ export async function GET() {
       operatingHours: "Monday - Sunday: 10:00 AM - 08:30 PM",
     };
 
+    const loyalty = settingsMap["loyalty"] || {
+      enabled: true,
+      earnRatePercent: 1,
+      minOrderAmountToEarn: 500,
+      pointsToRupeeRatio: 1,
+      allowRedemption: true,
+      maxRedemptionPercent: 50,
+      minOrderAmountToRedeem: 1000,
+      tiers: [
+        { name: "Privilege Member", minSpend: 0 },
+        { name: "Gold Member", minSpend: 5000 },
+        { name: "Platinum Member", minSpend: 15000 },
+      ],
+      privileges: [],
+    };
+
     return NextResponse.json(
       {
         success: true,
         shipping,
         payments,
         general,
+        loyalty,
       },
       {
         headers: {

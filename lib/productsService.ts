@@ -92,6 +92,7 @@ function mapRowToProduct(row: any): Product {
 
   return {
     id: row.slug || row.id,
+    slug: row.slug || row.id,
     brand: row.brand?.name || localMatch?.brand || "Shivam Optical",
     name: row.name,
     subtitle: row.subtitle || localMatch?.subtitle,
@@ -274,8 +275,20 @@ export function filterAndSortProducts(
       result = result.filter((p) => p.category === "sunglasses" || p.type === "sunglasses");
     } else if (cat === "eyeglasses") {
       result = result.filter((p) => p.category === "eyeglasses" || p.type === "eyeglasses");
-    } else if (cat === "meta-smart" || cat === "smart-glasses") {
-      result = result.filter((p) => p.category === "meta-smart");
+    } else if (cat === "meta-smart" || cat === "smart-glasses" || cat === "meta") {
+      result = result.filter((p) => {
+        const c = (p.category || "").toLowerCase();
+        const t = (p.type || "").toLowerCase();
+        const n = (p.name || "").toLowerCase();
+        const s = (p.slug || "").toLowerCase();
+        return (
+          c === "meta-smart" ||
+          t === "meta-smart" ||
+          c.includes("meta") ||
+          s.includes("meta") ||
+          (n.includes("meta") && (n.includes("ray-ban") || n.includes("smart") || n.includes("wayfarer") || n.includes("headliner") || n.includes("skyler")))
+        );
+      });
     } else if (cat === "kids") {
       result = result.filter((p) => p.category === "kids" || p.gender === "kids");
     } else if (cat === "new" || cat === "new-arrivals") {

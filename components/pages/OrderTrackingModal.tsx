@@ -33,28 +33,28 @@ export const OrderTrackingModal: React.FC = () => {
   const STAGES = [
     {
       id: "confirmed",
-      title: "Order Confirmed & Rx Verified",
-      desc: "Prescription parameters checked by certified optical master",
+      title: "Order Confirmed",
+      desc: "Order confirmed and prescription details verified",
     },
     {
       id: "optician_assembly",
-      title: "Robotic Lens Surfacing & Edging",
-      desc: "Precision surfacing, cylinder axis alignment & anti-reflective hard coating",
+      title: "Optical Lab Assembly",
+      desc: "Lens cutting, cylinder axis alignment & custom frame fitting",
     },
     {
       id: "quality_check",
-      title: "12-Point Clinical Inspection",
-      desc: "Pupillary distance verification, frame alignment & tension testing",
+      title: "Quality Inspection",
+      desc: "Optical verification, frame alignment & final check",
     },
     {
       id: "dispatched",
-      title: "Insured Courier Dispatched",
-      desc: "Packed in custom shock-proof luxury presentation vault box",
+      title: "Order Dispatched",
+      desc: "Packed securely in protective eyewear case and handed to courier",
     },
     {
       id: "delivered",
-      title: "Delivered to Doorstep",
-      desc: "Complete with certificate of optical authenticity & warranty card",
+      title: "Delivered",
+      desc: "Delivered safely to your shipping address",
     },
   ];
 

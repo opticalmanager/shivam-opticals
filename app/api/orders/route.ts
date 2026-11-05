@@ -150,11 +150,35 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const trackingNumber = searchParams.get("tracking") || searchParams.get("id");
     const phone = searchParams.get("phone");
+    const email = searchParams.get("email");
+    const customerId = searchParams.get("customerId");
 
     if (trackingNumber) {
       const res = await query(
-        `SELECT * FROM public.orders 
-         WHERE order_number = $1 OR tracking_number = $1 OR id::text = $1
+        `SELECT 
+          o.*,
+          COALESCE((
+            SELECT json_agg(json_build_object(
+              'id', oi.id,
+              'quantity', oi.quantity,
+              'unit_price', oi.unit_price,
+              'lens_price', oi.lens_price,
+              'total_price', oi.total_price,
+              'product_name', COALESCE(oi.product_snapshot->>'name', p.name, 'Optical Frame'),
+              'brand', COALESCE(oi.product_snapshot->>'brand', b.name, 'Luxury Atelier'),
+              'color', COALESCE(oi.product_snapshot->>'color', pv.color_name, 'Standard'),
+              'lens_package', oi.product_snapshot->>'lensPackage',
+              'prescription', oi.product_snapshot->'prescription',
+              'images', oi.product_snapshot->'images'
+            ))
+            FROM public.order_items oi
+            LEFT JOIN public.products p ON p.id = oi.product_id
+            LEFT JOIN public.brands b ON b.id = p.brand_id
+            LEFT JOIN public.product_variants pv ON pv.id = oi.variant_id
+            WHERE oi.order_id = o.id
+          ), '[]'::json) as items
+         FROM public.orders o
+         WHERE o.order_number = $1 OR o.tracking_number = $1 OR o.id::text = $1
          LIMIT 1;`,
         [trackingNumber]
       );
@@ -164,18 +188,68 @@ export async function GET(req: Request) {
       return NextResponse.json({ success: true, order: res.rows[0] });
     }
 
-    if (phone) {
+    if (phone || email || customerId) {
+      const cleanPhone = phone ? phone.replace(/\D/g, "").slice(-10) : null;
+      const cleanEmail = email ? email.trim().toLowerCase() : null;
+      const validCustomerId = customerId && customerId.length >= 20 ? customerId : null;
+
       const res = await query(
-        `SELECT * FROM public.orders 
-         WHERE guest_phone = $1 
-         ORDER BY created_at DESC 
-         LIMIT 20;`,
-        [phone]
+        `SELECT 
+          o.id,
+          o.order_number,
+          o.customer_id,
+          o.guest_name,
+          o.guest_email,
+          o.guest_phone,
+          o.status,
+          o.payment_status,
+          o.payment_method,
+          o.subtotal,
+          o.discount_amount,
+          o.coupon_code,
+          o.shipping_fee,
+          o.total_amount,
+          o.shipping_address,
+          o.tracking_number,
+          o.courier_partner,
+          o.estimated_delivery,
+          o.created_at,
+          COALESCE((
+            SELECT json_agg(json_build_object(
+              'id', oi.id,
+              'quantity', oi.quantity,
+              'unit_price', oi.unit_price,
+              'lens_price', oi.lens_price,
+              'total_price', oi.total_price,
+              'product_name', COALESCE(oi.product_snapshot->>'name', p.name, 'Optical Frame'),
+              'brand', COALESCE(oi.product_snapshot->>'brand', b.name, 'Luxury Atelier'),
+              'color', COALESCE(oi.product_snapshot->>'color', pv.color_name, 'Standard'),
+              'lens_package', oi.product_snapshot->>'lensPackage',
+              'prescription', oi.product_snapshot->'prescription',
+              'images', oi.product_snapshot->'images'
+            ))
+            FROM public.order_items oi
+            LEFT JOIN public.products p ON p.id = oi.product_id
+            LEFT JOIN public.brands b ON b.id = p.brand_id
+            LEFT JOIN public.product_variants pv ON pv.id = oi.variant_id
+            WHERE oi.order_id = o.id
+          ), '[]'::json) as items
+        FROM public.orders o
+        WHERE 
+          ($1::text IS NOT NULL AND (
+            o.guest_phone ILIKE '%' || $1 || '%' OR 
+            RIGHT(REGEXP_REPLACE(COALESCE(o.guest_phone, ''), '\D', '', 'g'), 10) = $2
+          )) OR
+          ($3::text IS NOT NULL AND LOWER(o.guest_email) = $3) OR
+          ($4::uuid IS NOT NULL AND o.customer_id = $4)
+        ORDER BY o.created_at DESC
+        LIMIT 50;`,
+        [phone || null, cleanPhone || null, cleanEmail || null, validCustomerId || null]
       );
       return NextResponse.json({ success: true, orders: res.rows });
     }
 
-    return NextResponse.json({ success: false, error: "Query parameter required" }, { status: 400 });
+    return NextResponse.json({ success: false, error: "Query parameter required (tracking, phone, email, or customerId)" }, { status: 400 });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }

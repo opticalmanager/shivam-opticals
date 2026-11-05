@@ -85,7 +85,7 @@ export const PincodeEstimator: React.FC<PincodeEstimatorProps> = ({ isRx = false
           <span>Estimated Atelier Delivery</span>
         </div>
         <span className="text-[10px] text-stone-500 uppercase tracking-wider">
-          Insured Air Transit
+          Courier Delivery
         </span>
       </div>
 
@@ -134,11 +134,11 @@ export const PincodeEstimator: React.FC<PincodeEstimatorProps> = ({ isRx = false
                 </span>
               </div>
               <div className="text-[11px] text-stone-600 pl-5">
-                Dispatched via {result.carrier} • Transit Insurance Included
+                Dispatched via {result.carrier}
               </div>
               {isRx && (
-                <div className="text-[10px] text-amber-800 bg-amber-50 rounded px-2 py-1 mt-1 border border-amber-200">
-                  Includes 48h optical surfacing & 12-point clinical inspection buffer
+                <div className="text-[10px] text-stone-600 bg-[#FAF3EB] rounded px-2 py-1 mt-1 border border-[#E8DEC8]">
+                  Includes custom prescription lens fitting
                 </div>
               )}
             </div>
@@ -152,8 +152,8 @@ export const PincodeEstimator: React.FC<PincodeEstimatorProps> = ({ isRx = false
 
       <div className="flex items-center justify-between text-[10px] text-stone-500 pt-1">
         <div className="flex items-center gap-1">
-          <ShieldCheck className="w-3 h-3 text-emerald-600" />
-          <span>Complimentary Armored Transit</span>
+          <Truck className="w-3 h-3 text-[#C5A059]" />
+          <span>Complimentary Delivery Available</span>
         </div>
         <span>Dispatched from Mayur Vihar Atelier (110091)</span>
       </div>

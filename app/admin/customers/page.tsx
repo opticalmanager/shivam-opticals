@@ -15,7 +15,7 @@ import {
   X,
   MapPin,
   ExternalLink,
-  Sparkles,
+  Award,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { StatusBadge } from "@/components/admin/common/StatusBadge";
@@ -219,7 +219,7 @@ export default function AdminCustomersPage() {
                     {selectedCustomer.full_name}
                   </h2>
                   <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-[#C5A059]/10 text-[#C5A059] border border-[#C5A059]/20 flex items-center gap-1">
-                    <Sparkles className="w-2.5 h-2.5" />
+                    <Award className="w-2.5 h-2.5" />
                     {Number(selectedCustomer.total_spent ?? selectedCustomer.total_spend ?? 0) >= 100000
                       ? "VIP Platinum"
                       : Number(selectedCustomer.total_spent ?? selectedCustomer.total_spend ?? 0) >= 50000

@@ -13,7 +13,6 @@ import {
   ExternalLink,
   MapPin,
   Clock,
-  Sparkles,
 } from "lucide-react";
 import { Order } from "@/types";
 import { formatCurrency } from "@/lib/utils";
@@ -33,8 +32,8 @@ export const StepOrderSummary: React.FC<StepOrderSummaryProps> = ({
 
   const steps = [
     { label: "Confirmed", status: "completed", desc: "Order confirmed & verified" },
-    { label: "Lab Crafting", status: "current", desc: "Precision lens fitting & finishing" },
-    { label: "Quality Check", status: "upcoming", desc: "Multi-point precision inspection" },
+    { label: "Lab Assembly", status: "current", desc: "Lens cutting & frame fitting" },
+    { label: "Quality Check", status: "upcoming", desc: "Final optical alignment & check" },
     { label: "Dispatched", status: "upcoming", desc: "Shipped with live tracking updates" },
     { label: "Delivered", status: "upcoming", desc: "Delivered safely to your doorstep" },
   ];

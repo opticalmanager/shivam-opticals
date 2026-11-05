@@ -69,7 +69,7 @@ export const WishlistDrawer: React.FC = () => {
               </div>
               <p className="text-base font-serif font-bold text-[#0A251C]">Your Wishlist is Empty</p>
               <p className="text-xs max-w-xs text-stone-500 leading-relaxed">
-                Tap the bookmark icon on any designer eyewear frame to curate your personal style vault.
+                Tap the heart icon on any eyewear frame to save it to your wishlist.
               </p>
               <Link
                 href="/products"

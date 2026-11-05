@@ -7,7 +7,8 @@ import {
   ShieldCheck,
   Sun,
   Truck,
-  Sparkles,
+  Eye,
+  Glasses,
   MapPin,
   Phone,
   Clock,
@@ -178,14 +179,10 @@ const FAQ_ITEMS = [
           ) after placing your order.
         </p>
         <p className="mb-2">
-          <strong>What is the warranty policy?</strong> 1 Year Comprehensive
-          Warranty on all frames and lens anti-reflective coatings against
-          manufacturing defects.
+          <strong>What is your warranty policy?</strong> Brand manufacturer warranty applies to branded frames and lenses as provided by respective brand distributors.
         </p>
         <p>
-          <strong>Returns &amp; Exchanges:</strong> 14-day hassle-free doorstep
-          return and exchange guarantee if the fit or power is not 100%
-          satisfactory.
+          <strong>Returns &amp; Exchanges:</strong> 7-day exchange support on unused frames in original packaging. Custom prescription lenses are crafted to your specific power.
         </p>
       </>
     ),
@@ -424,7 +421,7 @@ export default function HomePage() {
         {/* 5-Column Product Grid Container */}
         {filteredProducts.length === 0 ? (
           <div className="py-14 text-center border border-dashed border-[#E8DEC8] rounded-2xl bg-[#FCFAF7] p-8 max-w-lg mx-auto">
-            <Sparkles className="w-8 h-8 text-[#C5A059] mx-auto mb-3 opacity-75" />
+            <Glasses className="w-8 h-8 text-[#C5A059] mx-auto mb-3 opacity-75" />
             <h4 className="font-serif text-lg text-[#1A1816] font-semibold">
               Curating New Atelier Collection
             </h4>
@@ -510,7 +507,7 @@ export default function HomePage() {
           <div className="flex-1 relative overflow-hidden">
             {recommendedProducts.length === 0 ? (
               <div className="h-full min-h-[220px] flex flex-col items-center justify-center text-center border border-dashed border-[#E8DEC8] rounded-xl bg-[#FCFAF7] p-6">
-                <Sparkles className="w-6 h-6 text-[#C5A059] mb-2 opacity-70" />
+                <Glasses className="w-6 h-6 text-[#C5A059] mb-2 opacity-70" />
                 <p className="font-serif text-base text-[#1A1816] font-medium">
                   New Season Recommendations Coming Soon
                 </p>
@@ -648,22 +645,22 @@ export default function HomePage() {
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
-                1 Year Warranty
+                100% Genuine Eyewear
               </h4>
               <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
-                Full replacement coverage on structural frame craftsmanship.
+                Original frames and sunglasses directly from authorized brand distributors.
               </p>
             </div>
 
             <div className="flex flex-col items-center">
               <div className="w-14 h-14 rounded-full bg-[#FBF9F5] border border-[#E8E2D9] flex items-center justify-center text-[#C5A059] mb-3.5 shadow-sm">
-                <Sun className="w-6 h-6" />
+                <Glasses className="w-6 h-6" />
               </div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
-                100% UV Protection
+                Computerized Eye Test
               </h4>
               <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
-                Certified UV400 Japanese lenses guarding macular health.
+                Accurate digital eye examinations by certified optometrists daily.
               </p>
             </div>
 
@@ -672,23 +669,22 @@ export default function HomePage() {
                 <Truck className="w-6 h-6" />
               </div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
-                Free Express Delivery
+                Free Delivery on Select Items
               </h4>
               <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
-                Prompt insured air courier delivery across India &amp; 14-day
-                returns.
+                Complimentary shipping available on eligible orders across India.
               </p>
             </div>
 
             <div className="flex flex-col items-center">
               <div className="w-14 h-14 rounded-full bg-[#FBF9F5] border border-[#E8E2D9] flex items-center justify-center text-[#C5A059] mb-3.5 shadow-sm">
-                <Sparkles className="w-6 h-6" />
+                <Eye className="w-6 h-6" />
               </div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
-                German Fitting Lab
+                Custom Lens Fitting
               </h4>
               <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
-                Robotic CNC diamond edging accurate to 0.01mm pupil centering.
+                Single vision, progressive &amp; blue-cut lenses fitted to your exact power.
               </p>
             </div>
           </div>

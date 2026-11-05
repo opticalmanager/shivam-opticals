@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import {
   Megaphone,
   Send,
-  Sparkles,
   MessageSquare,
   Plus,
   Loader2,
@@ -238,7 +237,7 @@ export default function AdminMarketingPage() {
         {/* Live Preview Box */}
         {announcementEnabled && (
           <div className="p-2.5 rounded-lg bg-[#0A251C] text-[#C5A059] text-xs flex items-center justify-center gap-2 font-medium tracking-wide border border-[#C5A059]/30">
-            <Sparkles className="w-3.5 h-3.5 shrink-0" />
+            <Megaphone className="w-3.5 h-3.5 shrink-0" />
             <span className="truncate">{announcementText || "Announcement text goes here..."}</span>
           </div>
         )}

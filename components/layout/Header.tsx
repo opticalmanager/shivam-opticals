@@ -130,20 +130,25 @@ export const Header: React.FC = () => {
 
         {/* Bottom Row: Centered Navigation Row */}
         <nav className="hidden lg:flex items-center justify-center pt-1 pb-2.5 text-[10px] md:text-[10.5px] font-semibold tracking-[0.14em] uppercase text-[#1A1816]/90 space-x-6">
-          {/* NEW ARRIVALS with Meta Pill */}
-          <div className="flex items-center gap-1">
+          {/* NEW ARRIVALS with Clickable Meta Smart Glasses Pill */}
+          <div className="flex items-center gap-1.5">
             <Link
               href="/products?filter=new"
               className="flex items-center gap-1 hover:text-[#C5A059] transition nav-link"
             >
               <span>NEW ARRIVALS</span>
             </Link>
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[8.5px] font-bold tracking-wider uppercase border border-[#76A9EA] bg-[#E8F2FD] text-[#0A66C2] ml-1 shadow-xs">
-              <svg className="w-3 h-2 text-[#0A66C2]" viewBox="0 0 24 14" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <Link
+              href="/products?category=meta-smart"
+              className="group inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[8.5px] font-bold tracking-wider uppercase border border-[#76A9EA] bg-[#E8F2FD] text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-all duration-200 shadow-2xs hover:shadow-xs hover:scale-105 active:scale-95 cursor-pointer select-none"
+              title="Explore Ray-Ban | Meta Smart Glasses"
+              aria-label="Ray-Ban Meta Smart Glasses"
+            >
+              <svg className="w-3 h-2 text-[#0A66C2] group-hover:text-white transition-colors" viewBox="0 0 24 14" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path d="M6 1C3.238 1 1 3.238 1 6s2.238 5 5 5c3.2 0 4.5-5 6-5s2.8 5 6 5c2.762 0 5-2.238 5-5s-2.238-5-5-5c-3.2 0-4.5 5-6 5s-2.8-5-6-5z" />
               </svg>
               <span>META</span>
-            </span>
+            </Link>
           </div>
 
           <Link href="/products?type=eyeglasses" className="flex items-center gap-1 hover:text-[#C5A059] transition nav-link">
@@ -254,9 +259,23 @@ export const Header: React.FC = () => {
                 className="flex items-center justify-between min-h-[44px] py-2.5 hover:text-[#C5A059] transition-colors"
               >
                 <span>NEW ARRIVALS</span>
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[8.5px] font-bold border border-[#76A9EA] bg-[#E8F2FD] text-[#0A66C2]">
-                  META
-                </span>
+                <span className="text-[10px] text-stone-400 font-normal">Latest Drops</span>
+              </Link>
+              <Link
+                href="/products?category=meta-smart"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between min-h-[44px] py-2.5 hover:text-[#0A66C2] transition-colors group"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-[#0A251C] group-hover:text-[#0A66C2]">RAY-BAN | META</span>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[8.5px] font-bold border border-[#76A9EA] bg-[#E8F2FD] text-[#0A66C2]">
+                    <svg className="w-2.5 h-1.5 text-[#0A66C2]" viewBox="0 0 24 14" fill="none" stroke="currentColor" strokeWidth="2.2">
+                      <path d="M6 1C3.238 1 1 3.238 1 6s2.238 5 5 5c3.2 0 4.5-5 6-5s2.8 5 6 5c2.762 0 5-2.238 5-5s-2.238-5-5-5c-3.2 0-4.5 5-6 5s-2.8-5-6-5z" />
+                    </svg>
+                    SMART AI
+                  </span>
+                </div>
+                <span className="text-[10px] text-[#0A66C2] font-semibold">12MP &amp; Audio</span>
               </Link>
               <Link
                 href="/products?type=eyeglasses"
