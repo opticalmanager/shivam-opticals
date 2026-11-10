@@ -483,9 +483,12 @@ export const SearchModal: React.FC = () => {
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-12 rounded-lg bg-white border border-[#E8DEC8] p-1 flex items-center justify-center shrink-0">
                             <img
-                              src={product.img || product.images?.[0] || "/images/placeholder.jpg"}
+                              src={product.img || product.images?.[0] || "/images/clean_frame_1.png"}
                               alt={product.name}
                               className="w-full h-full object-contain"
+                              onError={(e) => {
+                                (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+                              }}
                             />
                           </div>
                           <div>
@@ -529,9 +532,12 @@ export const SearchModal: React.FC = () => {
                   <div className="flex items-center gap-3 min-w-0 pr-3">
                     <div className="w-13 h-13 rounded-lg bg-white border border-[#E8DEC8] p-1 flex items-center justify-center shrink-0">
                       <img
-                        src={product.img || product.images?.[0] || "/images/placeholder.jpg"}
+                        src={product.img || product.images?.[0] || "/images/clean_frame_1.png"}
                         alt={product.name}
                         className="w-full h-full object-contain"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+                        }}
                       />
                     </div>
                     <div className="min-w-0">

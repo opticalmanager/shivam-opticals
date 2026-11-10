@@ -1,0 +1,1356 @@
+{
+  "summary": {
+    "frames": {
+      "total": 566,
+      "present": 5,
+      "missing": 561,
+      "presentByBrand": {
+        "RAYBAN": 5
+      },
+      "missingByBrand": {
+        "ARMANI EXCHANGE": 5,
+        "BURBERRY": 2,
+        "BENETTON": 16,
+        "BOSS": 5,
+        "CALVIN KLEIN": 1,
+        "CARRERA": 30,
+        "DANIEL MORRIS": 45,
+        "ENZZO": 3,
+        "EYEPLAYER": 25,
+        "FOSSIL": 2,
+        "FRANK LUX": 5,
+        "FRENCH CONNECTION": 14,
+        "HUGO": 12,
+        "I JEWLS": 12,
+        "IDEE": 1,
+        "IDOR": 26,
+        "INSIST LUXURY": 48,
+        "INSIST STUDIO": 29,
+        "INSIST VOGUE": 4,
+        "JAGUAR": 5,
+        "NAUTICA": 1,
+        "PARADOX": 23,
+        "PIERRE CARDIN": 1,
+        "PRODIGY": 38,
+        "QLOO": 12,
+        "RAYBAN": 68,
+        "SCOTT": 26,
+        "SHIVAM": 102
+      }
+    },
+    "sunglasses": {
+      "total": 287,
+      "present": 34,
+      "missing": 253,
+      "presentByBrand": {
+        "RAYBAN": 34
+      },
+      "missingByBrand": {
+        "ARMANI EXCHANGE": 2,
+        "BURBERRY": 6,
+        "CARRERA": 3,
+        "DANIEL MORRIS": 57,
+        "FRAME": 4,
+        "IARRA": 55,
+        "IDOR": 4,
+        "OAKLEY": 1,
+        "QLOO": 2,
+        "RAYBAN": 25,
+        "SCOTT": 10,
+        "SHIVAM": 42,
+        "SMART": 2,
+        "TOMMY HILFIGER": 4,
+        "VELOCITY": 2,
+        "XITE": 34
+      }
+    },
+    "total": {
+      "total": 853,
+      "present": 39,
+      "missing": 814
+    }
+  },
+  "sampleFramesMissing": [
+    {
+      "BRAND": "ARMANI EXCHANGE",
+      "ITEM CODE": "FR00724A",
+      "ITEM DESC.": "AX 1070 BLACK",
+      "COLOR": "6000",
+      "PRICE": "8490",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "17-05-2026"
+    },
+    {
+      "BRAND": "ARMANI EXCHANGE",
+      "ITEM CODE": "FR00727A",
+      "ITEM DESC.": "AX 3077 BLK",
+      "COLOR": "8001",
+      "PRICE": "8890",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "17-05-2026"
+    },
+    {
+      "BRAND": "ARMANI EXCHANGE",
+      "ITEM CODE": "FR00728A",
+      "ITEM DESC.": "AX 1077 COPER",
+      "COLOR": "6106",
+      "PRICE": "9290",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "17-05-2026"
+    },
+    {
+      "BRAND": "ARMANI EXCHANGE",
+      "ITEM CODE": "FR00729A",
+      "ITEM DESC.": "AX 3077 GREY",
+      "COLOR": "8239",
+      "PRICE": "8890",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "17-05-2026"
+    },
+    {
+      "BRAND": "ARMANI EXCHANGE",
+      "ITEM CODE": "FR00730A",
+      "ITEM DESC.": "AX 1077 BLACK",
+      "COLOR": "6133",
+      "PRICE": "9290",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "17-05-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "FR00732A",
+      "ITEM DESC.": "B3192",
+      "COLOR": "1109",
+      "PRICE": "24090",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "FR00733A",
+      "ITEM DESC.": "B 1282",
+      "COLOR": "1001",
+      "PRICE": "17790",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00192A",
+      "ITEM DESC.": "BE024026",
+      "COLOR": "C6",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00248A",
+      "ITEM DESC.": "BE025017",
+      "COLOR": "C3",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00249A",
+      "ITEM DESC.": "BE025017",
+      "COLOR": "C2",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00250A",
+      "ITEM DESC.": "BE025017",
+      "COLOR": "C5",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00251A",
+      "ITEM DESC.": "BE024018",
+      "COLOR": "C3",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00252A",
+      "ITEM DESC.": "BE02608",
+      "COLOR": "C1",
+      "PRICE": "5300",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00253A",
+      "ITEM DESC.": "BE02609",
+      "COLOR": "C3",
+      "PRICE": "5600",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00255A",
+      "ITEM DESC.": "BE02615",
+      "COLOR": "C1",
+      "PRICE": "5600",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00256A",
+      "ITEM DESC.": "BE02605",
+      "COLOR": "C4",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00257A",
+      "ITEM DESC.": "BE023043",
+      "COLOR": "C1",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00258A",
+      "ITEM DESC.": "BE025002",
+      "COLOR": "C1",
+      "PRICE": "5600",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00259A",
+      "ITEM DESC.": "BE025012",
+      "COLOR": "C3",
+      "PRICE": "5400",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "BENETTON",
+      "ITEM CODE": "FR00260A",
+      "ITEM DESC.": "BE025002",
+      "COLOR": "C2",
+      "PRICE": "5600",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    }
+  ],
+  "sampleSunglassesMissing": [
+    {
+      "BRAND": "ARMANI EXCHANGE",
+      "ITEM CODE": "SG00358A",
+      "ITEM DESC.": "AX 4164SU",
+      "COLOR": "839673",
+      "PRICE": "8790",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "17-05-2026"
+    },
+    {
+      "BRAND": "ARMANI EXCHANGE",
+      "ITEM CODE": "SG00359A",
+      "ITEM DESC.": "AX 2050S",
+      "COLOR": "6003/73",
+      "PRICE": "12790",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "17-05-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "SG00370A",
+      "ITEM DESC.": "B 3163",
+      "COLOR": "1109",
+      "PRICE": "24490",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "SG00371A",
+      "ITEM DESC.": "B4458",
+      "COLOR": "3464",
+      "PRICE": "20590",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "SG00372A",
+      "ITEM DESC.": "B 4474",
+      "COLOR": "3001",
+      "PRICE": "20590",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "SG00373A",
+      "ITEM DESC.": "B 3166",
+      "COLOR": "1109",
+      "PRICE": "24490",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "SG00374A",
+      "ITEM DESC.": "B 4293",
+      "COLOR": "3806",
+      "PRICE": "18690",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "BURBERRY",
+      "ITEM CODE": "SG00375A",
+      "ITEM DESC.": "B 3151",
+      "COLOR": "1109",
+      "PRICE": "24490",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "15-06-2026"
+    },
+    {
+      "BRAND": "CARRERA",
+      "ITEM CODE": "SG00056A",
+      "ITEM DESC.": "5041/S",
+      "COLOR": "80790",
+      "PRICE": "8300",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "26-02-2026"
+    },
+    {
+      "BRAND": "CARRERA",
+      "ITEM CODE": "SG00247A",
+      "ITEM DESC.": "CA362/S2K",
+      "COLOR": "HAWANA",
+      "PRICE": "14900",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "CARRERA",
+      "ITEM CODE": "SG00250A",
+      "ITEM DESC.": "CA368",
+      "COLOR": "C85K",
+      "PRICE": "11900",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00252A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00253A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00254A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00255A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00257A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00258A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00259A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00260A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    },
+    {
+      "BRAND": "DANIEL MORRIS",
+      "ITEM CODE": "SG00261A",
+      "ITEM DESC.": "SHEET",
+      "COLOR": "MIX",
+      "PRICE": "2700",
+      "CP": "0.00",
+      "ST": "P",
+      "DATED": "07-05-2026"
+    }
+  ],
+  "sampleFramesPresent": [
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "FR00680A",
+        "ITEM DESC.": "RB6303I",
+        "COLOR": "2509",
+        "PRICE": "4990",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "07-05-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "c86f6db6-b5ed-4787-85db-cd2a695a67f2",
+          "name": "RayBan Frame RB6303I 2502",
+          "slug": "so-ray-ban-rb6303",
+          "brand_name": "Ray-Ban",
+          "base_price": "5290.00",
+          "original_price": "5878.00",
+          "category_name": "Eyeglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 53,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "53",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "FR00690A",
+        "ITEM DESC.": "RB6303I",
+        "COLOR": "2500",
+        "PRICE": "5190",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "07-05-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "c86f6db6-b5ed-4787-85db-cd2a695a67f2",
+          "name": "RayBan Frame RB6303I 2502",
+          "slug": "so-ray-ban-rb6303",
+          "brand_name": "Ray-Ban",
+          "base_price": "5290.00",
+          "original_price": "5878.00",
+          "category_name": "Eyeglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 53,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "53",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "FR00698A",
+        "ITEM DESC.": "RB7033I",
+        "COLOR": "2012",
+        "PRICE": "5990",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "07-05-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "928b5d23-e06c-48b7-bbf4-f7fb389a46ae",
+          "name": "Rayban Frame RB 7033I 2012",
+          "slug": "so-ray-ban-rb7033",
+          "brand_name": "Ray-Ban",
+          "base_price": "6090.00",
+          "original_price": "6767.00",
+          "category_name": "Eyeglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 53,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "52",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "FR00718A",
+        "ITEM DESC.": "RB7033I",
+        "COLOR": "2000",
+        "PRICE": "5990",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "07-05-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "928b5d23-e06c-48b7-bbf4-f7fb389a46ae",
+          "name": "Rayban Frame RB 7033I 2012",
+          "slug": "so-ray-ban-rb7033",
+          "brand_name": "Ray-Ban",
+          "base_price": "6090.00",
+          "original_price": "6767.00",
+          "category_name": "Eyeglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 53,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "52",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "FR00721A",
+        "ITEM DESC.": "RB6267I",
+        "COLOR": "2500",
+        "PRICE": "5390",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "07-05-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "fd8971bc-fb06-4567-a313-fcf4784e8bdb",
+          "name": "RAYBAN RB 6267I 2500 54",
+          "slug": "so-ray-ban-rb6267",
+          "brand_name": "Ray-Ban",
+          "base_price": "5290.00",
+          "original_price": "5878.00",
+          "category_name": "Eyeglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 53,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "54",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    }
+  ],
+  "sampleSunglassesPresent": [
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00022A",
+        "ITEM DESC.": "RB2140F",
+        "COLOR": "902/51",
+        "PRICE": "12190",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "26-02-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "1cbcad83-c1a9-4643-8d97-da14644943d4",
+          "name": "RAY BAN 0RB 2140F",
+          "slug": "so-ray-ban-rb2140f",
+          "brand_name": "Ray-Ban",
+          "base_price": "13490.00",
+          "original_price": "14989.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 52,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "901",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00127A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "0015",
+        "PRICE": "8690",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00131A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "001/58",
+        "PRICE": "10990",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00132A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "001/58",
+        "PRICE": "10990",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00133A",
+        "ITEM DESC.": "RB3785I",
+        "COLOR": "0024L",
+        "PRICE": "8250",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "7ca13941-e939-41ec-b9b0-e5a59cc77681",
+          "name": "RAY BAN 0RB 3785I",
+          "slug": "so-ray-ban-rb-3785",
+          "brand_name": "Ray-Ban",
+          "base_price": "8990.00",
+          "original_price": "9989.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "001/71",
+          "color_variants": [],
+          "is_active": false
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00135A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "L0205",
+        "PRICE": "8690",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00136A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "L0205",
+        "PRICE": "8690",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00137A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "002/3F",
+        "PRICE": "9490",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00138A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "002/3F",
+        "PRICE": "9490",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00139A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "002/3F",
+        "PRICE": "9490",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00140A",
+        "ITEM DESC.": "RB3760I",
+        "COLOR": "003/9A",
+        "PRICE": "10490",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "eff283e7-ed33-4c1e-93ee-7f6a20cd711f",
+          "name": "Rayban Sunglass RB 3760I 003/9A",
+          "slug": "so-ray-ban-rb3760",
+          "brand_name": "Ray-Ban",
+          "base_price": "10990.00",
+          "original_price": "12211.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 53,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "003/9A",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00141A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "003/32",
+        "PRICE": "9490",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00142A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "003/32",
+        "PRICE": "9490",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00144A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "002/58",
+        "PRICE": "10990",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00146A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "002/58",
+        "PRICE": "10990",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00148A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "W3277",
+        "PRICE": "10090",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00149A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "W3277",
+        "PRICE": "10090",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00237A",
+        "ITEM DESC.": "RB3016",
+        "COLOR": "W0365",
+        "PRICE": "12490",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "bf84cf08-3214-414d-b19c-523248809ca6",
+          "name": "RAY BAN   0RB 3016",
+          "slug": "so-ray-ban-rb3016",
+          "brand_name": "Ray-Ban",
+          "base_price": "13390.00",
+          "original_price": "14878.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 51,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "6878/53",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00240A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "0015",
+        "PRICE": "8690",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    },
+    {
+      "item": {
+        "BRAND": "RAYBAN",
+        "ITEM CODE": "SG00241A",
+        "ITEM DESC.": "RB3025I",
+        "COLOR": "W3276",
+        "PRICE": "10190",
+        "CP": "0.00",
+        "ST": "P",
+        "DATED": "13-03-2026"
+      },
+      "match": {
+        "matchType": "DB_PRODUCT_MATCH",
+        "matchedItem": {
+          "id": "f81f2d4a-0b72-4246-9a94-d9927af5f150",
+          "name": "RAY BAN  0RB 3025I",
+          "slug": "so-ray-ban-rb3025",
+          "brand_name": "Ray-Ban",
+          "base_price": "9690.00",
+          "original_price": "10767.00",
+          "category_name": "Sunglasses",
+          "specs": {
+            "weight": "22g",
+            "lensWidth": 58,
+            "frameWidth": 140,
+            "bridgeWidth": 18,
+            "templeLength": 145
+          },
+          "color": "002/3F",
+          "color_variants": [],
+          "is_active": true
+        },
+        "source": "DB_PRODUCT"
+      }
+    }
+  ]
+}

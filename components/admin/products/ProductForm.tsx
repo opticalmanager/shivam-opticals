@@ -92,13 +92,39 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     },
   });
 
-  // Images State
-  const [images, setImages] = useState<string[]>(
-    initialData?.images?.map((img: any) => (typeof img === "string" ? img : img.url)) ||
-      (initialData?.img ? [initialData.img] : [
-        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
-      ])
-  );
+  // Form Images State with Variant Linking
+  interface FormImageItem {
+    id?: string;
+    url: string;
+    variantId?: string | null;
+    isPrimary?: boolean;
+  }
+
+  const [images, setImages] = useState<FormImageItem[]>(() => {
+    if (initialData?.images && Array.isArray(initialData.images) && initialData.images.length > 0) {
+      return initialData.images.map((img: any, i: number) => {
+        if (typeof img === "string") {
+          return { url: img, variantId: null, isPrimary: i === 0 };
+        }
+        return {
+          id: img.id,
+          url: img.url,
+          variantId: img.variantId || img.variant_id || null,
+          isPrimary: Boolean(img.isPrimary ?? img.is_primary ?? i === 0),
+        };
+      });
+    }
+    if (initialData?.img) {
+      return [{ url: initialData.img, variantId: null, isPrimary: true }];
+    }
+    return [
+      {
+        url: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",
+        variantId: null,
+        isPrimary: true,
+      },
+    ];
+  });
   const [newImageUrl, setNewImageUrl] = useState("");
 
   // Variants State
@@ -119,6 +145,23 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     ]
   );
 
+  // Auto-detect variant link from URL or filename tokens
+  const autoDetectVariantId = (url: string): string | null => {
+    if (!url || !variants || variants.length === 0) return null;
+    const lower = url.toLowerCase();
+    for (const v of variants) {
+      const tokens = [
+        v.sku?.split("-").pop(),
+        ...(v.colorName || "").split(/[\s/_-]+/),
+      ].filter((t): t is string => Boolean(t && t.length >= 2 && !/^(black|brown|gold|grey|gray|blue|green|white|silver|unisex|men|women|so|sku)$/i.test(t)));
+
+      if (tokens.some((t) => lower.includes(t.toLowerCase()))) {
+        return v.id || v.sku || null;
+      }
+    }
+    return null;
+  };
+
   // File Upload to Cloudflare R2
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -136,8 +179,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       });
       const data = await res.json();
       if (data.success && data.url) {
-        setImages((prev) => [...prev, data.url]);
-        toast.success("Image uploaded directly to Cloudflare R2 CDN");
+        const detectedVar = autoDetectVariantId(data.url);
+        setImages((prev) => [
+          ...prev,
+          { url: data.url, variantId: detectedVar, isPrimary: prev.length === 0 },
+        ]);
+        toast.success(
+          detectedVar
+            ? "Image uploaded and automatically linked to color variant"
+            : "Image uploaded directly to Cloudflare R2 CDN"
+        );
       } else {
         toast.error("Upload failed", { description: data.error });
       }
@@ -150,8 +201,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
   const handleAddImageUrl = () => {
     if (!newImageUrl.trim()) return;
-    setImages((prev) => [...prev, newImageUrl.trim()]);
+    const cleanUrl = newImageUrl.trim();
+    const detectedVar = autoDetectVariantId(cleanUrl);
+    setImages((prev) => [
+      ...prev,
+      { url: cleanUrl, variantId: detectedVar, isPrimary: prev.length === 0 },
+    ]);
     setNewImageUrl("");
+    if (detectedVar) {
+      toast.info("Automatically linked image to color variant");
+    }
   };
 
   const handleRemoveImage = (idx: number) => {
@@ -246,7 +305,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     setSaving(true);
     const payload = {
       ...formData,
-      images,
+      images: images.map((img, i) => ({
+        url: img.url,
+        variantId: img.variantId || null,
+        isPrimary: i === 0,
+        displayOrder: i,
+      })),
       variants,
     };
 
@@ -587,31 +651,76 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           </div>
 
           {/* Image Thumbnails Gallery */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 pt-3">
-            {images.map((url, idx) => (
-              <div
-                key={idx}
-                className="group relative aspect-square rounded-lg border border-[#E8DCCF] overflow-hidden bg-[#FAF7F2] flex items-center justify-center p-1"
-              >
-                <img
-                  src={url}
-                  alt={`Angle ${idx + 1}`}
-                  className="w-full h-full object-contain"
-                />
-                {idx === 0 && (
-                  <span className="absolute top-1 left-1 bg-[#C5A059] text-white text-[9px] font-bold px-1.5 py-0.2 rounded shadow-xs">
-                    Primary
-                  </span>
-                )}
-                <button
-                  type="button"
-                  onClick={() => handleRemoveImage(idx)}
-                  className="absolute top-1 right-1 p-1 bg-black/60 text-white rounded hover:bg-rose-600 transition-colors opacity-0 group-hover:opacity-100 cursor-pointer"
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-3">
+            {images.map((imgItem, idx) => {
+              const matchedVar = variants.find(
+                (v) => (v.id && v.id === imgItem.variantId) || (v.sku && v.sku === imgItem.variantId)
+              );
+
+              return (
+                <div
+                  key={idx}
+                  className={`group relative rounded-xl border p-2.5 space-y-2 transition-all shadow-2xs ${
+                    imgItem.variantId
+                      ? "bg-white border-[#C5A059]/60 ring-1 ring-[#C5A059]/20"
+                      : "bg-[#FAF7F2] border-[#E8DCCF] hover:border-stone-400"
+                  }`}
                 >
-                  <X className="w-3 h-3" />
-                </button>
-              </div>
-            ))}
+                  <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-white flex items-center justify-center p-2 border border-[#E8DCCF]/60">
+                    <img
+                      src={imgItem.url}
+                      alt={`Angle ${idx + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                    {idx === 0 && (
+                      <span className="absolute top-1.5 left-1.5 bg-[#C5A059] text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow-xs">
+                        Primary Angle
+                      </span>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(idx)}
+                      className="absolute top-1.5 right-1.5 p-1 bg-black/70 text-white rounded-full hover:bg-rose-600 transition-colors opacity-0 group-hover:opacity-100 cursor-pointer shadow-xs"
+                      title="Remove Image"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+
+                  {/* Variant Link Selector */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-[10px]">
+                      <span className="font-semibold text-stone-600 uppercase tracking-wider">
+                        Color Variant Link
+                      </span>
+                      {matchedVar && (
+                        <span className="inline-flex items-center gap-1 text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                          <Check className="w-2.5 h-2.5" />
+                          <span>Linked</span>
+                        </span>
+                      )}
+                    </div>
+                    <select
+                      value={imgItem.variantId || ""}
+                      onChange={(e) => {
+                        const val = e.target.value || null;
+                        setImages((prev) =>
+                          prev.map((item, i) => (i === idx ? { ...item, variantId: val } : item))
+                        );
+                      }}
+                      className="w-full text-[11px] bg-white border border-[#E8DCCF] rounded-md px-2 py-1 text-[#0A251C] focus:outline-hidden focus:border-[#C5A059] cursor-pointer"
+                    >
+                      <option value="">General / All Variants</option>
+                      {variants.map((v, vIdx) => (
+                        <option key={v.id || v.sku || vIdx} value={v.id || v.sku}>
+                          {v.colorName || `Color ${vIdx + 1}`} ({v.sku || "Variant"})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

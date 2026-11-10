@@ -77,7 +77,7 @@ export const CatalogHealthOverview: React.FC<CatalogHealthOverviewProps> = ({ da
             <span className="font-semibold uppercase tracking-wider text-[10px]">Active Frames</span>
             <Glasses className="w-3.5 h-3.5 text-[#C5A059]" />
           </div>
-          <div className="text-xl font-bold font-serif text-[#0A251C]">
+          <div className="text-xl font-bold font-sans tabular-nums text-[#0A251C]">
             {activeProducts}{" "}
             <span className="text-xs font-normal text-stone-500 font-sans">
               / {totalProducts} online
@@ -91,7 +91,7 @@ export const CatalogHealthOverview: React.FC<CatalogHealthOverviewProps> = ({ da
             <span className="font-semibold uppercase tracking-wider text-[10px]">Physical Inventory</span>
             <Archive className="w-3.5 h-3.5 text-[#C5A059]" />
           </div>
-          <div className="text-xl font-bold font-serif text-[#0A251C]">
+          <div className="text-xl font-bold font-sans tabular-nums text-[#0A251C]">
             {totalStockUnits.toLocaleString("en-IN")}{" "}
             <span className="text-xs font-normal text-stone-500 font-sans">units</span>
           </div>
@@ -103,9 +103,9 @@ export const CatalogHealthOverview: React.FC<CatalogHealthOverviewProps> = ({ da
             <span className="font-semibold uppercase tracking-wider text-[10px]">Designer Brands</span>
             <Award className="w-3.5 h-3.5 text-[#C5A059]" />
           </div>
-          <div className="text-xl font-bold font-serif text-[#0A251C]">
+          <div className="text-xl font-bold font-sans tabular-nums text-[#0A251C]">
             {totalBrands}{" "}
-            <span className="text-xs font-normal text-stone-500 font-sans">luxury ateliers</span>
+            <span className="text-xs font-normal text-stone-500 font-sans">luxury brands</span>
           </div>
           <p className="text-[10px] text-stone-500 mt-0.5">Verified authentic distributor stock</p>
         </div>
@@ -115,7 +115,7 @@ export const CatalogHealthOverview: React.FC<CatalogHealthOverviewProps> = ({ da
       {topBrands.length > 0 && (
         <div className="pt-2">
           <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-[#716B64] mb-2.5">
-            <span>Leading Atelier Brand Distribution</span>
+            <span>Leading Designer Brand Distribution</span>
             <Link href="/admin/brands" className="text-[#C5A059] hover:underline lowercase font-normal text-xs">
               view all {totalBrands} brands
             </Link>

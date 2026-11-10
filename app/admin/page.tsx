@@ -59,7 +59,7 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col items-center justify-center py-28 space-y-3">
         <Loader2 className="w-8 h-8 text-[#C5A059] animate-spin" />
         <span className="text-xs text-[#716B64] font-medium tracking-wide">
-          Loading Shivam Optical Atelier Executive Dashboard...
+          Loading Shivam Optical Executive Dashboard...
         </span>
       </div>
     );
@@ -107,7 +107,7 @@ export default function AdminDashboardPage() {
             </h1>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Atelier Online</span>
+              <span>Store Online</span>
             </span>
           </div>
           <p className="text-xs text-[#716B64] mt-0.5">

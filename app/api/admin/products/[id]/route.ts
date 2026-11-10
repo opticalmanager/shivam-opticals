@@ -35,6 +35,7 @@ export async function GET(
           SELECT json_agg(json_build_object(
             'id', pi.id,
             'url', pi.url,
+            'variant_id', pi.variant_id,
             'alt_text', pi.alt_text,
             'is_primary', pi.is_primary,
             'display_order', pi.display_order
@@ -66,7 +67,15 @@ export async function GET(
       originalPrice: row.original_price ? Number(row.original_price) : undefined,
       brand: row.brand_slug || row.brand_name || "cartier",
       category: row.category_slug || row.category_name || "eyeglasses",
-      images: Array.isArray(row.images) && row.images.length > 0 ? row.images.map((img: any) => img.url) : [],
+      images: Array.isArray(row.images) && row.images.length > 0
+        ? row.images.map((img: any) => ({
+            id: img.id,
+            url: img.url,
+            variantId: img.variant_id,
+            isPrimary: Boolean(img.is_primary),
+            displayOrder: img.display_order,
+          }))
+        : [],
     };
 
     return NextResponse.json({
@@ -219,18 +228,56 @@ export async function PUT(
         );
       }
 
-      // 6. Sync images if provided
+      // 6. Sync images if provided (preserving and assigning variant_id)
       if (Array.isArray(body.images) && body.images.length > 0) {
+        // Query existing image-to-variant mappings before deleting
+        const existingImgsRes = await client.query(
+          `SELECT url, variant_id FROM public.product_images WHERE product_id = $1;`,
+          [productId]
+        );
+        const existingVariantMap = new Map<string, string | null>();
+        existingImgsRes.rows.forEach((r) => {
+          if (r.url) existingVariantMap.set(r.url.trim(), r.variant_id);
+        });
+
+        // Retrieve current variants for SKU-to-UUID lookup
+        const currentVariantsRes = await client.query(
+          `SELECT id, sku FROM public.product_variants WHERE product_id = $1;`,
+          [productId]
+        );
+        const variantSkuMap = new Map<string, string>();
+        currentVariantsRes.rows.forEach((v) => {
+          variantSkuMap.set(v.id, v.id);
+          if (v.sku) variantSkuMap.set(v.sku.toLowerCase(), v.id);
+        });
+
         await client.query(`DELETE FROM public.product_images WHERE product_id = $1;`, [productId]);
+
         for (let i = 0; i < body.images.length; i++) {
-          const url = typeof body.images[i] === "string" ? body.images[i] : body.images[i].url;
-          if (url) {
-            await client.query(
-              `INSERT INTO public.product_images (product_id, url, display_order, is_primary)
-               VALUES ($1, $2, $3, $4);`,
-              [productId, url, i, i === 0]
-            );
+          const item = body.images[i];
+          const url = typeof item === "string" ? item.trim() : item?.url?.trim();
+          if (!url) continue;
+
+          let rawVarId = typeof item === "object" ? (item.variant_id || item.variantId || null) : null;
+          let resolvedVarId: string | null = null;
+
+          if (rawVarId && variantSkuMap.has(rawVarId.toLowerCase())) {
+            resolvedVarId = variantSkuMap.get(rawVarId.toLowerCase()) || null;
+          } else if (rawVarId && variantSkuMap.has(rawVarId)) {
+            resolvedVarId = rawVarId;
+          } else if (existingVariantMap.has(url) && existingVariantMap.get(url)) {
+            // Preserve existing variant association!
+            resolvedVarId = existingVariantMap.get(url)!;
           }
+
+          const isPrimary = typeof item === "object" && item.is_primary !== undefined ? Boolean(item.is_primary) : i === 0;
+          const displayOrder = typeof item === "object" && item.display_order !== undefined ? Number(item.display_order) : i;
+
+          await client.query(
+            `INSERT INTO public.product_images (product_id, variant_id, url, display_order, is_primary)
+             VALUES ($1, $2, $3, $4, $5);`,
+            [productId, resolvedVarId, url, displayOrder, isPrimary]
+          );
         }
       }
 

@@ -1,0 +1,374 @@
+{
+  "rawSum": 1493,
+  "file1Count": 566,
+  "file2Count": 640,
+  "file3Count": 287,
+  "duplicatesCut": 566,
+  "totalUnique": 927,
+  "matchedCount": 80,
+  "missingCount": 847,
+  "existingBrandsMissing": 142,
+  "newBrandsMissing": 705,
+  "summaryTable": [
+    {
+      "brand": "SHIVAM",
+      "total": 149,
+      "frames": 107,
+      "sunglasses": 42,
+      "matched": 0,
+      "missing": 149,
+      "status": "New Brand"
+    },
+    {
+      "brand": "RAYBAN",
+      "total": 132,
+      "frames": 73,
+      "sunglasses": 59,
+      "matched": 74,
+      "missing": 58,
+      "status": "Active (New Models to Add)"
+    },
+    {
+      "brand": "DANIEL MORRIS",
+      "total": 102,
+      "frames": 45,
+      "sunglasses": 57,
+      "matched": 0,
+      "missing": 102,
+      "status": "New Brand"
+    },
+    {
+      "brand": "XITE",
+      "total": 60,
+      "frames": 26,
+      "sunglasses": 34,
+      "matched": 0,
+      "missing": 60,
+      "status": "New Brand"
+    },
+    {
+      "brand": "IARRA",
+      "total": 55,
+      "frames": 0,
+      "sunglasses": 55,
+      "matched": 0,
+      "missing": 55,
+      "status": "New Brand"
+    },
+    {
+      "brand": "INSIST LUXURY",
+      "total": 48,
+      "frames": 48,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 48,
+      "status": "New Brand"
+    },
+    {
+      "brand": "PRODIGY",
+      "total": 38,
+      "frames": 38,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 38,
+      "status": "New Brand"
+    },
+    {
+      "brand": "SCOTT",
+      "total": 36,
+      "frames": 26,
+      "sunglasses": 10,
+      "matched": 0,
+      "missing": 36,
+      "status": "New Brand"
+    },
+    {
+      "brand": "CARRERA",
+      "total": 33,
+      "frames": 30,
+      "sunglasses": 3,
+      "matched": 4,
+      "missing": 29,
+      "status": "Active (New Models to Add)"
+    },
+    {
+      "brand": "IDOR",
+      "total": 30,
+      "frames": 26,
+      "sunglasses": 4,
+      "matched": 0,
+      "missing": 30,
+      "status": "New Brand"
+    },
+    {
+      "brand": "INSIST STUDIO",
+      "total": 29,
+      "frames": 29,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 29,
+      "status": "New Brand"
+    },
+    {
+      "brand": "EYEPLAYER",
+      "total": 25,
+      "frames": 25,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 25,
+      "status": "New Brand"
+    },
+    {
+      "brand": "PARADOX",
+      "total": 23,
+      "frames": 23,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 23,
+      "status": "New Brand"
+    },
+    {
+      "brand": "TOMMY HILFIGER",
+      "total": 23,
+      "frames": 19,
+      "sunglasses": 4,
+      "matched": 0,
+      "missing": 23,
+      "status": "Active DB Brand"
+    },
+    {
+      "brand": "BENETTON",
+      "total": 16,
+      "frames": 16,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 16,
+      "status": "New Brand"
+    },
+    {
+      "brand": "ZOE MILLAR",
+      "total": 15,
+      "frames": 15,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 15,
+      "status": "New Brand"
+    },
+    {
+      "brand": "FRENCH CONNECTION",
+      "total": 14,
+      "frames": 14,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 14,
+      "status": "Active DB Brand"
+    },
+    {
+      "brand": "QLOO",
+      "total": 14,
+      "frames": 12,
+      "sunglasses": 2,
+      "matched": 0,
+      "missing": 14,
+      "status": "New Brand"
+    },
+    {
+      "brand": "HUGO",
+      "total": 12,
+      "frames": 12,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 12,
+      "status": "New Brand"
+    },
+    {
+      "brand": "I JEWLS",
+      "total": 12,
+      "frames": 12,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 12,
+      "status": "New Brand"
+    },
+    {
+      "brand": "BURBERRY",
+      "total": 8,
+      "frames": 2,
+      "sunglasses": 6,
+      "matched": 2,
+      "missing": 6,
+      "status": "Active (New Models to Add)"
+    },
+    {
+      "brand": "ARMANI EXCHANGE",
+      "total": 7,
+      "frames": 5,
+      "sunglasses": 2,
+      "matched": 0,
+      "missing": 7,
+      "status": "Active DB Brand"
+    },
+    {
+      "brand": "STEPPER",
+      "total": 6,
+      "frames": 6,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 6,
+      "status": "New Brand"
+    },
+    {
+      "brand": "BOSS",
+      "total": 5,
+      "frames": 5,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 5,
+      "status": "Active DB Brand"
+    },
+    {
+      "brand": "FRANK LUX",
+      "total": 5,
+      "frames": 5,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 5,
+      "status": "New Brand"
+    },
+    {
+      "brand": "JAGUAR",
+      "total": 5,
+      "frames": 5,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 5,
+      "status": "New Brand"
+    },
+    {
+      "brand": "INSIST VOGUE",
+      "total": 4,
+      "frames": 4,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 4,
+      "status": "New Brand"
+    },
+    {
+      "brand": "FRAME",
+      "total": 4,
+      "frames": 0,
+      "sunglasses": 4,
+      "matched": 0,
+      "missing": 4,
+      "status": "New Brand"
+    },
+    {
+      "brand": "ENZZO",
+      "total": 3,
+      "frames": 3,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 3,
+      "status": "New Brand"
+    },
+    {
+      "brand": "FOSSIL",
+      "total": 2,
+      "frames": 2,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 2,
+      "status": "New Brand"
+    },
+    {
+      "brand": "SMART",
+      "total": 2,
+      "frames": 0,
+      "sunglasses": 2,
+      "matched": 0,
+      "missing": 2,
+      "status": "New Brand"
+    },
+    {
+      "brand": "VELOCITY",
+      "total": 2,
+      "frames": 0,
+      "sunglasses": 2,
+      "matched": 0,
+      "missing": 2,
+      "status": "New Brand"
+    },
+    {
+      "brand": "CALVIN KLEIN",
+      "total": 1,
+      "frames": 1,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    },
+    {
+      "brand": "IDEE",
+      "total": 1,
+      "frames": 1,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    },
+    {
+      "brand": "NAUTICA",
+      "total": 1,
+      "frames": 1,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    },
+    {
+      "brand": "PIERRE CARDIN",
+      "total": 1,
+      "frames": 1,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    },
+    {
+      "brand": "SILHOUTTE",
+      "total": 1,
+      "frames": 1,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    },
+    {
+      "brand": "SORRENTO",
+      "total": 1,
+      "frames": 1,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    },
+    {
+      "brand": "TIMBERLAND",
+      "total": 1,
+      "frames": 1,
+      "sunglasses": 0,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    },
+    {
+      "brand": "OAKLEY",
+      "total": 1,
+      "frames": 0,
+      "sunglasses": 1,
+      "matched": 0,
+      "missing": 1,
+      "status": "New Brand"
+    }
+  ]
+}

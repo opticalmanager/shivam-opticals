@@ -84,7 +84,19 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   const isValidImageUrl = (url?: string): boolean => {
     if (!url || typeof url !== "string") return false;
     const trimmed = url.trim();
-    return trimmed.startsWith("/") || trimmed.startsWith("http://") || trimmed.startsWith("https://");
+    if (!trimmed.startsWith("/") && !trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
+      return false;
+    }
+    const lower = trimmed.toLowerCase();
+    if (
+      lower.includes("banner") ||
+      lower.includes("promo") ||
+      lower.includes("crop_") ||
+      lower.includes("inspect_")
+    ) {
+      return false;
+    }
+    return true;
   };
 
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
@@ -104,44 +116,66 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     // 1. Check active color variant
     const activeColorVariant = product.colorVariants?.[selectedVariantIdx];
     const activeVariant = product.variants?.[selectedVariantIdx];
-    const featuredImg = activeColorVariant?.featuredImage || activeVariant?.image;
+    const featuredImg = activeVariant?.image || activeColorVariant?.featuredImage;
 
     // 2. Add primary featured image first
     if (featuredImg) {
       addImg(featuredImg);
     }
 
-    // 3. Add dedicated gallery images for this variant
+    // 3. Add dedicated gallery images for this variant from activeVariant.images
+    if (activeVariant?.images && Array.isArray(activeVariant.images)) {
+      activeVariant.images.forEach(addImg);
+    }
+
+    // 4. Add dedicated gallery images for this variant from activeColorVariant.gallery
     if (activeColorVariant?.gallery && Array.isArray(activeColorVariant.gallery)) {
       activeColorVariant.gallery.forEach(addImg);
     }
 
-    // 4. Barcode matching across product images
-    if (featuredImg && product.images && product.images.length > 0) {
-      const cleanFeatured = featuredImg.split("?")[0];
-      const filename = cleanFeatured.split("/").pop() || "";
-      const barcodeMatch = filename.match(/(\d{8,14})/);
-      const barcode = barcodeMatch ? barcodeMatch[1] : null;
+    // 5. Barcode & Token matching across product images
+    if (product.images && product.images.length > 0) {
+      if (featuredImg) {
+        const cleanFeatured = featuredImg.split("?")[0];
+        const filename = cleanFeatured.split("/").pop() || "";
+        const barcodeMatch = filename.match(/(\d{8,14})/);
+        const barcode = barcodeMatch ? barcodeMatch[1] : null;
 
-      if (barcode) {
+        if (barcode) {
+          product.images.forEach((img) => {
+            if (isValidImageUrl(img) && img.includes(barcode)) {
+              addImg(img);
+            }
+          });
+        }
+      }
+
+      // Check color code tokens from variant (e.g. 2012, 8208, KB7, M4P, etc.)
+      const colorTokens = [
+        ...(activeVariant?.colorName || "").split(/[\s/_-]+/),
+        activeColorVariant?.sku?.split("-").pop(),
+      ].filter((tok): tok is string => Boolean(tok && tok.length >= 2 && !/^(black|brown|gold|grey|gray|blue|green|unisex|men|women)$/i.test(tok)));
+
+      if (colorTokens.length > 0) {
         product.images.forEach((img) => {
-          if (isValidImageUrl(img) && img.includes(barcode)) {
-            addImg(img);
+          if (isValidImageUrl(img)) {
+            const lowerImg = img.toLowerCase();
+            if (colorTokens.some((t) => lowerImg.includes(t.toLowerCase()))) {
+              addImg(img);
+            }
           }
         });
       }
     }
 
-    // 5. If 1 or 0 variants, include all general product images
-    const totalVariants = Math.max(
-      product.colorVariants?.length || 0,
-      product.variants?.length || 0
-    );
-    if (totalVariants <= 1 && product.images && product.images.length > 0) {
-      product.images.forEach(addImg);
+    // 6. If list has 0 or 1 images, include all available general product images so angles are rich
+    if (product.images && product.images.length > 0) {
+      if (list.length <= 1) {
+        product.images.forEach(addImg);
+      }
     }
 
-    // 6. Fallback safety
+    // 7. Fallback safety
     if (list.length === 0) {
       if (product.images && product.images.length > 0) {
         product.images.forEach(addImg);
@@ -151,7 +185,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     }
 
     if (list.length === 0) {
-      list.push("/images/placeholder.jpg");
+      list.push("/images/clean_frame_1.png");
     }
 
     return list;
@@ -174,7 +208,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   }, [activeImgIdx]);
 
   const getHdImageUrl = useCallback((url?: string): string => {
-    if (!url || typeof url !== "string") return "/images/placeholder.jpg";
+    if (!url || typeof url !== "string") return "/images/clean_frame_1.png";
     let clean = url.trim();
     if (clean.includes("cdn.shopify.com")) {
       clean = clean.replace(/_([0-9]+x[0-9]*|_compact|_medium|_grande|_large)/g, "");
@@ -184,17 +218,33 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     return clean;
   }, []);
 
-  // Preload secondary images in pristine HD background
+  // Proactively preload all variants and catalog images on mount for zero-latency switching
   useEffect(() => {
-    if (typeof window !== "undefined" && imagesToDisplay.length > 1) {
-      imagesToDisplay.slice(1).forEach((imgUrl) => {
-        if (!imgUrl) return;
-        const targetSrc = getHdImageUrl(imgUrl);
-        const preloader = new window.Image();
-        preloader.src = targetSrc;
+    if (typeof window === "undefined") return;
+    const allUrls: string[] = [];
+    if (product.images) allUrls.push(...product.images);
+    if (product.img) allUrls.push(product.img);
+    if (product.variants) {
+      product.variants.forEach((v) => {
+        if (v.image) allUrls.push(v.image);
+        if (v.images) allUrls.push(...v.images);
       });
     }
-  }, [imagesToDisplay, getHdImageUrl]);
+    if (product.colorVariants) {
+      product.colorVariants.forEach((cv) => {
+        if (cv.featuredImage) allUrls.push(cv.featuredImage);
+        if (cv.gallery) allUrls.push(...cv.gallery);
+      });
+    }
+
+    const unique = Array.from(
+      new Set(allUrls.filter((u): u is string => Boolean(u && isValidImageUrl(u))))
+    );
+    unique.forEach((u) => {
+      const img = new window.Image();
+      img.src = getHdImageUrl(u);
+    });
+  }, [product, getHdImageUrl]);
 
   const handlePrevImage = useCallback(() => {
     setActiveImgIdx((prev) => (prev > 0 ? prev - 1 : imagesToDisplay.length - 1));
@@ -356,6 +406,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         alt={`${product.name} view ${idx + 1}`}
                         className="w-full h-full object-contain"
                         loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+                        }}
                       />
                     </button>
                   ))}
@@ -390,12 +443,23 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   </button>
                 )}
 
-                {/* Main Eyewear Image - Pristine Ultra-HD Quality & Cleanly Fitted */}
+                {/* Main Eyewear Image - Pristine Ultra-HD Quality & Cleanly Fitted with zero latency */}
                 <div className="w-full h-full flex items-center justify-center p-2 sm:p-4">
                   <img
+                    key={`${product.id}-${selectedVariantIdx}-${activeImgIdx}`}
                     src={getHdImageUrl(currentImage)}
-                    alt={product.name}
-                    className="w-full h-full max-h-[340px] sm:max-h-[400px] object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105 select-none"
+                    alt={`${product.brand} - ${product.name}`}
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      if (product.images && product.images[0] && !target.src.includes(product.images[0])) {
+                        target.src = product.images[0];
+                      } else if (product.img && !target.src.includes(product.img)) {
+                        target.src = product.img;
+                      } else {
+                        target.src = "/images/clean_frame_1.png";
+                      }
+                    }}
+                    className="w-full h-full max-h-[340px] sm:max-h-[400px] object-contain filter drop-shadow-md transition-opacity duration-200 animate-in fade-in fill-mode-forwards select-none"
                     loading="eager"
                     style={{ imageRendering: "-webkit-optimize-contrast" }}
                   />
@@ -530,38 +594,58 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </div>
 
             {/* Colorway Variant Selection */}
-            {product.variants && product.variants.length > 0 && (
-              <div className="space-y-2 pt-0.5">
-                <span className="font-sans text-[11px] font-medium text-[#1A1816] uppercase tracking-wider block">
-                  Color:{" "}
-                  <span className="font-normal text-neutral-600">
-                    {product.variants[selectedVariantIdx]?.colorName?.replace(/\s+/g, " ").trim()}
+            {(() => {
+              const availableColorways =
+                product.variants && product.variants.length > 0
+                  ? product.variants
+                  : (product.colorVariants || []).map((cv, i) => ({
+                      id: cv.id || `cv-${i}`,
+                      colorName: cv.colorName,
+                      colorHex: cv.colorHex,
+                      image: cv.featuredImage,
+                      images: cv.gallery,
+                    }));
+
+              if (availableColorways.length === 0) return null;
+
+              const activeColorName =
+                availableColorways[selectedVariantIdx]?.colorName?.replace(/\s+/g, " ").trim() ||
+                product.color;
+
+              return (
+                <div className="space-y-2 pt-0.5">
+                  <span className="font-sans text-[11px] font-medium text-[#1A1816] uppercase tracking-wider block">
+                    Color:{" "}
+                    <span className="font-semibold text-[#0A251C]">
+                      {activeColorName}
+                    </span>
                   </span>
-                </span>
-                <div className="flex items-center gap-2 flex-wrap">
-                  {product.variants.map((v, idx) => (
-                    <button
-                      key={v.id}
-                      onClick={() => {
-                        setSelectedVariantIdx(idx);
-                        setActiveImgIdx(0);
-                      }}
-                      className={`w-7 h-7 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center ${
-                        selectedVariantIdx === idx
-                          ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 scale-110 shadow-xs"
-                          : "border-neutral-300 opacity-80 hover:opacity-100"
-                      }`}
-                      style={{ backgroundColor: v.colorHex }}
-                      title={v.colorName?.replace(/\s+/g, " ").trim()}
-                    >
-                      {selectedVariantIdx === idx && (
-                        <Check className="w-3.5 h-3.5 text-white drop-shadow-md" />
-                      )}
-                    </button>
-                  ))}
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {availableColorways.map((v, idx) => (
+                      <button
+                        key={v.id || idx}
+                        type="button"
+                        onClick={() => {
+                          setSelectedVariantIdx(idx);
+                          setActiveImgIdx(0);
+                        }}
+                        className={`w-7 h-7 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center ${
+                          selectedVariantIdx === idx
+                            ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 scale-110 shadow-xs"
+                            : "border-neutral-300 opacity-80 hover:opacity-100"
+                        }`}
+                        style={{ backgroundColor: v.colorHex }}
+                        title={v.colorName?.replace(/\s+/g, " ").trim()}
+                      >
+                        {selectedVariantIdx === idx && (
+                          <Check className="w-3.5 h-3.5 text-white drop-shadow-md" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              );
+            })()}
 
             {/* Primary Action: ADD TO CART */}
             <button

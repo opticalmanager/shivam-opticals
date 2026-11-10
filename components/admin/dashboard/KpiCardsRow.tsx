@@ -50,7 +50,7 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
       value: `₹${(data.totalRevenue || 0).toLocaleString("en-IN")}`,
       growth: revGrowth,
       isPositive: revGrowth ? !revGrowth.startsWith("-") : true,
-      contextFallback: data.totalRevenue > 0 ? "Verified checkout orders" : "Pre-Launch Ready",
+      contextFallback: data.totalRevenue > 0 ? "Verified paid orders" : "No paid orders yet",
       icon: IndianRupee,
     },
     {
@@ -59,20 +59,20 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
       value: (data.totalOrders || 0).toLocaleString(),
       growth: ordGrowth,
       isPositive: ordGrowth ? !ordGrowth.startsWith("-") : true,
-      contextFallback: data.totalOrders > 0 ? "Completed & in assembly" : "Gateway Active",
+      contextFallback: data.totalOrders > 0 ? "Completed & paid orders" : "0 paid orders",
       icon: ShoppingBag,
     },
     {
       id: "aov",
       title: "AVG. ORDER VALUE",
       value:
-        data.avgOrderValue > 0
+        data.totalOrders > 0 && data.avgOrderValue > 0
           ? `₹${data.avgOrderValue.toLocaleString("en-IN")}`
-          : `₹${avgCatalogPrice.toLocaleString("en-IN")}`,
-      subtitle: data.avgOrderValue > 0 ? "Order Basket Median" : "Catalog Portfolio MRP",
+          : "₹0",
+      subtitle: data.totalOrders > 0 ? "Order Basket Average" : "Awaiting Paid Orders",
       growth: aovGrowth,
       isPositive: aovGrowth ? !aovGrowth.startsWith("-") : true,
-      contextFallback: data.avgOrderValue > 0 ? "Per completed ticket" : "Median Frame Price",
+      contextFallback: data.totalOrders > 0 ? "Per completed paid order" : "No paid orders yet",
       icon: Package,
     },
     {
@@ -140,7 +140,7 @@ export const KpiCardsRow: React.FC<KpiCardsRowProps> = ({
                 <span className="w-2 h-2 rounded-full bg-emerald-500/80" title="Live Synced" />
               </div>
 
-              <div className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C] tracking-tight mb-2">
+              <div className="text-2xl sm:text-3xl font-sans font-bold tabular-nums text-[#0A251C] tracking-tight mb-2">
                 {card.value}
               </div>
 

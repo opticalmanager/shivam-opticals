@@ -35,12 +35,12 @@ export async function GET(req: NextRequest) {
       daysToGenerate = 7;
     }
 
-    // 1. Revenue & orders aggregates for the selected range
+    // 1. Revenue & orders aggregates for the selected range (strictly verified paid orders)
     const statsRes = await query(`
       SELECT 
         COALESCE(SUM(CASE WHEN payment_status = 'paid' THEN total_amount ELSE 0 END), 0) as total_revenue,
-        COUNT(id) as total_orders,
-        COUNT(DISTINCT COALESCE(guest_email, guest_phone)) as total_customers,
+        COUNT(CASE WHEN payment_status = 'paid' THEN id END) as total_orders,
+        COUNT(DISTINCT CASE WHEN payment_status = 'paid' THEN COALESCE(guest_email, guest_phone) END) as total_customers,
         COALESCE(AVG(CASE WHEN payment_status = 'paid' THEN total_amount END), 0) as avg_order_value
       FROM public.orders
       ${dateFilter};
@@ -65,8 +65,8 @@ export async function GET(req: NextRequest) {
       const prevStatsRes = await query(`
         SELECT 
           COALESCE(SUM(CASE WHEN payment_status = 'paid' THEN total_amount ELSE 0 END), 0) as total_revenue,
-          COUNT(id) as total_orders,
-          COUNT(DISTINCT COALESCE(guest_email, guest_phone)) as total_customers,
+          COUNT(CASE WHEN payment_status = 'paid' THEN id END) as total_orders,
+          COUNT(DISTINCT CASE WHEN payment_status = 'paid' THEN COALESCE(guest_email, guest_phone) END) as total_customers,
           COALESCE(AVG(CASE WHEN payment_status = 'paid' THEN total_amount END), 0) as avg_order_value
         FROM public.orders
         ${prevDateFilter};
@@ -143,7 +143,7 @@ export async function GET(req: NextRequest) {
         to_char(date_trunc('day', created_at), 'YYYY-MM-DD') as date_str,
         to_char(date_trunc('day', created_at), 'DD Mon') as label,
         COALESCE(SUM(CASE WHEN payment_status = 'paid' THEN total_amount ELSE 0 END), 0) as revenue,
-        COUNT(id) as orders
+        COUNT(CASE WHEN payment_status = 'paid' THEN id END) as orders
       FROM public.orders
       WHERE created_at >= CURRENT_DATE - INTERVAL '${daysToGenerate} days'
       GROUP BY date_trunc('day', created_at)
@@ -175,7 +175,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // 5. Top Eyewear Models or Flagship Atelier Showcase
+    // 5. Top Eyewear Models (strictly verified paid orders)
     const topProductsRes = await query(`
       SELECT 
         COALESCE(oi.product_snapshot->>'name', p.name, 'Optical Frame') as name,
@@ -184,8 +184,10 @@ export async function GET(req: NextRequest) {
         SUM(oi.total_price)::numeric as revenue,
         p.base_price as price
       FROM public.order_items oi
+      JOIN public.orders o ON o.id = oi.order_id
       LEFT JOIN public.products p ON p.id = oi.product_id
       LEFT JOIN public.brands b ON b.id = p.brand_id
+      WHERE o.payment_status = 'paid'
       GROUP BY oi.product_snapshot->>'name', p.name, b.name, p.base_price
       HAVING SUM(oi.quantity) > 0
       ORDER BY revenue DESC
@@ -303,11 +305,15 @@ export async function GET(req: NextRequest) {
       LIMIT 6;
     `);
 
+    const paidOrders = Number(statsRow.total_orders || 0);
+    const paidRevenue = Number(statsRow.total_revenue || 0);
+    const avgOrderValue = paidOrders > 0 ? Math.round(paidRevenue / paidOrders) : 0;
+
     const statsPayload = {
-      totalRevenue: Number(statsRow.total_revenue || 0),
-      totalOrders: Number(statsRow.total_orders || 0),
+      totalRevenue: paidRevenue,
+      totalOrders: paidOrders,
       totalCustomers,
-      avgOrderValue: Math.round(Number(statsRow.avg_order_value || 0)),
+      avgOrderValue,
       growth: {
         revenue: revenueGrowth,
         orders: ordersGrowth,

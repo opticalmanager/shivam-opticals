@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { Heart, ShoppingBag, Star } from "lucide-react";
 import { Product } from "@/types";
@@ -15,6 +15,8 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem, openCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+
+  const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
 
   const isSaved = isInWishlist(product.id);
 
@@ -31,6 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         id: v.id || `v-${i}`,
         colorName: v.colorName || `Color ${i + 1}`,
         colorHex: v.colorHex || "#1A1816",
+        image: v.image || v.images?.[0],
       }));
     }
     if (product.colorVariants && product.colorVariants.length > 0) {
@@ -38,6 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         id: cv.id || `cv-${i}`,
         colorName: cv.colorName || `Color ${i + 1}`,
         colorHex: cv.colorHex || "#1A1816",
+        image: cv.featuredImage || cv.gallery?.[0],
       }));
     }
     if (product.colors && product.colors.length > 0) {
@@ -45,6 +49,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         id: `c-${i}`,
         colorName: c.startsWith("#") ? `Color ${i + 1}` : c,
         colorHex: c.startsWith("#") ? c : "#1A1816",
+        image: product.images?.[i] || product.img,
       }));
     }
     return [
@@ -52,17 +57,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         id: "c-0",
         colorName: product.color || "Black",
         colorHex: product.colorHex || "#1A1816",
+        image: product.img || product.images?.[0],
       },
     ];
   }, [product]);
 
   const totalColors = availableVariants.length;
-  const displayImg = product.img || product.images?.[0] || "/images/placeholder.jpg";
+  const activeVariant = availableVariants[selectedVariantIdx] || availableVariants[0];
+  const displayImg = activeVariant?.image || product.images?.[0] || product.img || "/images/clean_frame_1.png";
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addItem(product, availableVariants[0]?.colorHex || "#1A1816");
+    addItem(product, activeVariant?.colorHex || "#1A1816");
     openCart();
   };
 
@@ -105,13 +112,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             className="w-full h-full flex items-center justify-center p-1 cursor-pointer"
           >
             <img
+              key={`${product.id}-${selectedVariantIdx}`}
               src={displayImg}
               alt={product.name}
               loading="lazy"
               onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+                const target = e.currentTarget as HTMLImageElement;
+                if (product.images && product.images[0] && target.src !== product.images[0]) {
+                  target.src = product.images[0];
+                } else if (product.img && target.src !== product.img) {
+                  target.src = product.img;
+                } else {
+                  target.src = "/images/clean_frame_1.png";
+                }
               }}
-              className="w-full h-full max-h-28 sm:max-h-32 object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full max-h-28 sm:max-h-32 object-contain filter drop-shadow-sm group-hover:scale-105 transition-all duration-200 animate-in fade-in"
             />
           </Link>
         </div>
@@ -164,11 +179,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {availableVariants.length > 1 && (
             <div className="flex items-center gap-1.5 justify-center flex-wrap max-w-full">
               {availableVariants.slice(0, 5).map((v, idx) => (
-                <span
+                <button
                   key={v.id || idx}
-                  className="w-2.5 h-2.5 rounded-full border border-neutral-300 shadow-2xs shrink-0"
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setSelectedVariantIdx(idx);
+                  }}
+                  className={`w-3 h-3 rounded-full border transition-all duration-150 shrink-0 cursor-pointer ${
+                    selectedVariantIdx === idx
+                      ? "border-[#0A251C] ring-2 ring-[#C5A059] scale-125 shadow-xs"
+                      : "border-neutral-300 opacity-80 hover:opacity-100 hover:scale-110"
+                  }`}
                   style={{ backgroundColor: v.colorHex || "#1A1816" }}
                   title={v.colorName}
+                  aria-label={`Select color ${v.colorName}`}
                 />
               ))}
               {availableVariants.length > 5 && (

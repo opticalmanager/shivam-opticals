@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { Product, Brand, LensPackage, ProductVariant } from "@/types";
 import { PRODUCTS as FALLBACK_PRODUCTS } from "@/data/products";
 import { LUXURY_BRANDS as FALLBACK_BRANDS } from "@/data/brands";
+import { isValidProductImageUrl } from "@/lib/productsService";
 import { query, getPgPool } from "./pg";
 import { PoolClient } from "pg";
 
@@ -155,7 +156,8 @@ export async function getProducts(options?: {
     return data.map((row: any) => {
       const sortedImages = (row.images || [])
         .sort((a: any, b: any) => a.display_order - b.display_order)
-        .map((img: any) => img.url);
+        .map((img: any) => img.url?.trim())
+        .filter((url: string | undefined): url is string => Boolean(url && isValidProductImageUrl(url)));
 
       const mappedVariants: ProductVariant[] = (row.variants || []).map((v: any) => ({
         id: v.id,
@@ -186,7 +188,7 @@ export async function getProducts(options?: {
         isLimitedEdition: row.is_limited_edition,
         rating: Number(row.rating || 5.0),
         reviewCount: row.review_count || 0,
-        images: sortedImages.length > 0 ? sortedImages : ["/images/placeholder.jpg"],
+        images: sortedImages.length > 0 ? sortedImages : ["/images/clean_frame_1.png"],
         description: row.description || "",
         specs: row.specs || { lensWidth: 52, bridgeWidth: 18, templeLength: 145, frameWidth: 140 },
         variants: mappedVariants,
@@ -225,7 +227,8 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
     const sortedImages = (data.images || [])
       .sort((a: any, b: any) => a.display_order - b.display_order)
-      .map((img: any) => img.url);
+      .map((img: any) => img.url?.trim())
+      .filter((url: string | undefined): url is string => Boolean(url && isValidProductImageUrl(url)));
 
     return {
       id: data.slug,
@@ -248,7 +251,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       isLimitedEdition: data.is_limited_edition,
       rating: Number(data.rating || 5.0),
       reviewCount: data.review_count || 0,
-      images: sortedImages.length > 0 ? sortedImages : ["/images/placeholder.jpg"],
+      images: sortedImages.length > 0 ? sortedImages : ["/images/clean_frame_1.png"],
       description: data.description || "",
       specs: data.specs,
       variants: (data.variants || []).map((v: any) => ({

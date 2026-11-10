@@ -335,17 +335,40 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      // 5. Insert images
+      // 5. Insert images with variant linking
       if (Array.isArray(body.images) && body.images.length > 0) {
+        // Query inserted variants for SKU / ID mapping
+        const currentVariantsRes = await client.query(
+          `SELECT id, sku FROM public.product_variants WHERE product_id = $1;`,
+          [newProduct.id]
+        );
+        const variantSkuMap = new Map<string, string>();
+        currentVariantsRes.rows.forEach((v) => {
+          variantSkuMap.set(v.id, v.id);
+          if (v.sku) variantSkuMap.set(v.sku.toLowerCase(), v.id);
+        });
+
         for (let i = 0; i < body.images.length; i++) {
-          const imgUrl = typeof body.images[i] === "string" ? body.images[i] : body.images[i].url;
-          if (imgUrl) {
-            await client.query(
-              `INSERT INTO public.product_images (product_id, url, display_order, is_primary)
-               VALUES ($1, $2, $3, $4);`,
-              [newProduct.id, imgUrl, i, i === 0]
-            );
+          const item = body.images[i];
+          const imgUrl = typeof item === "string" ? item.trim() : item?.url?.trim();
+          if (!imgUrl) continue;
+
+          let rawVarId = typeof item === "object" ? (item.variant_id || item.variantId || null) : null;
+          let resolvedVarId: string | null = null;
+          if (rawVarId && variantSkuMap.has(rawVarId.toLowerCase())) {
+            resolvedVarId = variantSkuMap.get(rawVarId.toLowerCase()) || null;
+          } else if (rawVarId && variantSkuMap.has(rawVarId)) {
+            resolvedVarId = rawVarId;
           }
+
+          const isPrimary = typeof item === "object" && item.is_primary !== undefined ? Boolean(item.is_primary) : i === 0;
+          const displayOrder = typeof item === "object" && item.display_order !== undefined ? Number(item.display_order) : i;
+
+          await client.query(
+            `INSERT INTO public.product_images (product_id, variant_id, url, display_order, is_primary)
+             VALUES ($1, $2, $3, $4, $5);`,
+            [newProduct.id, resolvedVarId, imgUrl, displayOrder, isPrimary]
+          );
         }
       }
 

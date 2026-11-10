@@ -16,6 +16,24 @@ export function invalidateProductsCache(): void {
 
 export const ALL_FALLBACK_PRODUCTS: Product[] = PRODUCTS;
 
+export function isValidProductImageUrl(url?: string): boolean {
+  if (!url || typeof url !== "string") return false;
+  const trimmed = url.trim();
+  if (!trimmed.startsWith("/") && !trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
+    return false;
+  }
+  const lower = trimmed.toLowerCase();
+  if (
+    lower.includes("banner") ||
+    lower.includes("promo") ||
+    lower.includes("crop_") ||
+    lower.includes("inspect_")
+  ) {
+    return false;
+  }
+  return true;
+}
+
 /**
  * Helper to map Supabase row to client Product domain model
  */
@@ -30,16 +48,16 @@ function mapRowToProduct(row: any): Product {
         (a.display_order || 0) - (b.display_order || 0)
     )
     .map((img: any) => img.url?.trim())
-    .filter((url: string | undefined): url is string => Boolean(url));
+    .filter((url: string | undefined): url is string => Boolean(url && isValidProductImageUrl(url)));
 
   const resolvedImages =
     rawImages.length > 0
       ? rawImages
       : localMatch?.images && localMatch.images.length > 0
-      ? localMatch.images
-      : row.img
+      ? localMatch.images.filter(isValidProductImageUrl)
+      : row.img && isValidProductImageUrl(row.img)
       ? [row.img]
-      : ["/images/placeholder.jpg"];
+      : ["/images/clean_frame_1.png"];
 
   const price = Number(row.base_price || row.price || localMatch?.price || 0);
   const originalPrice = row.original_price ? Number(row.original_price) : localMatch?.originalPrice;
@@ -51,11 +69,41 @@ function mapRowToProduct(row: any): Product {
   const mappedVariants: ProductVariant[] =
     row.product_variants && row.product_variants.length > 0
       ? row.product_variants.map((v: any) => {
-          const variantImgObj = (row.product_images || []).find((img: any) => img.variant_id === v.id);
-          const rawVarUrl = variantImgObj?.url || variantImgObj?.image_url;
+          // 1. Direct matched images by variant_id
+          const directImages = (row.product_images || [])
+            .filter((img: any) => img.variant_id === v.id && isValidProductImageUrl(img.url || img.image_url))
+            .sort(
+              (a: any, b: any) =>
+                (b.is_primary ? 1 : 0) - (a.is_primary ? 1 : 0) ||
+                (a.display_order || 0) - (b.display_order || 0)
+            )
+            .map((img: any) => (img.url || img.image_url)?.trim())
+            .filter((url: string | undefined): url is string => Boolean(url && isValidProductImageUrl(url)));
+
+          // 2. Fallback token-based match in image URLs if directImages is empty
+          let fallbackImages: string[] = [];
+          if (directImages.length === 0) {
+            const rawTokens = [
+              v.sku?.split("-").pop(),
+              ...(v.color_name || "").split(/[\s/_-]+/),
+              v.barcode,
+            ].filter((t): t is string => Boolean(t && t.length >= 2 && !/^(black|brown|gold|grey|gray|blue|green|unisex|men|women)$/i.test(t)));
+
+            if (rawTokens.length > 0) {
+              fallbackImages = (row.product_images || [])
+                .filter((img: any) => {
+                  const url = (img.url || img.image_url || "").toLowerCase();
+                  return isValidProductImageUrl(url) && rawTokens.some((tok) => url.includes(tok.toLowerCase()));
+                })
+                .map((img: any) => (img.url || img.image_url)?.trim())
+                .filter((url: string | undefined): url is string => Boolean(url && isValidProductImageUrl(url)));
+            }
+          }
+
+          const variantImgs = directImages.length > 0 ? directImages : fallbackImages;
           const validVarImg =
-            rawVarUrl && (rawVarUrl.startsWith("/") || rawVarUrl.startsWith("http"))
-              ? rawVarUrl.trim()
+            variantImgs.length > 0
+              ? variantImgs[0]
               : resolvedImages[0];
 
           return {
@@ -63,6 +111,7 @@ function mapRowToProduct(row: any): Product {
             colorName: (v.color_name || "").replace(/\s+/g, " ").trim(),
             colorHex: v.color_hex || "#1A1A1A",
             image: validVarImg,
+            images: variantImgs.length > 0 ? variantImgs : [validVarImg],
             inStock: v.stock_quantity > 0,
           };
         })
@@ -72,6 +121,7 @@ function mapRowToProduct(row: any): Product {
           colorName: (cv.colorName || "").replace(/\s+/g, " ").trim(),
           colorHex: cv.colorHex || "#1A1A1A",
           image: cv.featuredImage || cv.gallery?.[0] || resolvedImages[0],
+          images: cv.gallery || (cv.featuredImage ? [cv.featuredImage] : [resolvedImages[0]]),
           inStock: cv.available !== false,
         }))
       : (localMatch?.variants || []).map((v: any) => ({
@@ -116,7 +166,7 @@ function mapRowToProduct(row: any): Product {
     isLimitedEdition: Boolean(row.is_limited_edition ?? localMatch?.isLimitedEdition),
     rating: Number(row.rating) || localMatch?.rating || 5.0,
     reviewCount: Number(row.review_count) || localMatch?.reviewCount || 0,
-    img: resolvedImages[0] || "/images/placeholder.jpg",
+    img: resolvedImages[0] || "/images/clean_frame_1.png",
     images: resolvedImages,
     description: row.description || localMatch?.description || "",
     specs: row.specs || localMatch?.specs || {
@@ -133,10 +183,24 @@ function mapRowToProduct(row: any): Product {
     },
     packageDimensions: row.package_dimensions || row.specs?.packageDimensions || localMatch?.packageDimensions,
     contactLensSpecs: row.specs?.contactLensSpecs || localMatch?.contactLensSpecs,
-    colorVariants: (row.color_variants || localMatch?.colorVariants || []).map((cv: any) => ({
-      ...cv,
-      colorName: (cv.colorName || "").replace(/\s+/g, " ").trim(),
-    })),
+    colorVariants:
+      mappedVariants.length > 0
+        ? mappedVariants.map((mv, mIdx) => ({
+            id: mv.id,
+            variantId: mv.id,
+            sku: row.product_variants?.[mIdx]?.sku || `${row.slug || row.id}-${mIdx + 1}`,
+            colorName: mv.colorName,
+            colorHex: mv.colorHex,
+            price,
+            compareAtPrice: originalPrice || null,
+            available: mv.inStock !== false,
+            featuredImage: mv.image,
+            gallery: mv.images && mv.images.length > 0 ? mv.images : (mv.image ? [mv.image] : []),
+          }))
+        : (row.color_variants || localMatch?.colorVariants || []).map((cv: any) => ({
+            ...cv,
+            colorName: (cv.colorName || "").replace(/\s+/g, " ").trim(),
+          })),
     sourceUrl: row.source_url || localMatch?.sourceUrl,
     variants: mappedVariants,
     tryOnEnabled: row.try_on_enabled ?? localMatch?.tryOnEnabled ?? false,

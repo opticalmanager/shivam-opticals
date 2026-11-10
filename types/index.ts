@@ -40,6 +40,7 @@ export interface ProductVariant {
   colorName: string;
   colorHex: string;
   image?: string;
+  images?: string[];
   inStock?: boolean;
 }
 
