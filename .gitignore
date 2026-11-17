@@ -27,6 +27,16 @@ yarn-error.log*
 .env
 .data/
 
+# Scraper & Ingestion Caches
+data/*_results.json
+data/*_pool*.json
+data/missing_*.json
+data/unmatched_*.json
+data/master_verified_*.json
+data/verified_*.json
+data/scraped_*.json
+data/scraped_80_inventory_results.json
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
