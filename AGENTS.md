@@ -153,3 +153,17 @@ When executing tasks across phases, follow this strict sequential order:
 - [ ] **Phase 5**: Production Checkout, Razorpay Integration & Shiprocket Logistics (`UnifiedCheckoutForm`, `/api/razorpay/*`, `/api/shipping/*`, order confirmation).
 - [ ] **Phase 6**: Enterprise Admin Operating System (`/admin/*`, 5-stage Lab queue, GST tax invoices, Product & Variant manager, Universal Settings).
 - [ ] **Phase 7**: Quality Assurance, Next.js build validation, and end-to-end user journey verification.
+
+---
+
+## 8. Ephemeral Scripts, Scratch Files & Repository Cleanliness Protocol
+
+1. **Mandatory Post-Task Cleanup**:
+   - Any temporary check files, diagnostic scripts, inspection tools, or one-off runners (`check_*.js`, `test_*.js`, `inspect_*.js`, `audit_*.js`, `harvest_*.js`, etc.) created during an investigation, audit, scraping run, or data verification **MUST BE COMPLETELY DELETED** immediately upon task completion.
+   - Any temporary intermediate data dumps or scraper cache files (`data/*.json`, `data/*.csv`) must also be cleaned up.
+2. **Preservation of Important Infrastructure**:
+   - Unless a script or file is an essential, permanent piece of application infrastructure (e.g., core database seeders, permanent build tools, or explicitly requested by the user), it must never be left sitting untracked in the repository.
+   - If an agent needs to keep reference copies of one-off migration or remediation scripts, store them in the agent brain scratch directory (`<appDataDir>/brain/<conversation-id>/scratch/`) rather than leaving them in the project workspace.
+3. **Pristine Working Tree Requirement**:
+   - Before completing any task or presenting final results to the user, the agent must verify with `git status` that no stray scratch files, one-off check scripts, or temporary test artifacts remain in the git working tree.
+
