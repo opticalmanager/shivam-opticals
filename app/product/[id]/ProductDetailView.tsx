@@ -133,45 +133,52 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       activeColorVariant.gallery.forEach(addImg);
     }
 
-    // 5. Barcode & Token matching across product images
-    if (product.images && product.images.length > 0) {
-      if (featuredImg) {
-        const cleanFeatured = featuredImg.split("?")[0];
-        const filename = cleanFeatured.split("/").pop() || "";
-        const barcodeMatch = filename.match(/(\d{8,14})/);
-        const barcode = barcodeMatch ? barcodeMatch[1] : null;
+    const hasMultipleVariants = Boolean(
+      (product.variants && product.variants.length > 1) ||
+      (product.colorVariants && product.colorVariants.length > 1)
+    );
 
-        if (barcode) {
+    // 5. If this is a multi-variant product and we already have dedicated images,
+    // never cross-pollinate this variant's gallery with other variants' images.
+    if (!hasMultipleVariants || list.length === 0) {
+      if (product.images && product.images.length > 0) {
+        // Barcode matching across product images (only if list is empty)
+        if (featuredImg && list.length === 0) {
+          const cleanFeatured = featuredImg.split("?")[0];
+          const filename = cleanFeatured.split("/").pop() || "";
+          const barcodeMatch = filename.match(/(\d{8,14})/);
+          const barcode = barcodeMatch ? barcodeMatch[1] : null;
+
+          if (barcode) {
+            product.images.forEach((img) => {
+              if (isValidImageUrl(img) && img.split("?")[0].includes(barcode)) {
+                addImg(img);
+              }
+            });
+          }
+        }
+
+        // Color code tokens matching (e.g. 2012, 8208, KB7, M4P) only if list is empty
+        const colorTokens = [
+          ...(activeVariant?.colorName || "").split(/[\s/_-]+/),
+          activeColorVariant?.sku?.split("-").pop(),
+        ].filter((tok): tok is string => Boolean(tok && tok.length >= 2 && !/^(black|brown|gold|grey|gray|blue|green|unisex|men|women)$/i.test(tok)));
+
+        if (colorTokens.length > 0 && list.length === 0) {
           product.images.forEach((img) => {
-            if (isValidImageUrl(img) && img.includes(barcode)) {
-              addImg(img);
+            if (isValidImageUrl(img)) {
+              const lowerImg = img.toLowerCase();
+              if (colorTokens.some((t) => lowerImg.includes(t.toLowerCase()))) {
+                addImg(img);
+              }
             }
           });
         }
-      }
 
-      // Check color code tokens from variant (e.g. 2012, 8208, KB7, M4P, etc.)
-      const colorTokens = [
-        ...(activeVariant?.colorName || "").split(/[\s/_-]+/),
-        activeColorVariant?.sku?.split("-").pop(),
-      ].filter((tok): tok is string => Boolean(tok && tok.length >= 2 && !/^(black|brown|gold|grey|gray|blue|green|unisex|men|women)$/i.test(tok)));
-
-      if (colorTokens.length > 0) {
-        product.images.forEach((img) => {
-          if (isValidImageUrl(img)) {
-            const lowerImg = img.toLowerCase();
-            if (colorTokens.some((t) => lowerImg.includes(t.toLowerCase()))) {
-              addImg(img);
-            }
-          }
-        });
-      }
-    }
-
-    // 6. If list has 0 or 1 images, include all available general product images so angles are rich
-    if (product.images && product.images.length > 0) {
-      if (list.length <= 1) {
-        product.images.forEach(addImg);
+        // Include general product images only if list is empty or if single variant
+        if (list.length === 0 || (!hasMultipleVariants && list.length <= 1)) {
+          product.images.forEach(addImg);
+        }
       }
     }
 
