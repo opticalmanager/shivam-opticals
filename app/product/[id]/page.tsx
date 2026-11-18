@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
-import { getProductById, getCatalogProducts } from "@/lib/productsService";
+import { getProductById, getCatalogProducts, PRODUCT_SLUG_ALIASES } from "@/lib/productsService";
 import { ProductDetailView } from "./ProductDetailView";
 
 export function generateStaticParams() {
@@ -20,11 +20,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   try {
     const resolvedParams = await params;
+    const rawId = decodeURIComponent(resolvedParams.id).toLowerCase();
+    const targetId = PRODUCT_SLUG_ALIASES[rawId] || resolvedParams.id;
     const allProducts = await getCatalogProducts();
     const product =
-      (await getProductById(resolvedParams.id)) ||
-      allProducts.find((p) => p.id === resolvedParams.id) ||
-      PRODUCTS.find((p) => p.id === resolvedParams.id);
+      (await getProductById(targetId)) ||
+      allProducts.find((p) => p.id === targetId) ||
+      PRODUCTS.find((p) => p.id === targetId);
 
     if (!product) {
       return {
@@ -84,6 +86,11 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const resolvedParams = await params;
+  const rawId = decodeURIComponent(resolvedParams.id).toLowerCase();
+  if (PRODUCT_SLUG_ALIASES[rawId]) {
+    redirect(`/product/${PRODUCT_SLUG_ALIASES[rawId]}`);
+  }
+
   const allProducts = await getCatalogProducts();
   const product =
     (await getProductById(resolvedParams.id)) ||

@@ -92,7 +92,24 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       lower.includes("banner") ||
       lower.includes("promo") ||
       lower.includes("crop_") ||
-      lower.includes("inspect_")
+      lower.includes("inspect_") ||
+      lower.includes("precision1") ||
+      lower.includes("alcon") ||
+      lower.includes("contact_lens") ||
+      lower.includes("contact-lens") ||
+      lower.includes("baush") ||
+      lower.includes("bausch") ||
+      lower.includes("optima38") ||
+      lower.includes("optima") ||
+      lower.includes("biotrue") ||
+      lower.includes("purevision") ||
+      lower.includes("acuvue") ||
+      lower.includes("coopervision") ||
+      lower.includes("freshlook") ||
+      lower.includes("soflens") ||
+      lower.includes("airoptix") ||
+      lower.includes("air_optix") ||
+      lower.includes("dailies")
     ) {
       return false;
     }

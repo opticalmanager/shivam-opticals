@@ -16,6 +16,79 @@ export function invalidateProductsCache(): void {
 
 export const ALL_FALLBACK_PRODUCTS: Product[] = PRODUCTS;
 
+/**
+ * Historical duplicate slug aliases mapping legacy scraped slugs to canonical products.
+ */
+export const PRODUCT_SLUG_ALIASES: Record<string, string> = {
+  // Legacy Nov 16 scraped slugs
+  "ray-ban-5438i": "so-ray-ban-rb5438",
+  "ray-ban-6463i": "so-ray-ban-rb6463",
+  "ray-ban-5389i": "so-ray-ban-rb5389",
+  "ray-ban-6267i": "so-ray-ban-rb6267",
+  "ray-ban-6304i": "so-ray-ban-rb6304",
+  "ray-ban-6304": "so-ray-ban-rb6304",
+  "ray-ban-2140-sunglasses": "so-ray-ban-rb2140",
+  "ray-ban-2140f-sunglasses": "so-ray-ban-rb2140f",
+  "ray-ban-2198-sunglasses": "so-ray-ban-rb2198",
+  "ray-ban-3025-sunglasses": "so-ray-ban-rb-3025",
+  "ray-ban-3025-i-sunglasses": "so-ray-ban-rb-3025",
+  "ray-ban-3025i-sunglasses": "so-ray-ban-rb-3025",
+  "ray-ban-3129-i-sunglasses": "so-ray-ban-rb3129",
+  "ray-ban-7027i": "so-ray-ban-rb7027",
+  "ray-ban-6483": "so-ray-ban-rb6483",
+  "ray-ban-6483i": "so-ray-ban-rb6483",
+  "ray-ban-6488": "so-ray-ban-rb6488",
+  "ray-ban-6496": "so-ray-ban-rb6496",
+  "ray-ban-4340v": "so-ray-ban-rb4340v",
+  "ray-ban-6539i": "so-ray-ban-rb653",
+  "ray-ban-7025": "so-ray-ban-rb7025",
+  "ray-ban-6303i": "so-ray-ban-rb6303",
+  "ray-ban-6323": "so-ray-ban-rb6323",
+  "ray-ban-6323i": "so-ray-ban-rb6323",
+  "ray-ban-7033i": "so-ray-ban-rb7033",
+  "ray-ban-3678i-sunglasses": "so-ray-ban-rb3678",
+  "ray-ban-3760i-sunglasses": "so-ray-ban-rb3760",
+  "ray-ban-3779-sunglasses": "so-ray-ban-rb3779",
+  "ray-ban-3785i-sunglasses": "so-ray-ban-rb3785",
+  "ray-ban-3016-sunglasses": "so-ray-ban-rb3016",
+  "ray-ban-3755-sunglasses": "so-ray-ban-rb3755",
+  "ray-ban-3761i-sunglasses": "so-ray-ban-rb3761",
+  "ray-ban-3447-sunglasses": "so-ray-ban-rb3447",
+  "ray-ban-3787-sunglasses": "so-ray-ban-rb3787",
+  "ray-ban-4349-i-sunglasses": "so-ray-ban-rb4349",
+  "rayban-4349i-sunglasses": "so-ray-ban-rb4349",
+
+  // Deduplicated redundant catalog items
+  "so-carrera-jsg": "so-carrera-ca",
+  "so-carrera-cai": "so-carrera-ca",
+  "so-carrera-7a": "so-carrera-ca37yg",
+  "so-tommy-hilfiger-metal": "so-tommy-hilfiger-thi",
+  "so-tommy-hilfiger-vusi": "so-tommy-hilfiger-thi",
+  "so-tommy-hilfiger-cio": "so-tommy-hilfiger-thi",
+  "so-tommy-hilfiger-thio": "so-tommy-hilfiger-thi",
+  "so-ray-ban-rb-3928": "so-ray-ban-rb3928",
+  "so-carrera-ca874": "so-carrera-ca8874",
+  "daniel-morris-metal-sunglasses": "daniel-morris-metal",
+  "daniel-morris-sheet-sunglasses": "daniel-morris-sheet",
+  "so-ray-ban-rb417": "so-ray-ban-rb4171",
+  "so-ray-ban-mix": "so-ray-ban-rb2140",
+  "so-ray-ban-sheet": "so-ray-ban-rb2140",
+  "so-ray-ban-rb-3785": "so-ray-ban-rb3785",
+  "shivam-sheet-sunglasses": "shivam-sheet",
+  "shivam-tr-sunglasses": "shivam-tr",
+  "so-vogue-vo5712west": "so-vogue-vo5712",
+  "xite-metal-sunglasses": "xite-metal",
+  "xite-sheet-sunglasses": "xite-sheet",
+  "so-carrera-crg4oc": "so-carrera-caprwiyin",
+  "so-vogue-vo570": "so-vogue-vo5701",
+  "so-ray-ban-rb702-5": "so-ray-ban-rb7025",
+  "rayban-3774b-sunglasses": "so-ray-ban-rb3774d",
+  "3025 9286/48 62": "so-ray-ban-rb-3025",
+  "so-ray-ban-rb302s": "so-ray-ban-rb-3025",
+  "so-ray-ban-rb3025": "so-ray-ban-rb-3025",
+  "rayban-3723-i-sunglasses": "rayban-3723-sunglasses",
+};
+
 export function isValidProductImageUrl(url?: string): boolean {
   if (!url || typeof url !== "string") return false;
   const trimmed = url.trim();
@@ -27,7 +100,24 @@ export function isValidProductImageUrl(url?: string): boolean {
     lower.includes("banner") ||
     lower.includes("promo") ||
     lower.includes("crop_") ||
-    lower.includes("inspect_")
+    lower.includes("inspect_") ||
+    lower.includes("precision1") ||
+    lower.includes("alcon") ||
+    lower.includes("contact_lens") ||
+    lower.includes("contact-lens") ||
+    lower.includes("baush") ||
+    lower.includes("bausch") ||
+    lower.includes("optima38") ||
+    lower.includes("optima") ||
+    lower.includes("biotrue") ||
+    lower.includes("purevision") ||
+    lower.includes("acuvue") ||
+    lower.includes("coopervision") ||
+    lower.includes("freshlook") ||
+    lower.includes("soflens") ||
+    lower.includes("airoptix") ||
+    lower.includes("air_optix") ||
+    lower.includes("dailies")
   ) {
     return false;
   }
@@ -269,7 +359,8 @@ export async function getCatalogProducts(forceRefresh = false): Promise<Product[
  */
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   if (!slug) return null;
-  const cleanSlug = decodeURIComponent(slug).toLowerCase();
+  const rawClean = decodeURIComponent(slug).toLowerCase();
+  const cleanSlug = PRODUCT_SLUG_ALIASES[rawClean] || rawClean;
 
   // 1. Fast in-memory catalog cache lookup (0 ms)
   if (cachedProducts && cachedProducts.length > 0) {
@@ -294,11 +385,11 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       `)
       .eq("is_active", true);
 
-    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(slug);
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(cleanSlug);
     if (isUuid) {
-      query = query.or(`slug.eq.${slug},id.eq.${slug}`);
+      query = query.or(`slug.eq.${cleanSlug},id.eq.${cleanSlug}`);
     } else {
-      query = query.eq("slug", slug);
+      query = query.eq("slug", cleanSlug);
     }
 
     const { data, error } = await query.maybeSingle();
