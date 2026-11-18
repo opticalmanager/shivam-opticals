@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { PRODUCTS } from "@/data/products";
 import { Product } from "@/types";
+import { getProductFallbackImage } from "@/lib/productsService";
 import { query } from "./pg";
 export { getPgPool, query } from "./pg";
 
@@ -834,8 +835,8 @@ export function createProduct(productData: Partial<Product>): Product {
     discountPct: productData.discountPct || 33,
     tag: productData.tag || "NEW ARRIVAL",
     tagType: productData.tagType || "new",
-    img: productData.img || (productData.images?.[0] || "/images/clean_frame_1.png"),
-    images: productData.images || [productData.img || "/images/clean_frame_1.png"],
+    img: productData.img || (productData.images?.[0] || getProductFallbackImage(productData.shape, (productData as any).slug)),
+    images: productData.images || [productData.img || getProductFallbackImage(productData.shape, (productData as any).slug)],
     colors: productData.colors || ["#1A1816", "#C5A059"],
     description: productData.description || "Precision engineered eyewear from Shivam Optical Mayur Vihar store.",
     material: productData.material || "Beta Titanium & Italian Acetate",
@@ -1394,7 +1395,7 @@ export function getDashboardMetrics(range: string = "7d") {
         name: prod?.name || "Optical Frame",
         brand: prod?.brand || "GAST",
         price: prod?.price || 1490,
-        img: prod?.img || "/images/clean_frame_1.png",
+        img: prod?.img || getProductFallbackImage(prod?.shape, prod?.id),
         unitsSold: sales.unitsSold,
         revenue: sales.revenue,
       };

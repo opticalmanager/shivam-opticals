@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/pg";
 import { getProducts, createProduct } from "@/lib/adminDb";
 import { PRODUCTS } from "@/data/products";
+import { getProductFallbackImage } from "@/lib/productsService";
 
 export const dynamic = "force-dynamic";
 
@@ -162,7 +163,7 @@ export async function GET(req: NextRequest) {
       const images = Array.isArray(row.images)
         ? row.images.map((img: any) => (typeof img === "string" ? img : img.url)).filter(Boolean)
         : [];
-      const primaryImg = row.primary_image_url || images[0] || "/images/clean_frame_1.png";
+      const primaryImg = row.primary_image_url || images[0] || getProductFallbackImage(row.shape, row.slug);
       const colors = Array.isArray(row.variants)
         ? Array.from(new Set(row.variants.map((v: any) => v.color_hex).filter(Boolean)))
         : [row.color_hex || "#1A1816"];

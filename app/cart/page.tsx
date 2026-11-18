@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { formatCurrency } from "@/lib/utils";
+import { getProductFallbackImage } from "@/lib/productsService";
 
 export default function StandaloneCartPage() {
   const router = useRouter();
@@ -123,7 +124,7 @@ export default function StandaloneCartPage() {
                         <div className="w-20 h-20 rounded-xl bg-[#FCFAF7] border border-[#E8DEC8] p-1 flex items-center justify-center shrink-0 overflow-hidden">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
-                            src={it.selectedVariant?.image || it.product.img || it.product.images?.[0] || "/images/clean_frame_1.png"}
+                            src={it.selectedVariant?.image || it.product.img || it.product.images?.[0] || getProductFallbackImage(it.product.shape, it.product.slug)}
                             alt={it.product.name}
                             className="w-full h-full object-contain"
                           />

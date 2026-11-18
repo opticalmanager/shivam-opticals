@@ -124,6 +124,18 @@ export function isValidProductImageUrl(url?: string): boolean {
   return true;
 }
 
+export function getProductFallbackImage(shape?: string, slug?: string): string {
+  const normalized = (shape || "").toLowerCase();
+  if (normalized.includes("round") || normalized.includes("oval")) return "/images/clean_frame_2.png";
+  if (normalized.includes("square")) return "/images/clean_frame_3.png";
+  if (normalized.includes("aviator") || normalized.includes("pilot")) return "/images/clean_frame_4.png";
+  if (slug) {
+    const charCode = slug.charCodeAt(slug.length - 1) % 4;
+    return `/images/clean_frame_${charCode + 1}.png`;
+  }
+  return "/images/clean_frame_1.png";
+}
+
 /**
  * Helper to map Supabase row to client Product domain model
  */
@@ -140,6 +152,8 @@ function mapRowToProduct(row: any): Product {
     .map((img: any) => img.url?.trim())
     .filter((url: string | undefined): url is string => Boolean(url && isValidProductImageUrl(url)));
 
+  const defaultFallback = getProductFallbackImage(row.shape || localMatch?.shape, row.slug || localMatch?.slug);
+
   const resolvedImages =
     rawImages.length > 0
       ? rawImages
@@ -147,7 +161,7 @@ function mapRowToProduct(row: any): Product {
       ? localMatch.images.filter(isValidProductImageUrl)
       : row.img && isValidProductImageUrl(row.img)
       ? [row.img]
-      : ["/images/clean_frame_1.png"];
+      : [defaultFallback];
 
   const price = Number(row.base_price || row.price || localMatch?.price || 0);
   const originalPrice = row.original_price ? Number(row.original_price) : localMatch?.originalPrice;
@@ -256,7 +270,7 @@ function mapRowToProduct(row: any): Product {
     isLimitedEdition: Boolean(row.is_limited_edition ?? localMatch?.isLimitedEdition),
     rating: Number(row.rating) || localMatch?.rating || 5.0,
     reviewCount: Number(row.review_count) || localMatch?.reviewCount || 0,
-    img: resolvedImages[0] || "/images/clean_frame_1.png",
+    img: resolvedImages[0] || defaultFallback,
     images: resolvedImages,
     description: row.description || localMatch?.description || "",
     specs: row.specs || localMatch?.specs || {

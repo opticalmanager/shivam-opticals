@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { Product } from "@/types";
 import { formatCurrency } from "@/lib/utils";
+import { getProductFallbackImage } from "@/lib/productsService";
 import {
   Search,
   X,
@@ -483,11 +484,11 @@ export const SearchModal: React.FC = () => {
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-12 rounded-lg bg-white border border-[#E8DEC8] p-1 flex items-center justify-center shrink-0">
                             <img
-                              src={product.img || product.images?.[0] || "/images/clean_frame_1.png"}
+                              src={product.img || product.images?.[0] || getProductFallbackImage(product.shape, product.slug)}
                               alt={product.name}
                               className="w-full h-full object-contain"
                               onError={(e) => {
-                                (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+                                (e.currentTarget as HTMLImageElement).src = getProductFallbackImage(product.shape, product.slug);
                               }}
                             />
                           </div>
@@ -532,11 +533,11 @@ export const SearchModal: React.FC = () => {
                   <div className="flex items-center gap-3 min-w-0 pr-3">
                     <div className="w-13 h-13 rounded-lg bg-white border border-[#E8DEC8] p-1 flex items-center justify-center shrink-0">
                       <img
-                        src={product.img || product.images?.[0] || "/images/clean_frame_1.png"}
+                        src={product.img || product.images?.[0] || getProductFallbackImage(product.shape, product.slug)}
                         alt={product.name}
                         className="w-full h-full object-contain"
                         onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+                          (e.currentTarget as HTMLImageElement).src = getProductFallbackImage(product.shape, product.slug);
                         }}
                       />
                     </div>

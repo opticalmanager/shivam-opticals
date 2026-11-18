@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { formatCurrency } from "@/lib/utils";
+import { getProductFallbackImage } from "@/lib/productsService";
 import {
   ShoppingBag,
   X,
@@ -130,7 +131,7 @@ export const CartDrawer: React.FC = () => {
                         <div className="w-20 h-20 rounded-lg bg-[#FCFAF7] border border-[#E8DEC8] flex items-center justify-center p-1 shrink-0 overflow-hidden">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
-                            src={item.selectedVariant?.image || item.product.img || item.product.images[0] || "/images/clean_frame_1.png"}
+                            src={item.selectedVariant?.image || item.product.img || item.product.images[0] || getProductFallbackImage(item.product.shape, item.product.slug)}
                             alt={item.product.name}
                             className="max-h-full max-w-full object-contain"
                           />

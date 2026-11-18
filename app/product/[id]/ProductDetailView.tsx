@@ -26,6 +26,7 @@ import { toast } from "sonner";
 import { ProductCard } from "@/components/home/ProductCard";
 import { LensCustomizerModal } from "@/components/optical/LensCustomizerModal";
 import { PincodeEstimator } from "@/components/product/PincodeEstimator";
+import { getProductFallbackImage } from "@/lib/productsService";
 
 interface ProductDetailViewProps {
   product: Product;
@@ -209,7 +210,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     }
 
     if (list.length === 0) {
-      list.push("/images/clean_frame_1.png");
+      list.push(getProductFallbackImage(product.shape, product.slug));
     }
 
     return list;
@@ -232,7 +233,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   }, [activeImgIdx]);
 
   const getHdImageUrl = useCallback((url?: string): string => {
-    if (!url || typeof url !== "string") return "/images/clean_frame_1.png";
+    if (!url || typeof url !== "string") return getProductFallbackImage(product.shape, product.slug);
     let clean = url.trim();
     if (clean.includes("cdn.shopify.com")) {
       clean = clean.replace(/_([0-9]+x[0-9]*|_compact|_medium|_grande|_large)/g, "");
@@ -240,7 +241,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       return `${clean}${sep}width=2048&quality=95`;
     }
     return clean;
-  }, []);
+  }, [product.shape, product.slug]);
 
   // Proactively preload all variants and catalog images on mount for zero-latency switching
   useEffect(() => {
@@ -431,7 +432,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         className="w-full h-full object-contain"
                         loading="lazy"
                         onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = "/images/clean_frame_1.png";
+                          (e.currentTarget as HTMLImageElement).src = getProductFallbackImage(product.shape, product.slug);
                         }}
                       />
                     </button>
@@ -480,7 +481,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                       } else if (product.img && !target.src.includes(product.img)) {
                         target.src = product.img;
                       } else {
-                        target.src = "/images/clean_frame_1.png";
+                        target.src = getProductFallbackImage(product.shape, product.slug);
                       }
                     }}
                     className="w-full h-full max-h-[340px] sm:max-h-[400px] object-contain filter drop-shadow-md transition-opacity duration-200 animate-in fade-in fill-mode-forwards select-none"

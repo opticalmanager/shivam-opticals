@@ -3,6 +3,7 @@
 import React from "react";
 import { Product } from "@/types";
 import { formatCurrency } from "@/lib/utils";
+import { getProductFallbackImage } from "@/lib/productsService";
 import { hasTryOnModel } from "@/lib/try-on/products/TryOnProductConfig";
 
 interface FrameSelectorBarProps {
@@ -32,7 +33,7 @@ export const FrameSelectorBar: React.FC<FrameSelectorBarProps> = ({
       <div className="flex items-center gap-2.5">
         {tryOnAvailableProducts.map((p) => {
           const isActive = p.id === activeProduct.id;
-          const imgUrl = p.img || (p.images && p.images[0]) || "/images/clean_frame_1.png";
+          const imgUrl = p.img || (p.images && p.images[0]) || getProductFallbackImage(p.shape, p.id);
 
           return (
             <button

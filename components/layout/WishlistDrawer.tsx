@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import { formatCurrency } from "@/lib/utils";
+import { getProductFallbackImage } from "@/lib/productsService";
 import { Heart, X, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 
 export const WishlistDrawer: React.FC = () => {
@@ -89,7 +90,7 @@ export const WishlistDrawer: React.FC = () => {
                   <div className="w-16 h-16 rounded-lg bg-[#FAF7F2] border border-[#E8DEC8] flex items-center justify-center p-1 shrink-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={product.img || product.images?.[0] || "/images/clean_frame_1.png"}
+                      src={product.img || product.images?.[0] || getProductFallbackImage(product.shape, product.slug)}
                       alt={product.name}
                       className="max-h-full max-w-full object-contain"
                     />

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Edit3, Trash2, CheckSquare, Square, Star } from "lucide-react";
 import { StatusBadge } from "../common/StatusBadge";
 import { Product } from "@/types";
+import { getProductFallbackImage } from "@/lib/productsService";
 
 interface ProductTableProps {
   products: Product[];
@@ -58,12 +59,13 @@ export const ProductTable: React.FC<ProductTableProps> = ({
           <tbody className="divide-y divide-stone-100">
             {products.map((p) => {
               const isSelected = selectedIds.includes(p.id);
+              const fallbackImg = getProductFallbackImage(p.shape, p.slug);
               const primaryImage =
                 (typeof p.img === "string" && p.img) ||
                 (Array.isArray(p.images) && typeof p.images[0] === "string" && p.images[0]) ||
                 (Array.isArray(p.images) && (p.images[0] as any)?.url) ||
                 (p as any).primary_image_url ||
-                "/images/clean_frame_1.png";
+                fallbackImg;
 
               const brandName = p.brand || (p as any).brand_name || "Shivam Optical";
               const categoryName = p.category || (p as any).category_name || "Eyewear";
@@ -110,7 +112,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                           alt={p.name}
                           className="w-full h-full object-contain p-0.5"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = "/images/clean_frame_1.png";
+                            (e.target as HTMLImageElement).src = fallbackImg;
                           }}
                         />
                       </div>

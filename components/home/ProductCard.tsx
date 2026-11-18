@@ -7,6 +7,7 @@ import { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { formatCurrency } from "@/lib/utils";
+import { getProductFallbackImage } from "@/lib/productsService";
 
 interface ProductCardProps {
   product: Product;
@@ -64,7 +65,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const totalColors = availableVariants.length;
   const activeVariant = availableVariants[selectedVariantIdx] || availableVariants[0];
-  const displayImg = activeVariant?.image || product.images?.[0] || product.img || "/images/clean_frame_1.png";
+  const fallbackImg = getProductFallbackImage(product.shape, product.slug);
+  const displayImg = activeVariant?.image || product.images?.[0] || product.img || fallbackImg;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -123,7 +125,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 } else if (product.img && target.src !== product.img) {
                   target.src = product.img;
                 } else {
-                  target.src = "/images/clean_frame_1.png";
+                  target.src = fallbackImg;
                 }
               }}
               className="w-full h-full max-h-28 sm:max-h-32 object-contain filter drop-shadow-sm group-hover:scale-105 transition-all duration-200 animate-in fade-in"
