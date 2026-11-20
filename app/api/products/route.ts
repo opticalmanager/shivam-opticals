@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCatalogProducts, filterAndSortProducts } from "@/lib/productsService";
 
+// Force dynamic execution for query params while leveraging Vercel Edge CDN headers
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
@@ -21,7 +22,16 @@ export async function GET(request: NextRequest) {
       if (!match) {
         return NextResponse.json({ error: "Product not found" }, { status: 404 });
       }
-      return NextResponse.json({ product: match });
+      return NextResponse.json(
+        { product: match },
+        {
+          headers: {
+            "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
+            "CDN-Cache-Control": "public, s-maxage=300",
+            "Vercel-CDN-Cache-Control": "public, s-maxage=300",
+          },
+        }
+      );
     }
 
     const filtered = filterAndSortProducts(allProducts, {
@@ -33,11 +43,20 @@ export async function GET(request: NextRequest) {
       sortBy: sort,
     });
 
-    return NextResponse.json({
-      success: true,
-      total: filtered.length,
-      products: filtered,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        total: filtered.length,
+        products: filtered,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
+          "CDN-Cache-Control": "public, s-maxage=300",
+          "Vercel-CDN-Cache-Control": "public, s-maxage=300",
+        },
+      }
+    );
   } catch (error: any) {
     console.error("[api/products] Error fetching products:", error);
     return NextResponse.json(

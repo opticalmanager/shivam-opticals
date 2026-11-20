@@ -1,0 +1,723 @@
+"use client";
+
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import Link from "next/link";
+import {
+  Star,
+  ShieldCheck,
+  Sun,
+  Truck,
+  Eye,
+  Glasses,
+  MapPin,
+  Phone,
+  Clock,
+  PhoneCall,
+  Navigation,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  ArrowRight,
+  Plus,
+  Minus,
+  CheckCircle2,
+} from "lucide-react";
+import { Product } from "@/types";
+import { ProductCard } from "@/components/home/ProductCard";
+import { ShapeFilterBar } from "@/components/home/ShapeFilterBar";
+import { GoogleReviewsSection } from "@/components/home/GoogleReviewsSection";
+import { ProductGridSkeleton } from "@/components/home/ProductGridSkeleton";
+import { useAuth } from "@/context/AuthContext";
+
+const SUNGLASSES_SHAPES = [
+  { name: "Aviator", queryParam: "Aviator", img: "/images/shapes/aviator.png" },
+  { name: "Round", queryParam: "Round", img: "/images/shapes/round.png" },
+  {
+    name: "Rectangle",
+    queryParam: "Rectangle",
+    img: "/images/shapes/rectangle.png",
+  },
+  {
+    name: "Cat Eye",
+    queryParam: "Cat-Eye",
+    img: "/images/shapes/cat_eye.png",
+  },
+  {
+    name: "Geometric",
+    queryParam: "Geometric",
+    img: "/images/shapes/geometric.png",
+  },
+  {
+    name: "Clubmaster",
+    queryParam: "Clubmaster",
+    img: "/images/shapes/clubmaster.png",
+  },
+  { name: "Square", queryParam: "Square", img: "/images/shapes/square.png" },
+];
+
+const EYEGLASSES_SHAPES = [
+  {
+    name: "Rectangle",
+    queryParam: "Rectangle",
+    img: "/images/shapes/eyeglass_rectangle.png",
+  },
+  {
+    name: "Cateye",
+    queryParam: "Cat-Eye",
+    img: "/images/shapes/eyeglass_cateye.png",
+  },
+  {
+    name: "Aviator",
+    queryParam: "Aviator",
+    img: "/images/shapes/eyeglass_aviator.png",
+  },
+  {
+    name: "Geometric",
+    queryParam: "Geometric",
+    img: "/images/shapes/eyeglass_geometric.png",
+  },
+  {
+    name: "Round",
+    queryParam: "Round",
+    img: "/images/shapes/eyeglass_round.png",
+  },
+  {
+    name: "Clubmaster",
+    queryParam: "Clubmaster",
+    img: "/images/shapes/eyeglass_clubmaster.png",
+  },
+  {
+    name: "Square",
+    queryParam: "Square",
+    img: "/images/shapes/eyeglass_square.png",
+  },
+];
+
+const FAQ_ITEMS = [
+  {
+    title: "Buying of Sunglasses",
+    content: (
+      <>
+        <p className="mb-2">
+          <strong>UV400 vs. Polarized:</strong> All Shivam Optical sunglasses offer
+          certified 100% UV400 protection against both UVA and UVB rays. Our
+          polarized editions incorporate an acoustic multi-layer iodine filter to
+          eliminate blinding glare from water, tarmac, and snow without
+          distorting natural colors.
+        </p>
+        <p>
+          <strong>Face Shape Fit:</strong> Round faces benefit from angular
+          Geometric and Rectangle frames; square jawlines harmonize with soft
+          Round and Aviator silhouettes.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Buying of Frames & Lenses",
+    content: (
+      <>
+        <p className="mb-2">
+          <strong>Lens Options:</strong> You can select Zero Power (Fashion / Blue
+          Light), Single Vision (Distance or Reading), or Freeform Digital
+          Progressives (no line bifocals with wide corridor transition).
+        </p>
+        <p>
+          <strong>Thin High Index:</strong> For prescriptions over ±2.50, our
+          1.61, 1.67, and 1.74 ultra-thin high-index lenses prevent lens
+          thickness and heavy weight.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Buying of Contact Lenses",
+    content: (
+      <>
+        <p className="mb-2">
+          We provide certified Silicone Hydrogel breathable daily, bi-weekly,
+          and monthly disposable contact lenses from Alcon, Bausch &amp; Lomb,
+          and Acuvue.
+        </p>
+        <p>
+          Ensure you have a recent corneal curvature (BC) and diameter
+          measurement. Our optometrist team verifies each prescription before
+          fulfillment.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Buying of Computer Glasses",
+    content: (
+      <>
+        <p className="mb-2">
+          <strong>Shield Against Digital Eye Strain:</strong> Shivam Optical
+          Blue-Block lenses filter out 98% of harmful 410-455nm high-energy blue
+          radiation emitted by laptops, tablets, and smartphone displays.
+        </p>
+        <p>
+          Available in both zero-power (plano) and prescription formats, fitted
+          with anti-smudge hydrophobic oleophobic coatings.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Frequently Asked Questions",
+    content: (
+      <>
+        <p className="mb-2">
+          <strong>How do I submit my prescription?</strong> You can type it during
+          checkout, upload a photo of your doctor&apos;s slip, or send it
+          directly to our optometrist on WhatsApp (
+          <a
+            href="tel:09779990207"
+            className="underline font-semibold text-[#1A1816]"
+          >
+            097799 90207
+          </a>
+          ) after placing your order.
+        </p>
+        <p className="mb-2">
+          <strong>What is your warranty policy?</strong> Brand manufacturer warranty applies to branded frames and lenses as provided by respective brand distributors.
+        </p>
+        <p>
+          <strong>Returns &amp; Exchanges:</strong> 7-day exchange support on unused frames in original packaging. Custom prescription lenses are crafted to your specific power.
+        </p>
+      </>
+    ),
+  },
+];
+
+interface HomePageClientProps {
+  initialProducts?: Product[];
+}
+
+export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
+  const { openAppointmentModal } = useAuth();
+  const [collectionTab, setCollectionTab] = useState<"new" | "bestsellers">("new");
+  const [selectedShape, setSelectedShape] = useState<string>("all");
+  const [recCategory, setRecCategory] = useState<"men" | "women" | "kids">("men");
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const recCarouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollRecCarousel = (direction: -1 | 1) => {
+    if (recCarouselRef.current) {
+      recCarouselRef.current.scrollBy({
+        left: direction * 240,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  // Instant catalog state: initialize with server-provided initialProducts or sessionStorage cache
+  const [productsList, setProductsList] = useState<Product[]>(() => {
+    if (initialProducts && initialProducts.length > 0) return initialProducts;
+    if (typeof window !== "undefined") {
+      try {
+        const cached = sessionStorage.getItem("shivam_optics_catalog_cache_v1");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch {}
+    }
+    return [];
+  });
+
+  const [isLoading, setIsLoading] = useState(
+    !productsList || productsList.length === 0
+  );
+
+  useEffect(() => {
+    if (productsList.length > 0) {
+      setIsLoading(false);
+      try {
+        sessionStorage.setItem(
+          "shivam_optics_catalog_cache_v1",
+          JSON.stringify(productsList)
+        );
+      } catch {}
+    }
+
+    // Background edge sync to guarantee freshest catalog
+    fetch("/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.products && Array.isArray(data.products) && data.products.length > 0) {
+          setProductsList(data.products);
+          try {
+            sessionStorage.setItem(
+              "shivam_optics_catalog_cache_v1",
+              JSON.stringify(data.products)
+            );
+          } catch {}
+        }
+      })
+      .catch((err) => console.warn("Background catalog sync:", err))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  // Filter products for collection section
+  const filteredProducts = useMemo(() => {
+    return productsList
+      .filter((p) => {
+        if (
+          selectedShape !== "all" &&
+          (p.shape || "").toLowerCase() !== selectedShape.toLowerCase()
+        ) {
+          return false;
+        }
+        if (collectionTab === "bestsellers") {
+          return p.isBestSeller || (p.rating && p.rating >= 4.8);
+        }
+        return true;
+      })
+      .slice(0, 10);
+  }, [productsList, selectedShape, collectionTab]);
+
+  // Recommended products dynamically filtered by patron demographic
+  const recommendedProducts = useMemo(() => {
+    const list = productsList.filter((p) => {
+      if (recCategory === "kids") return p.gender === "kids";
+      if (recCategory === "women") return p.gender === "women" || p.gender === "unisex";
+      return p.gender === "men" || p.gender === "unisex";
+    });
+    return list.length > 0 ? list.slice(0, 8) : productsList.slice(0, 8);
+  }, [productsList, recCategory]);
+
+  return (
+    <div className="w-full">
+      {/* Google LocalBusiness & Sitelinks Searchbox JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": "https://shivamoptical.in/#website",
+                url: "https://shivamoptical.in",
+                name: "Shivam Optical",
+                description:
+                  "Luxury Eyewear Store, Handcrafted Frames & Computerized Eye Testing in Delhi",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target:
+                    "https://shivamoptical.in/products?search={search_term_string}",
+                  "query-input": "required name=search_term_string",
+                },
+              },
+              {
+                "@type": "Optician",
+                "@id": "https://shivamoptical.in/#store",
+                name: "Shivam Optical",
+                url: "https://shivamoptical.in",
+                image: "https://shivamoptical.in/images/clean_frame_1.png",
+                telephone: "+919779990207",
+                priceRange: "₹₹",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress:
+                    "SAMACHAR market, Shop No-1, Kanishka Complex",
+                  addressLocality: "Mayur Vihar Phase I Extension",
+                  addressRegion: "Delhi",
+                  postalCode: "110091",
+                  addressCountry: "IN",
+                },
+                geo: {
+                  "@type": "GeoCoordinates",
+                  latitude: 28.6015,
+                  longitude: 77.3005,
+                },
+                openingHoursSpecification: [
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: [
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday",
+                      "Sunday",
+                    ],
+                    opens: "10:30",
+                    closes: "21:00",
+                  },
+                ],
+                sameAs: ["https://maps.app.goo.gl/ShivamOpticalMayurVihar"],
+              },
+            ],
+          }),
+        }}
+      />
+
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative w-full overflow-hidden bg-[#FAF3EB] border-b border-[#E8DEC8]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF7F2] border border-[#E8DEC8] text-xs font-semibold uppercase tracking-wider text-[#0A251C]">
+                <span className="w-2 h-2 rounded-full bg-[#C5A059]" />
+                Mayur Vihar Flagship Store • Delhi
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#0A251C] tracking-tight leading-[1.1]">
+                Haute Lunetterie &amp; Clinical Optometry
+              </h1>
+              <p className="text-base sm:text-lg text-[#716B64] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                Discover handcrafted Italian acetate frames, ultra-lightweight
+                aerospace titanium silhouettes, and certified digital Zeiss
+                lenses engineered with surgical precision.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                <Link
+                  href="/products?brand=Ray-Ban"
+                  className="w-full sm:w-auto px-8 py-3.5 bg-[#0A251C] hover:bg-[#C5A059] text-white hover:text-[#0A251C] text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-center"
+                >
+                  Explore Designer Collection
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => openAppointmentModal()}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-[#FAF7F2] text-[#0A251C] border border-[#E8DEC8] text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 shadow-xs hover:shadow-sm text-center cursor-pointer"
+                >
+                  Book Eye Exam
+                </button>
+              </div>
+            </div>
+
+            {/* Right Hero Image Column */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-3xl overflow-hidden border border-[#E8DEC8] shadow-xl bg-white group">
+                <picture>
+                  <source
+                    srcSet="/hero-banner-rayban-meta.png"
+                    type="image/png"
+                  />
+                  <img
+                    src="/hero-banner-rayban-meta.png"
+                    alt="Ray-Ban Meta Smart Glasses & Designer Frames at Shivam Optical"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    loading="eager"
+                    fetchPriority="high"
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-lg">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#C5A059]">
+                        Official Retailer
+                      </p>
+                      <h3 className="font-serif font-bold text-sm text-[#0A251C]">
+                        Ray-Ban | Meta Smart Glasses
+                      </h3>
+                    </div>
+                    <Link
+                      href="/products?category=meta-smart"
+                      className="px-4 py-2 bg-[#0A251C] text-white text-[11px] font-bold uppercase tracking-wider rounded-xl hover:bg-[#C5A059] transition"
+                    >
+                      View
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= VALUE PROPOSITIONS BAR ================= */}
+      <section className="border-b border-[#E8DEC8] bg-white py-6">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center space-y-1.5">
+              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
+                100% Certified Authentic
+              </h4>
+              <p className="text-[11px] text-[#716B64]">Direct brand distributor imports</p>
+            </div>
+            <div className="flex flex-col items-center space-y-1.5">
+              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
+                <Eye className="w-5 h-5" />
+              </div>
+              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
+                Precision Lens Customizer
+              </h4>
+              <p className="text-[11px] text-[#716B64]">Zeiss, Blue-Cut &amp; Progressives</p>
+            </div>
+            <div className="flex flex-col items-center space-y-1.5">
+              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
+                <Truck className="w-5 h-5" />
+              </div>
+              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
+                Insured Doorstep Dispatch
+              </h4>
+              <p className="text-[11px] text-[#716B64]">Fast Pan-India shipping</p>
+            </div>
+            <div className="flex flex-col items-center space-y-1.5">
+              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
+                <Clock className="w-5 h-5" />
+              </div>
+              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
+                Atelier Optometry Clinic
+              </h4>
+              <p className="text-[11px] text-[#716B64]">Open 7 Days • 10:30 AM – 9 PM</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= COLLECTION SHOWCASE: NEW ARRIVALS & BEST SELLERS ================= */}
+      <section className="py-14 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center space-y-3 mb-8">
+          <div className="inline-flex items-center gap-6 border-b border-[#E8DEC8] pb-1">
+            <button
+              onClick={() => setCollectionTab("new")}
+              className={`text-sm sm:text-base font-bold uppercase tracking-widest pb-2 transition cursor-pointer ${
+                collectionTab === "new"
+                  ? "text-[#0A251C] border-b-2 border-[#0A251C]"
+                  : "text-[#716B64] hover:text-[#0A251C]"
+              }`}
+            >
+              New Arrivals
+            </button>
+            <button
+              onClick={() => setCollectionTab("bestsellers")}
+              className={`text-sm sm:text-base font-bold uppercase tracking-widest pb-2 transition cursor-pointer ${
+                collectionTab === "bestsellers"
+                  ? "text-[#0A251C] border-b-2 border-[#0A251C]"
+                  : "text-[#716B64] hover:text-[#0A251C]"
+              }`}
+            >
+              Best Sellers
+            </button>
+          </div>
+
+          {/* Quick Shape Filter Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+            {["all", "Aviator", "Round", "Rectangle", "Cat-Eye", "Geometric", "Square"].map(
+              (shape) => (
+                <button
+                  key={shape}
+                  onClick={() => setSelectedShape(shape)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition cursor-pointer capitalize ${
+                    selectedShape.toLowerCase() === shape.toLowerCase()
+                      ? "bg-[#0A251C] text-white shadow-xs"
+                      : "bg-white border border-[#E8DEC8] text-[#716B64] hover:text-[#0A251C] hover:border-[#C5A059]"
+                  }`}
+                >
+                  {shape === "all" ? "All Shapes" : shape}
+                </button>
+              )
+            )}
+          </div>
+        </div>
+
+        {/* 5-Column Product Grid Container */}
+        {isLoading ? (
+          <ProductGridSkeleton count={5} />
+        ) : filteredProducts.length === 0 ? (
+          <div className="py-14 text-center border border-dashed border-[#E8DEC8] rounded-2xl bg-[#FCFAF7] p-8 max-w-lg mx-auto">
+            <Glasses className="w-8 h-8 text-[#C5A059] mx-auto mb-3 opacity-75" />
+            <h4 className="font-serif text-lg text-[#1A1816] font-semibold">
+              Curating New Eyewear Collection
+            </h4>
+            <p className="text-xs text-[#716B64] mt-1.5 leading-relaxed">
+              Our master opticians are currently cataloging pristine new designer frames and clinical eyewear. Check back shortly or visit our Delhi store.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+            {filteredProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ================= SECTION: GET THE PERFECT SHAPE - SUNGLASSES ================= */}
+      <ShapeFilterBar
+        title="Get the perfect shape – Sunglasses"
+        type="sunglasses"
+        shapes={SUNGLASSES_SHAPES}
+      />
+
+      {/* ================= SECTION: TRIED, LOVED & RECOMMENDED ================= */}
+      <section id="recommended" className="py-14 max-w-[1240px] mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8">
+          <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#717171] mb-1">
+            BEST SELLERS
+          </p>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-[0.05em] text-[#111827] uppercase mb-4">
+            TRIED, LOVED &amp; RECOMMENDED
+          </h2>
+          <div className="inline-flex items-center space-x-8 text-xs font-semibold tracking-wider uppercase">
+            {(["men", "women", "kids"] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setRecCategory(cat)}
+                className={`pb-1 transition uppercase cursor-pointer ${
+                  recCategory === cat
+                    ? "text-[#C5A059] border-b-2 border-[#C5A059] font-bold"
+                    : "text-[#9CA3AF] hover:text-[#111827]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row items-stretch gap-3 relative">
+          <Link
+            href={`/products?shape=Rectangle${recCategory ? `&gender=${recCategory}` : ""}`}
+            className="w-full max-w-[280px] mx-auto lg:mx-0 lg:max-w-none lg:w-[220px] shrink-0 rounded-2xl overflow-hidden relative shadow-xs hover:shadow-md border border-[#E8DEC8] hover:border-[#C5A059]/60 group transition-all duration-300 bg-[#1A1816] block cursor-pointer select-none aspect-[695/1024] lg:aspect-auto"
+            aria-label={`Shop Modern Essentials - ${recCategory ? recCategory : "all"} collection`}
+          >
+            <picture>
+              <source srcSet="/images/rec_editorial_man.webp" type="image/webp" />
+              <img
+                src="/images/rec_editorial_man.jpg"
+                alt="Modern Essentials - Built for everyday wear"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-center block group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+            </picture>
+            <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[84%] z-10 pointer-events-none">
+              <span className="w-full py-2.5 px-3 bg-white/95 backdrop-blur-xs group-hover:bg-[#C5A059] text-[#1A1816] group-hover:text-white text-[11px] font-bold uppercase tracking-[0.16em] rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5 border border-white/60">
+                <span>SHOP NOW</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </span>
+            </div>
+          </Link>
+
+          <div className="flex-1 relative overflow-hidden">
+            {isLoading ? (
+              <div className="h-full min-h-[220px] flex items-center">
+                <ProductGridSkeleton count={4} />
+              </div>
+            ) : recommendedProducts.length === 0 ? (
+              <div className="h-full min-h-[220px] flex flex-col items-center justify-center text-center border border-dashed border-[#E8DEC8] rounded-xl bg-[#FCFAF7] p-6">
+                <Glasses className="w-6 h-6 text-[#C5A059] mb-2 opacity-70" />
+                <p className="font-serif text-base text-[#1A1816] font-medium">
+                  New Season Recommendations Coming Soon
+                </p>
+                <p className="text-xs text-[#716B64] mt-1 max-w-sm">
+                  Curated recommendations will automatically appear as fresh inventory is cataloged.
+                </p>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => scrollRecCarousel(-1)}
+                  className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white shadow-md border border-[#E5E7EB] flex items-center justify-center text-[#374151] hover:text-black hover:scale-105 transition cursor-pointer"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+
+                <div
+                  ref={recCarouselRef}
+                  className="flex gap-3 overflow-x-auto scroll-smooth py-1 px-1 scrollbar-none items-stretch"
+                >
+                  {recommendedProducts.map((p) => (
+                    <div key={p.id} className="w-[200px] sm:w-[215px] shrink-0">
+                      <ProductCard product={p} />
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => scrollRecCarousel(1)}
+                  className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-white shadow-md border border-[#E5E7EB] flex items-center justify-center text-[#374151] hover:text-black hover:scale-105 transition cursor-pointer"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            href="/products"
+            className="inline-flex items-center justify-center px-8 py-3 bg-[#111827] text-white hover:bg-[#C5A059] hover:text-[#111827] text-xs font-bold tracking-widest uppercase rounded-full shadow-xs hover:shadow-md transition cursor-pointer"
+          >
+            VIEW ALL PRODUCTS
+          </Link>
+        </div>
+      </section>
+
+      {/* ================= SECTION: GET THE PERFECT SHAPE - EYEGLASSES ================= */}
+      <ShapeFilterBar
+        title="Get the perfect shape – Eyeglasses"
+        type="eyeglasses"
+        shapes={EYEGLASSES_SHAPES}
+      />
+
+      {/* ================= SECTION: GOOGLE VERIFIED REVIEWS ================= */}
+      <GoogleReviewsSection />
+
+      {/* ================= SECTION: CLINICAL FAQ ACCORDION ================= */}
+      <section className="py-16 bg-[#FAF3EB] border-t border-[#E8DEC8]">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#C5A059]">
+              Optical Knowledge Hub
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
+              Frequently Consulted Optical Guides
+            </h2>
+            <p className="text-xs sm:text-sm text-[#716B64]">
+              Expert recommendations on UV400 lenses, clinical eye testing, and frame selection.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            {FAQ_ITEMS.map((item, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl border border-[#E8DEC8] overflow-hidden transition-all duration-200"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[#FCFAF7] transition cursor-pointer"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="font-serif font-bold text-base sm:text-lg text-[#0A251C]">
+                      {item.title}
+                    </span>
+                    <span className="w-8 h-8 rounded-full bg-[#FAF3EB] flex items-center justify-center text-[#0A251C] shrink-0 ml-4">
+                      {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-6 pb-6 text-xs sm:text-sm text-[#716B64] leading-relaxed border-t border-[#FAF3EB] pt-4">
+                      {item.content}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
