@@ -90,28 +90,34 @@ function CatalogContent() {
       searchParams.get("type") ||
       searchParams.get("category") ||
       (searchParams.get("filter") === "meta" ? "meta-smart" : "");
-    if (currentType) {
-      setSelectedCategory(currentType);
-    }
+    setSelectedCategory(currentType || "all");
+
     const currentGender = searchParams.get("gender");
-    if (currentGender) {
-      setSelectedGender(currentGender);
-    }
+    setSelectedGender(currentGender || "all");
+
     const currentShape = searchParams.get("shape");
     if (currentShape) {
       setSelectedShapes([currentShape]);
+    } else if (!searchParams.has("shape")) {
+      setSelectedShapes([]);
     }
+
     const currentBrand = searchParams.get("brand");
     if (currentBrand) {
       setSelectedBrands([currentBrand]);
+    } else if (!searchParams.has("brand")) {
+      setSelectedBrands([]);
     }
+
     const currentFilter = searchParams.get("filter");
-    if (currentFilter === "new") {
-      setSelectedOffers((prev) => (prev.includes("new") ? prev : [...prev, "new"]));
-    }
-    if (searchParams.get("sale") === "true") {
-      setSelectedOffers((prev) => (prev.includes("sale") ? prev : [...prev, "sale"]));
-    }
+    const currentSale = searchParams.get("sale") === "true";
+    setSelectedOffers(() => {
+      const list: string[] = [];
+      if (currentFilter === "new") list.push("new");
+      if (currentSale) list.push("sale");
+      return list;
+    });
+
     const currentSearch = searchParams.get("search") || searchParams.get("q") || "";
     setSearchQuery(currentSearch);
   }, [searchParams]);
@@ -162,8 +168,36 @@ function CatalogContent() {
     );
   };
 
+  const handleCategorySelect = (categoryKey: string) => {
+    setSelectedCategory(categoryKey);
+    const params = new URLSearchParams(searchParams.toString());
+    if (categoryKey === "all") {
+      params.delete("type");
+      params.delete("category");
+      params.delete("filter");
+    } else if (categoryKey === "meta-smart") {
+      params.delete("type");
+      params.delete("filter");
+      params.set("category", "meta-smart");
+    } else {
+      params.delete("category");
+      params.delete("filter");
+      params.set("type", categoryKey);
+    }
+    const newQuery = params.toString();
+    router.replace(newQuery ? `/products?${newQuery}` : "/products", { scroll: false });
+  };
+
   const handleGenderChange = (gender: string) => {
     setSelectedGender(gender);
+    const params = new URLSearchParams(searchParams.toString());
+    if (gender === "all") {
+      params.delete("gender");
+    } else {
+      params.set("gender", gender);
+    }
+    const newQuery = params.toString();
+    router.replace(newQuery ? `/products?${newQuery}` : "/products", { scroll: false });
   };
 
   const resetAllFilters = () => {
@@ -197,24 +231,26 @@ function CatalogContent() {
       const name = (p.name || "").toLowerCase();
       const slug = (p.slug || "").toLowerCase();
 
-      if (cat === "sunglasses" || typ === "sunglasses") counts.sunglasses++;
-      if (cat === "eyeglasses" || typ === "eyeglasses") counts.eyeglasses++;
-      if (cat.includes("contact") || typ.includes("contact")) counts["contact-lenses"]++;
-      if (
+      const isMeta =
         cat === "meta-smart" ||
         typ === "meta-smart" ||
-        cat.includes("meta") ||
-        slug.includes("meta") ||
-        (name.includes("meta") &&
-          (name.includes("ray-ban") ||
-            name.includes("smart") ||
-            name.includes("wayfarer") ||
-            name.includes("headliner") ||
-            name.includes("skyler")))
-      ) {
+        slug.startsWith("so-ray-ban-meta") ||
+        /\bmeta\b/i.test(name) ||
+        /\bmeta\b/i.test(slug);
+
+      if (isMeta) {
         counts["meta-smart"]++;
+      } else if (cat === "sunglasses" || typ === "sunglasses") {
+        counts.sunglasses++;
+      } else if (cat === "eyeglasses" || typ === "eyeglasses") {
+        counts.eyeglasses++;
+      } else if (cat.includes("contact") || typ.includes("contact")) {
+        counts["contact-lenses"]++;
       }
-      if (cat === "kids" || p.gender === "kids") counts.kids++;
+
+      if (cat === "kids" || p.gender === "kids") {
+        counts.kids++;
+      }
     });
     return counts;
   }, [productsList]);
@@ -274,25 +310,28 @@ function CatalogContent() {
           const pName = (p.name || "").toLowerCase();
           const pSlug = (p.slug || "").toLowerCase();
 
-          if (cat === "sunglasses" && pCat !== "sunglasses" && pType !== "sunglasses") return false;
-          if (cat === "eyeglasses" && pCat !== "eyeglasses" && pType !== "eyeglasses") return false;
+          const isMeta =
+            pCat === "meta-smart" ||
+            pType === "meta-smart" ||
+            pSlug.startsWith("so-ray-ban-meta") ||
+            /\bmeta\b/i.test(pName) ||
+            /\bmeta\b/i.test(pSlug);
+
           if (cat === "meta-smart") {
-            const isMeta =
-              pCat === "meta-smart" ||
-              pType === "meta-smart" ||
-              pCat.includes("meta") ||
-              pSlug.includes("meta") ||
-              (pName.includes("meta") &&
-                (pName.includes("ray-ban") ||
-                  pName.includes("smart") ||
-                  pName.includes("wayfarer") ||
-                  pName.includes("headliner") ||
-                  pName.includes("skyler")));
             if (!isMeta) return false;
+          } else if (cat === "sunglasses") {
+            if (isMeta) return false;
+            const isSun = (pCat === "sunglasses" || pType === "sunglasses") && pCat !== "eyeglasses";
+            if (!isSun) return false;
+          } else if (cat === "eyeglasses") {
+            if (isMeta) return false;
+            const isEye = (pCat === "eyeglasses" || pType === "eyeglasses") && pCat !== "sunglasses";
+            if (!isEye) return false;
+          } else if (cat === "kids") {
+            if (pCat !== "kids" && p.gender !== "kids") return false;
+          } else if (cat === "contact-lenses") {
+            if (!pCat.includes("contact") && !pType.includes("contact")) return false;
           }
-          if (cat === "kids" && pCat !== "kids" && p.gender !== "kids") return false;
-          if (cat === "contact-lenses" && !pCat.includes("contact") && !pType.includes("contact"))
-            return false;
         }
 
         // Gender filter
@@ -415,13 +454,13 @@ function CatalogContent() {
       };
       chips.push({
         label: `Category: ${catLabels[selectedCategory] || selectedCategory}`,
-        onRemove: () => setSelectedCategory("all"),
+        onRemove: () => handleCategorySelect("all"),
       });
     }
     if (selectedGender !== "all") {
       chips.push({
         label: `Gender: ${selectedGender === "men" ? "Men's" : selectedGender === "women" ? "Women's" : selectedGender}`,
-        onRemove: () => setSelectedGender("all"),
+        onRemove: () => handleGenderChange("all"),
       });
     }
     if (selectedPrice !== "all") {
@@ -741,7 +780,7 @@ function CatalogContent() {
                       ].map((cat) => (
                         <label
                           key={cat.key}
-                          onClick={() => setSelectedCategory(cat.key)}
+                          onClick={() => handleCategorySelect(cat.key)}
                           className={`flex items-center justify-between text-xs px-2.5 py-2 rounded-lg cursor-pointer select-none transition-colors ${
                             selectedCategory === cat.key
                               ? "bg-[#0A251C] text-white font-semibold"
@@ -1159,7 +1198,7 @@ function CatalogContent() {
                       ].map((cat) => (
                         <label
                           key={cat.key}
-                          onClick={() => setSelectedCategory(cat.key)}
+                          onClick={() => handleCategorySelect(cat.key)}
                           className={`flex items-center justify-between text-xs px-2.5 py-1.5 rounded-lg cursor-pointer select-none transition-colors ${
                             selectedCategory === cat.key
                               ? "bg-[#0A251C] text-white font-medium shadow-2xs"

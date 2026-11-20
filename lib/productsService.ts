@@ -218,6 +218,31 @@ function mapRowToProduct(row: any): Product {
       ? distinctColors
       : row.colors || localMatch?.colors || (row.color_hex ? [row.color_hex] : ["#1A1A1A"]);
 
+  const rawCategorySlug =
+    (typeof row.category === "object" ? row.category?.slug : row.category) ||
+    localMatch?.category;
+
+  const resolvedCategory =
+    rawCategorySlug ||
+    (row.name?.toLowerCase().includes("sunglass")
+      ? "sunglasses"
+      : "eyeglasses");
+
+  const resolvedType =
+    row.type ||
+    localMatch?.type ||
+    (resolvedCategory === "sunglasses"
+      ? "sunglasses"
+      : resolvedCategory === "eyeglasses"
+      ? "eyeglasses"
+      : resolvedCategory === "contact-lenses"
+      ? "contact-lenses"
+      : resolvedCategory === "meta-smart"
+      ? "meta-smart"
+      : resolvedCategory === "kids"
+      ? (row.name?.toLowerCase().includes("sunglass") ? "sunglasses" : "eyeglasses")
+      : "eyeglasses");
+
   return {
     id: row.slug || row.id,
     slug: row.slug || row.id,
@@ -227,8 +252,8 @@ function mapRowToProduct(row: any): Product {
     price,
     originalPrice,
     discountPct: calculatedDiscountPct,
-    category: row.category?.slug || row.category || localMatch?.category || "sunglasses",
-    type: row.type || localMatch?.type || "sunglasses",
+    category: resolvedCategory,
+    type: resolvedType,
     gender: (row.gender || localMatch?.gender || "unisex") as any,
     shape: (row.shape || localMatch?.shape || "rectangle") as any,
     rimType: (row.rim_type || localMatch?.rimType || "full-rim") as any,
@@ -415,9 +440,19 @@ export function filterAndSortProducts(
   if (filterState.category && filterState.category !== "all") {
     const cat = filterState.category.toLowerCase();
     if (cat === "sunglasses") {
-      result = result.filter((p) => p.category === "sunglasses" || p.type === "sunglasses");
+      result = result.filter(
+        (p) =>
+          (p.category === "sunglasses" || p.type === "sunglasses") &&
+          p.category !== "eyeglasses" &&
+          p.category !== "meta-smart"
+      );
     } else if (cat === "eyeglasses") {
-      result = result.filter((p) => p.category === "eyeglasses" || p.type === "eyeglasses");
+      result = result.filter(
+        (p) =>
+          (p.category === "eyeglasses" || p.type === "eyeglasses") &&
+          p.category !== "sunglasses" &&
+          p.category !== "meta-smart"
+      );
     } else if (cat === "meta-smart" || cat === "smart-glasses" || cat === "meta") {
       result = result.filter((p) => {
         const c = (p.category || "").toLowerCase();
@@ -427,9 +462,9 @@ export function filterAndSortProducts(
         return (
           c === "meta-smart" ||
           t === "meta-smart" ||
-          c.includes("meta") ||
-          s.includes("meta") ||
-          (n.includes("meta") && (n.includes("ray-ban") || n.includes("smart") || n.includes("wayfarer") || n.includes("headliner") || n.includes("skyler")))
+          s.startsWith("so-ray-ban-meta") ||
+          /\bmeta\b/i.test(n) ||
+          /\bmeta\b/i.test(s)
         );
       });
     } else if (cat === "kids") {
@@ -440,13 +475,14 @@ export function filterAndSortProducts(
       result = result.filter((p) => p.isOnSale || (p.originalPrice && p.originalPrice > p.price));
     } else if (cat === "contact-lenses" || cat === "contacts" || cat === "contact lenses") {
       result = result.filter((p) => {
-        const c = p.category?.toLowerCase();
-        return c === "contact-lenses" || c === "contact lenses" || c === "contact lens" || p.type === "contact-lenses";
+        const c = (p.category || "").toLowerCase();
+        const t = (p.type || "").toLowerCase();
+        return c.includes("contact") || t.includes("contact");
       });
     } else {
       result = result.filter((p) => {
-        const c = p.category?.toLowerCase();
-        return c === cat || c?.replace(/-/g, " ") === cat.replace(/-/g, " ");
+        const c = (p.category || "").toLowerCase();
+        return c === cat || c.replace(/-/g, " ") === cat.replace(/-/g, " ");
       });
     }
   }
