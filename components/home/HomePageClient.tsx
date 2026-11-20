@@ -22,11 +22,12 @@ import {
   Minus,
   CheckCircle2,
 } from "lucide-react";
-import { Product } from "@/types";
+import { PRODUCTS } from "@/data/products";
 import { ProductCard } from "@/components/home/ProductCard";
 import { ShapeFilterBar } from "@/components/home/ShapeFilterBar";
 import { GoogleReviewsSection } from "@/components/home/GoogleReviewsSection";
 import { ProductGridSkeleton } from "@/components/home/ProductGridSkeleton";
+import { Product } from "@/types";
 import { useAuth } from "@/context/AuthContext";
 
 const SUNGLASSES_SHAPES = [
@@ -190,15 +191,15 @@ const FAQ_ITEMS = [
   },
 ];
 
-interface HomePageClientProps {
-  initialProducts?: Product[];
-}
-
-export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
+export function HomePageClient({ initialProducts = [] }: { initialProducts?: Product[] }) {
   const { openAppointmentModal } = useAuth();
-  const [collectionTab, setCollectionTab] = useState<"new" | "bestsellers">("new");
+  const [collectionTab, setCollectionTab] = useState<"new" | "bestsellers">(
+    "new"
+  );
   const [selectedShape, setSelectedShape] = useState<string>("all");
-  const [recCategory, setRecCategory] = useState<"men" | "women" | "kids">("men");
+  const [recCategory, setRecCategory] = useState<"men" | "women" | "kids">(
+    "men"
+  );
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const recCarouselRef = useRef<HTMLDivElement>(null);
@@ -212,7 +213,6 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
     }
   };
 
-  // Instant catalog state: initialize with server-provided initialProducts or sessionStorage cache
   const [productsList, setProductsList] = useState<Product[]>(() => {
     if (initialProducts && initialProducts.length > 0) return initialProducts;
     if (typeof window !== "undefined") {
@@ -227,32 +227,23 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
     return [];
   });
 
-  const [isLoading, setIsLoading] = useState(
-    !productsList || productsList.length === 0
-  );
+  const [isLoading, setIsLoading] = useState(!productsList || productsList.length === 0);
 
   useEffect(() => {
     if (productsList.length > 0) {
       setIsLoading(false);
       try {
-        sessionStorage.setItem(
-          "shivam_optics_catalog_cache_v1",
-          JSON.stringify(productsList)
-        );
+        sessionStorage.setItem("shivam_optics_catalog_cache_v1", JSON.stringify(productsList));
       } catch {}
     }
 
-    // Background edge sync to guarantee freshest catalog
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
         if (data.products && Array.isArray(data.products) && data.products.length > 0) {
           setProductsList(data.products);
           try {
-            sessionStorage.setItem(
-              "shivam_optics_catalog_cache_v1",
-              JSON.stringify(data.products)
-            );
+            sessionStorage.setItem("shivam_optics_catalog_cache_v1", JSON.stringify(data.products));
           } catch {}
         }
       })
@@ -349,176 +340,108 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
                     closes: "21:00",
                   },
                 ],
-                sameAs: ["https://maps.app.goo.gl/ShivamOpticalMayurVihar"],
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: 146,
+                  bestRating: "5",
+                  worstRating: "1",
+                },
               },
             ],
           }),
         }}
       />
 
-      {/* ================= HERO SECTION ================= */}
-      <section className="relative w-full overflow-hidden bg-[#FAF3EB] border-b border-[#E8DEC8]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF7F2] border border-[#E8DEC8] text-xs font-semibold uppercase tracking-wider text-[#0A251C]">
-                <span className="w-2 h-2 rounded-full bg-[#C5A059]" />
-                Mayur Vihar Flagship Store • Delhi
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#0A251C] tracking-tight leading-[1.1]">
-                Haute Lunetterie &amp; Clinical Optometry
-              </h1>
-              <p className="text-base sm:text-lg text-[#716B64] max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                Discover handcrafted Italian acetate frames, ultra-lightweight
-                aerospace titanium silhouettes, and certified digital Zeiss
-                lenses engineered with surgical precision.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                <Link
-                  href="/products?brand=Ray-Ban"
-                  className="w-full sm:w-auto px-8 py-3.5 bg-[#0A251C] hover:bg-[#C5A059] text-white hover:text-[#0A251C] text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 shadow-md hover:shadow-lg text-center"
-                >
-                  Explore Designer Collection
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => openAppointmentModal()}
-                  className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-[#FAF7F2] text-[#0A251C] border border-[#E8DEC8] text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 shadow-xs hover:shadow-sm text-center cursor-pointer"
-                >
-                  Book Eye Exam
-                </button>
-              </div>
-            </div>
-
-            {/* Right Hero Image Column */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-3xl overflow-hidden border border-[#E8DEC8] shadow-xl bg-white group">
-                <picture>
-                  <source
-                    srcSet="/hero-banner-rayban-meta.png"
-                    type="image/png"
-                  />
-                  <img
-                    src="/hero-banner-rayban-meta.png"
-                    alt="Ray-Ban Meta Smart Glasses & Designer Frames at Shivam Optical"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="eager"
-                    fetchPriority="high"
-                  />
-                </picture>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-lg">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#C5A059]">
-                        Official Retailer
-                      </p>
-                      <h3 className="font-serif font-bold text-sm text-[#0A251C]">
-                        Ray-Ban | Meta Smart Glasses
-                      </h3>
-                    </div>
-                    <Link
-                      href="/products?category=meta-smart"
-                      className="px-4 py-2 bg-[#0A251C] text-white text-[11px] font-bold uppercase tracking-wider rounded-xl hover:bg-[#C5A059] transition"
-                    >
-                      View
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* ================= HERO SECTION (OUR MOST LOVED STYLES BANNER) ================= */}
+      <section className="relative w-full overflow-hidden bg-gradient-to-r from-[#EAE8E4] via-[#EAE7E2] to-[#E9E6E1] border-b border-[#E8E2D9]/60">
+        <div className="w-full max-w-[1920px] mx-auto relative">
+          <Link
+            href="/products?brand=Ray-Ban"
+            className="group block w-full relative cursor-pointer overflow-hidden"
+            title="Shop Our Most Loved Styles — Iconic Ray-Ban Polarized Sunglasses & Frames at Shivam Optical"
+          >
+            <picture className="block w-full">
+              <source
+                type="image/webp"
+                srcSet="/images/banner.webp 1024w, /images/banner-2x.webp 2048w"
+                sizes="(max-width: 1024px) 100vw, 1920px"
+              />
+              <source
+                type="image/png"
+                srcSet="/images/banner.png 1024w, /images/banner-2x.png 2048w"
+                sizes="(max-width: 1024px) 100vw, 1920px"
+              />
+              <img
+                src="/images/banner.png"
+                alt="Shivam Optical - Our Most Loved Styles | Iconic Ray-Ban Polarized Sunglasses"
+                className="w-full h-auto aspect-[1024/426] object-cover object-center block select-none transition-transform duration-700 ease-out group-hover:scale-[1.008]"
+                width={1024}
+                height={426}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
+            <span className="sr-only">
+              Shop Our Most Loved Styles and Iconic Ray-Ban Polarized Sunglasses at Shivam Optical
+            </span>
+          </Link>
         </div>
       </section>
 
-      {/* ================= VALUE PROPOSITIONS BAR ================= */}
-      <section className="border-b border-[#E8DEC8] bg-white py-6">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="flex flex-col items-center space-y-1.5">
-              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
-                100% Certified Authentic
-              </h4>
-              <p className="text-[11px] text-[#716B64]">Direct brand distributor imports</p>
-            </div>
-            <div className="flex flex-col items-center space-y-1.5">
-              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
-                <Eye className="w-5 h-5" />
-              </div>
-              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
-                Precision Lens Customizer
-              </h4>
-              <p className="text-[11px] text-[#716B64]">Zeiss, Blue-Cut &amp; Progressives</p>
-            </div>
-            <div className="flex flex-col items-center space-y-1.5">
-              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
-                <Truck className="w-5 h-5" />
-              </div>
-              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
-                Insured Doorstep Dispatch
-              </h4>
-              <p className="text-[11px] text-[#716B64]">Fast Pan-India shipping</p>
-            </div>
-            <div className="flex flex-col items-center space-y-1.5">
-              <div className="w-10 h-10 rounded-full bg-[#FAF3EB] text-[#C5A059] flex items-center justify-center mb-1">
-                <Clock className="w-5 h-5" />
-              </div>
-              <h4 className="text-xs font-bold tracking-wider uppercase text-[#1A1816]">
-                Atelier Optometry Clinic
-              </h4>
-              <p className="text-[11px] text-[#716B64]">Open 7 Days • 10:30 AM – 9 PM</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= COLLECTION SHOWCASE: NEW ARRIVALS & BEST SELLERS ================= */}
-      <section className="py-14 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-3 mb-8">
-          <div className="inline-flex items-center gap-6 border-b border-[#E8DEC8] pb-1">
+      {/* ================= PRODUCT COLLECTION TABS: NEW ARRIVALS & BEST SELLERS ================= */}
+      <section
+        id="sunglasses"
+        className="pt-6 md:pt-8 pb-16 md:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
+        {/* Tab Navigation & Header */}
+        <div className="flex flex-col items-center mb-8">
+          <div className="inline-flex border-b border-[#E8E2D9] space-x-8 md:space-x-12 mb-6">
             <button
               onClick={() => setCollectionTab("new")}
-              className={`text-sm sm:text-base font-bold uppercase tracking-widest pb-2 transition cursor-pointer ${
+              className={`pb-3 text-sm md:text-base font-semibold tracking-[0.2em] uppercase transition relative ${
                 collectionTab === "new"
-                  ? "text-[#0A251C] border-b-2 border-[#0A251C]"
-                  : "text-[#716B64] hover:text-[#0A251C]"
+                  ? "text-[#1A1816] border-b-2 border-[#1A1816]"
+                  : "text-[#716B64] hover:text-[#1A1816]"
               }`}
             >
-              New Arrivals
+              NEW ARRIVALS
             </button>
             <button
               onClick={() => setCollectionTab("bestsellers")}
-              className={`text-sm sm:text-base font-bold uppercase tracking-widest pb-2 transition cursor-pointer ${
+              className={`pb-3 text-sm md:text-base font-semibold tracking-[0.2em] uppercase transition relative ${
                 collectionTab === "bestsellers"
-                  ? "text-[#0A251C] border-b-2 border-[#0A251C]"
-                  : "text-[#716B64] hover:text-[#0A251C]"
+                  ? "text-[#1A1816] border-b-2 border-[#1A1816]"
+                  : "text-[#716B64] hover:text-[#1A1816]"
               }`}
             >
-              Best Sellers
+              BEST SELLERS
             </button>
           </div>
 
-          {/* Quick Shape Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-            {["all", "Aviator", "Round", "Rectangle", "Cat-Eye", "Geometric", "Square"].map(
-              (shape) => (
-                <button
-                  key={shape}
-                  onClick={() => setSelectedShape(shape)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition cursor-pointer capitalize ${
-                    selectedShape.toLowerCase() === shape.toLowerCase()
-                      ? "bg-[#0A251C] text-white shadow-xs"
-                      : "bg-white border border-[#E8DEC8] text-[#716B64] hover:text-[#0A251C] hover:border-[#C5A059]"
-                  }`}
-                >
-                  {shape === "all" ? "All Shapes" : shape}
-                </button>
-              )
-            )}
+          {/* Quick Shape Sub-filters */}
+          <div className="w-full max-w-full overflow-hidden">
+            <div className="flex items-center overflow-x-auto sm:flex-wrap sm:justify-center gap-2 text-xs uppercase tracking-wider text-[#716B64] font-medium pb-2 sm:pb-0 scrollbar-none snap-x -mx-4 px-4 sm:mx-0 sm:px-0">
+              {["all", "Aviator", "Round", "Rectangle", "Cat-Eye", "Geometric"].map(
+                (shape) => {
+                  const isActive = selectedShape === shape;
+                  return (
+                    <button
+                      key={shape}
+                      onClick={() => setSelectedShape(shape)}
+                      className={`shrink-0 snap-start px-3.5 py-1.5 rounded-full border transition cursor-pointer text-xs ${
+                        isActive
+                          ? "border-[#1A1816] bg-[#1A1816] text-white"
+                          : "border-[#E8E2D9] bg-white text-[#1A1816] hover:border-[#C5A059]"
+                      }`}
+                    >
+                      {shape === "all" ? "All" : shape}
+                    </button>
+                  );
+                }
+              )}
+            </div>
           </div>
         </div>
 
@@ -553,6 +476,7 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
 
       {/* ================= SECTION: TRIED, LOVED & RECOMMENDED ================= */}
       <section id="recommended" className="py-14 max-w-[1240px] mx-auto px-4 sm:px-6">
+        {/* Title & Tab Bar */}
         <div className="text-center mb-8">
           <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#717171] mb-1">
             BEST SELLERS
@@ -577,7 +501,9 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
           </div>
         </div>
 
+        {/* Main Showcase Row: Left Editorial Card + Right Product Carousel */}
         <div className="flex flex-col lg:flex-row items-stretch gap-3 relative">
+          {/* Left Editorial Card */}
           <Link
             href={`/products?shape=Rectangle${recCategory ? `&gender=${recCategory}` : ""}`}
             className="w-full max-w-[280px] mx-auto lg:mx-0 lg:max-w-none lg:w-[220px] shrink-0 rounded-2xl overflow-hidden relative shadow-xs hover:shadow-md border border-[#E8DEC8] hover:border-[#C5A059]/60 group transition-all duration-300 bg-[#1A1816] block cursor-pointer select-none aspect-[695/1024] lg:aspect-auto"
@@ -593,7 +519,11 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
                 className="w-full h-full object-cover object-center block group-hover:scale-105 transition-transform duration-700 ease-out"
               />
             </picture>
+
+            {/* Subtle luxury vignette scrim for contrast & depth */}
             <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+
+            {/* Interactive Layered Luxury CTA Button */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[84%] z-10 pointer-events-none">
               <span className="w-full py-2.5 px-3 bg-white/95 backdrop-blur-xs group-hover:bg-[#C5A059] text-[#1A1816] group-hover:text-white text-[11px] font-bold uppercase tracking-[0.16em] rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5 border border-white/60">
                 <span>SHOP NOW</span>
@@ -602,6 +532,7 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
             </div>
           </Link>
 
+          {/* Right Carousel Container */}
           <div className="flex-1 relative overflow-hidden">
             {isLoading ? (
               <div className="h-full min-h-[220px] flex items-center">
@@ -649,15 +580,6 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
             )}
           </div>
         </div>
-
-        <div className="mt-8 text-center">
-          <Link
-            href="/products"
-            className="inline-flex items-center justify-center px-8 py-3 bg-[#111827] text-white hover:bg-[#C5A059] hover:text-[#111827] text-xs font-bold tracking-widest uppercase rounded-full shadow-xs hover:shadow-md transition cursor-pointer"
-          >
-            VIEW ALL PRODUCTS
-          </Link>
-        </div>
       </section>
 
       {/* ================= SECTION: GET THE PERFECT SHAPE - EYEGLASSES ================= */}
@@ -667,54 +589,235 @@ export function HomePageClient({ initialProducts = [] }: HomePageClientProps) {
         shapes={EYEGLASSES_SHAPES}
       />
 
-      {/* ================= SECTION: GOOGLE VERIFIED REVIEWS ================= */}
+      {/* ================= ARTISAN CRAFT BANNER SECTION ================= */}
+      <section
+        id="lifestyle-banner"
+        className="py-8 sm:py-10 bg-[#FAF3EB] border-t border-[#E8DEC8]"
+      >
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
+          <div className="relative w-full overflow-hidden rounded-2xl shadow-md border border-[#E8DEC8] bg-white">
+            <Link
+              href="/products"
+              className="block w-full cursor-pointer"
+              title="Explore Eyewear Collection"
+            >
+              <img
+                src="/images/artisan_craft_banner.png"
+                alt="Handcrafted Luxury Frames on Sculptural Podiums"
+                className="w-full h-auto block select-none object-cover"
+              />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= VERIFIED GOOGLE CUSTOMER REVIEWS ================= */}
       <GoogleReviewsSection />
 
-      {/* ================= SECTION: CLINICAL FAQ ACCORDION ================= */}
-      <section className="py-16 bg-[#FAF3EB] border-t border-[#E8DEC8]">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#C5A059]">
-              Optical Knowledge Hub
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0A251C]">
-              Frequently Consulted Optical Guides
+      {/* ================= NEED TO KNOW: ACCORDION SECTION ================= */}
+      <section id="faq" className="py-16 bg-[#F4EFEA]/30 border-y border-[#E8E2D9]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold tracking-[0.1em] text-[#1A1816] uppercase">
+              Need to{" "}
+              <span className="italic font-normal text-[#8C6239]">Know</span>
             </h2>
-            <p className="text-xs sm:text-sm text-[#716B64]">
-              Expert recommendations on UV400 lenses, clinical eye testing, and frame selection.
+            <p className="text-xs uppercase tracking-widest text-[#716B64] mt-2">
+              Your comprehensive optical guide to frames, lenses, and precision
+              vision
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-3">
+          <div className="space-y-3">
             {FAQ_ITEMS.map((item, index) => {
               const isOpen = openFaqIndex === index;
               return (
                 <div
-                  key={index}
-                  className="bg-white rounded-2xl border border-[#E8DEC8] overflow-hidden transition-all duration-200"
+                  key={item.title}
+                  className="accordion-item bg-white rounded-lg border border-[#E8E2D9] overflow-hidden"
                 >
                   <button
-                    type="button"
-                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[#FCFAF7] transition cursor-pointer"
-                    aria-expanded={isOpen}
+                    onClick={() =>
+                      setOpenFaqIndex(isOpen ? null : index)
+                    }
+                    className="w-full px-6 py-4.5 text-left flex items-center justify-between font-medium text-[#1A1816] hover:text-[#C5A059] transition cursor-pointer"
                   >
-                    <span className="font-serif font-bold text-base sm:text-lg text-[#0A251C]">
+                    <span className="text-sm font-semibold tracking-wide">
                       {item.title}
                     </span>
-                    <span className="w-8 h-8 rounded-full bg-[#FAF3EB] flex items-center justify-center text-[#0A251C] shrink-0 ml-4">
-                      {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                    <span className="text-[#716B64]">
+                      {isOpen ? (
+                        <Minus className="w-4 h-4" />
+                      ) : (
+                        <Plus className="w-4 h-4" />
+                      )}
                     </span>
                   </button>
-
                   {isOpen && (
-                    <div className="px-6 pb-6 text-xs sm:text-sm text-[#716B64] leading-relaxed border-t border-[#FAF3EB] pt-4">
+                    <div className="px-6 pb-5 text-xs sm:text-sm text-[#716B64] leading-relaxed border-t border-[#E8E2D9]/40 pt-4">
                       {item.content}
                     </div>
                   )}
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= MORE THAN JUST GLASSES: VALUE PILLARS ================= */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h3 className="text-xs sm:text-sm font-bold tracking-[0.35em] text-[#1A1816] uppercase mb-12">
+            MORE THAN JUST GLASSES
+          </h3>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 rounded-full bg-[#FBF9F5] border border-[#E8E2D9] flex items-center justify-center text-[#C5A059] mb-3.5 shadow-sm">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
+                100% Genuine Eyewear
+              </h4>
+              <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
+                Original frames and sunglasses directly from authorized brand distributors.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 rounded-full bg-[#FBF9F5] border border-[#E8E2D9] flex items-center justify-center text-[#C5A059] mb-3.5 shadow-sm">
+                <Glasses className="w-6 h-6" />
+              </div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
+                Computerized Eye Test
+              </h4>
+              <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
+                Accurate digital eye examinations by certified optometrists daily.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 rounded-full bg-[#FBF9F5] border border-[#E8E2D9] flex items-center justify-center text-[#C5A059] mb-3.5 shadow-sm">
+                <Truck className="w-6 h-6" />
+              </div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
+                Free Delivery on Select Items
+              </h4>
+              <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
+                Complimentary shipping available on eligible orders across India.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <div className="w-14 h-14 rounded-full bg-[#FBF9F5] border border-[#E8E2D9] flex items-center justify-center text-[#C5A059] mb-3.5 shadow-sm">
+                <Eye className="w-6 h-6" />
+              </div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1A1816] mb-1">
+                Custom Lens Fitting
+              </h4>
+              <p className="text-[11px] text-[#716B64] leading-relaxed max-w-[200px]">
+                Single vision, progressive &amp; blue-cut lenses fitted to your exact power.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= STORE LOCATION & CONTACT US SECTION ================= */}
+      <section
+        id="contact"
+        className="py-16 md:py-20 bg-[#FBF9F5] border-t border-[#E8E2D9]"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#FAF3EB] border border-[#E8DEC8] rounded-2xl p-8 sm:p-12 shadow-sm relative overflow-hidden">
+            <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-[#C5A059]/15 blur-3xl pointer-events-none"></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              <div className="lg:col-span-7 space-y-4">
+                <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#C5A059] block">
+                  VISIT OUR STORE
+                </span>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#1A1816] leading-tight">
+                  Shivam Optical
+                </h2>
+
+                <div className="space-y-3.5 pt-2 text-sm text-[#2D2926]">
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-full bg-white border border-[#E8DEC8] flex items-center justify-center text-[#C5A059] shadow-xs shrink-0 mt-0.5">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#1A1816]">Store Address:</p>
+                      <p className="text-[#2D2926]/90 leading-relaxed mt-0.5">
+                        SAMACHAR market, Shop No-1, Kanishka Complex,
+                        <br />
+                        Mayur Vihar Phase I, extention, Mayur Vihar, Delhi, 110091
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-full bg-white border border-[#E8DEC8] flex items-center justify-center text-[#C5A059] shadow-xs shrink-0">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-[#1A1816]">
+                        Call / WhatsApp:{" "}
+                      </span>
+                      <a
+                        href="tel:09779990207"
+                        className="text-[#1A1816] hover:text-[#C5A059] font-bold text-base transition ml-1 underline decoration-[#C5A059]/50 underline-offset-2"
+                      >
+                        097799 90207
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-full bg-white border border-[#E8DEC8] flex items-center justify-center text-[#C5A059] shadow-xs shrink-0">
+                      <Clock className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="font-bold text-[#1A1816]">
+                        Store Hours:{" "}
+                      </span>
+                      <span className="text-[#2D2926]/90 font-medium ml-1">
+                        Open 7 Days • 10:30 AM to 9:00 PM
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 flex flex-col gap-3">
+                <a
+                  href="tel:09779990207"
+                  className="w-full py-3.5 px-6 bg-[#1A1816] hover:bg-black text-white text-center font-bold text-xs uppercase tracking-wider rounded-lg transition shadow-sm flex items-center justify-center gap-2 group"
+                >
+                  <PhoneCall className="w-4 h-4 text-[#C5A059] group-hover:scale-110 transition-transform" />
+                  <span>Call Us Now: 097799 90207</span>
+                </a>
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=SAMACHAR+market+Shop+No-1+Kanishka+Complex+Mayur+Vihar+Phase+I+extention+Delhi+110091"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 px-6 bg-white hover:bg-[#F3EDE5] text-[#1A1816] text-center font-bold text-xs uppercase tracking-wider rounded-lg border border-[#E8DEC8] transition shadow-xs flex items-center justify-center gap-2"
+                >
+                  <Navigation className="w-4 h-4 text-[#C5A059]" />
+                  <span>Get Directions on Google Maps</span>
+                </a>
+
+                <button
+                  onClick={openAppointmentModal}
+                  className="w-full py-3.5 px-6 bg-[#C5A059] hover:bg-[#B08B45] text-[#1A1816] text-center font-bold text-xs uppercase tracking-wider rounded-lg transition shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Calendar className="w-4 h-4 text-[#1A1816]" />
+                  <span>Book In-Store Eye Test</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
