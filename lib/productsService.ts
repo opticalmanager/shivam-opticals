@@ -222,11 +222,35 @@ function mapRowToProduct(row: any): Product {
     (typeof row.category === "object" ? row.category?.slug : row.category) ||
     localMatch?.category;
 
-  const resolvedCategory =
+  const lowerName = (row.name || "").toLowerCase();
+  const lowerSlug = (row.slug || "").toLowerCase();
+  const lowerDesc = (row.description || "").toLowerCase();
+
+  const isExplicitClearOptical =
+    lowerName.includes("clip-on") ||
+    lowerName.includes("clipon") ||
+    lowerSlug.includes("clip") ||
+    lowerDesc.includes("lens colour clear") ||
+    lowerDesc.includes("lens color clear") ||
+    lowerDesc.includes("lens color: clear") ||
+    lowerDesc.includes("lens colour: clear") ||
+    lowerName.includes("spectacle") ||
+    lowerName.includes("optical frame") ||
+    lowerSlug === "so-carrera-ca1145" ||
+    lowerSlug === "so-burberry-399" ||
+    lowerSlug === "so-burberry-3991" ||
+    lowerSlug === "so-tommy-hilfiger-th1079" ||
+    lowerSlug === "so-ray-ban-rb4340v";
+
+  let resolvedCategory =
     rawCategorySlug ||
-    (row.name?.toLowerCase().includes("sunglass")
-      ? "sunglasses"
-      : "eyeglasses");
+    (lowerName.includes("sunglass") ? "sunglasses" : "eyeglasses");
+
+  if (isExplicitClearOptical && resolvedCategory === "sunglasses") {
+    resolvedCategory = "eyeglasses";
+  } else if ((lowerName.includes("/g/s") || lowerName.includes("sunglass")) && resolvedCategory === "eyeglasses") {
+    resolvedCategory = "sunglasses";
+  }
 
   const resolvedType =
     row.type ||
@@ -240,7 +264,7 @@ function mapRowToProduct(row: any): Product {
       : resolvedCategory === "meta-smart"
       ? "meta-smart"
       : resolvedCategory === "kids"
-      ? (row.name?.toLowerCase().includes("sunglass") ? "sunglasses" : "eyeglasses")
+      ? (lowerName.includes("sunglass") ? "sunglasses" : "eyeglasses")
       : "eyeglasses");
 
   return {

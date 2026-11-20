@@ -11,6 +11,7 @@ import { AppointmentModal } from "@/components/layout/AppointmentModal";
 import { LoginModal } from "@/components/layout/LoginModal";
 import { OrderTrackingModal } from "@/components/pages/OrderTrackingModal";
 import { LensCustomizerModal } from "@/components/optical/LensCustomizerModal";
+import { WhatsAppStickyButton } from "@/components/layout/WhatsAppStickyButton";
 import { useCart } from "@/context/CartContext";
 import { Product, SelectedLensConfig } from "@/types";
 
@@ -51,6 +52,7 @@ export function StorefrontShell({ children }: { children: React.ReactNode }) {
       <AppointmentModal />
       <LoginModal />
       <OrderTrackingModal />
+      <WhatsAppStickyButton />
 
       {/* Clinical Lens Customizer Overlay */}
       {customizerProduct && (

@@ -167,6 +167,22 @@ export async function getProducts(options?: {
         inStock: v.stock_quantity > 0,
       }));
 
+      const lowerName = (row.name || "").toLowerCase();
+      const lowerSlug = (row.slug || "").toLowerCase();
+      const isExplicitClearOptical =
+        lowerName.includes("clip-on") ||
+        lowerName.includes("clipon") ||
+        lowerSlug.includes("clip") ||
+        lowerName.includes("spectacle") ||
+        lowerName.includes("optical frame");
+
+      let catSlug = row.category?.slug || (lowerName.includes("sunglass") ? "sunglasses" : "eyeglasses");
+      if (isExplicitClearOptical && catSlug === "sunglasses") {
+        catSlug = "eyeglasses";
+      } else if ((lowerName.includes("/g/s") || lowerName.includes("sunglass")) && catSlug === "eyeglasses") {
+        catSlug = "sunglasses";
+      }
+
       return {
         id: row.slug || row.id,
         brand: row.brand?.name || "Shivam Optical",
@@ -174,8 +190,8 @@ export async function getProducts(options?: {
         subtitle: row.subtitle,
         price: Number(row.base_price),
         originalPrice: row.original_price ? Number(row.original_price) : undefined,
-        category: (row.category?.slug || (row.name?.toLowerCase().includes("sunglass") ? "sunglasses" : "eyeglasses")) as any,
-        type: row.category?.slug || (row.name?.toLowerCase().includes("sunglass") ? "sunglasses" : "eyeglasses"),
+        category: catSlug as any,
+        type: catSlug,
         gender: row.gender as any,
         shape: row.shape as any,
         rimType: row.rim_type as any,
