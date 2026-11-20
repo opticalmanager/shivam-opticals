@@ -178,7 +178,35 @@ function mapRowToProduct(row: any): Product {
             }
           }
 
-          const variantImgs = directImages.length > 0 ? directImages : fallbackImages;
+          // 3. Fallback to sister variant with same color name or color hex if still empty
+          let sisterImages: string[] = [];
+          if (directImages.length === 0 && fallbackImages.length === 0) {
+            const cleanCol = (v.color_name || "").replace(/\s+/g, " ").trim().toLowerCase();
+            const sister = (row.product_variants || []).find((other: any) => {
+              if (other.id === v.id) return false;
+              const otherCol = (other.color_name || "").replace(/\s+/g, " ").trim().toLowerCase();
+              return (cleanCol && otherCol === cleanCol) || (v.color_hex && other.color_hex === v.color_hex);
+            });
+            if (sister) {
+              sisterImages = (row.product_images || [])
+                .filter((img: any) => img.variant_id === sister.id && isValidProductImageUrl(img.url || img.image_url))
+                .sort(
+                  (a: any, b: any) =>
+                    (b.is_primary ? 1 : 0) - (a.is_primary ? 1 : 0) ||
+                    (a.display_order || 0) - (b.display_order || 0)
+                )
+                .map((img: any) => (img.url || img.image_url)?.trim())
+                .filter((url: string | undefined): url is string => Boolean(url && isValidProductImageUrl(url)));
+            }
+          }
+
+          const variantImgs =
+            directImages.length > 0
+              ? directImages
+              : fallbackImages.length > 0
+              ? fallbackImages
+              : sisterImages;
+
           const validVarImg =
             variantImgs.length > 0
               ? variantImgs[0]
