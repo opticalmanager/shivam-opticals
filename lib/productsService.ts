@@ -226,29 +226,37 @@ function mapRowToProduct(row: any): Product {
   const lowerSlug = (row.slug || "").toLowerCase();
   const lowerDesc = (row.description || "").toLowerCase();
 
+  const hasExplicitSunglassTerm =
+    lowerName.includes("sunglass") ||
+    lowerSlug.includes("sunglass") ||
+    lowerName.includes("/g/s") ||
+    lowerSlug.includes("/g/s") ||
+    lowerName.includes("/p/s") ||
+    lowerSlug.includes("/p/s") ||
+    lowerName.endsWith("/s") ||
+    lowerName.includes("/s ");
+
   const isExplicitClearOptical =
-    lowerName.includes("clip-on") ||
-    lowerName.includes("clipon") ||
-    lowerSlug.includes("clip") ||
-    lowerDesc.includes("lens colour clear") ||
-    lowerDesc.includes("lens color clear") ||
-    lowerDesc.includes("lens color: clear") ||
-    lowerDesc.includes("lens colour: clear") ||
-    lowerName.includes("spectacle") ||
-    lowerName.includes("optical frame") ||
-    lowerSlug === "so-carrera-ca1145" ||
-    lowerSlug === "so-burberry-399" ||
-    lowerSlug === "so-burberry-3991" ||
-    lowerSlug === "so-tommy-hilfiger-th1079" ||
-    lowerSlug === "so-ray-ban-rb4340v";
+    !hasExplicitSunglassTerm &&
+    (lowerName.includes("spectacle") ||
+      lowerName.includes("optical frame") ||
+      lowerDesc.includes("lens colour clear") ||
+      lowerDesc.includes("lens color clear") ||
+      lowerDesc.includes("lens color: clear") ||
+      lowerDesc.includes("lens colour: clear") ||
+      lowerSlug === "so-carrera-ca1145" ||
+      lowerSlug === "so-burberry-399" ||
+      lowerSlug === "so-burberry-3991" ||
+      lowerSlug === "so-tommy-hilfiger-th1079" ||
+      lowerSlug === "so-ray-ban-rb4340v");
 
   let resolvedCategory =
     rawCategorySlug ||
-    (lowerName.includes("sunglass") ? "sunglasses" : "eyeglasses");
+    (hasExplicitSunglassTerm ? "sunglasses" : "eyeglasses");
 
   if (isExplicitClearOptical && resolvedCategory === "sunglasses") {
     resolvedCategory = "eyeglasses";
-  } else if ((lowerName.includes("/g/s") || lowerName.includes("sunglass")) && resolvedCategory === "eyeglasses") {
+  } else if (hasExplicitSunglassTerm && resolvedCategory === "eyeglasses") {
     resolvedCategory = "sunglasses";
   }
 
