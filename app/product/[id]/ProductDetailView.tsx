@@ -620,7 +620,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
             {/* Colorway Variant Selection */}
             {(() => {
-              const availableColorways =
+              const rawVariants =
                 product.variants && product.variants.length > 0
                   ? product.variants
                   : (product.colorVariants || []).map((cv, i) => ({
@@ -631,10 +631,28 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                       images: cv.gallery,
                     }));
 
-              if (availableColorways.length === 0) return null;
+              if (rawVariants.length === 0) return null;
 
+              // Deduplicate swatches so each swatch strictly represents a distinct colorway
+              const seen = new Set<string>();
+              const uniqueColorways: { variant: (typeof rawVariants)[0]; originalIdx: number }[] = [];
+
+              rawVariants.forEach((v, idx) => {
+                const cleanName = (v.colorName || "").replace(/\s+/g, " ").trim().toLowerCase();
+                const isPlaceholder = !cleanName || cleanName === "atelier signature noir";
+                const key = isPlaceholder
+                  ? `${v.colorHex || ""}-${v.image || idx}`
+                  : cleanName;
+
+                if (!seen.has(key)) {
+                  seen.add(key);
+                  uniqueColorways.push({ variant: v, originalIdx: idx });
+                }
+              });
+
+              const activeVariant = rawVariants[selectedVariantIdx];
               const activeColorName =
-                availableColorways[selectedVariantIdx]?.colorName?.replace(/\s+/g, " ").trim() ||
+                activeVariant?.colorName?.replace(/\s+/g, " ").trim() ||
                 product.color;
 
               return (
@@ -645,29 +663,39 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                       {activeColorName}
                     </span>
                   </span>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {availableColorways.map((v, idx) => (
-                      <button
-                        key={v.id || idx}
-                        type="button"
-                        onClick={() => {
-                          setSelectedVariantIdx(idx);
-                          setActiveImgIdx(0);
-                        }}
-                        className={`w-7 h-7 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center ${
-                          selectedVariantIdx === idx
-                            ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 scale-110 shadow-xs"
-                            : "border-neutral-300 opacity-80 hover:opacity-100"
-                        }`}
-                        style={{ backgroundColor: v.colorHex }}
-                        title={v.colorName?.replace(/\s+/g, " ").trim()}
-                      >
-                        {selectedVariantIdx === idx && (
-                          <Check className="w-3.5 h-3.5 text-white drop-shadow-md" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
+                  {uniqueColorways.length > 1 && (
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {uniqueColorways.map(({ variant: v, originalIdx }) => {
+                        const isSelected =
+                          selectedVariantIdx === originalIdx ||
+                          (activeVariant &&
+                            (activeVariant.colorName || "").trim().toLowerCase() ===
+                              (v.colorName || "").trim().toLowerCase());
+
+                        return (
+                          <button
+                            key={v.id || originalIdx}
+                            type="button"
+                            onClick={() => {
+                              setSelectedVariantIdx(originalIdx);
+                              setActiveImgIdx(0);
+                            }}
+                            className={`w-7 h-7 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center ${
+                              isSelected
+                                ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 scale-110 shadow-xs"
+                                : "border-neutral-300 opacity-80 hover:opacity-100"
+                            }`}
+                            style={{ backgroundColor: v.colorHex }}
+                            title={v.colorName?.replace(/\s+/g, " ").trim()}
+                          >
+                            {isSelected && (
+                              <Check className="w-3.5 h-3.5 text-white drop-shadow-md" />
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })()}
