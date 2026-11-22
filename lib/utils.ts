@@ -58,3 +58,27 @@ export function getStorefrontUrl(): string {
   }
   return "/";
 }
+
+/**
+ * Determines whether a color is visually light based on ITU-R BT.709 perceived luminance.
+ * Useful for deciding whether to render dark or light text/icons on a colored background.
+ */
+export function isLightColor(hexStr?: string): boolean {
+  if (!hexStr) return false;
+  const hex = hexStr.replace("#", "").trim();
+  if (hex.length < 3) return false;
+  const fullHex =
+    hex.length === 3
+      ? hex
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : hex.slice(0, 6);
+  const r = parseInt(fullHex.substring(0, 2), 16);
+  const g = parseInt(fullHex.substring(2, 4), 16);
+  const b = parseInt(fullHex.substring(4, 6), 16);
+  if (isNaN(r) || isNaN(g) || isNaN(b)) return false;
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.65;
+}
+

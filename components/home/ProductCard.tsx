@@ -29,38 +29,52 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   // Resolve all available color variants accurately
   const availableVariants = useMemo(() => {
+    let raw: { id: string; colorName: string; colorHex: string; image?: string }[] = [];
     if (product.variants && product.variants.length > 0) {
-      return product.variants.map((v, i) => ({
+      raw = product.variants.map((v, i) => ({
         id: v.id || `v-${i}`,
         colorName: v.colorName || `Color ${i + 1}`,
         colorHex: v.colorHex || "#1A1816",
         image: v.image || v.images?.[0],
       }));
-    }
-    if (product.colorVariants && product.colorVariants.length > 0) {
-      return product.colorVariants.map((cv, i) => ({
+    } else if (product.colorVariants && product.colorVariants.length > 0) {
+      raw = product.colorVariants.map((cv, i) => ({
         id: cv.id || `cv-${i}`,
         colorName: cv.colorName || `Color ${i + 1}`,
         colorHex: cv.colorHex || "#1A1816",
         image: cv.featuredImage || cv.gallery?.[0],
       }));
-    }
-    if (product.colors && product.colors.length > 0) {
-      return product.colors.map((c, i) => ({
+    } else if (product.colors && product.colors.length > 0) {
+      raw = product.colors.map((c, i) => ({
         id: `c-${i}`,
         colorName: c.startsWith("#") ? `Color ${i + 1}` : c,
         colorHex: c.startsWith("#") ? c : "#1A1816",
         image: product.images?.[i] || product.img,
       }));
+    } else {
+      raw = [
+        {
+          id: "c-0",
+          colorName: product.color || "Black",
+          colorHex: product.colorHex || "#1A1816",
+          image: product.img || product.images?.[0],
+        },
+      ];
     }
-    return [
-      {
-        id: "c-0",
-        colorName: product.color || "Black",
-        colorHex: product.colorHex || "#1A1816",
-        image: product.img || product.images?.[0],
-      },
-    ];
+
+    // Deduplicate so each dot represents a genuine distinct colorway
+    const seen = new Set<string>();
+    const deduplicated: typeof raw = [];
+    for (const v of raw) {
+      const cleanName = (v.colorName || "").replace(/\s+/g, " ").trim().toLowerCase();
+      const isPlaceholder = !cleanName || cleanName === "atelier signature noir";
+      const key = isPlaceholder ? `${v.colorHex || ""}-${v.image || ""}` : cleanName;
+      if (!seen.has(key)) {
+        seen.add(key);
+        deduplicated.push(v);
+      }
+    }
+    return deduplicated;
   }, [product]);
 
   const totalColors = availableVariants.length;

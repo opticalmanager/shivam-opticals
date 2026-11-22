@@ -21,7 +21,7 @@ import {
 import { Product, ProductVariant, SelectedLensConfig } from "@/types";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, isLightColor } from "@/lib/utils";
 import { toast } from "sonner";
 import { ProductCard } from "@/components/home/ProductCard";
 import { LensCustomizerModal } from "@/components/optical/LensCustomizerModal";
@@ -664,13 +664,15 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                     </span>
                   </span>
                   {uniqueColorways.length > 1 && (
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-2.5 flex-wrap">
                       {uniqueColorways.map(({ variant: v, originalIdx }) => {
                         const isSelected =
                           selectedVariantIdx === originalIdx ||
                           (activeVariant &&
                             (activeVariant.colorName || "").trim().toLowerCase() ===
                               (v.colorName || "").trim().toLowerCase());
+
+                        const isLight = isLightColor(v.colorHex);
 
                         return (
                           <button
@@ -680,16 +682,21 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                               setSelectedVariantIdx(originalIdx);
                               setActiveImgIdx(0);
                             }}
-                            className={`w-7 h-7 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center ${
+                            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 transition-all cursor-pointer flex items-center justify-center relative ${
                               isSelected
                                 ? "border-[#C5A059] ring-2 ring-[#C5A059]/40 scale-110 shadow-xs"
-                                : "border-neutral-300 opacity-80 hover:opacity-100"
+                                : "border-neutral-300/80 opacity-85 hover:opacity-100 hover:scale-105"
                             }`}
-                            style={{ backgroundColor: v.colorHex }}
+                            style={{ backgroundColor: v.colorHex || "#1A1816" }}
                             title={v.colorName?.replace(/\s+/g, " ").trim()}
+                            aria-label={`Select color ${v.colorName}`}
                           >
                             {isSelected && (
-                              <Check className="w-3.5 h-3.5 text-white drop-shadow-md" />
+                              <Check
+                                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5] ${
+                                  isLight ? "text-[#1A1816]" : "text-white drop-shadow-xs"
+                                }`}
+                              />
                             )}
                           </button>
                         );
