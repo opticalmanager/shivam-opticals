@@ -17,8 +17,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem, openCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
 
-  const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
-
   const isSaved = isInWishlist(product.id);
 
   // Real Dynamic Discount: Only calculate if originalPrice is legitimately higher than price
@@ -80,6 +78,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
     return deduplicated;
   }, [product]);
+
+  // Automatically select the variant that matches the primary product image
+  const initialVariantIdx = useMemo(() => {
+    if (!product.images || product.images.length === 0) return 0;
+    const primaryImg = product.images[0];
+    const matchIdx = availableVariants.findIndex((v) => v.image === primaryImg);
+    return matchIdx >= 0 ? matchIdx : 0;
+  }, [product.images, availableVariants]);
+
+  const [selectedVariantIdx, setSelectedVariantIdx] = useState(initialVariantIdx);
+
+  React.useEffect(() => {
+    setSelectedVariantIdx(initialVariantIdx);
+  }, [initialVariantIdx]);
 
   const totalColors = availableVariants.length;
   const activeVariant = availableVariants[selectedVariantIdx] || availableVariants[0];
