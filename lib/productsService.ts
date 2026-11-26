@@ -181,12 +181,20 @@ function mapRowToProduct(row: any): Product {
           // 3. Fallback to sister variant with same color name if still empty (never match on generic placeholders or default hex)
           let sisterImages: string[] = [];
           if (directImages.length === 0 && fallbackImages.length === 0) {
-            const cleanCol = (v.color_name || "").replace(/\s+/g, " ").trim().toLowerCase();
+            const cleanCol = (v.color_name || "")
+              .replace(/\s*\((?:size\s*)?[0-9]+\s*(?:mm)?\)/gi, "")
+              .replace(/\s+/g, " ")
+              .trim()
+              .toLowerCase();
             const isPlaceholder = !cleanCol || cleanCol.includes("atelier signature noir");
             if (!isPlaceholder) {
               const sister = (row.product_variants || []).find((other: any) => {
                 if (other.id === v.id) return false;
-                const otherCol = (other.color_name || "").replace(/\s+/g, " ").trim().toLowerCase();
+                const otherCol = (other.color_name || "")
+                  .replace(/\s*\((?:size\s*)?[0-9]+\s*(?:mm)?\)/gi, "")
+                  .replace(/\s+/g, " ")
+                  .trim()
+                  .toLowerCase();
                 return otherCol === cleanCol;
               });
               if (sister) {

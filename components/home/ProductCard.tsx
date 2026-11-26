@@ -66,7 +66,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const seen = new Set<string>();
     const deduplicated: typeof raw = [];
     for (const v of raw) {
-      const cleanName = (v.colorName || "").replace(/\s+/g, " ").trim().toLowerCase();
+      const cleanName = (v.colorName || "")
+        .replace(/\s*\((?:size\s*)?[0-9]+\s*(?:mm)?\)/gi, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
       const isPlaceholder = !cleanName || cleanName === "atelier signature noir";
       const key = isPlaceholder ? `${v.colorHex || ""}-${v.image || ""}` : cleanName;
       if (!seen.has(key)) {

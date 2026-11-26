@@ -638,7 +638,11 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               const uniqueColorways: { variant: (typeof rawVariants)[0]; originalIdx: number }[] = [];
 
               rawVariants.forEach((v, idx) => {
-                const cleanName = (v.colorName || "").replace(/\s+/g, " ").trim().toLowerCase();
+                const cleanName = (v.colorName || "")
+                  .replace(/\s*\((?:size\s*)?[0-9]+\s*(?:mm)?\)/gi, "")
+                  .replace(/\s+/g, " ")
+                  .trim()
+                  .toLowerCase();
                 const isPlaceholder = !cleanName || cleanName === "atelier signature noir";
                 const key = isPlaceholder
                   ? `${v.colorHex || ""}-${v.image || idx}`
@@ -669,8 +673,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         const isSelected =
                           selectedVariantIdx === originalIdx ||
                           (activeVariant &&
-                            (activeVariant.colorName || "").trim().toLowerCase() ===
-                              (v.colorName || "").trim().toLowerCase());
+                            (activeVariant.colorName || "")
+                              .replace(/\s*\((?:size\s*)?[0-9]+\s*(?:mm)?\)/gi, "")
+                              .trim()
+                              .toLowerCase() ===
+                              (v.colorName || "")
+                                .replace(/\s*\((?:size\s*)?[0-9]+\s*(?:mm)?\)/gi, "")
+                                .trim()
+                                .toLowerCase());
 
                         const isLight = isLightColor(v.colorHex);
 
